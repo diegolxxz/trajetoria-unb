@@ -47,5 +47,5 @@ def load_data():
     return {}
 
 if __name__ == '__main__':
-    print('Servidor rodando em http://localhost:8081')
-    run(host='localhost', port=8081, debug=True, reloader=True)
+    print('Servidor rodando em http://localhost:8080')
+    run(host='localhost', port=8080, debug=True, reloader=True)

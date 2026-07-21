@@ -22,5 +22,16 @@ Se você deu um "fork" ou baixou esse projeto, basta hospedar na aba **Pages** d
 * Vanilla JavaScript (Sem frameworks, extremamente leve)
 * Bootstrap 5 (Apenas para o sistema de Grid flexível)
 
+## 💻 Como Usar Offline
+
+Caso queira usar o projeto localmente no seu próprio computador e salvar suas notas num arquivo físico (`dados.json`), basta seguir esses passos:
+
+1. Certifique-se de ter o Python instalado.
+2. Abra o terminal na pasta do projeto e instale o pacote Bottle: `pip install bottle`
+3. Inicie o servidor rodando: `python route.py`
+4. Acesse no seu navegador: **[http://localhost:8080](http://localhost:8080)**
+
+Sempre que você alterar suas notas pelo navegador rodando localmente, elas serão salvas na hora no seu arquivo `dados.json`.
+
 ---
 *Este projeto não possui vínculos oficiais com a Universidade de Brasília.*
