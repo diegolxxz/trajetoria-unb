@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-br" data-tema="escuro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculadora do Índice de Rendimento Acadêmico (IRA) e Média Ponderada (MP) da Universidade de Brasília (UnB)">
+    <title>Calculadora de IRA — UnB</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Cabeçalho -->
+    <header class="cabecalho">
+        <div class="container d-flex justify-content-between align-items-center">
+            <h1 class="titulo-principal">Calculadora de IRA <span class="badge-unb">UnB</span></h1>
+            <button id="btnTema" class="btn-tema" onclick="alternarTema()" title="Alternar tema">☀️</button>
+        </div>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main class="container">
+        <!-- Barra superior: botão Novo Período + IRA/MP -->
+        <div class="barra-superior">
+            <button class="btn btn-success btn-novo-periodo" onclick="criarPeriodo()">
+                + Novo Período
+            </button>
+            <div id="ira-mp" class="badge-resultado">
+                IRA: 0.0000 &nbsp; MP: 0.0000
+            </div>
+        </div>
+
+        <!-- Container dos períodos (gerado pelo JS) -->
+        <div id="periodos"></div>
+    </main>
+
+    <!-- Painel de Intercâmbio -->
+    <section class="container painel-intercambio" id="painelIntercambio">
+        <h3 class="painel-titulo">📊 Cálculos para Intercâmbio</h3>
+
+        <!-- Seletor de Curso -->
+        <div class="row g-3 mb-3">
+            <div class="col-lg-8 col-md-7">
+                <label class="form-label" for="seletorCurso">Curso</label>
+                <select id="seletorCurso" class="form-select" onchange="selecionarCurso()">
+                    <option value="">Selecionar curso...</option>
+                    <option value="manual">✏️ Inserir manualmente</option>
+                    <!-- Cursos populados pelo JS -->
+                </select>
+            </div>
+            <div class="col-lg-4 col-md-5">
+                <label class="form-label" for="horasCurso">Horas Totais do Curso</label>
+                <div class="input-group">
+                    <input type="number" id="horasCurso" class="form-control" value="0">
+                    <div class="input-group-text grupo-trava">
+                        <input class="form-check-input mt-0 me-1" type="checkbox" id="lockHoras" onchange="alternarTrava('horasCurso', 'lockHoras')">
+                        <label class="form-check-label small" for="lockHoras">Travar</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Média e Desvio Padrão -->
+        <div class="row g-3 mb-4">
+            <div class="col-md-6">
+                <label class="form-label" for="mediaCurso">Média IRA do Curso</label>
+                <div class="input-group">
+                    <input type="number" step="0.0000001" id="mediaCurso" class="form-control" value="0.0000">
+                    <div class="input-group-text grupo-trava">
+                        <input class="form-check-input mt-0 me-1" type="checkbox" id="lockMedia" onchange="alternarTrava('mediaCurso', 'lockMedia')">
+                        <label class="form-check-label small" for="lockMedia">Travar</label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label" for="desvioPadrao">Desvio Padrão do Curso</label>
+                <div class="input-group">
+                    <input type="number" step="0.0000001" id="desvioPadrao" class="form-control" value="1.0000">
+                    <div class="input-group-text grupo-trava">
+                        <input class="form-check-input mt-0 me-1" type="checkbox" id="lockDesvio" onchange="alternarTrava('desvioPadrao', 'lockDesvio')">
+                        <label class="form-check-label small" for="lockDesvio">Travar</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quadro de Resultados -->
+        <div class="row text-center quadro-resultados">
+            <div class="col-sm-3 col-6">
+                <div class="resultado-item">
+                    <span class="resultado-label">Horas Acumuladas</span>
+                    <span class="resultado-valor"><span id="horasAcumuladas">0</span>h</span>
+                </div>
+            </div>
+            <div class="col-sm-3 col-6">
+                <div class="resultado-item">
+                    <span class="resultado-label">IPF (Progresso)</span>
+                    <span class="resultado-valor" id="ipfCalc">0.0000</span>
+                </div>
+            </div>
+            <div class="col-sm-3 col-6">
+                <div class="resultado-item">
+                    <span class="resultado-label">IRA Padronizado</span>
+                    <span class="resultado-valor" id="iraPadrao">0.0000</span>
+                </div>
+            </div>
+            <div class="col-sm-3 col-6">
+                <div class="resultado-item resultado-destaque">
+                    <span class="resultado-label">NF Final</span>
+                    <span class="resultado-valor" id="nfCalc">0.0000</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rodapé -->
+    <footer class="text-center py-4">
+        <div class="container mb-3" style="max-width: 800px; color: var(--text-secondary); font-size: 0.9em;">
+            A caixa <strong>"Mód. Livre"</strong> serve para retirar a disciplina da conta da Média Ponderada (MP), mantendo-a apenas no cálculo do IRA.
+        </div>
+        <small style="color: var(--text-secondary);">Este site <strong>não é oficial</strong> da Universidade de Brasília. Os cálculos são aproximações e podem não refletir o valor exato do seu IRA — confira sempre pelo SIGAA.</small>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/functionality.js"></script>
+</body>
+</html>

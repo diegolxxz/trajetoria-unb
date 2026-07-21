@@ -1,0 +1,15 @@
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Dados locais do usuário
+dados.json
+test_ira.py
+brute.py
+brute_cred.py
+calc_remove.py
+find_mp.py
+
+# Arquivos de backup
+*.bak
+*.url

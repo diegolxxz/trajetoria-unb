@@ -1,0 +1,538 @@
+/* ============================================================
+   CALCULADORA IRA UNB — ESTILOS
+   Modo escuro primário, toggle para modo claro
+   ============================================================ */
+
+/* ===========================
+   VARIÁVEIS DE TEMA
+   =========================== */
+
+:root {
+    /* Modo Escuro (padrão) */
+    --bg-body: #0d1117;
+    --bg-surface: #161b22;
+    --bg-surface-hover: #1c2128;
+    --bg-input: #0d1117;
+    --text-primary: #e6edf3;
+    --text-secondary: #8b949e;
+    --text-muted: #484f58;
+    --border-color: #30363d;
+    --border-subtle: #21262d;
+    --accent: #58a6ff;
+    --accent-hover: #79c0ff;
+    --accent-glow: rgba(88, 166, 255, 0.15);
+    --success: #3fb950;
+    --success-hover: #56d364;
+    --success-bg: rgba(63, 185, 80, 0.12);
+    --danger: #f85149;
+    --danger-hover: #ff7b72;
+    --danger-bg: rgba(248, 81, 73, 0.12);
+    --destaque: #ffa657;
+    --destaque-glow: rgba(255, 166, 87, 0.15);
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+    --radius: 12px;
+    --radius-sm: 8px;
+    --transition: 0.25s ease;
+    --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Modo Claro */
+[data-tema="claro"] {
+    --bg-body: #f0f2f5;
+    --bg-surface: #ffffff;
+    --bg-surface-hover: #f6f8fa;
+    --bg-input: #ffffff;
+    --text-primary: #1f2328;
+    --text-secondary: #656d76;
+    --text-muted: #8b949e;
+    --border-color: #d0d7de;
+    --border-subtle: #e8ebee;
+    --accent: #0969da;
+    --accent-hover: #0550ae;
+    --accent-glow: rgba(9, 105, 218, 0.1);
+    --success: #1a7f37;
+    --success-hover: #116329;
+    --success-bg: rgba(26, 127, 55, 0.08);
+    --danger: #cf222e;
+    --danger-hover: #a40e26;
+    --danger-bg: rgba(207, 34, 46, 0.08);
+    --destaque: #bf8700;
+    --destaque-glow: rgba(191, 135, 0, 0.1);
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+/* ===========================
+   BASE
+   =========================== */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font);
+    background-color: var(--bg-body);
+    color: var(--text-primary);
+    min-height: 100vh;
+    margin: 0;
+    padding-bottom: 1rem;
+    transition: background-color var(--transition), color var(--transition);
+}
+
+/* Scrollbar personalizada */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: var(--bg-body);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--text-muted);
+}
+
+/* ===========================
+   CABEÇALHO
+   =========================== */
+
+.cabecalho {
+    background: var(--bg-surface);
+    border-bottom: 1px solid var(--border-color);
+    padding: 1rem 0;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow-sm);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(12px);
+    transition: background-color var(--transition), border-color var(--transition);
+}
+
+.titulo-principal {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.badge-unb {
+    background: linear-gradient(135deg, var(--accent), #a371f7);
+    color: #fff;
+    font-size: 0.65rem;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.btn-tema {
+    background: var(--bg-surface-hover);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 8px 14px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    line-height: 1;
+    transition: all var(--transition);
+}
+
+.btn-tema:hover {
+    background: var(--accent-glow);
+    border-color: var(--accent);
+    transform: scale(1.08);
+}
+
+/* ===========================
+   BARRA SUPERIOR (IRA/MP)
+   =========================== */
+
+.barra-superior {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-subtle);
+    gap: 1rem;
+}
+
+.btn-novo-periodo {
+    font-weight: 600;
+    padding: 8px 20px;
+    border-radius: var(--radius-sm);
+    white-space: nowrap;
+}
+
+.badge-resultado {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    padding: 10px 20px;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    font-size: 1rem;
+    font-variant-numeric: tabular-nums;
+    box-shadow: var(--shadow-sm);
+    letter-spacing: 0.01em;
+    transition: background-color var(--transition), border-color var(--transition);
+}
+
+/* ===========================
+   PERÍODOS
+   =========================== */
+
+.periodo {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 1.2rem 1.4rem;
+    margin-bottom: 1rem;
+    box-shadow: var(--shadow-sm);
+    transition: background-color var(--transition), border-color var(--transition), box-shadow var(--transition);
+}
+
+.periodo:hover {
+    box-shadow: var(--shadow-md);
+}
+
+.periodo-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.6rem;
+}
+
+.periodo-header h4 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin: 0;
+    color: var(--accent);
+}
+
+.btn-add-disc {
+    margin-top: 0.6rem;
+    font-size: 0.82rem;
+    font-weight: 500;
+    border-radius: var(--radius-sm);
+    padding: 5px 14px;
+}
+
+/* ===========================
+   DISCIPLINAS
+   =========================== */
+
+.disciplina-row {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.disciplina-row:last-child {
+    border-bottom: none;
+}
+
+.btn-remover-disc {
+    width: 34px;
+    height: 34px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    font-size: 0.9rem;
+    border-radius: 50%;
+    transition: all var(--transition);
+}
+
+.btn-remover-disc:hover {
+    transform: scale(1.15);
+}
+
+/* ===========================
+   PAINEL INTERCÂMBIO
+   =========================== */
+
+.painel-intercambio {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 1.5rem 1.8rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow-md);
+    transition: background-color var(--transition), border-color var(--transition);
+}
+
+.painel-titulo {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: 1.2rem;
+}
+
+.grupo-trava {
+    cursor: pointer;
+    user-select: none;
+}
+
+/* ===========================
+   QUADRO DE RESULTADOS
+   =========================== */
+
+.quadro-resultados {
+    background: var(--bg-body);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 1.2rem 0.5rem;
+    margin-top: 1rem;
+    transition: background-color var(--transition), border-color var(--transition);
+}
+
+.resultado-item {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 0.5rem 0;
+}
+
+.resultado-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.resultado-valor {
+    font-size: 1.15rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+
+.resultado-destaque {
+    position: relative;
+}
+
+.resultado-destaque .resultado-valor {
+    color: var(--destaque);
+    font-size: 1.35rem;
+}
+
+.resultado-destaque::before {
+    content: '';
+    position: absolute;
+    inset: 4px;
+    background: var(--destaque-glow);
+    border-radius: var(--radius-sm);
+    z-index: -1;
+}
+
+/* ===========================
+   BOOTSTRAP OVERRIDES
+   =========================== */
+
+.form-control,
+.form-select {
+    background-color: var(--bg-input);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+    border-radius: var(--radius-sm);
+    transition: border-color var(--transition), box-shadow var(--transition), background-color var(--transition);
+}
+
+.form-control::placeholder,
+.form-select:invalid {
+    color: var(--text-muted);
+}
+
+.form-select option {
+    color: var(--text-primary);
+}
+
+.form-control:focus,
+.form-select:focus {
+    background-color: var(--bg-input);
+    border-color: var(--accent);
+    color: var(--text-primary);
+    box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+.form-control:disabled,
+.form-select:disabled {
+    background-color: var(--bg-surface-hover);
+    color: var(--text-secondary);
+    opacity: 0.7;
+}
+
+/* Fix da seta do select no modo escuro */
+.form-select {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%238b949e' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+}
+
+[data-tema="claro"] .form-select {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+}
+
+.input-group-text {
+    background-color: var(--bg-surface-hover);
+    border-color: var(--border-color);
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    transition: background-color var(--transition), border-color var(--transition);
+}
+
+.form-label {
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    margin-bottom: 0.3rem;
+}
+
+.form-check-input {
+    background-color: var(--bg-input);
+    border-color: var(--border-color);
+    cursor: pointer;
+}
+
+.form-check-input:checked {
+    background-color: var(--accent);
+    border-color: var(--accent);
+}
+
+.form-check-input:focus {
+    box-shadow: 0 0 0 3px var(--accent-glow);
+    border-color: var(--accent);
+}
+
+/* Botões */
+.btn-success {
+    background-color: var(--success);
+    border-color: var(--success);
+    color: #fff;
+}
+
+.btn-success:hover {
+    background-color: var(--success-hover);
+    border-color: var(--success-hover);
+}
+
+.btn-outline-primary {
+    color: var(--accent);
+    border-color: var(--accent);
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+
+.btn-outline-danger {
+    color: var(--danger);
+    border-color: transparent;
+    background: var(--danger-bg);
+}
+
+.btn-outline-danger:hover {
+    background-color: var(--danger);
+    border-color: var(--danger);
+    color: #fff;
+}
+
+/* ===========================
+   RODAPÉ
+   =========================== */
+
+footer {
+    color: var(--text-muted);
+    font-size: 0.82rem;
+    border-top: 1px solid var(--border-subtle);
+    margin-top: 1rem;
+    transition: color var(--transition), border-color var(--transition);
+}
+
+/* ===========================
+   RESPONSIVO
+   =========================== */
+
+@media (max-width: 768px) {
+    .barra-superior {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+    }
+
+    .badge-resultado {
+        text-align: center;
+        font-size: 0.92rem;
+    }
+
+    .titulo-principal {
+        font-size: 1.25rem;
+    }
+
+    .periodo {
+        padding: 1rem;
+    }
+
+    .painel-intercambio {
+        padding: 1.2rem;
+    }
+
+    .resultado-item {
+        padding: 0.6rem 0;
+    }
+
+    .resultado-destaque .resultado-valor {
+        font-size: 1.15rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .cabecalho {
+        position: relative;
+    }
+}
+
+/* ===========================
+   ANIMAÇÕES
+   =========================== */
+
+.periodo {
+    animation: entradaCard 0.3s ease forwards;
+}
+
+.disciplina-row {
+    animation: entradaItem 0.2s ease forwards;
+}
+
+@keyframes entradaCard {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes entradaItem {
+    from {
+        opacity: 0;
+        transform: translateX(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
