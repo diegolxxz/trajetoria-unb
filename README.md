@@ -9,19 +9,6 @@ Uma ferramenta simples, rápida e 100% focada na Universidade de Brasília (UnB)
 - **Seletor de Cursos:** Mais de 70 cursos pré-cadastrados com Média e Desvio Padrão oficiais para o cálculo exato do IRA Padronizado.
 - **Offline First:** Possui um script Python opcional (`route.py`) para quem deseja salvar cópias físicas locais (`dados.json`), embora não seja necessário para hospedar no GitHub Pages/Vercel.
 
-## 🚀 Como Hospedar de Graça (GitHub Pages)
-
-Se você deu um "fork" ou baixou esse projeto, basta hospedar na aba **Pages** do GitHub:
-1. Vá nas **Settings** (Configurações) do seu repositório.
-2. Na aba **Pages**, escolha a `main` branch.
-3. Pronto! Seu site estará online em `usuario.github.io/calculadora-ira-unb`.
-
-## 🛠 Tecnologias Usadas
-* HTML5 Semântico
-* CSS3 (Variáveis nativas e transições fluídas)
-* Vanilla JavaScript (Sem frameworks, extremamente leve)
-* Bootstrap 5 (Apenas para o sistema de Grid flexível)
-
 ## 💻 Como Usar Offline
 
 Caso queira usar o projeto localmente no seu próprio computador e salvar suas notas num arquivo físico (`dados.json`), basta seguir esses passos:
