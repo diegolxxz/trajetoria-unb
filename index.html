@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Calculadora do Índice de Rendimento Acadêmico (IRA) e Média Ponderada (MP) da Universidade de Brasília (UnB)">
-    <title>Calculadora de IRA — UnB</title>
+    <meta name="description" content="Calculadora de Notas e Média Ponderada (MP) da Universidade de Brasília (UnB)">
+    <title>Calculadora de Notas — UnB</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,7 +16,7 @@
     <!-- Cabeçalho -->
     <header class="cabecalho">
         <div class="container d-flex justify-content-between align-items-center">
-            <h1 class="titulo-principal">Calculadora de IRA <span class="badge-unb">UnB</span></h1>
+            <h1 class="titulo-principal">Calculadora de Notas <span class="badge-unb">UnB</span></h1>
             <button id="btnTema" class="btn-tema" onclick="alternarTema()" title="Alternar tema">☀️</button>
         </div>
     </header>
@@ -29,7 +29,7 @@
                 + Novo Período
             </button>
             <div id="ira-mp" class="badge-resultado">
-                IRA: 0.0000 &nbsp; MP: 0.0000
+                Notas: 0.0000 &nbsp; MP: 0.0000
             </div>
         </div>
 
@@ -66,7 +66,7 @@
         <!-- Média e Desvio Padrão -->
         <div class="row g-3 mb-4">
             <div class="col-md-6">
-                <label class="form-label" for="mediaCurso">Média IRA do Curso</label>
+                <label class="form-label" for="mediaCurso">Média de Notas do Curso</label>
                 <div class="input-group">
                     <input type="number" step="0.0000001" id="mediaCurso" class="form-control" value="0.0000">
                     <div class="input-group-text grupo-trava">
@@ -103,7 +103,7 @@
             </div>
             <div class="col-sm-3 col-6">
                 <div class="resultado-item">
-                    <span class="resultado-label">IRA Padronizado</span>
+                    <span class="resultado-label">Nota Padronizada</span>
                     <span class="resultado-valor" id="iraPadrao">0.0000</span>
                 </div>
             </div>
@@ -116,12 +116,13 @@
         </div>
     </section>
 
-    <!-- Rodapé -->
     <footer class="text-center py-4">
         <div class="container mb-3" style="max-width: 800px; color: var(--text-secondary); font-size: 0.9em;">
-            A caixa <strong>"Mód. Livre"</strong> serve para retirar a disciplina da conta da Média Ponderada (MP), mantendo-a apenas no cálculo do IRA.
+            A caixa <strong>"Mód. Livre"</strong> serve para retirar a disciplina da conta da Média Ponderada (MP), mantendo-a apenas no cálculo das Notas.
+            <br><br>
+            ⚠️ <strong>Atenção ao Intercâmbio:</strong> Os cálculos de intercâmbio (IPF e Nota Padronizada) são estimativas. As fórmulas podem mudar, portanto, atente-se sempre às regras e cálculos usados no último edital oficial da UnB.
         </div>
-        <small style="color: var(--text-secondary);">Este site <strong>não é oficial</strong> da Universidade de Brasília. Os cálculos são aproximações e podem não refletir o valor exato do seu IRA — confira sempre pelo SIGAA.</small>
+        <small style="color: var(--text-secondary);">Este site <strong>não é oficial</strong> da Universidade de Brasília. Os cálculos são aproximações e podem não refletir o valor exato das suas Notas — confira sempre pelo SIGAA.</small>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

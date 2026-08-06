@@ -394,9 +394,9 @@ function calcularIra() {
     const display = document.getElementById('ira-mp');
     if (display) {
         if (somaPesosIra > 0) {
-            display.textContent = `IRA: ${ira.toFixed(4)}   MP: ${mp.toFixed(4)}`;
+            display.textContent = `Notas: ${ira.toFixed(4)}   MP: ${mp.toFixed(4)}`;
         } else {
-            display.textContent = 'IRA: 0.0000   MP: 0.0000';
+            display.textContent = 'Notas: 0.0000   MP: 0.0000';
         }
     }
 
