@@ -394,9 +394,9 @@ function calcularIra() {
     const display = document.getElementById('ira-mp');
     if (display) {
         if (somaPesosIra > 0) {
-            display.textContent = `Notas: ${ira.toFixed(4)}   MP: ${mp.toFixed(4)}`;
+            display.textContent = `IRA: ${ira.toFixed(4)}   MP: ${mp.toFixed(4)}`;
         } else {
-            display.textContent = 'Notas: 0.0000   MP: 0.0000';
+            display.textContent = 'IRA: 0.0000   MP: 0.0000';
         }
     }
 
@@ -408,26 +408,40 @@ function calcularIra() {
 // ===========================
 
 function calcularIntercambio(iraAtual) {
-    const periodos = document.querySelectorAll('#periodos .periodo');
-    let horasAcumuladas = 0;
+    const modoManual = document.getElementById('modoManual') && document.getElementById('modoManual').checked;
+    
+    let ira = 0;
+    let ipf = 0;
 
-    // 1. Horas Acumuladas (1 crédito = 15h, apenas SS, MS e MM — menção >= 3)
-    periodos.forEach(periodoEl => {
-        periodoEl.querySelectorAll('.disciplina-row').forEach(disc => {
-            const creditos = parseInt(disc.querySelector('.sel-creditos').value);
-            const mencao = parseInt(disc.querySelector('.sel-mencao').value);
+    if (modoManual) {
+        // Usa os valores digitados (ipf vem em %, dividimos por 100)
+        ira = parseFloat(document.getElementById('iraManual').value) || 0;
+        let ipfInput = parseFloat(document.getElementById('ipfManual').value) || 0;
+        ipf = ipfInput / 100;
+        document.getElementById('horasAcumuladas').textContent = '-';
+    } else {
+        // Usa os valores calculados das disciplinas
+        ira = iraAtual !== undefined ? iraAtual : (parseFloat(document.getElementById('ira-mp').textContent.match(/Notas: ([\d.]+)/)?.[1]) || 0);
+        
+        let horasAcumuladas = 0;
+        const periodos = document.querySelectorAll('#periodos .periodo');
+        periodos.forEach(periodoEl => {
+            periodoEl.querySelectorAll('.disciplina-row').forEach(disc => {
+                const creditos = parseInt(disc.querySelector('.sel-creditos').value);
+                const mencao = parseInt(disc.querySelector('.sel-mencao').value);
 
-            if (mencao >= 3 && creditos > 0) {
-                horasAcumuladas += creditos * 15;
-            }
+                if (mencao >= 3 && creditos > 0) {
+                    horasAcumuladas += creditos * 15;
+                }
+            });
         });
-    });
 
-    document.getElementById('horasAcumuladas').textContent = horasAcumuladas;
+        document.getElementById('horasAcumuladas').textContent = horasAcumuladas;
 
-    // 2. IPF (Índice de Progresso no Fluxo)
-    const horasCurso = parseFloat(document.getElementById('horasCurso').value) || 0;
-    const ipf = horasCurso > 0 ? horasAcumuladas / horasCurso : 0;
+        const horasCurso = parseFloat(document.getElementById('horasCurso').value) || 0;
+        ipf = horasCurso > 0 ? horasAcumuladas / horasCurso : 0;
+    }
+    
     document.getElementById('ipfCalc').textContent = ipf.toFixed(4);
 
     // 3. IRA Padronizado: (IRA do Aluno - Média do Curso) / Desvio Padrão
@@ -435,12 +449,19 @@ function calcularIntercambio(iraAtual) {
     let desvioPadrao = parseFloat(document.getElementById('desvioPadrao').value) || 1;
     if (desvioPadrao === 0) desvioPadrao = 1; // Evita divisão por zero
 
-    const iraPadronizado = !isNaN(iraAtual) ? (iraAtual - mediaCurso) / desvioPadrao : 0;
+    const iraPadronizado = (ira - mediaCurso) / desvioPadrao;
     document.getElementById('iraPadrao').textContent = iraPadronizado.toFixed(4);
 
     // 4. NF = IRA Padronizado + 2 × IPF
     const nf = iraPadronizado + (2 * ipf);
     document.getElementById('nfCalc').textContent = nf.toFixed(4);
+}
+
+function alternarModoManual() {
+    const isManual = document.getElementById('modoManual').checked;
+    document.getElementById('divInputsManuais').style.display = isManual ? 'flex' : 'none';
+    calcularIntercambio();
+    salvarDados();
 }
 
 // ===========================
@@ -475,6 +496,9 @@ function coletarDados() {
         desvioPadrao: document.getElementById('desvioPadrao').value,
         lockDesvio: document.getElementById('lockDesvio').checked,
         cursoSelecionado: document.getElementById('seletorCurso').value,
+        modoManual: document.getElementById('modoManual') ? document.getElementById('modoManual').checked : false,
+        iraManual: document.getElementById('iraManual') ? document.getElementById('iraManual').value : '0.0000',
+        ipfManual: document.getElementById('ipfManual') ? document.getElementById('ipfManual').value : '0.0000',
     };
 
     return dados;
@@ -566,6 +590,13 @@ async function carregarDados() {
             // Restaurar curso selecionado
             if (inter.cursoSelecionado !== undefined && inter.cursoSelecionado !== null) {
                 document.getElementById('seletorCurso').value = inter.cursoSelecionado;
+            }
+            
+            if (inter.modoManual !== undefined) {
+                document.getElementById('modoManual').checked = inter.modoManual;
+                document.getElementById('iraManual').value = inter.iraManual || '0.0000';
+                document.getElementById('ipfManual').value = inter.ipfManual || '0.0000';
+                alternarModoManual(); // atualiza a interface
             }
 
             // Aplicar travas
