@@ -514,14 +514,6 @@ function salvarDados() {
         console.warn('Erro ao salvar no localStorage:', e);
     }
 
-    // Também tenta salvar no servidor (para uso local com route.py)
-    fetch('/save', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(dados),
-    }).catch(() => {
-        // Silencioso — servidor pode não estar rodando
-    });
 }
 
 async function carregarDados() {
@@ -537,22 +529,6 @@ async function carregarDados() {
         }
     }
 
-    // 2. Se não tem localStorage, tenta carregar do servidor (route.py)
-    if (!dados) {
-        try {
-            const resposta = await fetch('/load');
-            if (resposta.ok) {
-                const dadosServidor = await resposta.json();
-                if (dadosServidor && Object.keys(dadosServidor).length > 0) {
-                    dados = dadosServidor;
-                    // Migra para localStorage
-                    localStorage.setItem(CHAVE_DADOS, JSON.stringify(dados));
-                }
-            }
-        } catch (e) {
-            // Servidor não disponível — normal para deploy estático
-        }
-    }
 
     // 3. Restaurar dados ou criar estado inicial
     if (dados) {
