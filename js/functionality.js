@@ -182,7 +182,7 @@ function selecionarCurso() {
 
         if (valor === '') {
             inputMedia.value = '0.0000';
-            inputDesvio.value = '1.0000';
+            inputDesvio.value = '0.0000';
         }
     } else {
         // Curso selecionado: preenche e trava
@@ -578,7 +578,7 @@ async function carregarDados() {
             document.getElementById('lockHoras').checked = inter.lockHoras || false;
             document.getElementById('mediaCurso').value = inter.mediaCurso || 0;
             document.getElementById('lockMedia').checked = inter.lockMedia || false;
-            document.getElementById('desvioPadrao').value = inter.desvioPadrao || 1;
+            document.getElementById('desvioPadrao').value = inter.desvioPadrao || 0;
             document.getElementById('lockDesvio').checked = inter.lockDesvio || false;
 
             // Restaurar curso selecionado
