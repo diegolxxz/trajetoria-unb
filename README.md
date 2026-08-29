@@ -7,20 +7,13 @@ Uma ferramenta simples, rápida e 100% focada na Universidade de Brasília (UnB)
 - **Modo Escuro Nativo:** Interface pensada no conforto visual.
 - **Módulo Livre (§2º):** Opção individual por matéria para excluí-la da MP e mantê-la nas Notas, espelhando perfeitamente a matemática oficial do SIGAA.
 - **Seletor de Cursos:** Mais de 70 cursos pré-cadastrados com Média e Desvio Padrão oficiais para o cálculo exato da Nota Padronizada.
-- **Offline First:** Possui um script Python opcional (`route.py`) para quem deseja salvar cópias físicas locais (`dados.json`), embora não seja necessário para hospedar no GitHub Pages/Vercel.
-
-## 🚀 Como Hospedar de Graça (GitHub Pages)
-
-Se você deu um "fork" ou baixou esse projeto, basta hospedar na aba **Pages** do GitHub:
-1. Vá nas **Settings** (Configurações) do seu repositório.
-2. Na aba **Pages**, escolha a `main` branch.
-3. Pronto! Seu site estará online em `usuario.github.io/calculadora-ira-unb`.
+- **Offline First:** Possui um script Python opcional (`route.py`) para quem deseja salvar cópias físicas locais (`dados.json`).
 
 ## 🛠 Tecnologias Usadas
 * HTML5 Semântico
-* CSS3 (Variáveis nativas e transições fluídas)
-* Vanilla JavaScript (Sem frameworks, extremamente leve)
-* Bootstrap 5 (Apenas para o sistema de Grid flexível)
+* CSS3
+* Vanilla JavaScript
+* Bootstrap 5
 
 ## 💻 Como Usar Offline
 
