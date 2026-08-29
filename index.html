@@ -14,11 +14,10 @@
 </head>
 <body>
 
-    <!-- Cabeçalho -->
     <header class="cabecalho">
-        <div class="container d-flex justify-content-between align-items-center">
+        <div class="container position-relative d-flex justify-content-between align-items-center">
             <h1 class="titulo-principal m-0">Calculadora de Notas <span class="badge-unb">UnB</span></h1>
-            <span class="small d-none d-md-block text-center mx-3" style="color: var(--text-secondary); opacity: 0.8; font-size: 0.85rem;">
+            <span class="small d-none d-md-block text-center position-absolute top-50 start-50 translate-middle" style="color: var(--text-secondary); opacity: 0.8; font-size: 0.85rem; width: max-content;">
                 ⚠️ Site <strong>não oficial</strong> da Universidade de Brasília
             </span>
             <button id="btnTema" class="btn-tema" onclick="alternarTema()" title="Alternar tema">☀️</button>
@@ -64,7 +63,7 @@
 
         <!-- Seletor de Curso -->
         <div class="row g-3 mb-3">
-            <div class="col-lg-8 col-md-7">
+            <div class="col-lg-8 col-md-7" id="colSeletorCurso">
                 <label class="form-label" for="seletorCurso">Curso</label>
                 <select id="seletorCurso" class="form-select" onchange="selecionarCurso()">
                     <option value="">Selecionar curso...</option>
@@ -72,7 +71,7 @@
                     <!-- Cursos populados pelo JS -->
                 </select>
             </div>
-            <div class="col-lg-4 col-md-5">
+            <div class="col-lg-4 col-md-5" id="colHorasCurso">
                 <label class="form-label" for="horasCurso">Horas Totais do Curso</label>
                 <div class="input-group">
                     <input type="number" id="horasCurso" class="form-control" value="0">
@@ -110,25 +109,25 @@
 
         <!-- Quadro de Resultados -->
         <div class="row text-center quadro-resultados">
-            <div class="col-sm-3 col-6">
+            <div class="col-sm-3 col-6" id="cardHorasAcumuladas">
                 <div class="resultado-item">
                     <span class="resultado-label">Horas Acumuladas</span>
                     <span class="resultado-valor"><span id="horasAcumuladas">0</span>h</span>
                 </div>
             </div>
-            <div class="col-sm-3 col-6">
+            <div class="col-sm-3 col-6" id="cardIpf">
                 <div class="resultado-item">
                     <span class="resultado-label">IPF (Progresso)</span>
                     <span class="resultado-valor" id="ipfCalc">0.0000</span>
                 </div>
             </div>
-            <div class="col-sm-3 col-6">
+            <div class="col-sm-3 col-6" id="cardIraPadrao">
                 <div class="resultado-item">
                     <span class="resultado-label">Nota Padronizada</span>
                     <span class="resultado-valor" id="iraPadrao">0.0000</span>
                 </div>
             </div>
-            <div class="col-sm-3 col-6">
+            <div class="col-sm-3 col-6" id="cardNfFinal">
                 <div class="resultado-item resultado-destaque">
                     <span class="resultado-label">NF Final</span>
                     <span class="resultado-valor" id="nfCalc">0.0000</span>
@@ -141,7 +140,7 @@
         <div class="container mb-3" style="max-width: 800px; color: var(--text-secondary); font-size: 0.9em;">
             <strong>Mód. Livre:</strong> Disciplinas de módulo livre são excluídas do cálculo da Média Ponderada (MP). Marque para que o site ignore a matéria na MP, mas ela continua sendo considerada para o cálculo do IRA.
             <br><br>
-            ⚠️ <strong>Atenção ao Intercâmbio:</strong> Os cálculos de intercâmbio (IPF e Nota Padronizada) são estimativas. As fórmulas podem mudar, portanto, atente-se sempre às regras e cálculos usados no último edital oficial da UnB.
+            ⚠️ <strong>Atenção ao Intercâmbio:</strong> Os cálculos de intercâmbio da Nota Padronizada e Nota Final são estimativas. As médias e o desvio padrão podem mudar, portanto, atente-se sempre às regras e cálculos usados no último edital oficial da UnB.
         </div>
         <small style="color: var(--text-secondary);">Este site <strong>não é oficial</strong> da Universidade de Brasília. Os cálculos são aproximações e podem não refletir o valor exato das suas Notas — confira sempre pelo SIGAA.</small>
     </footer>

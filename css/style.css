@@ -128,7 +128,7 @@ body {
 }
 
 .badge-unb {
-    background: linear-gradient(135deg, var(--accent), #a371f7);
+    background: #008037;
     color: #fff;
     font-size: 0.65rem;
     padding: 3px 10px;

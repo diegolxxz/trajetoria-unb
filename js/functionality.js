@@ -334,8 +334,14 @@ function removerDisciplina(botao) {
     const containerDisc = periodoEl.querySelector('.periodo-disciplinas');
     const todosPeridos = document.querySelectorAll('#periodos .periodo');
 
-    // Não permite remover a única disciplina do único período
+    // Não permite remover a única disciplina do único período (apenas limpa os campos)
     if (todosPeridos.length === 1 && containerDisc.children.length === 1) {
+        discRow.querySelector('.input-nome').value = '';
+        discRow.querySelector('.sel-creditos').selectedIndex = 0;
+        discRow.querySelector('.sel-mencao').selectedIndex = 0;
+        discRow.querySelector('.chk-modulo-livre').checked = false;
+        calcularIra();
+        salvarDados();
         return;
     }
 
@@ -460,6 +466,18 @@ function calcularIntercambio(iraAtual) {
 function alternarModoManual() {
     const isManual = document.getElementById('modoManual').checked;
     document.getElementById('divInputsManuais').style.display = isManual ? 'flex' : 'none';
+    
+    // Ocultar campo de Horas Totais do Curso
+    document.getElementById('colHorasCurso').style.display = isManual ? 'none' : 'block';
+    document.getElementById('colSeletorCurso').className = isManual ? 'col-12' : 'col-lg-8 col-md-7';
+
+    // Ocultar card de Horas Acumuladas
+    document.getElementById('cardHorasAcumuladas').style.display = isManual ? 'none' : 'block';
+    const colsCards = isManual ? 'col-sm-4 col-12' : 'col-sm-3 col-6';
+    document.getElementById('cardIpf').className = colsCards;
+    document.getElementById('cardIraPadrao').className = colsCards;
+    document.getElementById('cardNfFinal').className = colsCards;
+
     calcularIntercambio();
     salvarDados();
 }
