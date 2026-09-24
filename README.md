@@ -1,19 +1,13 @@
 # Calculadora de Notas e MP — UnB
 
-Uma ferramenta simples, rápida e 100% focada na Universidade de Brasília (UnB) para o cálculo das **Notas (antigo IRA)** e da **Média Ponderada (MP)**, além de fornecer métricas importantes para editais de intercâmbio (IPF e Nota Padronizada).
+Uma ferramenta simples, rápida e 100% focada na Universidade de Brasília (UnB) para o cálculo do  **Índice de Rendimento Acadêmico (IRA)** e da **Média Ponderada (MP)**, além de fornecer métricas importantes para editais de intercâmbio (IPF e Nota Padronizada).
 
 ## ✨ Funcionalidades
-- **100% Estático:** Todo o cálculo e salvamento (via `localStorage`) ocorre no seu próprio navegador. Hospedagem gratuita e instantânea.
+- **100% Estático:** Todo o cálculo e salvamento (via `localStorage`) ocorre no seu próprio navegador.
 - **Modo Escuro Nativo:** Interface pensada no conforto visual.
-- **Módulo Livre (§2º):** Opção individual por matéria para excluí-la da MP e mantê-la nas Notas, espelhando perfeitamente a matemática oficial do SIGAA.
+- **Módulo Livre (§2º):** Opção individual por matéria para excluí-la da MP e mantê-la no IRA, espelhando perfeitamente a matemática oficial do SIGAA.
 - **Seletor de Cursos:** Mais de 70 cursos pré-cadastrados com Média e Desvio Padrão oficiais para o cálculo exato da Nota Padronizada.
 - **Offline First:** Possui um script Python opcional (`route.py`) para quem deseja salvar cópias físicas locais (`dados.json`).
-
-## 🛠 Tecnologias Usadas
-* HTML5 Semântico
-* CSS3
-* Vanilla JavaScript
-* Bootstrap 5
 
 ## 💻 Como Usar Offline
 
