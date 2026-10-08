@@ -15,6 +15,12 @@ Uma ferramenta simples, rápida e 100% focada na Universidade de Brasília (UnB)
 * Vanilla JavaScript
 * Bootstrap 5
 
+## 📚 Atualizar os dados dos cursos
+
+As médias e os desvios padrão usados na Nota Padronizada ficam em [`js/cursos.js`](js/cursos.js), separados dos cálculos. A cada semestre, edite os valores `media` e `desvio` do curso correspondente nesse arquivo. Para incluir um curso, acrescente uma entrada com `nome`, `media` e `desvio`.
+
+O seletor usa o nome do curso para manter a escolha salva no navegador mesmo se a ordem da lista mudar. Campos travados recebem os valores atualizados ao abrir a página; campos destravados preservam os valores digitados. Se alterar o nome de um curso, será preciso selecioná-lo novamente. Confira os dados do edital vigente antes de atualizá-los.
+
 ## 💻 Como Usar Offline
 
 Caso queira usar o projeto localmente no seu próprio computador e salvar suas notas num arquivo físico (`dados.json`), basta seguir esses passos:

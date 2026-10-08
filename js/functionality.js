@@ -7,16 +7,13 @@
 // CONSTANTES
 // ===========================
 
+const HORAS_POR_CREDITO = 15;
 const OPCOES_CREDITOS = [
     { texto: 'Créditos', valor: -1 },
-    { texto: '1',  valor: 1 },
-    { texto: '2',  valor: 2 },
-    { texto: '3',  valor: 3 },
-    { texto: '4',  valor: 4 },
-    { texto: '6',  valor: 6 },
-    { texto: '8',  valor: 8 },
-    { texto: '10', valor: 10 },
-    { texto: '12', valor: 12 },
+    ...[1, 2, 3, 4, 6, 8, 10, 12].map(creditos => ({
+        texto: `${creditos} (${creditos * HORAS_POR_CREDITO}h)`,
+        valor: creditos
+    }))
 ];
 
 const OPCOES_MENCOES = [
@@ -27,79 +24,6 @@ const OPCOES_MENCOES = [
     { texto: 'MI', valor: 2 },
     { texto: 'II', valor: 1 },
     { texto: 'SR', valor: 0 },
-];
-
-const CURSOS = [
-    { nome: 'ADMINISTRAÇÃO', media: 3.478086994, desvio: 0.913469746 },
-    { nome: 'AGRONOMIA', media: 3.251711192, desvio: 0.737009302 },
-    { nome: 'ARQUITETURA E URBANISMO', media: 4.001342377, desvio: 0.750879614 },
-    { nome: 'ARTES CÊNICAS', media: 4.131679452, desvio: 1.117962677 },
-    { nome: 'ARTES CÊNICAS - INTERPRETAÇÃO TEATRAL', media: 4.291934328, desvio: 1.051549668 },
-    { nome: 'ARTES VISUAIS', media: 4.045295693, desvio: 1.058940409 },
-    { nome: 'BIBLIOTECONOMIA', media: 3.983608669, desvio: 0.823589686 },
-    { nome: 'BIOTECNOLOGIA', media: 3.623256856, desvio: 0.885530046 },
-    { nome: 'CIÊNCIA DA COMPUTAÇÃO', media: 3.73551684, desvio: 0.7197099 },
-    { nome: 'CIÊNCIA POLÍTICA', media: 3.96155, desvio: 0.822594377 },
-    { nome: 'CIÊNCIAS AMBIENTAIS', media: 3.3641625, desvio: 0.981824159 },
-    { nome: 'CIÊNCIAS BIOLÓGICAS', media: 3.504735513, desvio: 1.061462754 },
-    { nome: 'CIÊNCIAS CONTÁBEIS', media: 3.302135708, desvio: 0.903540657 },
-    { nome: 'CIÊNCIAS ECONÔMICAS', media: 3.482919815, desvio: 0.790552073 },
-    { nome: 'CIÊNCIAS NATURAIS', media: 3.716037908, desvio: 0.758114731 },
-    { nome: 'CIÊNCIAS SOCIAIS', media: 3.81294062, desvio: 1.05849745 },
-    { nome: 'CIÊNCIAS SOCIAIS - SOCIOLOGIA', media: 4.056052747, desvio: 1.03104698 },
-    { nome: 'COMUNICAÇÃO SOCIAL - AUDIOVISUAL', media: 4.399426182, desvio: 0.610346047 },
-    { nome: 'COMUNICAÇÃO SOCIAL - COMUNICAÇÃO ORGANIZACIONAL', media: 4.489382369, desvio: 0.656220437 },
-    { nome: 'COMUNICAÇÃO SOCIAL - PUBLICIDADE E PROPAGANDA', media: 4.429347034, desvio: 0.477521013 },
-    { nome: 'DESIGN - PROGRAMAÇÃO VISUAL', media: 4.473523474, desvio: 0.479613888 },
-    { nome: 'DESIGN - PROJETO DO PRODUTO', media: 4.093415385, desvio: 1.251853416 },
-    { nome: 'DIREITO', media: 4.201930121, desvio: 0.700511682 },
-    { nome: 'EDUCAÇÃO FÍSICA', media: 3.817175291, desvio: 0.623397951 },
-    { nome: 'ENFERMAGEM', media: 3.939373526, desvio: 0.64477753 },
-    { nome: 'ENGENHARIA', media: 3.20655859, desvio: 1.123768983 },
-    { nome: 'ENGENHARIA AEROESPACIAL', media: 3.42285549, desvio: 0.762583345 },
-    { nome: 'ENGENHARIA AMBIENTAL', media: 3.247862214, desvio: 0.668902884 },
-    { nome: 'ENGENHARIA CIVIL', media: 3.425058647, desvio: 0.75436304 },
-    { nome: 'ENGENHARIA DE COMPUTAÇÃO', media: 3.363616216, desvio: 0.790953799 },
-    { nome: 'ENGENHARIA DE ENERGIA', media: 3.259977143, desvio: 0.699993918 },
-    { nome: 'ENGENHARIA DE PRODUÇÃO', media: 3.298870916, desvio: 0.713470615 },
-    { nome: 'ENGENHARIA DE REDES DE COMUNICAÇÃO', media: 3.037918269, desvio: 0.795966401 },
-    { nome: 'ENGENHARIA DE SOFTWARE', media: 3.494431727, desvio: 0.561967758 },
-    { nome: 'ENGENHARIA ELÉTRICA', media: 3.157985533, desvio: 0.863056528 },
-    { nome: 'ENGENHARIA ELETRÔNICA', media: 3.368536559, desvio: 0.625692828 },
-    { nome: 'ENGENHARIA FLORESTAL', media: 3.260703806, desvio: 0.810105163 },
-    { nome: 'ENGENHARIA MECÂNICA', media: 3.193472423, desvio: 0.742878496 },
-    { nome: 'ENGENHARIA MECATRÔNICA - CONTROLE E AUTOMAÇÃO', media: 3.286072857, desvio: 0.794820257 },
-    { nome: 'ENGENHARIA QUÍMICA', media: 3.198266549, desvio: 0.888523502 },
-    { nome: 'ESTATÍSTICA', media: 3.183331287, desvio: 0.906287259 },
-    { nome: 'FARMÁCIA', media: 3.737438718, desvio: 0.767847659 },
-    { nome: 'FILOSOFIA', media: 3.703983364, desvio: 1.083731105 },
-    { nome: 'FÍSICA', media: 3.007174868, desvio: 1.135298971 },
-    { nome: 'FISIOTERAPIA', media: 4.020478189, desvio: 0.618053379 },
-    { nome: 'FONOAUDIOLOGIA', media: 3.874749638, desvio: 0.84505506 },
-    { nome: 'GEOGRAFIA', media: 3.528634591, desvio: 1.214160111 },
-    { nome: 'GESTÃO DE POLÍTICAS PÚBLICAS', media: 3.836621898, desvio: 0.939227214 },
-    { nome: 'HISTÓRIA', media: 4.030774876, desvio: 0.905058747 },
-    { nome: 'JORNALISMO', media: 4.133850206, desvio: 0.807999761 },
-    { nome: 'LETRAS - LÍNGUA ESPANHOLA E LITERATURA ESPANHOLA E HISPANO-AMERICANA', media: 3.891349296, desvio: 0.925122178 },
-    { nome: 'LETRAS - LÍNGUA INGLESA E RESPECTIVA LITERATURA', media: 4.271855508, desvio: 0.789750778 },
-    { nome: 'LETRAS - LÍNGUA PORTUGUESA E RESPECTIVA LITERATURA', media: 3.903281601, desvio: 1.241006833 },
-    { nome: 'LETRAS - PORTUGUÊS DO BRASIL COMO SEGUNDA LÍNGUA', media: 4.022797333, desvio: 0.958602432 },
-    { nome: 'LETRAS - TRADUÇÃO - FRANCÊS', media: 3.768155556, desvio: 1.364407857 },
-    { nome: 'LETRAS - TRADUÇÃO - INGLÊS', media: 4.143661244, desvio: 0.800160714 },
-    { nome: 'LÍNGUAS ESTRANGEIRAS APLICADAS - MSI', media: 3.984853469, desvio: 0.998815321 },
-    { nome: 'MEDICINA', media: 4.190889784, desvio: 0.696158583 },
-    { nome: 'MEDICINA VETERINÁRIA', media: 3.814644703, desvio: 0.685390381 },
-    { nome: 'MUSEOLOGIA', media: 3.930540719, desvio: 1.0554084 },
-    { nome: 'NUTRIÇÃO', media: 3.844901935, desvio: 0.786479801 },
-    { nome: 'ODONTOLOGIA', media: 3.916707458, desvio: 0.675032385 },
-    { nome: 'PEDAGOGIA', media: 4.17987235, desvio: 1.00070316 },
-    { nome: 'PSICOLOGIA', media: 4.495435702, desvio: 0.883910679 },
-    { nome: 'QUÍMICA TECNOLÓGICA', media: 3.140338053, desvio: 0.842927823 },
-    { nome: 'RELAÇÕES INTERNACIONAIS', media: 4.194942484, desvio: 0.71787958 },
-    { nome: 'SAÚDE COLETIVA', media: 3.720839096, desvio: 1.114897901 },
-    { nome: 'SERVIÇO SOCIAL', media: 3.894714179, desvio: 1.014927572 },
-    { nome: 'TEORIA, CRÍTICA E HISTÓRIA DA ARTE', media: 4.046142128, desvio: 1.193218559 },
-    { nome: 'TERAPIA OCUPACIONAL', media: 4.01959867, desvio: 0.615369 },
 ];
 
 const CHAVE_DADOS = 'calculadora-ira-unb';
@@ -157,9 +81,9 @@ function popularSeletorCursos() {
     const seletor = document.getElementById('seletorCurso');
     if (!seletor) return;
 
-    CURSOS.forEach((curso, indice) => {
+    CURSOS.forEach((curso) => {
         const opcao = document.createElement('option');
-        opcao.value = String(indice);
+        opcao.value = curso.nome;
         opcao.textContent = curso.nome;
         seletor.appendChild(opcao);
     });
@@ -186,7 +110,7 @@ function selecionarCurso() {
         }
     } else {
         // Curso selecionado: preenche e trava
-        const curso = CURSOS[parseInt(valor)];
+        const curso = CURSOS.find(curso => curso.nome === valor);
         if (curso) {
             inputMedia.value = curso.media;
             inputDesvio.value = curso.desvio;
@@ -437,7 +361,7 @@ function calcularIntercambio(iraAtual) {
                 const mencao = parseInt(disc.querySelector('.sel-mencao').value);
 
                 if (mencao >= 3 && creditos > 0) {
-                    horasAcumuladas += creditos * 15;
+                    horasAcumuladas += creditos * HORAS_POR_CREDITO;
                 }
             });
         });
@@ -583,7 +507,14 @@ async function carregarDados() {
 
             // Restaurar curso selecionado
             if (inter.cursoSelecionado !== undefined && inter.cursoSelecionado !== null) {
-                document.getElementById('seletorCurso').value = inter.cursoSelecionado;
+                const valorSalvo = String(inter.cursoSelecionado);
+                const cursoLegado = /^\d+$/.test(valorSalvo) ? CURSOS[Number(valorSalvo)] : null;
+                document.getElementById('seletorCurso').value = cursoLegado ? cursoLegado.nome : valorSalvo;
+
+                // Campos travados acompanham os dados atualizados do curso.
+                const curso = CURSOS.find(curso => curso.nome === document.getElementById('seletorCurso').value);
+                if (curso && inter.lockMedia) document.getElementById('mediaCurso').value = curso.media;
+                if (curso && inter.lockDesvio) document.getElementById('desvioPadrao').value = curso.desvio;
             }
             
             if (inter.modoManual !== undefined) {
