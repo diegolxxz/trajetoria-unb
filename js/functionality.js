@@ -1,13 +1,13 @@
 /* ============================================================
    CALCULADORA IRA UNB — LÓGICA PRINCIPAL
-   Reescrita completa: mais limpo, localStorage, seletor de cursos
+   Histórico de disciplinas, IRA e MP
    ============================================================ */
 
 // ===========================
 // CONSTANTES
 // ===========================
 
-const HORAS_POR_CREDITO = 15;
+const HORAS_POR_CREDITO = CalculosUnB.horasPorCredito;
 const OPCOES_CREDITOS = [
     { texto: 'Créditos', valor: -1 },
     ...[1, 2, 3, 4, 6, 8, 10, 12].map(creditos => ({
@@ -27,107 +27,81 @@ const OPCOES_MENCOES = [
 ];
 
 const CHAVE_DADOS = 'calculadora-ira-unb';
-const CHAVE_TEMA = 'calculadora-ira-tema';
-
-// ===========================
-// ESTADO GLOBAL
-// ===========================
-
 let contadorDisciplina = 0;
-
-// ===========================
-// INICIALIZAÇÃO
-// ===========================
+let sincronizarArquivo = false;
+let filaSalvamento = Promise.resolve();
 
 document.addEventListener('DOMContentLoaded', inicializar);
 
 async function inicializar() {
-    carregarTema();
-    popularSeletorCursos();
-    await carregarDados();
-    configurarEventos();
+    const dadosNavegador = AppUnB.ler(CHAVE_DADOS, {});
+    let dadosArquivo = null;
+    try {
+        const resposta = await fetch(new URL('load', AppUnB.raiz), { cache: 'no-store' });
+        if (resposta.ok) {
+            const recebido = await resposta.json();
+            if (recebido && typeof recebido === 'object' && !Array.isArray(recebido)) {
+                dadosArquivo = recebido;
+                sincronizarArquivo = true;
+            }
+        }
+    } catch { /* A versão estática continua usando os dados do navegador. */ }
+    const temPeriodos = dados => Object.keys(dados).some(chave => /^\d+$/.test(chave));
+    const extrasNavegador = Object.fromEntries(Object.entries(dadosNavegador).filter(([chave]) => !/^\d+$/.test(chave)));
+    const dados = dadosArquivo && temPeriodos(dadosArquivo)
+        ? { ...extrasNavegador, ...dadosArquivo }
+        : dadosNavegador;
+    AppUnB.salvar(CHAVE_DADOS, dados);
+    Object.keys(dados).filter(k => /^\d+$/.test(k)).sort((a, b) => Number(a) - Number(b)).forEach(chave => {
+        criarPeriodo(true);
+        const periodo = document.getElementById('periodos').lastElementChild;
+        Object.keys(dados[chave] || {}).sort((a, b) => Number(a) - Number(b)).forEach(d => {
+            adicionarDisciplina(periodo, dados[chave][d]);
+        });
+        if (!periodo.querySelector('.disciplina-row')) adicionarDisciplina(periodo);
+    });
+    if (!document.querySelector('.periodo')) criarPeriodo();
+    document.getElementById('periodos').addEventListener('change', () => { calcularIra(); salvarDados(); });
+    document.getElementById('periodos').addEventListener('input', salvarDados);
+    calcularIra();
 }
 
-// ===========================
-// TEMA (ESCURO / CLARO)
-// ===========================
-
-function carregarTema() {
-    const temaSalvo = localStorage.getItem(CHAVE_TEMA) || 'escuro';
-    document.documentElement.setAttribute('data-tema', temaSalvo);
-    atualizarIconeTema(temaSalvo);
+function coletarDados() {
+    const anterior = AppUnB.ler(CHAVE_DADOS, {});
+    const dados = {};
+    document.querySelectorAll('#periodos .periodo').forEach((periodo, i) => {
+        dados[i + 1] = {};
+        periodo.querySelectorAll('.disciplina-row').forEach((disc, j) => {
+            dados[i + 1][j + 1] = [disc.querySelector('.input-nome').value,
+                disc.querySelector('.sel-creditos').selectedIndex, disc.querySelector('.sel-mencao').selectedIndex,
+                disc.querySelector('.chk-modulo-livre').checked];
+        });
+    });
+    if (anterior.intercambio) dados.intercambio = anterior.intercambio;
+    if (anterior.horasCurso !== undefined) dados.horasCurso = anterior.horasCurso;
+    return dados;
 }
 
-function alternarTema() {
-    const temaAtual = document.documentElement.getAttribute('data-tema');
-    const novoTema = temaAtual === 'escuro' ? 'claro' : 'escuro';
-    document.documentElement.setAttribute('data-tema', novoTema);
-    localStorage.setItem(CHAVE_TEMA, novoTema);
-    atualizarIconeTema(novoTema);
-}
-
-function atualizarIconeTema(tema) {
-    const botao = document.getElementById('btnTema');
-    if (!botao) return;
-    botao.textContent = tema === 'escuro' ? '☀️' : '🌙';
-    botao.title = tema === 'escuro' ? 'Mudar para modo claro' : 'Mudar para modo escuro';
-}
-
-// ===========================
-// SELETOR DE CURSOS
-// ===========================
-
-function popularSeletorCursos() {
-    const seletor = document.getElementById('seletorCurso');
-    if (!seletor) return;
-
-    CURSOS.forEach((curso) => {
-        const opcao = document.createElement('option');
-        opcao.value = curso.nome;
-        opcao.textContent = curso.nome;
-        seletor.appendChild(opcao);
+function salvarDados() {
+    const dados = coletarDados();
+    AppUnB.salvar(CHAVE_DADOS, dados);
+    if (!sincronizarArquivo) return;
+    filaSalvamento = filaSalvamento.catch(() => {}).then(async () => {
+        const resposta = await fetch(new URL('save', AppUnB.raiz), {
+            method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(dados)
+        });
+        if (!resposta.ok) throw new Error(`HTTP ${resposta.status}`);
+    }).catch(() => {
+        const aviso = document.getElementById('avisoPersistencia');
+        aviso.hidden = false;
+        aviso.textContent = 'Alterações salvas no navegador, mas não foi possível atualizar dados.json.';
     });
 }
 
-function selecionarCurso() {
-    const seletor = document.getElementById('seletorCurso');
-    const valor = seletor.value;
-    const inputMedia = document.getElementById('mediaCurso');
-    const inputDesvio = document.getElementById('desvioPadrao');
-    const lockMedia = document.getElementById('lockMedia');
-    const lockDesvio = document.getElementById('lockDesvio');
-
-    if (valor === '' || valor === 'manual') {
-        // Placeholder ou manual: libera campos
-        inputMedia.disabled = false;
-        inputDesvio.disabled = false;
-        lockMedia.checked = false;
-        lockDesvio.checked = false;
-
-        if (valor === '') {
-            inputMedia.value = '0.0000';
-            inputDesvio.value = '0.0000';
-        }
-    } else {
-        // Curso selecionado: preenche e trava
-        const curso = CURSOS.find(curso => curso.nome === valor);
-        if (curso) {
-            inputMedia.value = curso.media;
-            inputDesvio.value = curso.desvio;
-            inputMedia.disabled = true;
-            inputDesvio.disabled = true;
-            lockMedia.checked = true;
-            lockDesvio.checked = true;
-        }
-    }
-
-    calcularIra();
-    salvarDados();
+function calcularIra() {
+    const resultado = CalculosUnB.historico(coletarDados());
+    document.getElementById('ira-mp').textContent = `IRA: ${AppUnB.numero(resultado.ira)}   MP: ${AppUnB.numero(resultado.mp)}`;
 }
-
-// ===========================
-// PERÍODOS
-// ===========================
 
 function criarPeriodo(salvo = false) {
     const container = document.getElementById('periodos');
@@ -218,15 +192,15 @@ function adicionarDisciplina(periodoEl, dados = null) {
         <div class="row g-2 align-items-center">
             <div class="col-lg-4 col-md-4 col-sm-12">
                 <input type="text" class="form-control form-control-sm input-nome"
-                       placeholder="Nome da Disciplina (Opcional)" value="${escapeHtml(nome)}">
+                       placeholder="Nome da Disciplina (Opcional)" >
             </div>
             <div class="col-lg-2 col-md-2 col-4">
-                <select class="form-select form-select-sm sel-creditos" required>
+                <select class="form-select form-select-sm sel-creditos" aria-label="Créditos da disciplina" required>
                     ${gerarOpcoesHtml(OPCOES_CREDITOS, indiceCred)}
                 </select>
             </div>
             <div class="col-lg-2 col-md-2 col-4">
-                <select class="form-select form-select-sm sel-mencao" required>
+                <select class="form-select form-select-sm sel-mencao" aria-label="Menção da disciplina" required>
                     ${gerarOpcoesHtml(OPCOES_MENCOES, indiceMenc)}
                 </select>
             </div>
@@ -243,13 +217,9 @@ function adicionarDisciplina(periodoEl, dados = null) {
         </div>
     `;
 
+    div.querySelector('.input-nome').value = nome;
     containerDisc.appendChild(div);
-}
-
-function escapeHtml(texto) {
-    const div = document.createElement('div');
-    div.textContent = texto;
-    return div.innerHTML;
+    if (!dados) salvarDados();
 }
 
 function removerDisciplina(botao) {
@@ -279,304 +249,4 @@ function removerDisciplina(botao) {
 
     calcularIra();
     salvarDados();
-}
-
-// ===========================
-// CÁLCULO DO IRA E MP
-// ===========================
-
-function calcularIra() {
-    const periodos = document.querySelectorAll('#periodos .periodo');
-    let somaPesadaIra = 0;
-    let somaPesosIra = 0;
-    let somaPesadaMp = 0;
-    let somaPesosMp = 0;
-
-    periodos.forEach((periodoEl, indice) => {
-        const semestre = Math.min(6, indice + 1);
-        const disciplinas = periodoEl.querySelectorAll('.disciplina-row');
-
-        disciplinas.forEach(disc => {
-            const creditos = parseInt(disc.querySelector('.sel-creditos').value);
-            const mencao = parseInt(disc.querySelector('.sel-mencao').value);
-            const moduloLivre = disc.querySelector('.chk-modulo-livre').checked;
-
-            if (mencao !== -1 && creditos !== -1) {
-                somaPesadaIra += mencao * creditos * semestre;
-                somaPesosIra += creditos * semestre;
-                
-                if (!moduloLivre) {
-                    somaPesadaMp += mencao * creditos;
-                    somaPesosMp += creditos;
-                }
-            }
-        });
-    });
-
-    let ira = 0;
-    let mp = 0;
-
-    if (somaPesosIra > 0) {
-        ira = somaPesadaIra / somaPesosIra;
-        mp = somaPesadaMp / somaPesosMp;
-    }
-
-    const display = document.getElementById('ira-mp');
-    if (display) {
-        if (somaPesosIra > 0) {
-            display.textContent = `IRA: ${ira.toFixed(4)}   MP: ${mp.toFixed(4)}`;
-        } else {
-            display.textContent = 'IRA: 0.0000   MP: 0.0000';
-        }
-    }
-
-    calcularIntercambio(ira);
-}
-
-// ===========================
-// CÁLCULO DE INTERCÂMBIO
-// ===========================
-
-function calcularIntercambio(iraAtual) {
-    const modoManual = document.getElementById('modoManual') && document.getElementById('modoManual').checked;
-    
-    let ira = 0;
-    let ipf = 0;
-
-    if (modoManual) {
-        // Usa os valores digitados (ipf vem em %, dividimos por 100)
-        ira = parseFloat(document.getElementById('iraManual').value) || 0;
-        let ipfInput = parseFloat(document.getElementById('ipfManual').value) || 0;
-        ipf = ipfInput / 100;
-        document.getElementById('horasAcumuladas').textContent = '-';
-    } else {
-        // Usa os valores calculados das disciplinas
-        ira = iraAtual !== undefined ? iraAtual : (parseFloat(document.getElementById('ira-mp').textContent.match(/Notas: ([\d.]+)/)?.[1]) || 0);
-        
-        let horasAcumuladas = 0;
-        const periodos = document.querySelectorAll('#periodos .periodo');
-        periodos.forEach(periodoEl => {
-            periodoEl.querySelectorAll('.disciplina-row').forEach(disc => {
-                const creditos = parseInt(disc.querySelector('.sel-creditos').value);
-                const mencao = parseInt(disc.querySelector('.sel-mencao').value);
-
-                if (mencao >= 3 && creditos > 0) {
-                    horasAcumuladas += creditos * HORAS_POR_CREDITO;
-                }
-            });
-        });
-
-        document.getElementById('horasAcumuladas').textContent = horasAcumuladas;
-
-        const horasCurso = parseFloat(document.getElementById('horasCurso').value) || 0;
-        ipf = horasCurso > 0 ? horasAcumuladas / horasCurso : 0;
-    }
-    
-    document.getElementById('ipfCalc').textContent = ipf.toFixed(4);
-
-    // 3. IRA Padronizado: (IRA do Aluno - Média do Curso) / Desvio Padrão
-    const mediaCurso = parseFloat(document.getElementById('mediaCurso').value) || 0;
-    let desvioPadrao = parseFloat(document.getElementById('desvioPadrao').value) || 1;
-    if (desvioPadrao === 0) desvioPadrao = 1; // Evita divisão por zero
-
-    const iraPadronizado = (ira - mediaCurso) / desvioPadrao;
-    document.getElementById('iraPadrao').textContent = iraPadronizado.toFixed(4);
-
-    // 4. NF = IRA Padronizado + 2 × IPF
-    const nf = iraPadronizado + (2 * ipf);
-    document.getElementById('nfCalc').textContent = nf.toFixed(4);
-}
-
-function alternarModoManual() {
-    const isManual = document.getElementById('modoManual').checked;
-    document.getElementById('divInputsManuais').style.display = isManual ? 'flex' : 'none';
-    
-    // Ocultar campo de Horas Totais do Curso
-    document.getElementById('colHorasCurso').style.display = isManual ? 'none' : 'block';
-    document.getElementById('colSeletorCurso').className = isManual ? 'col-12' : 'col-lg-8 col-md-7';
-
-    // Ocultar card de Horas Acumuladas
-    document.getElementById('cardHorasAcumuladas').style.display = isManual ? 'none' : 'block';
-    const colsCards = isManual ? 'col-sm-4 col-12' : 'col-sm-3 col-6';
-    document.getElementById('cardIpf').className = colsCards;
-    document.getElementById('cardIraPadrao').className = colsCards;
-    document.getElementById('cardNfFinal').className = colsCards;
-
-    calcularIntercambio();
-    salvarDados();
-}
-
-// ===========================
-// PERSISTÊNCIA (localStorage + fallback servidor)
-// ===========================
-
-function coletarDados() {
-    const dados = {};
-    const periodos = document.querySelectorAll('#periodos .periodo');
-
-    periodos.forEach((periodoEl, indice) => {
-        const periodoDados = {};
-        const disciplinas = periodoEl.querySelectorAll('.disciplina-row');
-
-        disciplinas.forEach((disc, j) => {
-            periodoDados[j + 1] = [
-                disc.querySelector('.input-nome').value,
-                disc.querySelector('.sel-creditos').selectedIndex,
-                disc.querySelector('.sel-mencao').selectedIndex,
-                disc.querySelector('.chk-modulo-livre').checked
-            ];
-        });
-
-        dados[indice + 1] = periodoDados;
-    });
-
-    dados['intercambio'] = {
-        horasCurso: document.getElementById('horasCurso').value,
-        lockHoras: document.getElementById('lockHoras').checked,
-        mediaCurso: document.getElementById('mediaCurso').value,
-        lockMedia: document.getElementById('lockMedia').checked,
-        desvioPadrao: document.getElementById('desvioPadrao').value,
-        lockDesvio: document.getElementById('lockDesvio').checked,
-        cursoSelecionado: document.getElementById('seletorCurso').value,
-        modoManual: document.getElementById('modoManual') ? document.getElementById('modoManual').checked : false,
-        iraManual: document.getElementById('iraManual') ? document.getElementById('iraManual').value : '0.0000',
-        ipfManual: document.getElementById('ipfManual') ? document.getElementById('ipfManual').value : '0.0000',
-    };
-
-    return dados;
-}
-
-function salvarDados() {
-    const dados = coletarDados();
-
-    // Salvar no localStorage (persistência principal)
-    try {
-        localStorage.setItem(CHAVE_DADOS, JSON.stringify(dados));
-    } catch (e) {
-        console.warn('Erro ao salvar no localStorage:', e);
-    }
-
-}
-
-async function carregarDados() {
-    let dados = null;
-
-    // 1. Tenta carregar do localStorage
-    const dadosLocal = localStorage.getItem(CHAVE_DADOS);
-    if (dadosLocal) {
-        try {
-            dados = JSON.parse(dadosLocal);
-        } catch (e) {
-            console.warn('Erro ao parsear localStorage:', e);
-        }
-    }
-
-
-    // 3. Restaurar dados ou criar estado inicial
-    if (dados) {
-        const chavesPeriodos = Object.keys(dados)
-            .filter(k => k !== 'intercambio')
-            .sort((a, b) => parseInt(a) - parseInt(b));
-
-        if (chavesPeriodos.length > 0) {
-            chavesPeriodos.forEach((chavePeriodo) => {
-                criarPeriodo(true);
-                const periodos = document.querySelectorAll('#periodos .periodo');
-                const periodoEl = periodos[periodos.length - 1];
-                const periodoDados = dados[chavePeriodo];
-
-                Object.keys(periodoDados)
-                    .sort((a, b) => parseInt(a) - parseInt(b))
-                    .forEach(chaveDisc => {
-                        adicionarDisciplina(periodoEl, periodoDados[chaveDisc]);
-                    });
-            });
-        } else {
-            criarPeriodo();
-        }
-
-        // Restaurar dados de intercâmbio
-        if (dados['intercambio']) {
-            const inter = dados['intercambio'];
-            document.getElementById('horasCurso').value = inter.horasCurso || 0;
-            document.getElementById('lockHoras').checked = inter.lockHoras || false;
-            document.getElementById('mediaCurso').value = inter.mediaCurso || 0;
-            document.getElementById('lockMedia').checked = inter.lockMedia || false;
-            document.getElementById('desvioPadrao').value = inter.desvioPadrao || 0;
-            document.getElementById('lockDesvio').checked = inter.lockDesvio || false;
-
-            // Restaurar curso selecionado
-            if (inter.cursoSelecionado !== undefined && inter.cursoSelecionado !== null) {
-                const valorSalvo = String(inter.cursoSelecionado);
-                const cursoLegado = /^\d+$/.test(valorSalvo) ? CURSOS[Number(valorSalvo)] : null;
-                document.getElementById('seletorCurso').value = cursoLegado ? cursoLegado.nome : valorSalvo;
-
-                // Campos travados acompanham os dados atualizados do curso.
-                const curso = CURSOS.find(curso => curso.nome === document.getElementById('seletorCurso').value);
-                if (curso && inter.lockMedia) document.getElementById('mediaCurso').value = curso.media;
-                if (curso && inter.lockDesvio) document.getElementById('desvioPadrao').value = curso.desvio;
-            }
-            
-            if (inter.modoManual !== undefined) {
-                document.getElementById('modoManual').checked = inter.modoManual;
-                document.getElementById('iraManual').value = inter.iraManual || '0.0000';
-                document.getElementById('ipfManual').value = inter.ipfManual || '0.0000';
-                alternarModoManual(); // atualiza a interface
-            }
-
-            // Aplicar travas
-            alternarTrava('horasCurso', 'lockHoras');
-            alternarTrava('mediaCurso', 'lockMedia');
-            alternarTrava('desvioPadrao', 'lockDesvio');
-        }
-    } else {
-        // Sem dados — estado inicial
-        criarPeriodo();
-    }
-
-    calcularIra();
-}
-
-// ===========================
-// TRAVA (LOCK)
-// ===========================
-
-function alternarTrava(inputId, lockId) {
-    const input = document.getElementById(inputId);
-    const lock = document.getElementById(lockId);
-    if (input && lock) {
-        input.disabled = lock.checked;
-    }
-    salvarDados();
-}
-
-// ===========================
-// EVENTOS (DELEGAÇÃO)
-// ===========================
-
-function configurarEventos() {
-    const containerPeriodos = document.getElementById('periodos');
-
-    // Quando alterar selects (créditos/menções) nos períodos
-    containerPeriodos.addEventListener('change', () => {
-        calcularIra();
-        salvarDados();
-    });
-
-    // Quando digitar em inputs (nome da disciplina)
-    containerPeriodos.addEventListener('input', () => {
-        salvarDados();
-    });
-
-    // Quando alterar campos do painel de intercâmbio
-    const painel = document.getElementById('painelIntercambio');
-    painel.addEventListener('change', () => {
-        calcularIra();
-        salvarDados();
-    });
-
-    painel.addEventListener('input', () => {
-        calcularIra();
-        salvarDados();
-    });
 }

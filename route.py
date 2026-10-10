@@ -1,13 +1,31 @@
-from bottle import route, run, static_file, request, response
+from bottle import route, run, static_file, request, response, redirect, abort
+from pathlib import Path
 import json
 import os
 
-DATA_FILE = 'dados.json'
+ROOT = Path(__file__).resolve().parent
+DATA_FILE = ROOT / 'dados.json'
 
 @route('/')
 def index():
-    """Serve a página principal diretamente da raiz do projeto."""
-    resp = static_file('index.html', root='./')
+    return redirect('/ira/')
+
+@route('/ira')
+@route('/ira/')
+@route('/intercambio')
+@route('/intercambio/')
+@route('/intercambio/<edital>')
+@route('/intercambio/<edital>/')
+def pagina(edital=None):
+    pasta = 'ira' if request.path.startswith('/ira') else 'intercambio'
+    if edital:
+        pasta += '/' + edital
+    arquivo = ROOT / pasta / 'index.html'
+    if not arquivo.is_file() or not arquivo.resolve().is_relative_to(ROOT):
+        abort(404, 'Página não encontrada')
+    if not request.path.endswith('/'):
+        return redirect(request.path + '/')
+    resp = static_file(pasta + '/index.html', root=str(ROOT))
     resp.set_header('Cache-Control', 'no-cache, no-store, must-revalidate')
     resp.set_header('Pragma', 'no-cache')
     resp.set_header('Expires', '0')
@@ -16,12 +34,18 @@ def index():
 @route('/css/<filename>')
 def serve_css(filename):
     """Serve arquivos CSS."""
-    return static_file(filename, root='./css')
+    return static_file(filename, root=str(ROOT / 'css'))
 
 @route('/js/<filename>')
 def serve_js(filename):
     """Serve arquivos JavaScript."""
-    return static_file(filename, root='./js')
+    return static_file(filename, root=str(ROOT / 'js'))
+
+@route('/data/editais/<filename>')
+def serve_edital(filename):
+    resp = static_file(filename, root=str(ROOT / 'data' / 'editais'))
+    resp.set_header('Cache-Control', 'no-cache')
+    return resp
 
 @route('/save', method='POST')
 def save_data():
