@@ -7,6 +7,8 @@ a { color: var(--accent); }
 .topo-site nav a[aria-current] { background: var(--accent-glow); color: var(--accent); }
 .pagina-conteudo { min-height: 65vh; }
 .intro-pagina { max-width: 760px; margin: 1.6rem 0; }
+.intro-pagina h1:only-child { margin-bottom: 0; }
+.ira-parcial { margin: -.45rem 0 1rem; padding: .7rem 1rem; border-left: 3px solid var(--accent); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; background: var(--accent-glow); color: var(--text-secondary); font-size: .88rem; font-variant-numeric: tabular-nums; }
 .intro-pagina h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 700; letter-spacing: -.04em; }
 .intro-pagina p:not(.sobretitulo) { color: var(--text-secondary); line-height: 1.7; }
 .sobretitulo { color: var(--accent); letter-spacing: .1em; font-weight: 600; font-size: .7rem; margin-bottom: .55rem; }

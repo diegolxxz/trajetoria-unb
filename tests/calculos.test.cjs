@@ -25,11 +25,12 @@ test('Direito possui duas referências e não inventa rótulos de turno', () => 
 
 test('IRA ignora linhas incompletas e MP lida com módulos livres sem divisão por zero', () => {
     const resultado = calc.historico({ 1: { 1: ['Teste', 4, 1, true], 2: ['', 0, 0, false] } });
-    assert.deepEqual(resultado, { ira: 5, mp: 0, horas: 60, temDisciplinas: true });
+    assert.deepEqual(resultado, { ira: 5, mp: 0, horas: 60, temDisciplinas: true, parciais: [{ periodo: 1, ira: 5 }] });
     const misto = calc.historico({ 1: {1: ['A', 4, 1, false]}, 2: {1: ['B', 2, 3, false]} });
     assert.equal(misto.ira, 4);
     assert.equal(misto.mp, 26 / 6);
     assert.equal(misto.horas, 90);
+    assert.deepEqual(misto.parciais, [{ periodo: 1, ira: 5 }, { periodo: 2, ira: 4 }]);
 });
 
 test('somente alocados exclui n/a e justificativas negativas da fonte', () => {

@@ -101,6 +101,17 @@ function salvarDados() {
 function calcularIra() {
     const resultado = CalculosUnB.historico(coletarDados());
     document.getElementById('ira-mp').textContent = `IRA: ${AppUnB.numero(resultado.ira)}   MP: ${AppUnB.numero(resultado.mp)}`;
+    const periodos = [...document.querySelectorAll('#periodos .periodo')];
+    document.querySelectorAll('#periodos .ira-parcial').forEach(elemento => elemento.remove());
+    periodos.forEach((periodo, indice) => {
+        const parcial = resultado.parciais[indice];
+        if (!parcial) return;
+        const cartao = document.createElement('div');
+        cartao.className = 'ira-parcial';
+        cartao.setAttribute('aria-live', 'polite');
+        cartao.textContent = `IRA parcial após o ${parcial.periodo}º período: ${AppUnB.numero(parcial.ira)}`;
+        periodo.after(cartao);
+    });
 }
 
 function criarPeriodo(salvo = false) {

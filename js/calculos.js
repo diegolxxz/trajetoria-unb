@@ -6,6 +6,7 @@ const CalculosUnB = (() => {
 
     function historico(dados = {}) {
         let pontosIra = 0, pesosIra = 0, pontosMp = 0, pesosMp = 0, horas = 0;
+        const parciais = [];
         Object.keys(dados).filter(k => /^\d+$/.test(k)).sort((a, b) => Number(a) - Number(b)).forEach((k, i) => {
             const pesoPeriodo = Math.min(i + 1, 6);
             Object.values(dados[k] || {}).forEach(d => {
@@ -19,9 +20,10 @@ const CalculosUnB = (() => {
                 if (!d[3]) { pontosMp += credito * mencao; pesosMp += credito; }
                 if (mencao >= 3) horas += credito * horasPorCredito;
             });
+            parciais.push({ periodo: Number(k), ira: pesosIra ? pontosIra / pesosIra : 0 });
         });
         return { ira: pesosIra ? pontosIra / pesosIra : 0, mp: pesosMp ? pontosMp / pesosMp : 0,
-            horas, temDisciplinas: pesosIra > 0 };
+            horas, temDisciplinas: pesosIra > 0, parciais };
     }
 
     function nota(ira, ipfPercentual, media, desvio, formula) {
