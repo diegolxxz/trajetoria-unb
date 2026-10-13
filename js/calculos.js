@@ -38,7 +38,7 @@ const CalculosUnB = (() => {
     function alocado(texto) {
         const valor = normalizar(texto).trim();
         return Boolean(valor && valor !== 'n/a' && valor !== '-' && !valor.startsWith('nao alocado') &&
-            !valor.startsWith('inscricao nao homologada') && !valor.startsWith('vide '));
+            !valor.startsWith('inscricao nao homologada') && !valor.startsWith('nao consta na alocacao') && !valor.startsWith('vide '));
     }
     return { creditos, mencoes, horasPorCredito, historico, nota, cursoBase, normalizar, alocado };
 })();

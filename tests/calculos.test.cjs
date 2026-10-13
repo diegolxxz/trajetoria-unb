@@ -35,7 +35,7 @@ test('IRA ignora linhas incompletas e MP lida com módulos livres sem divisão p
 
 test('somente alocados exclui n/a e justificativas negativas da fonte', () => {
     assert.equal(dados.resultados.filter(r => calc.alocado(r.alocacao)).length, 99);
-    for (const s of ['', 'n/a', 'Não alocado', 'Não alocado por falta de vaga']) assert.equal(calc.alocado(s), false);
+    for (const s of ['', 'n/a', 'Não alocado', 'Não alocado por falta de vaga', 'Não consta na alocação', 'Inscrição não homologada']) assert.equal(calc.alocado(s), false);
     assert.equal(calc.alocado('Portugal / Universidade de Coimbra'), true);
     assert.equal(calc.cursoBase('DIREITO - NOTURNO'), 'DIREITO');
 });
