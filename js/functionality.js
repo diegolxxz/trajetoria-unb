@@ -36,16 +36,18 @@ document.addEventListener('DOMContentLoaded', inicializar);
 async function inicializar() {
     const dadosNavegador = AppUnB.ler(CHAVE_DADOS, {});
     let dadosArquivo = null;
-    try {
-        const resposta = await fetch(new URL('load', AppUnB.raiz), { cache: 'no-store' });
-        if (resposta.ok) {
-            const recebido = await resposta.json();
-            if (recebido && typeof recebido === 'object' && !Array.isArray(recebido)) {
-                dadosArquivo = recebido;
-                sincronizarArquivo = true;
+    if (document.querySelector('meta[name="sincronizar-arquivo"]')?.content === 'true') {
+        try {
+            const resposta = await fetch(new URL('load', AppUnB.raiz), { cache: 'no-store' });
+            if (resposta.ok) {
+                const recebido = await resposta.json();
+                if (recebido && typeof recebido === 'object' && !Array.isArray(recebido)) {
+                    dadosArquivo = recebido;
+                    sincronizarArquivo = true;
+                }
             }
-        }
-    } catch { /* A versão estática continua usando os dados do navegador. */ }
+        } catch { /* Continua usando os dados do navegador se o servidor estiver indisponível. */ }
+    }
     const temPeriodos = dados => Object.keys(dados).some(chave => /^\d+$/.test(chave));
     const extrasNavegador = Object.fromEntries(Object.entries(dadosNavegador).filter(([chave]) => !/^\d+$/.test(chave)));
     const dados = dadosArquivo && temPeriodos(dadosArquivo)
@@ -116,7 +118,7 @@ function calcularIra() {
 
 function criarPeriodo(salvo = false) {
     const container = document.getElementById('periodos');
-    const numeroPeriodo = container.children.length + 1;
+    const numeroPeriodo = container.querySelectorAll('.periodo').length + 1;
 
     const divPeriodo = document.createElement('div');
     divPeriodo.className = 'periodo';
@@ -137,6 +139,7 @@ function criarPeriodo(salvo = false) {
 
     if (!salvo) {
         adicionarDisciplina(divPeriodo);
+        calcularIra();
         salvarDados();
     }
 }

@@ -39,6 +39,19 @@ class RotasTest(unittest.TestCase):
         for caminho in ['/js/common.js', '/js/calculos.js', '/js/functionality.js', '/js/intercambio.js', '/css/intercambio.css', '/data/editais/index.json', '/data/editais/edital-int-n-7-2026.json', '/data/editais/edital-int-n-7-2026.csv']:
             self.assertTrue(get(caminho)['status'].startswith('200'), caminho)
 
+    def test_favicons(self):
+        for caminho, tipo in [('/favicon.ico', 'image/x-icon'), ('/favicon.svg', 'image/svg+xml')]:
+            with self.subTest(caminho=caminho):
+                resposta = get(caminho)
+                self.assertTrue(resposta['status'].startswith('200'))
+                self.assertEqual(resposta['headers']['Content-Type'], tipo)
+                self.assertEqual(resposta['body'], (route.ROOT / caminho.lstrip('/')).read_bytes())
+
+    def test_sincronizacao_apenas_no_servidor_python(self):
+        marcador = b'<meta name="sincronizar-arquivo" content="true">'
+        self.assertIn(marcador, get('/ira/')['body'])
+        self.assertNotIn(marcador, (route.ROOT / 'ira/index.html').read_bytes())
+
 
 if __name__ == '__main__':
     unittest.main()

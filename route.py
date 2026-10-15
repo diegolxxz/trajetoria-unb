@@ -1,4 +1,4 @@
-from bottle import route, run, static_file, request, response, redirect, abort
+from bottle import route, run, static_file, request, response, redirect, abort, HTTPResponse
 from pathlib import Path
 import json
 import os
@@ -25,11 +25,23 @@ def pagina(edital=None):
         abort(404, 'Página não encontrada')
     if not request.path.endswith('/'):
         return redirect(request.path + '/')
-    resp = static_file(pasta + '/index.html', root=str(ROOT))
+    if pasta == 'ira':
+        html = arquivo.read_text(encoding='utf-8').replace(
+            '<head>', '<head>\n    <meta name="sincronizar-arquivo" content="true">', 1)
+        resp = HTTPResponse(body=html, headers={'Content-Type': 'text/html; charset=UTF-8'})
+    else:
+        resp = static_file(pasta + '/index.html', root=str(ROOT))
     resp.set_header('Cache-Control', 'no-cache, no-store, must-revalidate')
     resp.set_header('Pragma', 'no-cache')
     resp.set_header('Expires', '0')
     return resp
+
+@route('/favicon.ico')
+@route('/favicon.svg')
+def serve_favicon():
+    filename = request.path.lstrip('/')
+    mimetype = 'image/svg+xml' if filename.endswith('.svg') else 'image/x-icon'
+    return static_file(filename, root=str(ROOT), mimetype=mimetype)
 
 @route('/css/<filename>')
 def serve_css(filename):
