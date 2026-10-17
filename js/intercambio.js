@@ -5,6 +5,33 @@
     const slug = document.body.dataset.edital;
     const chaveFiltros = `calculadora-unb:filtros:${slug}`;
     let dados;
+    let colunasTabela = [];
+
+    function temConteudo(valor) {
+        return valor != null && !/^(?:\s*|[-–—]+|n\/a)$/i.test(String(valor).trim());
+    }
+
+    function valoresRegistro(r) {
+        return [r.matricula, r.curso, r.ira, r.ipf, r.notaFinal,
+            ...Array.from({ length: 5 }, (_, i) => r.opcoes?.[i]), r.idiomas, r.alocacao,
+            ...(dados.colunasExtras || []).map(c => r[c.campo])];
+    }
+
+    function atualizarColunas(linhas) {
+        // Sem resultados, manter os cabeçalhos pertinentes ao edital para o estado vazio.
+        const registros = linhas.length ? linhas : dados.resultados;
+        const visiveis = colunasTabela.map(() => false);
+        registros.forEach(r => valoresRegistro(r).forEach((valor, i) => {
+            if (temConteudo(valor)) visiveis[i] = true;
+        }));
+        const tabela = document.querySelector('.tabela-resultados');
+        tabela.querySelectorAll('thead th').forEach((th, i) => { th.hidden = !visiveis[i]; });
+        tabela.querySelector('colgroup').replaceChildren(...colunasTabela
+            .filter((_, i) => visiveis[i]).map(c => c.elemento.cloneNode()));
+        const largura = colunasTabela.reduce((soma, c, i) => soma + (visiveis[i] ? c.largura : 0), 0);
+        tabela.style.setProperty('--tabela-largura', `${largura}px`);
+        return visiveis;
+    }
 
     async function carregarJson(caminho) {
         const resposta = await fetch(new URL(caminho, AppUnB.raiz));
@@ -41,17 +68,31 @@
         $('erroPerfil').hidden = !invalido;
         $('erroPerfil').textContent = 'Informe um IRA entre 0 e 5 e um IPF entre 0% e 100%.';
         $('notasSimuladas').replaceChildren();
+        if (dados.formula.tipo === 'ira-direto') {
+            if (incompleto || invalido) return;
+            const nota = CalculosUnB.nota(ira, ipf, null, null, dados.formula);
+            const card = el('article', 'card-nota');
+            card.append(el('h3', '', 'Sua nota final'));
+            card.append(el('strong', 'nota-final', formato(nota.final, 5)));
+            $('notasSimuladas').append(card);
+            return;
+        }
         if (!curso || incompleto || invalido) return;
         curso.variantes.forEach((v, i) => {
             const nota = CalculosUnB.nota(ira, ipf, v.media, v.desvio, dados.formula);
             const card = el('article', 'card-nota');
             const identificacao = v.turno ? `${curso.nome} — ${v.turno}` : curso.variantes.length > 1 ? `Referência ${i + 1} · turno não informado` : curso.nome;
             card.append(el('h3', '', identificacao));
-            card.append(el('p', 'referencia-dados', `Média ${formato(v.media, 9)} · Desvio ${formato(v.desvio, 9)}`));
+            if (v.motivo) {
+                card.append(el('p', 'texto-apoio', v.motivo));
+                $('notasSimuladas').append(card);
+                return;
+            }
+            card.append(el('p', 'referencia-dados', `${v.estimada ? 'Estimativa · ' : ''}Média ${formato(v.media, v.estimada ? 4 : 9)} · Desvio ${formato(v.desvio, v.estimada ? 4 : 9)}`));
             card.append(el('span', 'resultado-label', 'Sua nota final'));
-            card.append(el('strong', 'nota-final', nota ? formato(nota.final, 9) : 'Indisponível'));
-            if (nota) card.append(el('p', 'texto-apoio', `IRA padronizado: ${formato(nota.padronizado, 9)}`));
-            card.append(el('small', 'texto-apoio', `Referência encontrada em ${v.registros} registro(s) da publicação.`));
+            card.append(el('strong', 'nota-final', nota ? `${v.estimada ? '≈ ' : ''}${formato(nota.final, v.estimada ? 4 : 9)}` : 'Indisponível'));
+            if (nota) card.append(el('p', 'texto-apoio', `IRA padronizado: ${v.estimada ? '≈ ' : ''}${formato(nota.padronizado, v.estimada ? 4 : 9)}`));
+            card.append(el('small', 'texto-apoio', v.estimada ? `Estimativa a partir de ${v.registros} registro(s), sujeita ao arredondamento da fonte. Turno não informado.` : `Referência encontrada em ${v.registros} registro(s) da publicação.`));
             $('notasSimuladas').append(card);
         });
     }
@@ -73,6 +114,10 @@
         const container = $('referenciasCurso');
         const curso = dados.cursos.find(c => c.nome === nome);
         container.replaceChildren();
+        if (dados.formula.tipo === 'ira-direto') {
+            container.hidden = true;
+            return;
+        }
         container.hidden = !curso;
         if (!curso) return;
         container.append(el('h3', 'referencias-titulo', `IRA médio e desvio — ${curso.nome}`));
@@ -81,13 +126,19 @@
             const card = el('div', 'referencia-curso');
             const titulo = curso.variantes.length > 1 ? `Referência ${i + 1}` : curso.nome;
             card.append(el('h4', '', v.turno ? `${titulo} · ${v.turno}` : titulo));
+            if (v.motivo) {
+                card.append(el('p', 'texto-apoio', v.motivo));
+                lista.append(card);
+                return;
+            }
             const valores = el('div', 'referencia-valores');
             const media = el('p', '', 'IRA médio ');
-            media.append(el('strong', '', formato(v.media, 9)));
+            media.append(el('strong', '', formato(v.media, v.estimada ? 4 : 9)));
             const desvio = el('p', '', 'Desvio padrão ');
-            desvio.append(el('strong', '', formato(v.desvio, 9)));
+            desvio.append(el('strong', '', formato(v.desvio, v.estimada ? 4 : 9)));
             valores.append(media, desvio);
             card.append(valores);
+            if (v.estimada) card.append(el('small', 'texto-apoio', 'Valores estimados pelo IRA padronizado publicado.'));
             lista.append(card);
         });
         container.append(lista);
@@ -107,6 +158,7 @@
         }).sort((a, b) => b[filtro.ordem] - a[filtro.ordem] || a.matricula.localeCompare(b.matricula));
         const fragmento = document.createDocumentFragment();
         const extras = dados.colunasExtras || [];
+        const visiveis = atualizarColunas(linhas);
         const rotulos = ['Matrícula', 'Curso', 'IRA', 'IPF', 'Nota final', '1ª opção', '2ª opção', '3ª opção', '4ª opção', '5ª opção', 'Idiomas', 'Alocação',
             ...extras.map(c => c.rotulo)];
         linhas.forEach(r => {
@@ -114,11 +166,13 @@
             const referencia = referenciaDoRegistro(r);
             const nomeCurso = referencia ? `${r.curso} · ${referencia}` : r.curso;
             const valores = [r.matricula, nomeCurso, formato(r.ira), `${formato(r.ipf, 2)}%`, formato(r.notaFinal, 9),
-                ...r.opcoes.map(v => v || '—'), r.idiomas || '—', r.alocacao || '—',
+                ...r.opcoes.map(v => v || '—'), AppUnB.idiomas((r.idiomas || '—')), r.alocacao || '—',
                 ...extras.map(c => r[c.campo] || '—')];
             valores.forEach((valor, i) => {
                 const td = el('td', i >= 2 && i <= 4 ? 'celula-numero' : '', valor);
+                td.hidden = !visiveis[i];
                 td.dataset.label = rotulos[i];
+                if (i === 10) td.classList.add('celula-idiomas');
                 if (i === 11 && CalculosUnB.alocado(r.alocacao)) td.classList.add('celula-alocada');
                 tr.append(td);
             });
@@ -127,7 +181,7 @@
         if (!linhas.length) {
             const tr = el('tr');
             const td = el('td', 'estado-vazio', 'Nenhum candidato encontrado para estes filtros.');
-            td.colSpan = 12 + extras.length; tr.append(td); fragmento.append(tr);
+            td.colSpan = Math.max(1, visiveis.filter(Boolean).length); tr.append(td); fragmento.append(tr);
         }
         $('linhasResultados').replaceChildren(fragmento);
         const alocados = linhas.filter(r => CalculosUnB.alocado(r.alocacao)).length;
@@ -165,6 +219,14 @@
                 });
                 tabela.style.setProperty('--tabela-largura', `${1535 + dados.colunasExtras.reduce((soma, c) => soma + c.largura, 0)}px`);
             }
+            colunasTabela = [...document.querySelectorAll('.tabela-resultados colgroup col')].flatMap(col => {
+                const largura = parseFloat(getComputedStyle(col).width);
+                return Array.from({ length: col.span || 1 }, () => {
+                    const elemento = col.cloneNode();
+                    elemento.removeAttribute('span');
+                    return { elemento, largura };
+                });
+            });
             opcoesCurso($('meuCurso')); opcoesCurso($('filtroCurso'));
             restaurarPerfil();
             const perfil = AppUnB.perfil();

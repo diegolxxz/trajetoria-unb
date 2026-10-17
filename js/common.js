@@ -45,7 +45,16 @@ const AppUnB = (() => {
         iconeTema();
     }
     function numero(valor, casas = 4) {
-        return Number(valor).toLocaleString('pt-BR', { minimumFractionDigits: casas, maximumFractionDigits: casas });
+        return Number(valor).toLocaleString('pt-BR', { maximumFractionDigits: Math.min(4, casas) });
+    }
+    function idiomas(valor) {
+        const linhas = [];
+        String(valor ?? '').split(/[,;\n]+|\s+e\s+/i).map(v => v.trim()).filter(Boolean).forEach(parte => {
+            // Algumas publicações separam o nível do idioma por ponto e vírgula.
+            if (/^(?:[ABC][12]|N[1-5]|HSK\s*\d)$/i.test(parte) && linhas.length) linhas[linhas.length - 1] += ` ${parte}`;
+            else linhas.push(parte);
+        });
+        return linhas.join('\n');
     }
     function elemento(tag, classe, texto) {
         const el = document.createElement(tag);
@@ -57,5 +66,5 @@ const AppUnB = (() => {
         tema();
         document.getElementById('btnTema')?.addEventListener('click', alternarTema);
     });
-    return { raiz, ler, salvar, perfil, salvarPerfil, chavePerfil, numero, elemento };
+    return { raiz, ler, salvar, perfil, salvarPerfil, chavePerfil, numero, idiomas, elemento };
 })();

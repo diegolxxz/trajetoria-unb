@@ -27,6 +27,11 @@ const CalculosUnB = (() => {
     }
 
     function nota(ira, ipfPercentual, media, desvio, formula) {
+        if (formula?.tipo === 'ira-direto') {
+            if (![ira, ipfPercentual, formula.pesoIra, formula.pesoIpf].every(Number.isFinite) ||
+                ira < 0 || ira > 5 || ipfPercentual < 0 || ipfPercentual > 100) return null;
+            return { padronizado: null, final: ira * formula.pesoIra + ipfPercentual / 100 * formula.pesoIpf };
+        }
         if (![ira, ipfPercentual, media, desvio, formula?.pesoIra, formula?.pesoIpf].every(Number.isFinite) ||
             ira < 0 || ira > 5 || ipfPercentual < 0 || ipfPercentual > 100 || desvio <= 0) return null;
         const padronizado = (ira - media) / desvio;
@@ -38,7 +43,8 @@ const CalculosUnB = (() => {
     function alocado(texto) {
         const valor = normalizar(texto).trim();
         return Boolean(valor && valor !== 'n/a' && valor !== '-' && !valor.startsWith('nao alocado') &&
-            !valor.startsWith('inscricao nao homologada') && !valor.startsWith('nao consta na alocacao') && !valor.startsWith('vide '));
+            !valor.startsWith('inscricao nao homologada') && !valor.startsWith('nao consta na alocacao') &&
+            !valor.startsWith('desistente') && !valor.startsWith('vide '));
     }
     return { creditos, mencoes, horasPorCredito, historico, nota, cursoBase, normalizar, alocado };
 })();

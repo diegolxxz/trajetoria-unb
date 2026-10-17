@@ -22,6 +22,7 @@ a { color: var(--accent); }
 .campos-perfil > div, .filtros-tabela > div { min-width: 0; }
 .campos-perfil .form-control, .campos-perfil .form-select { min-height: 44px; }
 .formula { margin: 1.2rem 0; padding: .8rem 1rem; background: var(--bg-body); border-radius: var(--radius-sm); color: var(--text-secondary); font-size: .85rem; }
+.formula-destaque strong { display: block; color: var(--text-primary); margin-bottom: .25rem; }
 .notas-simuladas { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 285px), 1fr)); gap: 1rem; }
 .notas-simuladas:not(:empty) { margin-top: 1rem; }
 .card-nota { padding: 1.2rem; border: 1px solid var(--border-color); border-top: 3px solid var(--success); border-radius: var(--radius-sm); background: var(--bg-body); }
@@ -98,3 +99,4 @@ a { color: var(--accent); }
     .topo-site .btn-tema { margin-left: auto; }
     .filtros-tabela { grid-template-columns: 1fr; }
 }
+.celula-idiomas { white-space: pre-line; }

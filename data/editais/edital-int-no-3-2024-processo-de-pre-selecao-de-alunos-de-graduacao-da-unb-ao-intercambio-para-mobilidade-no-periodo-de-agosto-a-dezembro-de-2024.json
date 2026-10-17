@@ -1,0 +1,8655 @@
+{
+  "slug": "edital-int-no-3-2024-processo-de-pre-selecao-de-alunos-de-graduacao-da-unb-ao-intercambio-para-mobilidade-no-periodo-de-agosto-a-dezembro-de-2024",
+  "titulo": "Edital INT nº 3/2024",
+  "mobilidade": "2º semestre de 2024",
+  "publicadoEm": "2024-03-14",
+  "extraidoEm": "2026-10-15T20:35:30.944567+00:00",
+  "fontes": {
+    "edital": "https://int.unb.br/edital-int-no-3-2024-processo-de-pre-selecao-de-alunos-de-graduacao-da-unb-ao-intercambio-para-mobilidade-no-periodo-de-agosto-a-dezembro-de-2024/",
+    "homologacao": "https://sei.unb.br/sei/publicacoes/controlador_publicacoes.php?acao=publicacao_visualizar&id_documento=12271234&id_orgao_publicacao=0",
+    "homologacaoPdf": "https://int.unb.br/wp-content/uploads/2026/07/SEI_UnB_-_10997420_-_Resultado_definitivo_da_homologacao.pdf",
+    "alocacao": "https://int.unb.br/wp-content/uploads/2026/07/SEI_UnB-11045088-Resultado-Definitivo-da-alocao-de-vagas-do-Edital.pdf",
+    "regras": "https://int.unb.br/wp-content/uploads/2026/07/SEI_10904856_Edital_3_INT.pdf"
+  },
+  "fontesSha256": {
+    "homologacao": "beb4a406b0f5830b57803b277912f0385ff21462fa901287df8e0c103a6307f6",
+    "alocacao": "f46165730e05fba0feceafe4dc4b90faaaf18636de955c6d10b67ee196f2a6b3"
+  },
+  "formula": {
+    "tipo": "ira-direto",
+    "pesoIra": 1,
+    "pesoIpf": 2
+  },
+  "descricaoResultados": "Opções de destino não informadas nas tabelas consultadas.",
+  "colunasExtras": [],
+  "cursos": [
+    {
+      "nome": "ADMINISTRAÇÃO",
+      "variantes": []
+    },
+    {
+      "nome": "AGRONOMIA",
+      "variantes": []
+    },
+    {
+      "nome": "ARQUITETURA E URBANISMO",
+      "variantes": []
+    },
+    {
+      "nome": "ARTES CÊNICAS",
+      "variantes": []
+    },
+    {
+      "nome": "ARTES VISUAIS",
+      "variantes": []
+    },
+    {
+      "nome": "BIBLIOTECONOMIA",
+      "variantes": []
+    },
+    {
+      "nome": "BIOTECNOLOGIA",
+      "variantes": []
+    },
+    {
+      "nome": "CIÊNCIA DA COMPUTAÇÃO",
+      "variantes": []
+    },
+    {
+      "nome": "CIÊNCIA POLÍTICA",
+      "variantes": []
+    },
+    {
+      "nome": "CIÊNCIAS AMBIENTAIS",
+      "variantes": []
+    },
+    {
+      "nome": "CIÊNCIAS BIOLÓGICAS",
+      "variantes": []
+    },
+    {
+      "nome": "CIÊNCIAS CONTÁBEIS",
+      "variantes": []
+    },
+    {
+      "nome": "CIÊNCIAS ECONÔMICAS",
+      "variantes": []
+    },
+    {
+      "nome": "CIÊNCIAS NATURAIS",
+      "variantes": []
+    },
+    {
+      "nome": "CIÊNCIAS SOCIAIS",
+      "variantes": []
+    },
+    {
+      "nome": "CIÊNCIAS SOCIAIS - ANTROPOLOGIA",
+      "variantes": []
+    },
+    {
+      "nome": "CIÊNCIAS SOCIAIS - SOCIOLOGIA",
+      "variantes": []
+    },
+    {
+      "nome": "COMPUTAÇÃO",
+      "variantes": []
+    },
+    {
+      "nome": "COMUNICAÇÃO SOCIAL - AUDIOVISUAL",
+      "variantes": []
+    },
+    {
+      "nome": "COMUNICAÇÃO SOCIAL - COMUNICAÇÃO ORGANIZACIONAL",
+      "variantes": []
+    },
+    {
+      "nome": "COMUNICAÇÃO SOCIAL - PUBLICIDADE E PROPAGANDA",
+      "variantes": []
+    },
+    {
+      "nome": "DESIGN - PROGRAMAÇÃO VISUAL",
+      "variantes": []
+    },
+    {
+      "nome": "DESIGN - PROJETO DO PRODUTO",
+      "variantes": []
+    },
+    {
+      "nome": "DIREITO",
+      "variantes": []
+    },
+    {
+      "nome": "Direito",
+      "variantes": []
+    },
+    {
+      "nome": "EDUCAÇÃO DO CAMPO - CIÊNCIAS DA NATUREZA",
+      "variantes": []
+    },
+    {
+      "nome": "EDUCAÇÃO FÍSICA",
+      "variantes": []
+    },
+    {
+      "nome": "ENFERMAGEM",
+      "variantes": []
+    },
+    {
+      "nome": "ENGENHARIA AEROESPACIAL",
+      "variantes": []
+    },
+    {
+      "nome": "ENGENHARIA AMBIENTAL",
+      "variantes": []
+    },
+    {
+      "nome": "ENGENHARIA AUTOMOTIVA",
+      "variantes": []
+    },
+    {
+      "nome": "ENGENHARIA CIVIL",
+      "variantes": []
+    },
+    {
+      "nome": "ENGENHARIA DE COMPUTAÇÃO",
+      "variantes": []
+    },
+    {
+      "nome": "ENGENHARIA DE ENERGIA",
+      "variantes": []
+    },
+    {
+      "nome": "ENGENHARIA DE PRODUÇÃO",
+      "variantes": []
+    },
+    {
+      "nome": "ENGENHARIA DE REDES DE COMUNICAÇÃO",
+      "variantes": []
+    },
+    {
+      "nome": "ENGENHARIA DE SOFTWARE",
+      "variantes": []
+    },
+    {
+      "nome": "ENGENHARIA ELETRÔNICA",
+      "variantes": []
+    },
+    {
+      "nome": "ENGENHARIA ELÉTRICA",
+      "variantes": []
+    },
+    {
+      "nome": "ENGENHARIA FLORESTAL",
+      "variantes": []
+    },
+    {
+      "nome": "ENGENHARIA MECATRÔNICA - CONTROLE E AUTOMAÇÃO",
+      "variantes": []
+    },
+    {
+      "nome": "ENGENHARIA MECÂNICA",
+      "variantes": []
+    },
+    {
+      "nome": "ENGENHARIA QUÍMICA",
+      "variantes": []
+    },
+    {
+      "nome": "ESTATÍSTICA",
+      "variantes": []
+    },
+    {
+      "nome": "FARMÁCIA",
+      "variantes": []
+    },
+    {
+      "nome": "FILOSOFIA",
+      "variantes": []
+    },
+    {
+      "nome": "FISIOTERAPIA",
+      "variantes": []
+    },
+    {
+      "nome": "FONOAUDIOLOGIA",
+      "variantes": []
+    },
+    {
+      "nome": "FÍSICA",
+      "variantes": []
+    },
+    {
+      "nome": "GEOGRAFIA",
+      "variantes": []
+    },
+    {
+      "nome": "GESTÃO AMBIENTAL",
+      "variantes": []
+    },
+    {
+      "nome": "GESTÃO DE POLÍTICAS PÚBLICAS",
+      "variantes": []
+    },
+    {
+      "nome": "GESTÃO DO AGRONEGÓCIO",
+      "variantes": []
+    },
+    {
+      "nome": "HISTÓRIA",
+      "variantes": []
+    },
+    {
+      "nome": "JORNALISMO",
+      "variantes": []
+    },
+    {
+      "nome": "LETRAS - LÍNGUA ESPANHOLA E LITERATURA ESPANHOLA E HISPANO-AMERICANA",
+      "variantes": []
+    },
+    {
+      "nome": "LETRAS - LÍNGUA FRANCESA E RESPECTIVA LITERATURA",
+      "variantes": []
+    },
+    {
+      "nome": "LETRAS - LÍNGUA INGLESA E RESPECTIVA LITERATURA",
+      "variantes": []
+    },
+    {
+      "nome": "LETRAS - LÍNGUA PORTUGUESA E RESPECTIVA LITERATURA",
+      "variantes": []
+    },
+    {
+      "nome": "LETRAS - PORTUGUÊS DO BRASIL COMO SEGUNDA LÍNGUA",
+      "variantes": []
+    },
+    {
+      "nome": "LETRAS - TRADUÇÃO - ESPANHOL",
+      "variantes": []
+    },
+    {
+      "nome": "LETRAS - TRADUÇÃO - FRANCÊS",
+      "variantes": []
+    },
+    {
+      "nome": "LETRAS - TRADUÇÃO - INGLÊS",
+      "variantes": []
+    },
+    {
+      "nome": "LÍNGUAS ESTRANGEIRAS APLICADAS - MSI",
+      "variantes": []
+    },
+    {
+      "nome": "MEDICINA",
+      "variantes": []
+    },
+    {
+      "nome": "MEDICINA VETERINÁRIA",
+      "variantes": []
+    },
+    {
+      "nome": "NUTRIÇÃO",
+      "variantes": []
+    },
+    {
+      "nome": "ODONTOLOGIA",
+      "variantes": []
+    },
+    {
+      "nome": "PEDAGOGIA",
+      "variantes": []
+    },
+    {
+      "nome": "PSICOLOGIA",
+      "variantes": []
+    },
+    {
+      "nome": "QUÍMICA",
+      "variantes": []
+    },
+    {
+      "nome": "RELAÇÕES INTERNACIONAIS",
+      "variantes": []
+    },
+    {
+      "nome": "SERVIÇO SOCIAL",
+      "variantes": []
+    },
+    {
+      "nome": "TEORIA, CRÍTICA E HISTÓRIA DA ARTE",
+      "variantes": []
+    },
+    {
+      "nome": "TERAPIA OCUPACIONAL",
+      "variantes": []
+    },
+    {
+      "nome": "TURISMO",
+      "variantes": []
+    }
+  ],
+  "resultados": [
+    {
+      "matricula": "202022263",
+      "curso": "PSICOLOGIA",
+      "ira": 4.9917,
+      "ipf": 86.17,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.7151,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês B2;",
+      "alocacao": "Temple University",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211015660",
+      "curso": "RELAÇÕES INTERNACIONAIS",
+      "ira": 4.9271,
+      "ipf": 87.1,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.66904,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1;Alemão B2;",
+      "alocacao": "Sciences Po (Institut d'études politiques de Paris)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "222022734",
+      "curso": "LETRAS - TRADUÇÃO - INGLÊS",
+      "ira": 5.0,
+      "ipf": 82.22,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.64444,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1;",
+      "alocacao": "Temple University",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "202056280",
+      "curso": "RELAÇÕES INTERNACIONAIS",
+      "ira": 4.8296,
+      "ipf": 89.25,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.61455,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1",
+      "alocacao": "Sciences Po (Institut d'études politiques de Paris)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "202037945",
+      "curso": "COMUNICAÇÃO SOCIAL - COMUNICAÇÃO ORGANIZACIONAL",
+      "ira": 4.9464,
+      "ipf": 81.72,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.58081,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1; Francês A1",
+      "alocacao": "Universidade de Navarra",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "190134216",
+      "curso": "DIREITO",
+      "ira": 4.7713,
+      "ipf": 88.28,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.53693,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1;",
+      "alocacao": "Universidade de Coimbra",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "200058533",
+      "curso": "DESIGN - PROGRAMAÇÃO VISUAL",
+      "ira": 4.9148,
+      "ipf": 80.61,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.52704,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Instituto Politécnico de Bragança",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "200019856",
+      "curso": "DESIGN - PROGRAMAÇÃO VISUAL",
+      "ira": 4.9673,
+      "ipf": 77.55,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.51832,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Instituto Politécnico de Bragança",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "202004087",
+      "curso": "PEDAGOGIA",
+      "ira": 4.8993,
+      "ipf": 80.18,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.5029,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Universidade do Porto - Faculdade de Psicologia e de Ciências da Educação da Universidade do Porto",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211015689",
+      "curso": "RELAÇÕES INTERNACIONAIS",
+      "ira": 4.798,
+      "ipf": 84.95,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.49692,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Espanhol B1;Inglês C1;",
+      "alocacao": "Institut d'Administration des Entreprises – University of Montpellier (IAE Montpellier)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "200030591",
+      "curso": "DIREITO",
+      "ira": 4.808,
+      "ipf": 84.38,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.4955,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Espanhol B2;Inglês B2;",
+      "alocacao": "Universidad de Jaén",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211040672",
+      "curso": "LETRAS - LÍNGUA INGLESA E RESPECTIVA LITERATURA",
+      "ira": 4.9485,
+      "ipf": 76.67,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.48183,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês B2;",
+      "alocacao": "Myongji University",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "202056305",
+      "curso": "RELAÇÕES INTERNACIONAIS",
+      "ira": 4.8468,
+      "ipf": 81.72,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.48121,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Universidade de Coimbra",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "232034078",
+      "curso": "LETRAS - LÍNGUA PORTUGUESA E RESPECTIVA LITERATURA",
+      "ira": 5.0,
+      "ipf": 73.86,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.47727,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Espanhol B2",
+      "alocacao": "Universidad de Jaén",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "190107936",
+      "curso": "DESIGN - PROJETO DO PRODUTO",
+      "ira": 4.708,
+      "ipf": 87.76,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.4631,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Universidade de Évora",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "200015788",
+      "curso": "DIREITO",
+      "ira": 4.79,
+      "ipf": 83.59,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.46188,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Francês A2",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "202056421",
+      "curso": "RELAÇÕES INTERNACIONAIS",
+      "ira": 4.7509,
+      "ipf": 84.95,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.44982,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês B2;",
+      "alocacao": "University of New Mexico",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "190025565",
+      "curso": "HISTÓRIA",
+      "ira": 4.7613,
+      "ipf": 83.76,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.43643,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês B2;Francês B2;",
+      "alocacao": "Université Grenoble Alpes",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211046012",
+      "curso": "RELAÇÕES INTERNACIONAIS",
+      "ira": 4.7315,
+      "ipf": 84.95,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.43042,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1;Francês B2;",
+      "alocacao": "Université Grenoble Alpes",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "202012525",
+      "curso": "EDUCAÇÃO FÍSICA",
+      "ira": 4.834,
+      "ipf": 79.72,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.42833,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Universidade de Beira Interior",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211047691",
+      "curso": "RELAÇÕES INTERNACIONAIS",
+      "ira": 4.974,
+      "ipf": 72.04,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.41486,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Espanhol B1;Inglês C1;Francês B1;",
+      "alocacao": "Universidad de Granada",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "202025087",
+      "curso": "COMUNICAÇÃO SOCIAL - AUDIOVISUAL",
+      "ira": 4.8114,
+      "ipf": 79.79,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.40714,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "200024396",
+      "curso": "RELAÇÕES INTERNACIONAIS",
+      "ira": 4.6429,
+      "ipf": 88.17,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.40634,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Espanhol B1;Inglês C2;Francês B1;",
+      "alocacao": "Institut d'Administration des Entreprises – University of Montpellier (IAE Montpellier)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "200057031",
+      "curso": "TERAPIA OCUPACIONAL",
+      "ira": 4.836,
+      "ipf": 77.78,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.39156,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Espanhol B2;",
+      "alocacao": "Universidad de Granada",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "200025589",
+      "curso": "RELAÇÕES INTERNACIONAIS",
+      "ira": 4.7338,
+      "ipf": 82.8,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.38971,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C2;Francês B2;",
+      "alocacao": "Institut d'Administration des Entreprises – University of Montpellier (IAE Montpellier)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211047619",
+      "curso": "RELAÇÕES INTERNACIONAIS",
+      "ira": 4.76,
+      "ipf": 80.65,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.3729,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1;",
+      "alocacao": "National Chengchi University",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211042514",
+      "curso": "ARQUITETURA E URBANISMO",
+      "ira": 4.8406,
+      "ipf": 75.6,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.3526,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211023475",
+      "curso": "LETRAS - LÍNGUA FRANCESA E RESPECTIVA LITERATURA",
+      "ira": 4.75,
+      "ipf": 80.0,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.35,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Francês B2;",
+      "alocacao": "Université Grenoble Alpes",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "190086742",
+      "curso": "DIREITO",
+      "ira": 4.5778,
+      "ipf": 88.28,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.34343,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1;",
+      "alocacao": "Universidade de Évora",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "200046586",
+      "curso": "COMUNICAÇÃO SOCIAL - COMUNICAÇÃO ORGANIZACIONAL",
+      "ira": 4.7213,
+      "ipf": 80.65,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.3342,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Instituto Politécnico de Portalegre",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211037425",
+      "curso": "COMUNICAÇÃO SOCIAL - PUBLICIDADE E PROPAGANDA",
+      "ira": 4.6758,
+      "ipf": 82.8,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.33171,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Francês B2;",
+      "alocacao": "Institut d'Administration des Entreprises – University of Montpellier (IAE Montpellier)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "221004240",
+      "curso": "COMUNICAÇÃO SOCIAL - COMUNICAÇÃO ORGANIZACIONAL",
+      "ira": 4.8421,
+      "ipf": 74.19,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.32597,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Universidade de Beira Interior",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "221004212",
+      "curso": "COMUNICAÇÃO SOCIAL - COMUNICAÇÃO ORGANIZACIONAL",
+      "ira": 4.9623,
+      "ipf": 67.74,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.31714,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1;Francês B2;",
+      "alocacao": "Université Libre de Bruxelles",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211015580",
+      "curso": "RELAÇÕES INTERNACIONAIS",
+      "ira": 4.734,
+      "ipf": 78.49,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.30389,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1;",
+      "alocacao": "Universidad Internacional del Ecuador",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "200061569",
+      "curso": "SERVIÇO SOCIAL",
+      "ira": 4.7055,
+      "ipf": 79.0,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.2855,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C2",
+      "alocacao": "Ruhr University Bochum",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "202001263",
+      "curso": "ARQUITETURA E URBANISMO",
+      "ira": 4.6183,
+      "ipf": 83.2,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.2823,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211023125",
+      "curso": "LETRAS - LÍNGUA INGLESA E RESPECTIVA LITERATURA",
+      "ira": 4.9823,
+      "ipf": 64.22,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.2667,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês B2;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211022208",
+      "curso": "DIREITO",
+      "ira": 4.8901,
+      "ipf": 68.75,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.2651,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1;Francês B2;Alemão B2;",
+      "alocacao": "Universidad de Jaén",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "200035576",
+      "curso": "DIREITO",
+      "ira": 4.7455,
+      "ipf": 75.78,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.26113,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Francês B2;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "200013629",
+      "curso": "ARQUITETURA E URBANISMO",
+      "ira": 4.626,
+      "ipf": 81.6,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.258,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Italiano B1;",
+      "alocacao": "Università degli Studi di Firenze – Scuola di Achitettura",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211021327",
+      "curso": "COMUNICAÇÃO SOCIAL - COMUNICAÇÃO ORGANIZACIONAL",
+      "ira": 4.8571,
+      "ipf": 69.89,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.25495,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Francês B1;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "190127899",
+      "curso": "ENFERMAGEM",
+      "ira": 4.521,
+      "ipf": 86.52,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.2515,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Instituto Politécnico de Portalegre",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "200024124",
+      "curso": "ARQUITETURA E URBANISMO",
+      "ira": 4.6535,
+      "ipf": 79.2,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.2375,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1;",
+      "alocacao": "Universidade de Vigo",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "231032598",
+      "curso": "JORNALISMO",
+      "ira": 4.5556,
+      "ipf": 84.0,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.2356,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "200040910",
+      "curso": "ARQUITETURA E URBANISMO",
+      "ira": 4.7485,
+      "ipf": 73.6,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.2205,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês B2;",
+      "alocacao": "University of Warsaw",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211016274",
+      "curso": "CIÊNCIAS SOCIAIS - SOCIOLOGIA",
+      "ira": 4.6697,
+      "ipf": 77.38,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.21732,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "202056403",
+      "curso": "RELAÇÕES INTERNACIONAIS",
+      "ira": 4.5175,
+      "ipf": 84.95,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.21642,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1;",
+      "alocacao": "Hankuk University of Foreign Studies (HUFS)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "200015257",
+      "curso": "LETRAS - LÍNGUA PORTUGUESA E RESPECTIVA LITERATURA",
+      "ira": 4.7086,
+      "ipf": 75.0,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.2086,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "202069690",
+      "curso": "DIREITO",
+      "ira": 4.7067,
+      "ipf": 75.0,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.2067,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1; Espanhol A1",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "202067532",
+      "curso": "JORNALISMO",
+      "ira": 4.5652,
+      "ipf": 82.0,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.2052,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "202039064",
+      "curso": "DESIGN - PROGRAMAÇÃO VISUAL",
+      "ira": 4.7528,
+      "ipf": 72.45,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.20178,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1;",
+      "alocacao": "Myongji University",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211050178",
+      "curso": "LÍNGUAS ESTRANGEIRAS APLICADAS - MSI",
+      "ira": 4.8675,
+      "ipf": 65.63,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.18,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Espanhol B2;Inglês C1;Francês B2;",
+      "alocacao": "Université Grenoble Alpes",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "200015532",
+      "curso": "SERVIÇO SOCIAL",
+      "ira": 4.5949,
+      "ipf": 79.0,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.1749,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Francês B2;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "190108541",
+      "curso": "CIÊNCIAS AMBIENTAIS",
+      "ira": 4.4737,
+      "ipf": 84.44,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.16259,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1;",
+      "alocacao": "Universidade de Vigo",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "200025597",
+      "curso": "EDUCAÇÃO FÍSICA",
+      "ira": 4.6229,
+      "ipf": 76.6,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.15481,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C2;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "202022100",
+      "curso": "RELAÇÕES INTERNACIONAIS",
+      "ira": 4.5373,
+      "ipf": 80.65,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.1502,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "190092645",
+      "curso": "JORNALISMO",
+      "ira": 4.3453,
+      "ipf": 90.0,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.1453,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "190091100",
+      "curso": "FARMÁCIA",
+      "ira": 4.5523,
+      "ipf": 79.45,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.14134,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C2;",
+      "alocacao": "Universidade do Porto - Faculdade de Farmácia da Universidade do Porto",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211044401",
+      "curso": "PEDAGOGIA",
+      "ira": 4.8235,
+      "ipf": 65.77,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.13882,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Instituto Politécnico de Portalegre",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "200027590",
+      "curso": "EDUCAÇÃO FÍSICA",
+      "ira": 4.5138,
+      "ipf": 80.37,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.12128,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês B2;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211046193",
+      "curso": "ARQUITETURA E URBANISMO",
+      "ira": 4.6186,
+      "ipf": 74.4,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.1066,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Espanhol B2;Inglês B2;Francês B2;",
+      "alocacao": "Universidad de Sevilla",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "170102475",
+      "curso": "ARQUITETURA E URBANISMO",
+      "ira": 4.3772,
+      "ipf": 86.4,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.1052,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1;",
+      "alocacao": "Instituto Politécnico de Bragança",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "200039199",
+      "curso": "ARQUITETURA E URBANISMO",
+      "ira": 4.6965,
+      "ipf": 70.4,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.1045,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Espanhol B2;Italiano B1;",
+      "alocacao": "Universidad de Burgos",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "212007313",
+      "curso": "COMUNICAÇÃO SOCIAL - AUDIOVISUAL",
+      "ira": 4.8056,
+      "ipf": 64.89,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.10347,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1;",
+      "alocacao": "Universitat de Vic-Universitat Central de Catalunya",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "200060121",
+      "curso": "ENGENHARIA DE PRODUÇÃO",
+      "ira": 4.8694,
+      "ipf": 61.25,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.0944,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C2;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211021532",
+      "curso": "COMUNICAÇÃO SOCIAL - COMUNICAÇÃO ORGANIZACIONAL",
+      "ira": 4.9048,
+      "ipf": 59.14,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.0876,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211013488",
+      "curso": "CIÊNCIAS CONTÁBEIS",
+      "ira": 4.4815,
+      "ipf": 80.0,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.0815,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1;",
+      "alocacao": "Sophia University",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "202043380",
+      "curso": "ENGENHARIA DE PRODUÇÃO",
+      "ira": 4.6011,
+      "ipf": 73.75,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.0761,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1;Francês B1;",
+      "alocacao": "CentraleSupélec",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "200039890",
+      "curso": "ARQUITETURA E URBANISMO",
+      "ira": 4.4651,
+      "ipf": 80.0,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.0651,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1; Italiano B2;",
+      "alocacao": "Università degli Studi di Firenze – Scuola di Achitettura",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "190109742",
+      "curso": "ENGENHARIA ELÉTRICA",
+      "ira": 4.4606,
+      "ipf": 79.84,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.05737,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "200037153",
+      "curso": "ARTES CÊNICAS",
+      "ira": 4.7185,
+      "ipf": 66.82,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.05491,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Espanhol B2;",
+      "alocacao": "Universidad Mayor de San Andrés (verificar subitem 5.2 do edital)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "190026154",
+      "curso": "LÍNGUAS ESTRANGEIRAS APLICADAS - MSI",
+      "ira": 4.3043,
+      "ipf": 87.5,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.0543,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Espanhol B2;Inglês B2;Francês B2;",
+      "alocacao": "Universidad de Santiago de Chile (verificar subitem 5.2 do edital)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "190087901",
+      "curso": "ENGENHARIA CIVIL",
+      "ira": 4.2974,
+      "ipf": 87.4,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.04549,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês B2;",
+      "alocacao": "Universidade Politécnica de Madri",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211061242",
+      "curso": "COMUNICAÇÃO SOCIAL - COMUNICAÇÃO ORGANIZACIONAL",
+      "ira": 4.8831,
+      "ipf": 58.06,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.04439,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "190016426",
+      "curso": "COMUNICAÇÃO SOCIAL - AUDIOVISUAL",
+      "ira": 4.528,
+      "ipf": 75.53,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.03864,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C2;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "221002138",
+      "curso": "CIÊNCIA POLÍTICA",
+      "ira": 4.9821,
+      "ipf": 52.81,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.03828,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "180025007",
+      "curso": "ENFERMAGEM",
+      "ira": 4.5062,
+      "ipf": 76.12,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.02859,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Espanhol B1;",
+      "alocacao": "Universidade de Santiago de Compostela",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "202027377",
+      "curso": "LETRAS - LÍNGUA ESPANHOLA E LITERATURA ESPANHOLA E HISPANO-AMERICANA",
+      "ira": 4.9772,
+      "ipf": 52.27,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.02265,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Espanhol B2;",
+      "alocacao": "Universidad Nacional de Colombia",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "190118431",
+      "curso": "CIÊNCIA POLÍTICA",
+      "ira": 4.3597,
+      "ipf": 83.15,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.02262,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "190093650",
+      "curso": "NUTRIÇÃO",
+      "ira": 4.2523,
+      "ipf": 88.46,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.02153,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês B2",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211022290",
+      "curso": "DIREITO",
+      "ira": 4.6286,
+      "ipf": 68.75,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.0036,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Francês B2;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211011868",
+      "curso": "TURISMO",
+      "ira": 4.5707,
+      "ipf": 71.59,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.00252,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Espanhol B2",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "190038411",
+      "curso": "PSICOLOGIA",
+      "ira": 4.9219,
+      "ipf": 53.9,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.99991,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Espanhol B2;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "221027360",
+      "curso": "RELAÇÕES INTERNACIONAIS",
+      "ira": 4.8444,
+      "ipf": 57.53,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.99494,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Espanhol B1;Inglês B2;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "200038982",
+      "curso": "DIREITO",
+      "ira": 4.5395,
+      "ipf": 72.66,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.99263,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês B1;Italiano B1;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211034586",
+      "curso": "GEOGRAFIA",
+      "ira": 4.5789,
+      "ipf": 70.24,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.98366,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "190039485",
+      "curso": "ENGENHARIA DE PRODUÇÃO",
+      "ira": 4.2537,
+      "ipf": 86.25,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.9787,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês B2;Alemão B2;",
+      "alocacao": "University of Innsbruck",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "202001924",
+      "curso": "TURISMO",
+      "ira": 4.5202,
+      "ipf": 72.73,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.97475,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "180114701",
+      "curso": "ARQUITETURA E URBANISMO",
+      "ira": 4.1816,
+      "ipf": 89.6,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.9736,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Espanhol B2;Inglês C1;",
+      "alocacao": "Universidade de Santiago de Compostela",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "200032984",
+      "curso": "ADMINISTRAÇÃO",
+      "ira": 4.3095,
+      "ipf": 83.0,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.9695,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Espanhol C1;",
+      "alocacao": "Universitat Jaume I",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "200037625",
+      "curso": "ENGENHARIA ELETRÔNICA",
+      "ira": 4.6319,
+      "ipf": 66.8,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.96787,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Francês B1;",
+      "alocacao": "Ecole Nationale Supérieure de l'Electronique et de ses Applications",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "221032244",
+      "curso": "RELAÇÕES INTERNACIONAIS",
+      "ira": 4.7143,
+      "ipf": 62.37,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.96161,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Espanhol B1;Inglês C1;Francês B1;",
+      "alocacao": "Universidad Nacional de Colombia",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "200058509",
+      "curso": "DIREITO",
+      "ira": 4.6047,
+      "ipf": 67.58,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.95626,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês B2;",
+      "alocacao": "Universidad Internacional del Ecuador",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "180140469",
+      "curso": "CIÊNCIAS SOCIAIS - ANTROPOLOGIA",
+      "ira": 4.4554,
+      "ipf": 75.0,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.9554,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Francês A2; Inglês B1;",
+      "alocacao": "Universidad de Burgos",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "221011422",
+      "curso": "JORNALISMO",
+      "ira": 4.9245,
+      "ipf": 51.5,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.9545,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "221004651",
+      "curso": "DIREITO",
+      "ira": 4.8605,
+      "ipf": 54.69,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.95425,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "202003268",
+      "curso": "PSICOLOGIA",
+      "ira": 4.7059,
+      "ipf": 62.41,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.95413,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "190038110",
+      "curso": "BIBLIOTECONOMIA",
+      "ira": 4.4536,
+      "ipf": 75.0,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.9536,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "190031395",
+      "curso": "FARMÁCIA",
+      "ira": 4.3565,
+      "ipf": 79.45,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.94554,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "221004203",
+      "curso": "COMUNICAÇÃO SOCIAL - COMUNICAÇÃO ORGANIZACIONAL",
+      "ira": 4.8125,
+      "ipf": 56.45,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.94153,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211022530",
+      "curso": "LETRAS - LÍNGUA PORTUGUESA E RESPECTIVA LITERATURA",
+      "ira": 4.8929,
+      "ipf": 52.27,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.93835,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "202021687",
+      "curso": "BIOTECNOLOGIA",
+      "ira": 4.3789,
+      "ipf": 77.57,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.9303,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "202038586",
+      "curso": "COMUNICAÇÃO SOCIAL - PUBLICIDADE E PROPAGANDA",
+      "ira": 4.5314,
+      "ipf": 69.89,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.92925,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "200033964",
+      "curso": "DIREITO",
+      "ira": 4.4748,
+      "ipf": 72.66,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.92793,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "190017228",
+      "curso": "CIÊNCIAS BIOLÓGICAS",
+      "ira": 4.4152,
+      "ipf": 75.49,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.925,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "190089121",
+      "curso": "CIÊNCIAS BIOLÓGICAS",
+      "ira": 4.3073,
+      "ipf": 80.88,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.92495,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211021621",
+      "curso": "COMUNICAÇÃO SOCIAL - PUBLICIDADE E PROPAGANDA",
+      "ira": 4.1809,
+      "ipf": 87.1,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.92284,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C2;",
+      "alocacao": "University of Innsbruck",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "190087081",
+      "curso": "ARQUITETURA E URBANISMO",
+      "ira": 4.3367,
+      "ipf": 79.2,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.9207,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "190106395",
+      "curso": "ARQUITETURA E URBANISMO",
+      "ira": 4.1425,
+      "ipf": 88.8,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.9185,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211016327",
+      "curso": "CIÊNCIAS SOCIAIS - SOCIOLOGIA",
+      "ira": 4.8571,
+      "ipf": 52.81,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.91328,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Espanhol B2;",
+      "alocacao": "Universidad de Buenos Aires",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "190024330",
+      "curso": "FARMÁCIA",
+      "ira": 4.181,
+      "ipf": 86.3,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.90703,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211064404",
+      "curso": "Direito",
+      "ira": 4.6842,
+      "ipf": 60.94,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.90295,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1;",
+      "alocacao": "University of Warsaw",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "190014601",
+      "curso": "ENGENHARIA DE PRODUÇÃO",
+      "ira": 4.2905,
+      "ipf": 80.42,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.89883,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "200018191",
+      "curso": "HISTÓRIA",
+      "ira": 4.5696,
+      "ipf": 66.05,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.89053,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211055343",
+      "curso": "CIÊNCIA DA COMPUTAÇÃO",
+      "ira": 4.6599,
+      "ipf": 61.21,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.8842,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1;",
+      "alocacao": "Paderborn University",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "200041142",
+      "curso": "ARQUITETURA E URBANISMO",
+      "ira": 4.5209,
+      "ipf": 68.0,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.8809,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "190117435",
+      "curso": "FISIOTERAPIA",
+      "ira": 4.1792,
+      "ipf": 84.33,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.86587,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "221004670",
+      "curso": "DIREITO",
+      "ira": 4.8017,
+      "ipf": 53.13,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.8642,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês B2;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "200030361",
+      "curso": "ENGENHARIA CIVIL",
+      "ira": 4.3361,
+      "ipf": 76.34,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.86282,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C2;",
+      "alocacao": "Universidade Politécnica de Madri",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "200054236",
+      "curso": "NUTRIÇÃO",
+      "ira": 4.3652,
+      "ipf": 74.79,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.86093,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "202028338",
+      "curso": "ADMINISTRAÇÃO",
+      "ira": 4.2059,
+      "ipf": 82.0,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.8459,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "190036061",
+      "curso": "ARQUITETURA E URBANISMO",
+      "ira": 4.2554,
+      "ipf": 79.2,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.8394,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C2",
+      "alocacao": "University of Warsaw",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "221027182",
+      "curso": "PSICOLOGIA",
+      "ira": 4.9179,
+      "ipf": 45.39,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.8257,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1;",
+      "alocacao": "University of Warsaw",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "222019247",
+      "curso": "PEDAGOGIA",
+      "ira": 4.7429,
+      "ipf": 54.05,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.82398,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211040995",
+      "curso": "GESTÃO DE POLÍTICAS PÚBLICAS",
+      "ira": 4.2713,
+      "ipf": 77.5,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.8213,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "221004455",
+      "curso": "COMUNICAÇÃO SOCIAL - PUBLICIDADE E PROPAGANDA",
+      "ira": 4.8103,
+      "ipf": 50.54,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.82105,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Espanhol B2;",
+      "alocacao": "Universidad de Buenos Aires",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "221019313",
+      "curso": "COMUNICAÇÃO SOCIAL - PUBLICIDADE E PROPAGANDA",
+      "ira": 4.9,
+      "ipf": 45.7,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.81398,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Espanhol B2;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "180053396",
+      "curso": "LÍNGUAS ESTRANGEIRAS APLICADAS - MSI",
+      "ira": 4.5629,
+      "ipf": 62.5,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.8129,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Espanhol B2;Inglês B2;Francês B2;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "200034448",
+      "curso": "DIREITO",
+      "ira": 4.1396,
+      "ipf": 83.59,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.81148,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "190095610",
+      "curso": "ENFERMAGEM",
+      "ira": 4.4718,
+      "ipf": 66.79,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.80762,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "231031198",
+      "curso": "BIBLIOTECONOMIA",
+      "ira": 5.0,
+      "ipf": 40.0,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.8,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "170167909",
+      "curso": "ENGENHARIA MECÂNICA",
+      "ira": 4.1348,
+      "ipf": 83.21,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.79892,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1;",
+      "alocacao": "Universidade Politécnica de Madri",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211021766",
+      "curso": "DESIGN - PROGRAMAÇÃO VISUAL",
+      "ira": 4.7143,
+      "ipf": 54.08,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.79593,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "202052048",
+      "curso": "LETRAS - LÍNGUA PORTUGUESA E RESPECTIVA LITERATURA",
+      "ira": 4.4118,
+      "ipf": 68.89,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.78958,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "180014048",
+      "curso": "HISTÓRIA",
+      "ira": 4.3473,
+      "ipf": 72.08,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.78892,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês B2;",
+      "alocacao": "University of Macau",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "202050606",
+      "curso": "HISTÓRIA",
+      "ira": 4.5227,
+      "ipf": 63.26,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.78782,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "202018206",
+      "curso": "FARMÁCIA",
+      "ira": 4.4234,
+      "ipf": 67.58,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.77494,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "221033976",
+      "curso": "LETRAS - LÍNGUA ESPANHOLA E LITERATURA ESPANHOLA E HISPANO-AMERICANA",
+      "ira": 4.6795,
+      "ipf": 54.55,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.77041,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Espanhol B2;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211012794",
+      "curso": "CIÊNCIAS CONTÁBEIS",
+      "ira": 4.3265,
+      "ipf": 72.0,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.7665,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "221012359",
+      "curso": "LÍNGUAS ESTRANGEIRAS APLICADAS - MSI",
+      "ira": 4.8036,
+      "ipf": 47.92,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.76193,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Espanhol B2;Inglês B2;Francês B2;",
+      "alocacao": "Universidad de Antioquia",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "190086343",
+      "curso": "ENGENHARIA ELÉTRICA",
+      "ira": 3.9864,
+      "ipf": 88.31,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.75253,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês B2;",
+      "alocacao": "Universidade Politécnica de Madri",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "140179461",
+      "curso": "CIÊNCIA POLÍTICA",
+      "ira": 3.9675,
+      "ipf": 88.76,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.74278,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "221025787",
+      "curso": "LÍNGUAS ESTRANGEIRAS APLICADAS - MSI",
+      "ira": 4.8036,
+      "ipf": 46.88,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.7411,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Espanhol B2;Inglês B2;Francês B2;",
+      "alocacao": "Universidad de Antioquia",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "200021974",
+      "curso": "MEDICINA VETERINÁRIA",
+      "ira": 4.3237,
+      "ipf": 70.71,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.73799,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "190121131",
+      "curso": "CIÊNCIAS SOCIAIS",
+      "ira": 4.0578,
+      "ipf": 83.33,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.72447,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "180073974",
+      "curso": "ARTES VISUAIS",
+      "ira": 4.3108,
+      "ipf": 70.09,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.71267,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1;",
+      "alocacao": "Sophia University",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "221019304",
+      "curso": "COMUNICAÇÃO SOCIAL - PUBLICIDADE E PROPAGANDA",
+      "ira": 4.7411,
+      "ipf": 48.39,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.70884,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "200031074",
+      "curso": "DIREITO",
+      "ira": 4.2675,
+      "ipf": 71.88,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.705,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211018706",
+      "curso": "NUTRIÇÃO",
+      "ira": 4.4205,
+      "ipf": 64.1,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.70255,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês B2;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211047735",
+      "curso": "RELAÇÕES INTERNACIONAIS",
+      "ira": 4.3034,
+      "ipf": 69.89,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.70125,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Espanhol B2;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "190134411",
+      "curso": "ENFERMAGEM",
+      "ira": 4.2888,
+      "ipf": 69.78,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.68432,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "200022679",
+      "curso": "ARQUITETURA E URBANISMO",
+      "ira": 4.2102,
+      "ipf": 73.6,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.6822,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "202008907",
+      "curso": "HISTÓRIA",
+      "ira": 4.4167,
+      "ipf": 63.26,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.68182,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "221014040",
+      "curso": "PSICOLOGIA",
+      "ira": 4.8087,
+      "ipf": 43.26,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.67395,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211024973",
+      "curso": "HISTÓRIA",
+      "ira": 4.6854,
+      "ipf": 49.3,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.67145,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "190128127",
+      "curso": "LÍNGUAS ESTRANGEIRAS APLICADAS - MSI",
+      "ira": 4.3377,
+      "ipf": 66.67,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.67103,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Espanhol B2;Inglês B2;Francês B2;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "190103124",
+      "curso": "TERAPIA OCUPACIONAL",
+      "ira": 4.1133,
+      "ipf": 77.78,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.66886,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "190103663",
+      "curso": "ARQUITETURA E URBANISMO",
+      "ira": 4.1937,
+      "ipf": 73.6,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.6657,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "190034122",
+      "curso": "ADMINISTRAÇÃO",
+      "ira": 4.2483,
+      "ipf": 70.0,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.6483,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Francês B2;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "200019902",
+      "curso": "DESIGN - PROGRAMAÇÃO VISUAL",
+      "ira": 4.1722,
+      "ipf": 73.47,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.64159,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "200018922",
+      "curso": "TURISMO",
+      "ira": 4.2546,
+      "ipf": 69.32,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.64096,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1;",
+      "alocacao": "Sophia University",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "202004944",
+      "curso": "MEDICINA",
+      "ira": 4.7193,
+      "ipf": 46.01,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.63945,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "190094991",
+      "curso": "ADMINISTRAÇÃO",
+      "ira": 4.0192,
+      "ipf": 81.0,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.6392,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "221023666",
+      "curso": "FISIOTERAPIA",
+      "ira": 4.781,
+      "ipf": 42.67,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.63433,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "190128534",
+      "curso": "ENGENHARIA ELÉTRICA",
+      "ira": 4.0288,
+      "ipf": 80.24,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.63364,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês B2;",
+      "alocacao": "Hamm-Lippstadt University of Applied Sciences",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "202011902",
+      "curso": "DIREITO",
+      "ira": 4.381,
+      "ipf": 62.5,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.631,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "200017420",
+      "curso": "ENFERMAGEM",
+      "ira": 4.3401,
+      "ipf": 64.54,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.63088,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "180011944",
+      "curso": "GESTÃO DE POLÍTICAS PÚBLICAS",
+      "ira": 4.55,
+      "ipf": 54.0,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.63,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês B2;",
+      "alocacao": "University of Innsbruck",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211024839",
+      "curso": "EDUCAÇÃO FÍSICA",
+      "ira": 4.619,
+      "ipf": 50.47,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.62835,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "221019190",
+      "curso": "COMUNICAÇÃO SOCIAL - COMUNICAÇÃO ORGANIZACIONAL",
+      "ira": 4.6964,
+      "ipf": 46.24,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.62113,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "221016607",
+      "curso": "FILOSOFIA",
+      "ira": 4.6491,
+      "ipf": 48.51,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.6194,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Espanhol B2;Inglês B1;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "190090839",
+      "curso": "TURISMO",
+      "ira": 4.3363,
+      "ipf": 63.64,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.60903,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211045202",
+      "curso": "CIÊNCIA POLÍTICA",
+      "ira": 4.2381,
+      "ipf": 68.54,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.60889,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês B2;",
+      "alocacao": "Nanzan University",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "190093838",
+      "curso": "CIÊNCIA DA COMPUTAÇÃO",
+      "ira": 3.9626,
+      "ipf": 82.24,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.60746,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C2;",
+      "alocacao": "Paderborn University",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "190095962",
+      "curso": "GESTÃO DE POLÍTICAS PÚBLICAS",
+      "ira": 3.9862,
+      "ipf": 81.0,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.6062,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "170100359",
+      "curso": "ENFERMAGEM",
+      "ira": 4.4293,
+      "ipf": 58.58,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.60094,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Espanhol B2;Inglês C1;",
+      "alocacao": "Universitat Jaume I",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "200023454",
+      "curso": "ENGENHARIA QUÍMICA",
+      "ira": 4.2193,
+      "ipf": 68.94,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.59809,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Espanhol B1;Inglês C2;",
+      "alocacao": "Sichuan University of Science and Engineering (SUSE)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "221019500",
+      "curso": "DIREITO",
+      "ira": 4.808,
+      "ipf": 39.45,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.59706,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "200021303",
+      "curso": "MEDICINA VETERINÁRIA",
+      "ira": 4.1522,
+      "ipf": 72.14,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.59506,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "221003162",
+      "curso": "DESIGN - PROJETO DO PRODUTO",
+      "ira": 5.0,
+      "ipf": 29.59,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.59184,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211032699",
+      "curso": "FONOAUDIOLOGIA",
+      "ira": 4.0853,
+      "ipf": 75.21,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.58957,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C2;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211024140",
+      "curso": "JORNALISMO",
+      "ira": 4.2692,
+      "ipf": 66.0,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.5892,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês B1;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "202011789",
+      "curso": "DIREITO",
+      "ira": 4.3935,
+      "ipf": 59.38,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.581,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês B2;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "170106586",
+      "curso": "ENGENHARIA CIVIL",
+      "ira": 3.8599,
+      "ipf": 85.88,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.57746,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "180098063",
+      "curso": "ADMINISTRAÇÃO",
+      "ira": 3.881,
+      "ipf": 84.0,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.561,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "222012961",
+      "curso": "COMUNICAÇÃO SOCIAL - PUBLICIDADE E PROPAGANDA",
+      "ira": 4.6724,
+      "ipf": 44.09,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.55412,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211029998",
+      "curso": "FARMÁCIA",
+      "ira": 4.6493,
+      "ipf": 45.21,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.55341,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "221004633",
+      "curso": "DIREITO",
+      "ira": 4.5906,
+      "ipf": 48.05,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.55154,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1;Francês B2;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211024249",
+      "curso": "DIREITO",
+      "ira": 4.331,
+      "ipf": 60.94,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.54975,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "200029746",
+      "curso": "ENGENHARIA MECÂNICA",
+      "ira": 4.4648,
+      "ipf": 54.2,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.54877,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês B2;",
+      "alocacao": "Riga Technical University",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "221000394",
+      "curso": "ADMINISTRAÇÃO",
+      "ira": 4.028,
+      "ipf": 76.0,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.548,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C2",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "190035820",
+      "curso": "ARQUITETURA E URBANISMO",
+      "ira": 4.0716,
+      "ipf": 73.6,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.5436,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211054650",
+      "curso": "GESTÃO DE POLÍTICAS PÚBLICAS",
+      "ira": 4.4625,
+      "ipf": 54.0,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.5425,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "202011484",
+      "curso": "DIREITO",
+      "ira": 4.2839,
+      "ipf": 62.89,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.54171,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "222025718",
+      "curso": "FILOSOFIA",
+      "ira": 4.9077,
+      "ipf": 31.68,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.54136,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "200039725",
+      "curso": "COMPUTAÇÃO",
+      "ira": 4.0541,
+      "ipf": 74.3,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.54008,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211048330",
+      "curso": "PSICOLOGIA",
+      "ira": 4.6982,
+      "ipf": 41.84,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.53508,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1;",
+      "alocacao": "Sophia University",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211022066",
+      "curso": "LETRAS - PORTUGUÊS DO BRASIL COMO SEGUNDA LÍNGUA",
+      "ira": 4.3172,
+      "ipf": 60.64,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.52997,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "190025859",
+      "curso": "ARQUITETURA E URBANISMO",
+      "ira": 3.9584,
+      "ipf": 78.4,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.5264,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211023573",
+      "curso": "DIREITO",
+      "ira": 4.2169,
+      "ipf": 65.23,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.52159,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "221004698",
+      "curso": "DIREITO",
+      "ira": 4.4681,
+      "ipf": 51.56,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.49935,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "222033700",
+      "curso": "EDUCAÇÃO DO CAMPO - CIÊNCIAS DA NATUREZA",
+      "ira": 4.7376,
+      "ipf": 38.03,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.49828,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "190092572",
+      "curso": "ENGENHARIA DE PRODUÇÃO",
+      "ira": 3.7662,
+      "ipf": 86.25,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.4912,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211059610",
+      "curso": "CIÊNCIAS ECONÔMICAS",
+      "ira": 4.4414,
+      "ipf": 52.0,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.4814,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "190128941",
+      "curso": "ENGENHARIA ELÉTRICA",
+      "ira": 3.7629,
+      "ipf": 85.89,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.48064,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "231009320",
+      "curso": "GEOGRAFIA",
+      "ira": 4.6923,
+      "ipf": 39.29,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.47801,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês B1;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "190101679",
+      "curso": "CIÊNCIAS BIOLÓGICAS",
+      "ira": 3.9654,
+      "ipf": 75.49,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.4752,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "222038879",
+      "curso": "LETRAS - LÍNGUA PORTUGUESA E RESPECTIVA LITERATURA",
+      "ira": 4.9245,
+      "ipf": 27.27,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.46995,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211045220",
+      "curso": "CIÊNCIA POLÍTICA",
+      "ira": 4.0707,
+      "ipf": 69.66,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.46396,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "222002277",
+      "curso": "RELAÇÕES INTERNACIONAIS",
+      "ira": 4.3976,
+      "ipf": 53.23,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.46212,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "221030482",
+      "curso": "DIREITO",
+      "ira": 4.7119,
+      "ipf": 37.5,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.4619,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "190095806",
+      "curso": "FARMÁCIA",
+      "ira": 4.0505,
+      "ipf": 70.31,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.45664,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "190017686",
+      "curso": "BIOTECNOLOGIA",
+      "ira": 3.9743,
+      "ipf": 73.83,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.45094,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Francês B2;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "221032253",
+      "curso": "RELAÇÕES INTERNACIONAIS",
+      "ira": 4.4381,
+      "ipf": 50.54,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.44885,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211053170",
+      "curso": "LETRAS - LÍNGUA INGLESA E RESPECTIVA LITERATURA",
+      "ira": 4.3604,
+      "ipf": 54.13,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.44297,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês B2;",
+      "alocacao": "Hankuk University of Foreign Studies (HUFS)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211064683",
+      "curso": "DIREITO",
+      "ira": 4.1988,
+      "ipf": 62.11,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.44099,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "200069365",
+      "curso": "ENGENHARIA DE PRODUÇÃO",
+      "ira": 4.0597,
+      "ipf": 68.75,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.4347,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês B2;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "222023830",
+      "curso": "DIREITO",
+      "ira": 4.8356,
+      "ipf": 29.69,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.42935,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "231004842",
+      "curso": "CIÊNCIAS CONTÁBEIS",
+      "ira": 4.8519,
+      "ipf": 28.43,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.42053,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Francês C1;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "221017186",
+      "curso": "CIÊNCIA POLÍTICA",
+      "ira": 4.2308,
+      "ipf": 58.43,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.39934,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "221033448",
+      "curso": "TURISMO",
+      "ira": 4.08,
+      "ipf": 65.91,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.39818,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês B2",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "180032704",
+      "curso": "COMUNICAÇÃO SOCIAL - AUDIOVISUAL",
+      "ira": 4.2052,
+      "ipf": 59.57,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.39669,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "200056981",
+      "curso": "ENGENHARIA DE SOFTWARE",
+      "ira": 3.9128,
+      "ipf": 74.14,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.39556,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C2;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "221029580",
+      "curso": "JORNALISMO",
+      "ira": 4.5143,
+      "ipf": 44.0,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.3943,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211069456",
+      "curso": "PEDAGOGIA",
+      "ira": 4.4387,
+      "ipf": 47.75,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.39365,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211010118",
+      "curso": "BIOTECNOLOGIA",
+      "ira": 4.1096,
+      "ipf": 64.02,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.38997,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês B2;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "190112654",
+      "curso": "RELAÇÕES INTERNACIONAIS",
+      "ira": 4.5867,
+      "ipf": 39.78,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.3824,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "222004914",
+      "curso": "ENFERMAGEM",
+      "ira": 4.7895,
+      "ipf": 28.73,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.36413,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "190038659",
+      "curso": "ENGENHARIA DE PRODUÇÃO",
+      "ira": 3.8581,
+      "ipf": 75.0,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.3581,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "180043200",
+      "curso": "ENGENHARIA DE REDES DE COMUNICAÇÃO",
+      "ira": 3.6615,
+      "ipf": 84.8,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.3575,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1;",
+      "alocacao": "Ecole Nationale Supérieure de l'Electronique et de ses Applications",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211034165",
+      "curso": "GESTÃO AMBIENTAL",
+      "ira": 4.0365,
+      "ipf": 65.59,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.34833,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Universidade Nova de Lisboa - Faculdade de Ciências e Tecnologia",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "202061520",
+      "curso": "FARMÁCIA",
+      "ira": 3.9906,
+      "ipf": 67.81,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.34676,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Espanhol B1;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "190089245",
+      "curso": "CIÊNCIA DA COMPUTAÇÃO",
+      "ira": 3.9611,
+      "ipf": 69.16,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.34428,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211064763",
+      "curso": "DIREITO",
+      "ira": 4.3873,
+      "ipf": 47.66,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.34043,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "190047020",
+      "curso": "DIREITO",
+      "ira": 4.0585,
+      "ipf": 62.5,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.3085,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Espanhol B2;",
+      "alocacao": "Universidad Nacional de Colombia",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "202017844",
+      "curso": "ESTATÍSTICA",
+      "ira": 3.6484,
+      "ipf": 83.0,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.3084,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211047806",
+      "curso": "RELAÇÕES INTERNACIONAIS",
+      "ira": 4.061,
+      "ipf": 62.37,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.30831,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês B2;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "202043521",
+      "curso": "ENGENHARIA DE PRODUÇÃO",
+      "ira": 4.0327,
+      "ipf": 63.75,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.3077,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Espanhol B1;Inglês C2;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "221004606",
+      "curso": "DIREITO",
+      "ira": 4.252,
+      "ipf": 52.73,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.30669,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês B2;",
+      "alocacao": "National Chengchi University",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "200044354",
+      "curso": "LETRAS - LÍNGUA FRANCESA E RESPECTIVA LITERATURA",
+      "ira": 3.9926,
+      "ipf": 65.56,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.30371,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Francês B2;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "222000728",
+      "curso": "COMUNICAÇÃO SOCIAL - AUDIOVISUAL",
+      "ira": 4.5313,
+      "ipf": 38.3,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.29726,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "180139894",
+      "curso": "ENFERMAGEM",
+      "ira": 3.7766,
+      "ipf": 75.89,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.29433,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "180022873",
+      "curso": "HISTÓRIA",
+      "ira": 3.9837,
+      "ipf": 65.48,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.29334,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "221019592",
+      "curso": "DIREITO",
+      "ira": 4.4646,
+      "ipf": 41.02,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.28491,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Espanhol B2;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211011410",
+      "curso": "CIÊNCIAS BIOLÓGICAS",
+      "ira": 4.208,
+      "ipf": 53.64,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.28073,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "222023080",
+      "curso": "MEDICINA VETERINÁRIA",
+      "ira": 4.4203,
+      "ipf": 42.86,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.27744,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "221023165",
+      "curso": "FARMÁCIA",
+      "ira": 4.6579,
+      "ipf": 30.82,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.27434,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Espanhol B2;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "180109863",
+      "curso": "ENGENHARIA AUTOMOTIVA",
+      "ira": 3.6768,
+      "ipf": 79.77,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.27213,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "190084341",
+      "curso": "ARQUITETURA E URBANISMO",
+      "ira": 4.0761,
+      "ipf": 59.2,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.2601,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "190090014",
+      "curso": "CIÊNCIAS BIOLÓGICAS",
+      "ira": 3.5922,
+      "ipf": 83.33,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.25887,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "190024216",
+      "curso": "LETRAS - PORTUGUÊS DO BRASIL COMO SEGUNDA LÍNGUA",
+      "ira": 3.8386,
+      "ipf": 70.74,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.25349,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Espanhol B2;",
+      "alocacao": "Universidad Diego Portales",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211042935",
+      "curso": "CIÊNCIAS SOCIAIS",
+      "ira": 4.3396,
+      "ipf": 45.62,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.25204,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "202047208",
+      "curso": "FARMÁCIA",
+      "ira": 4.272,
+      "ipf": 48.63,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.2446,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "221019663",
+      "curso": "DIREITO",
+      "ira": 4.4915,
+      "ipf": 37.5,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.2415,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "221001210",
+      "curso": "ARQUITETURA E URBANISMO",
+      "ira": 4.392,
+      "ipf": 42.4,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.24,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "190103990",
+      "curso": "NUTRIÇÃO",
+      "ira": 3.9387,
+      "ipf": 64.1,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.22075,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "202029012",
+      "curso": "ENGENHARIA DE SOFTWARE",
+      "ira": 3.9559,
+      "ipf": 62.93,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.21452,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "200034065",
+      "curso": "ENFERMAGEM",
+      "ira": 4.0794,
+      "ipf": 56.74,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.21415,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês B2;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "222025496",
+      "curso": "DIREITO",
+      "ira": 4.4706,
+      "ipf": 36.72,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.20498,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "222002286",
+      "curso": "RELAÇÕES INTERNACIONAIS",
+      "ira": 4.375,
+      "ipf": 41.4,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.20296,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês B2;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "231006426",
+      "curso": "COMUNICAÇÃO SOCIAL - COMUNICAÇÃO ORGANIZACIONAL",
+      "ira": 4.3125,
+      "ipf": 44.09,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.19422,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "190034998",
+      "curso": "EDUCAÇÃO FÍSICA",
+      "ira": 3.9167,
+      "ipf": 63.55,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.18773,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "221019780",
+      "curso": "DIREITO",
+      "ira": 4.3543,
+      "ipf": 41.41,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.18243,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211055290",
+      "curso": "CIÊNCIA DA COMPUTAÇÃO",
+      "ira": 4.2355,
+      "ipf": 47.2,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.17943,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "222011392",
+      "curso": "BIBLIOTECONOMIA",
+      "ira": 4.2444,
+      "ipf": 46.67,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.17773,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211043600",
+      "curso": "ENGENHARIA QUÍMICA",
+      "ira": 4.0996,
+      "ipf": 53.41,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.16778,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês B2;",
+      "alocacao": "Ecole Nationale Supérieure de l'Electronique et de ses Applications",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "222003677",
+      "curso": "DIREITO",
+      "ira": 4.5641,
+      "ipf": 29.69,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.15785,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês B2;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "221012340",
+      "curso": "LÍNGUAS ESTRANGEIRAS APLICADAS - MSI",
+      "ira": 4.3404,
+      "ipf": 40.63,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.1529,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Espanhol B2;Inglês B2;Francês B2;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211043370",
+      "curso": "ENGENHARIA DE PRODUÇÃO",
+      "ira": 4.0124,
+      "ipf": 56.67,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.14573,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C2;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "222040358",
+      "curso": "DIREITO",
+      "ira": 4.4737,
+      "ipf": 33.59,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.14558,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "190139501",
+      "curso": "ENGENHARIA DE PRODUÇÃO",
+      "ira": 3.662,
+      "ipf": 73.75,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.137,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211054856",
+      "curso": "BIOTECNOLOGIA",
+      "ira": 4.1641,
+      "ipf": 48.13,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.12672,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211049892",
+      "curso": "MEDICINA",
+      "ira": 4.4015,
+      "ipf": 35.66,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.11471,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Espanhol B2;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211063480",
+      "curso": "MEDICINA VETERINÁRIA",
+      "ira": 4.0821,
+      "ipf": 51.43,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.11067,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211067166",
+      "curso": "ENFERMAGEM",
+      "ira": 4.2737,
+      "ipf": 41.79,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.10952,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "190036788",
+      "curso": "ENGENHARIA DE PRODUÇÃO",
+      "ira": 3.9613,
+      "ipf": 57.08,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.10297,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Espanhol B2;",
+      "alocacao": "Universidad de Sevilla",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "190038144",
+      "curso": "ESTATÍSTICA",
+      "ira": 3.4022,
+      "ipf": 85.0,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.1022,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1;",
+      "alocacao": "University of Macau",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "202044387",
+      "curso": "ENGENHARIA MECATRÔNICA - CONTROLE E AUTOMAÇÃO",
+      "ira": 4.0358,
+      "ipf": 53.08,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.09734,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C2;",
+      "alocacao": "Ecole Nationale Supérieure de l'Electronique et de ses Applications",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "200051644",
+      "curso": "MEDICINA VETERINÁRIA",
+      "ira": 3.6809,
+      "ipf": 70.71,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.09519,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "200032356",
+      "curso": "HISTÓRIA",
+      "ira": 4.1895,
+      "ipf": 44.65,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.08252,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "222002212",
+      "curso": "RELAÇÕES INTERNACIONAIS",
+      "ira": 4.2963,
+      "ipf": 38.17,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.05974,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "180020625",
+      "curso": "LETRAS - TRADUÇÃO - FRANCÊS",
+      "ira": 3.3782,
+      "ipf": 83.33,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.04487,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Francês B2;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211044180",
+      "curso": "HISTÓRIA",
+      "ira": 3.9417,
+      "ipf": 54.88,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.03937,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211042434",
+      "curso": "ADMINISTRAÇÃO",
+      "ira": 3.8432,
+      "ipf": 59.0,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.0232,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211052619",
+      "curso": "ARQUITETURA E URBANISMO",
+      "ira": 3.9462,
+      "ipf": 53.6,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.0182,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês B2;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211031842",
+      "curso": "ENGENHARIA ELETRÔNICA",
+      "ira": 3.8304,
+      "ipf": 59.29,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.01617,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês B2;",
+      "alocacao": "Hamm-Lippstadt University of Applied Sciences",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "190038543",
+      "curso": "EDUCAÇÃO FÍSICA",
+      "ira": 3.3048,
+      "ipf": 85.11,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.00693,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211038530",
+      "curso": "ENGENHARIA ELÉTRICA",
+      "ira": 3.7186,
+      "ipf": 64.11,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.00086,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês B1;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211067658",
+      "curso": "ENFERMAGEM",
+      "ira": 4.1718,
+      "ipf": 41.13,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.9945,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211007355",
+      "curso": "ADMINISTRAÇÃO",
+      "ira": 3.5463,
+      "ipf": 72.0,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.9863,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "180118838",
+      "curso": "ENGENHARIA AEROESPACIAL",
+      "ira": 3.408,
+      "ipf": 78.63,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.98052,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C2;",
+      "alocacao": "Sichuan University of Science and Engineering (SUSE)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "202038568",
+      "curso": "COMUNICAÇÃO SOCIAL - PUBLICIDADE E PROPAGANDA",
+      "ira": 3.8241,
+      "ipf": 56.99,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.96388,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "180078054",
+      "curso": "CIÊNCIAS CONTÁBEIS",
+      "ira": 3.234,
+      "ipf": 85.5,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.944,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "232036116",
+      "curso": "PSICOLOGIA",
+      "ira": 4.2857,
+      "ipf": 32.62,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.93818,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês B1;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Desistência"
+    },
+    {
+      "matricula": "200015231",
+      "curso": "ENGENHARIA DE PRODUÇÃO",
+      "ira": 3.902,
+      "ipf": 51.67,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.93533,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Espanhol B2;Inglês C1;Francês A2;",
+      "alocacao": "Universidad de Sevilla",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "221018530",
+      "curso": "CIÊNCIAS SOCIAIS",
+      "ira": 4.1636,
+      "ipf": 37.79,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.91936,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211027545",
+      "curso": "ENGENHARIA ELÉTRICA",
+      "ira": 3.9497,
+      "ipf": 48.39,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.91744,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "200015419",
+      "curso": "CIÊNCIAS CONTÁBEIS",
+      "ira": 3.8068,
+      "ipf": 55.0,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.9068,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "200062620",
+      "curso": "ENGENHARIA DE SOFTWARE",
+      "ira": 3.8477,
+      "ipf": 52.59,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.89942,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês B2;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "202012365",
+      "curso": "DIREITO",
+      "ira": 3.7152,
+      "ipf": 58.98,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.89489,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211045310",
+      "curso": "CIÊNCIAS SOCIAIS",
+      "ira": 4.0483,
+      "ipf": 41.47,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.87779,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211064610",
+      "curso": "DIREITO",
+      "ira": 4.0258,
+      "ipf": 42.58,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.87736,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "202001782",
+      "curso": "ARTES VISUAIS",
+      "ira": 4.0352,
+      "ipf": 42.06,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.87632,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "180027859",
+      "curso": "LÍNGUAS ESTRANGEIRAS APLICADAS - MSI",
+      "ira": 3.5844,
+      "ipf": 64.58,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.87607,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Espanhol B2;Inglês B2;Francês B2;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211029728",
+      "curso": "FARMÁCIA",
+      "ira": 3.9195,
+      "ipf": 47.78,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.87513,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211029218",
+      "curso": "ENGENHARIA AEROESPACIAL",
+      "ira": 3.7637,
+      "ipf": 55.34,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.87057,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "200020986",
+      "curso": "ENGENHARIA ELETRÔNICA",
+      "ira": 3.474,
+      "ipf": 69.57,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.8653,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "222011795",
+      "curso": "CIÊNCIA POLÍTICA",
+      "ira": 4.1714,
+      "ipf": 33.71,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.84556,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "170123006",
+      "curso": "ADMINISTRAÇÃO",
+      "ira": 3.3481,
+      "ipf": 74.5,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.8381,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês B2;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "221015379",
+      "curso": "RELAÇÕES INTERNACIONAIS",
+      "ira": 3.6739,
+      "ipf": 58.06,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.83519,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "221015486",
+      "curso": "ADMINISTRAÇÃO",
+      "ira": 4.1346,
+      "ipf": 35.0,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.8346,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês B2;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "222023150",
+      "curso": "QUÍMICA",
+      "ira": 4.1392,
+      "ipf": 33.99,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.819,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1;",
+      "alocacao": "University of the Ryukyus",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "212005408",
+      "curso": "ENGENHARIA QUÍMICA",
+      "ira": 3.7284,
+      "ipf": 53.79,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.80416,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês B2;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211016102",
+      "curso": "CIÊNCIAS NATURAIS",
+      "ira": 4.0694,
+      "ipf": 36.28,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.79498,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "202024562",
+      "curso": "ENGENHARIA DE PRODUÇÃO",
+      "ira": 3.4949,
+      "ipf": 65.0,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.7949,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Espanhol B2;Inglês C1;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "231002089",
+      "curso": "RELAÇÕES INTERNACIONAIS",
+      "ira": 3.5641,
+      "ipf": 61.29,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.78991,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês B2",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211023949",
+      "curso": "LÍNGUAS ESTRANGEIRAS APLICADAS - MSI",
+      "ira": 3.9556,
+      "ipf": 41.67,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.78893,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Espanhol B2;Inglês B2;Francês B2;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "221020280",
+      "curso": "ENFERMAGEM",
+      "ira": 4.2429,
+      "ipf": 27.24,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.78768,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211057885",
+      "curso": "FARMÁCIA",
+      "ira": 4.1259,
+      "ipf": 32.88,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.78343,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "180124111",
+      "curso": "FARMÁCIA",
+      "ira": 3.4922,
+      "ipf": 64.38,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.77987,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "221008310",
+      "curso": "ENGENHARIA DE SOFTWARE",
+      "ira": 3.9817,
+      "ipf": 39.66,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.7748,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês B2;",
+      "alocacao": "Sichuan University of Science and Engineering (SUSE)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211053492",
+      "curso": "JORNALISMO",
+      "ira": 4.0169,
+      "ipf": 37.0,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.7569,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "221021910",
+      "curso": "ENGENHARIA AEROESPACIAL",
+      "ira": 4.0246,
+      "ipf": 36.26,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.74979,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C2;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "221031873",
+      "curso": "MEDICINA VETERINÁRIA",
+      "ira": 3.9924,
+      "ipf": 37.86,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.74954,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "180028880",
+      "curso": "ENGENHARIA DE PRODUÇÃO",
+      "ira": 3.5096,
+      "ipf": 61.67,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.74293,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Espanhol C1;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "180122282",
+      "curso": "FARMÁCIA",
+      "ira": 3.7193,
+      "ipf": 50.0,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.7193,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "200030582",
+      "curso": "ENGENHARIA DE COMPUTAÇÃO",
+      "ira": 3.5943,
+      "ipf": 56.03,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.71499,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "221009264",
+      "curso": "FARMÁCIA",
+      "ira": 4.1359,
+      "ipf": 28.77,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.71124,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "190043431",
+      "curso": "CIÊNCIAS NATURAIS",
+      "ira": 3.2657,
+      "ipf": 72.25,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.71068,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211030694",
+      "curso": "ENGENHARIA DE SOFTWARE",
+      "ira": 3.7381,
+      "ipf": 48.28,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.70362,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C2;",
+      "alocacao": "Sichuan University of Science and Engineering (SUSE)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "190110376",
+      "curso": "FARMÁCIA",
+      "ira": 3.378,
+      "ipf": 66.21,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.70223,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211043093",
+      "curso": "DIREITO",
+      "ira": 3.6972,
+      "ipf": 50.0,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.6972,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Espanhol C1;",
+      "alocacao": "Universidad de Sevilla (obrigatório o envio do passaporte no ato da inscrição no edital)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "221013427",
+      "curso": "ODONTOLOGIA",
+      "ira": 3.9268,
+      "ipf": 38.2,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.69084,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "232036466",
+      "curso": "ENGENHARIA DE COMPUTAÇÃO",
+      "ira": 3.8571,
+      "ipf": 41.38,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.68469,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "200024281",
+      "curso": "AGRONOMIA",
+      "ira": 3.4415,
+      "ipf": 62.12,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.68392,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "221009175",
+      "curso": "FARMÁCIA",
+      "ira": 3.976,
+      "ipf": 34.81,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.67225,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "202032902",
+      "curso": "ARTES VISUAIS",
+      "ira": 3.8087,
+      "ipf": 42.99,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.66851,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "170007413",
+      "curso": "ENGENHARIA DE SOFTWARE",
+      "ira": 3.3956,
+      "ipf": 62.93,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.65422,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C2;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "202041160",
+      "curso": "ENFERMAGEM",
+      "ira": 3.7776,
+      "ipf": 43.66,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.65073,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Espanhol B2;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "200062450",
+      "curso": "ENGENHARIA DE ENERGIA",
+      "ira": 3.525,
+      "ipf": 56.22,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.6495,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês B2;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211060272",
+      "curso": "CIÊNCIAS SOCIAIS - ANTROPOLOGIA",
+      "ira": 3.6016,
+      "ipf": 52.38,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.64922,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês B2;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211066561",
+      "curso": "EDUCAÇÃO FÍSICA",
+      "ira": 3.5733,
+      "ipf": 53.19,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.63713,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211028088",
+      "curso": "ENGENHARIA MECATRÔNICA - CONTROLE E AUTOMAÇÃO",
+      "ira": 3.5822,
+      "ipf": 52.69,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.63605,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "222001618",
+      "curso": "CIÊNCIA POLÍTICA",
+      "ira": 4.0909,
+      "ipf": 26.97,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.63023,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211044958",
+      "curso": "ADMINISTRAÇÃO",
+      "ira": 3.4491,
+      "ipf": 58.0,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.6091,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "200060457",
+      "curso": "HISTÓRIA",
+      "ira": 3.7798,
+      "ipf": 40.93,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.5984,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "221035380",
+      "curso": "HISTÓRIA",
+      "ira": 3.7321,
+      "ipf": 42.79,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.58791,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "221021536",
+      "curso": "ENGENHARIA MECATRÔNICA - CONTROLE E AUTOMAÇÃO",
+      "ira": 3.7611,
+      "ipf": 40.38,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.56879,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "202066571",
+      "curso": "ENGENHARIA ELÉTRICA",
+      "ira": 3.3827,
+      "ipf": 57.26,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.52786,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês B2;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "232008292",
+      "curso": "ADMINISTRAÇÃO",
+      "ira": 4.0,
+      "ipf": 26.0,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.52,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "180114611",
+      "curso": "ENGENHARIA DE ENERGIA",
+      "ira": 3.2963,
+      "ipf": 60.24,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.50112,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "221012798",
+      "curso": "MEDICINA VETERINÁRIA",
+      "ira": 3.8534,
+      "ipf": 32.14,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.49626,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "170107817",
+      "curso": "AGRONOMIA",
+      "ira": 3.0507,
+      "ipf": 71.76,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.48581,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "221010200",
+      "curso": "FONOAUDIOLOGIA",
+      "ira": 3.5643,
+      "ipf": 45.3,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.47028,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211054604",
+      "curso": "GESTÃO DE POLÍTICAS PÚBLICAS",
+      "ira": 3.5882,
+      "ipf": 44.0,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.4682,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211066249",
+      "curso": "ENGENHARIA MECATRÔNICA - CONTROLE E AUTOMAÇÃO",
+      "ira": 3.748,
+      "ipf": 35.38,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.45569,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "222000970",
+      "curso": "ARQUITETURA E URBANISMO",
+      "ira": 3.8675,
+      "ipf": 28.8,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.4435,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "221000400",
+      "curso": "ADMINISTRAÇÃO",
+      "ira": 3.8163,
+      "ipf": 31.0,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.4363,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C2;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "180104365",
+      "curso": "ENGENHARIA AEROESPACIAL",
+      "ira": 3.4414,
+      "ipf": 49.24,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.42613,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "212006334",
+      "curso": "ENGENHARIA MECATRÔNICA - CONTROLE E AUTOMAÇÃO",
+      "ira": 3.3987,
+      "ipf": 51.15,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.42178,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211039199",
+      "curso": "FARMÁCIA",
+      "ira": 3.5,
+      "ipf": 44.52,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.39041,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211016953",
+      "curso": "QUÍMICA",
+      "ira": 3.1635,
+      "ipf": 60.95,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.38255,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "202048500",
+      "curso": "FISIOTERAPIA",
+      "ira": 3.2908,
+      "ipf": 54.0,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.3708,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "150121342",
+      "curso": "ARQUITETURA E URBANISMO",
+      "ira": 3.3744,
+      "ipf": 49.6,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.3664,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "190089822",
+      "curso": "ENGENHARIA DE PRODUÇÃO",
+      "ira": 3.2089,
+      "ipf": 56.67,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.34223,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "221008730",
+      "curso": "ENGENHARIA ELETRÔNICA",
+      "ira": 3.6538,
+      "ipf": 33.99,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.33364,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês B2;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "221017785",
+      "curso": "CIÊNCIAS CONTÁBEIS",
+      "ira": 3.5806,
+      "ipf": 35.29,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.28648,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "222000951",
+      "curso": "ARQUITETURA E URBANISMO",
+      "ira": 3.6747,
+      "ipf": 29.6,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.2667,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "222008762",
+      "curso": "CIÊNCIAS ECONÔMICAS",
+      "ira": 3.4262,
+      "ipf": 41.0,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.2462,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211040215",
+      "curso": "NUTRIÇÃO",
+      "ira": 3.3488,
+      "ipf": 42.74,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.2035,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "180020030",
+      "curso": "GESTÃO DO AGRONEGÓCIO",
+      "ira": 3.1611,
+      "ipf": 52.0,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.2011,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "202065430",
+      "curso": "FARMÁCIA",
+      "ira": 3.4741,
+      "ipf": 36.3,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.20013,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "222014320",
+      "curso": "ENGENHARIA DE PRODUÇÃO",
+      "ira": 3.549,
+      "ipf": 32.5,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.199,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês B2",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211064048",
+      "curso": "ENGENHARIA QUÍMICA",
+      "ira": 3.4918,
+      "ipf": 34.09,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.17362,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Espanhol C1;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "180032011",
+      "curso": "ENGENHARIA DE PRODUÇÃO",
+      "ira": 3.3488,
+      "ipf": 39.17,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.13213,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "221015682",
+      "curso": "ADMINISTRAÇÃO",
+      "ira": 3.4318,
+      "ipf": 31.0,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.0518,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "221010318",
+      "curso": "FÍSICA",
+      "ira": 3.2527,
+      "ipf": 38.64,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.02543,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211038665",
+      "curso": "ENGENHARIA FLORESTAL",
+      "ira": 3.3414,
+      "ipf": 33.72,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.01582,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "202039369",
+      "curso": "ENFERMAGEM",
+      "ira": 3.1002,
+      "ipf": 45.52,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.01065,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "202025434",
+      "curso": "DIREITO",
+      "ira": 3.2332,
+      "ipf": 33.59,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 3.90508,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "202052208",
+      "curso": "LETRAS - LÍNGUA PORTUGUESA E RESPECTIVA LITERATURA",
+      "ira": 3.1519,
+      "ipf": 34.09,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 3.83372,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211057820",
+      "curso": "FARMÁCIA",
+      "ira": 3.2434,
+      "ipf": 27.4,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 3.79135,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211026029",
+      "curso": "ENGENHARIA AMBIENTAL",
+      "ira": 3.0045,
+      "ipf": 36.92,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 3.74296,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C2;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "211031682",
+      "curso": "ENGENHARIA DE SOFTWARE",
+      "ira": 3.1006,
+      "ipf": 28.45,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 3.66957,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês B2;",
+      "alocacao": "Não alocado(a)",
+      "situacaoInscricao": "Homologada"
+    },
+    {
+      "matricula": "202050188",
+      "curso": "GESTÃO DE POLÍTICAS PÚBLICAS",
+      "ira": 4.7751,
+      "ipf": 100.0,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.7751,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Inscrição não homologada",
+      "situacaoInscricao": "Não homologada"
+    },
+    {
+      "matricula": "200025392",
+      "curso": "COMUNICAÇÃO SOCIAL - COMUNICAÇÃO ORGANIZACIONAL",
+      "ira": 4.8862,
+      "ipf": 90.86,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.7034,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1;",
+      "alocacao": "Inscrição não homologada",
+      "situacaoInscricao": "Não homologada"
+    },
+    {
+      "matricula": "190021772",
+      "curso": "ARQUITETURA E URBANISMO",
+      "ira": 4.8458,
+      "ipf": 90.4,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.6538,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1;",
+      "alocacao": "Inscrição não homologada",
+      "situacaoInscricao": "Não homologada"
+    },
+    {
+      "matricula": "190016817",
+      "curso": "ENGENHARIA DE PRODUÇÃO",
+      "ira": 4.7206,
+      "ipf": 90.42,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.52893,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1;",
+      "alocacao": "Inscrição não homologada",
+      "situacaoInscricao": "Não homologada"
+    },
+    {
+      "matricula": "180028111",
+      "curso": "DIREITO",
+      "ira": 4.4362,
+      "ipf": 98.44,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.40495,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês B2;",
+      "alocacao": "Inscrição não homologada",
+      "situacaoInscricao": "Não homologada"
+    },
+    {
+      "matricula": "180101749",
+      "curso": "ARQUITETURA E URBANISMO",
+      "ira": 4.5566,
+      "ipf": 92.0,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 6.3966,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês B2;",
+      "alocacao": "Inscrição não homologada",
+      "situacaoInscricao": "Não homologada"
+    },
+    {
+      "matricula": "190091509",
+      "curso": "ENGENHARIA DE PRODUÇÃO",
+      "ira": 4.1155,
+      "ipf": 90.83,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.93217,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Espanhol C1;Inglês B2;",
+      "alocacao": "Inscrição não homologada",
+      "situacaoInscricao": "Não homologada"
+    },
+    {
+      "matricula": "190037610",
+      "curso": "QUÍMICA",
+      "ira": 3.9492,
+      "ipf": 90.15,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.75216,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Chinês B2;",
+      "alocacao": "Inscrição não homologada",
+      "situacaoInscricao": "Não homologada"
+    },
+    {
+      "matricula": "211056298",
+      "curso": "DIREITO",
+      "ira": 4.7639,
+      "ipf": 24.22,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.24828,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1;",
+      "alocacao": "Inscrição não homologada",
+      "situacaoInscricao": "Não homologada"
+    },
+    {
+      "matricula": "232029775",
+      "curso": "TEORIA, CRÍTICA E HISTÓRIA DA ARTE",
+      "ira": 5.0,
+      "ipf": 10.34,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.2069,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Inscrição não homologada",
+      "situacaoInscricao": "Não homologada"
+    },
+    {
+      "matricula": "150127031",
+      "curso": "LETRAS - LÍNGUA FRANCESA E RESPECTIVA LITERATURA",
+      "ira": 3.1194,
+      "ipf": 100.0,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.1194,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês B2;Francês B2;",
+      "alocacao": "Inscrição não homologada",
+      "situacaoInscricao": "Não homologada"
+    },
+    {
+      "matricula": "231022063",
+      "curso": "LETRAS - PORTUGUÊS DO BRASIL COMO SEGUNDA LÍNGUA",
+      "ira": 4.6364,
+      "ipf": 22.34,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.08321,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Inscrição não homologada",
+      "situacaoInscricao": "Não homologada"
+    },
+    {
+      "matricula": "222000755",
+      "curso": "PSICOLOGIA",
+      "ira": 4.5405,
+      "ipf": 24.82,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.03695,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês B2;",
+      "alocacao": "Inscrição não homologada",
+      "situacaoInscricao": "Não homologada"
+    },
+    {
+      "matricula": "222003864",
+      "curso": "MEDICINA",
+      "ira": 4.4554,
+      "ipf": 23.4,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.92332,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Inscrição não homologada",
+      "situacaoInscricao": "Não homologada"
+    },
+    {
+      "matricula": "221018540",
+      "curso": "CIÊNCIAS SOCIAIS",
+      "ira": 4.3929,
+      "ipf": 24.88,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.8906,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1;",
+      "alocacao": "Inscrição não homologada",
+      "situacaoInscricao": "Não homologada"
+    },
+    {
+      "matricula": "170006913",
+      "curso": "GESTÃO AMBIENTAL",
+      "ira": 3.0379,
+      "ipf": 91.94,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.87661,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Inscrição não homologada",
+      "situacaoInscricao": "Não homologada"
+    },
+    {
+      "matricula": "232038792",
+      "curso": "CIÊNCIAS BIOLÓGICAS",
+      "ira": 4.5,
+      "ipf": 18.18,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.86364,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Francês B1;",
+      "alocacao": "Inscrição não homologada",
+      "situacaoInscricao": "Não homologada"
+    },
+    {
+      "matricula": "231022967",
+      "curso": "DIREITO",
+      "ira": 4.4375,
+      "ipf": 18.75,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.8125,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Inscrição não homologada",
+      "situacaoInscricao": "Não homologada"
+    },
+    {
+      "matricula": "232031399",
+      "curso": "LÍNGUAS ESTRANGEIRAS APLICADAS - MSI",
+      "ira": 4.4545,
+      "ipf": 11.46,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.68367,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Espanhol B2;Inglês B2;Francês B2;",
+      "alocacao": "Inscrição não homologada",
+      "situacaoInscricao": "Não homologada"
+    },
+    {
+      "matricula": "232026700",
+      "curso": "CIÊNCIAS SOCIAIS",
+      "ira": 4.5,
+      "ipf": 7.37,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.64747,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Inscrição não homologada",
+      "situacaoInscricao": "Não homologada"
+    },
+    {
+      "matricula": "222015954",
+      "curso": "FISIOTERAPIA",
+      "ira": 4.125,
+      "ipf": 22.67,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.57833,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Inscrição não homologada",
+      "situacaoInscricao": "Não homologada"
+    },
+    {
+      "matricula": "202025793",
+      "curso": "EDUCAÇÃO FÍSICA",
+      "ira": 2.9487,
+      "ipf": 78.5,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.51879,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Inscrição não homologada",
+      "situacaoInscricao": "Não homologada"
+    },
+    {
+      "matricula": "222034252",
+      "curso": "FARMÁCIA",
+      "ira": 3.9355,
+      "ipf": 21.92,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.37386,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Inscrição não homologada",
+      "situacaoInscricao": "Não homologada"
+    },
+    {
+      "matricula": "231008805",
+      "curso": "HISTÓRIA",
+      "ira": 3.9375,
+      "ipf": 18.6,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.30959,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Inscrição não homologada",
+      "situacaoInscricao": "Não homologada"
+    },
+    {
+      "matricula": "222025763",
+      "curso": "ENGENHARIA ELÉTRICA",
+      "ira": 3.9348,
+      "ipf": 14.52,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.22512,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Francês B1;Alemão B1;",
+      "alocacao": "Inscrição não homologada",
+      "situacaoInscricao": "Não homologada"
+    },
+    {
+      "matricula": "222037361",
+      "curso": "CIÊNCIAS SOCIAIS - SOCIOLOGIA",
+      "ira": 3.7317,
+      "ipf": 23.6,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.20361,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C2;",
+      "alocacao": "Inscrição não homologada",
+      "situacaoInscricao": "Não homologada"
+    },
+    {
+      "matricula": "221003841",
+      "curso": "CIÊNCIAS SOCIAIS",
+      "ira": 3.6,
+      "ipf": 17.51,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 3.95023,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês B2;",
+      "alocacao": "Inscrição não homologada",
+      "situacaoInscricao": "Não homologada"
+    },
+    {
+      "matricula": "180012151",
+      "curso": "ENGENHARIA DE ENERGIA",
+      "ira": 2.907,
+      "ipf": 47.39,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 3.85479,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Inscrição não homologada",
+      "situacaoInscricao": "Não homologada"
+    },
+    {
+      "matricula": "222001322",
+      "curso": "CIÊNCIA DA COMPUTAÇÃO",
+      "ira": 3.4941,
+      "ipf": 16.36,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 3.8212,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C2;",
+      "alocacao": "Inscrição não homologada",
+      "situacaoInscricao": "Não homologada"
+    },
+    {
+      "matricula": "221023370",
+      "curso": "FARMÁCIA",
+      "ira": 3.3458,
+      "ipf": 23.29,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 3.81155,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Inscrição não homologada",
+      "situacaoInscricao": "Não homologada"
+    },
+    {
+      "matricula": "170110656",
+      "curso": "ADMINISTRAÇÃO",
+      "ira": 2.5116,
+      "ipf": 63.0,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 3.7716,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1;",
+      "alocacao": "Inscrição não homologada",
+      "situacaoInscricao": "Não homologada"
+    },
+    {
+      "matricula": "222025932",
+      "curso": "ENGENHARIA DE SOFTWARE",
+      "ira": 3.2063,
+      "ipf": 18.1,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 3.56837,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Inscrição não homologada",
+      "situacaoInscricao": "Não homologada"
+    },
+    {
+      "matricula": "232031100",
+      "curso": "ENGENHARIA MECÂNICA",
+      "ira": 3.375,
+      "ipf": 9.16,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 3.55821,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Inscrição não homologada",
+      "situacaoInscricao": "Não homologada"
+    },
+    {
+      "matricula": "180099795",
+      "curso": "FÍSICA",
+      "ira": 2.7806,
+      "ipf": 37.27,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 3.52605,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C2;",
+      "alocacao": "Inscrição não homologada",
+      "situacaoInscricao": "Não homologada"
+    },
+    {
+      "matricula": "211059164",
+      "curso": "CIÊNCIAS CONTÁBEIS",
+      "ira": 2.7712,
+      "ipf": 32.35,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 3.41826,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Inscrição não homologada",
+      "situacaoInscricao": "Não homologada"
+    },
+    {
+      "matricula": "211023386",
+      "curso": "LETRAS - LÍNGUA FRANCESA E RESPECTIVA LITERATURA",
+      "ira": 2.7704,
+      "ipf": 31.11,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 3.39262,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Francês B2;",
+      "alocacao": "Inscrição não homologada",
+      "situacaoInscricao": "Não homologada"
+    },
+    {
+      "matricula": "190102748",
+      "curso": "LETRAS - TRADUÇÃO - ESPANHOL",
+      "ira": 2.3554,
+      "ipf": 50.0,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 3.3554,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Espanhol B2;",
+      "alocacao": "Inscrição não homologada",
+      "situacaoInscricao": "Não homologada"
+    },
+    {
+      "matricula": "180114182",
+      "curso": "LÍNGUAS ESTRANGEIRAS APLICADAS - MSI",
+      "ira": 2.8013,
+      "ipf": 25.0,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 3.3013,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Espanhol B2;Inglês B2;Francês B2;",
+      "alocacao": "Inscrição não homologada",
+      "situacaoInscricao": "Não homologada"
+    },
+    {
+      "matricula": "231016389",
+      "curso": "ADMINISTRAÇÃO",
+      "ira": 3.0,
+      "ipf": 8.0,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 3.16,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Espanhol C2;",
+      "alocacao": "Inscrição não homologada",
+      "situacaoInscricao": "Não homologada"
+    },
+    {
+      "matricula": "232006780",
+      "curso": "COMPUTAÇÃO",
+      "ira": 2.8571,
+      "ipf": 3.74,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 2.93187,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Inscrição não homologada",
+      "situacaoInscricao": "Não homologada"
+    },
+    {
+      "matricula": "211031127",
+      "curso": "ENGENHARIA DE SOFTWARE",
+      "ira": 2.5714,
+      "ipf": 10.34,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 2.7783,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Inscrição não homologada",
+      "situacaoInscricao": "Não homologada"
+    },
+    {
+      "matricula": "232027780",
+      "curso": "ENGENHARIA DE REDES DE COMUNICAÇÃO",
+      "ira": 2.5333,
+      "ipf": 5.6,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 2.6453,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Inscrição não homologada",
+      "situacaoInscricao": "Não homologada"
+    },
+    {
+      "matricula": "180025872",
+      "curso": "ENGENHARIA AEROESPACIAL",
+      "ira": 1.8115,
+      "ipf": 9.16,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 1.99471,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Francês B1;Japonês B2;",
+      "alocacao": "Inscrição não homologada",
+      "situacaoInscricao": "Não homologada"
+    },
+    {
+      "matricula": "232023010",
+      "curso": "PSICOLOGIA",
+      "ira": 0.0,
+      "ipf": 88.7,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 1.77391,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1;",
+      "alocacao": "Inscrição não homologada",
+      "situacaoInscricao": "Não homologada"
+    },
+    {
+      "matricula": "222028139",
+      "curso": "LETRAS - LÍNGUA PORTUGUESA E RESPECTIVA LITERATURA",
+      "ira": 0.0,
+      "ipf": 50.0,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 1.0,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1;Japonês B2;",
+      "alocacao": "Inscrição não homologada",
+      "situacaoInscricao": "Não homologada"
+    },
+    {
+      "matricula": "211016541",
+      "curso": "CIÊNCIAS SOCIAIS - SOCIOLOGIA",
+      "ira": 4.6667,
+      "ipf": 63.1,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.9286,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Desistente",
+      "situacaoInscricao": "Não homologada - desistência"
+    },
+    {
+      "matricula": "190113391",
+      "curso": "RELAÇÕES INTERNACIONAIS",
+      "ira": 4.0374,
+      "ipf": 89.25,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.82235,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Desistente",
+      "situacaoInscricao": "Não homologada - desistência"
+    },
+    {
+      "matricula": "202006902",
+      "curso": "CIÊNCIA POLÍTICA",
+      "ira": 4.35,
+      "ipf": 73.03,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.81067,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Desistente",
+      "situacaoInscricao": "Não homologada - desistência"
+    },
+    {
+      "matricula": "232023252",
+      "curso": "DIREITO",
+      "ira": 5.0,
+      "ipf": 27.34,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.54688,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Espanhol B2",
+      "alocacao": "Desistente",
+      "situacaoInscricao": "Não homologada - desistência"
+    },
+    {
+      "matricula": "222019238",
+      "curso": "PEDAGOGIA",
+      "ira": 4.9259,
+      "ipf": 27.93,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.48446,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Desistente",
+      "situacaoInscricao": "Não homologada - desistência"
+    },
+    {
+      "matricula": "202042300",
+      "curso": "ENGENHARIA CIVIL",
+      "ira": 4.1336,
+      "ipf": 63.36,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.40078,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês B2;",
+      "alocacao": "Desistente",
+      "situacaoInscricao": "Não homologada - desistência"
+    },
+    {
+      "matricula": "211026430",
+      "curso": "ENGENHARIA CIVIL",
+      "ira": 4.0391,
+      "ipf": 65.27,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 5.34444,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Inglês C1;",
+      "alocacao": "Desistente",
+      "situacaoInscricao": "Não homologada - desistência"
+    },
+    {
+      "matricula": "222017251",
+      "curso": "HISTÓRIA",
+      "ira": 3.8,
+      "ipf": 29.77,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.39535,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Desistente",
+      "situacaoInscricao": "Não homologada - desistência"
+    },
+    {
+      "matricula": "221022140",
+      "curso": "ENGENHARIA DE SOFTWARE",
+      "ira": 3.5729,
+      "ipf": 39.66,
+      "media": null,
+      "desvio": null,
+      "notaFinal": 4.366,
+      "opcoes": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "idiomas": "Português",
+      "alocacao": "Desistente",
+      "situacaoInscricao": "Não homologada - desistência"
+    }
+  ]
+}

@@ -21,17 +21,23 @@ O servidor carrega o histórico de disciplinas de `dados.json`, quando disponív
 
 ## Editais
 
-Estão disponíveis os editais **1/2025**, **1/2026** e **7/2026**. Os dados vêm das publicações oficiais da INT, com links para as fontes em cada página.
+Estão disponíveis os editais **3/2024**, **10/2024**, **1/2025**, **1/2026** e **7/2026**. Os dados vêm das publicações oficiais da INT, com links para as fontes em cada página.
 
 Os arquivos ficam em `data/editais/`. Cada edital tem seu próprio script de extração, porque as publicações nem sempre seguem o mesmo formato. Para atualizar os dados:
 
 ```sh
+python scripts/extrair_edital_3_2024.py
+python scripts/extrair_edital_10_2024.py
 python scripts/extrair_edital_1_2025.py
 python scripts/extrair_edital_1_2026.py
 python scripts/extrair_edital_7_2026.py
 ```
 
 Execute o script do edital que quiser atualizar. Nos editais 1/2025 e 1/2026, homologação e alocação são cruzadas pela matrícula. Médias e desvios são específicos de cada seleção; quando há mais de uma referência para o curso, a calculadora mostra as alternativas.
+
+O 3/2024 usa o IRA diretamente: `IRA + 2 × (IPF / 100)`, sem média ou desvio por curso. As opções de destino não constam nas tabelas consultadas.
+
+No 10/2024, as opções de destino não foram encontradas nas publicações consultadas. As médias e os desvios são estimados pelo IRA e pelo escore publicado, sem atribuir turnos. Quando os dados não permitem distinguir uma referência, a simulação fica indisponível. O JSON registra o método e as matrículas usadas em cada estimativa.
 
 Para incluir um novo edital, crie o extrator em `scripts/`, os dados em `data/editais/` e a página em `intercambio/`. Depois, adicione a entrada em `data/editais/index.json`.
 
