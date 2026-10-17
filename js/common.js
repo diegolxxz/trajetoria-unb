@@ -49,9 +49,9 @@ const AppUnB = (() => {
     }
     function idiomas(valor) {
         const linhas = [];
-        String(valor ?? '').split(/[,;\n]+|\s+e\s+/i).map(v => v.trim()).filter(Boolean).forEach(parte => {
+        String(valor ?? '').replace(/\bHSK\s+level\s+(\d+)\b/gi, 'HSK $1').split(/[,;\n]+|\s+e\s+/i).map(v => v.trim()).filter(Boolean).forEach(parte => {
             // Algumas publicações separam o nível do idioma por ponto e vírgula.
-            if (/^(?:[ABC][12]|N[1-5]|HSK\s*\d)$/i.test(parte) && linhas.length) linhas[linhas.length - 1] += ` ${parte}`;
+            if (/^(?:[ABC][12]|N[1-5])$/i.test(parte) && linhas.length) linhas[linhas.length - 1] += ` ${parte}`;
             else linhas.push(parte);
         });
         return linhas.join('\n');

@@ -25,9 +25,9 @@ html { -webkit-text-size-adjust: 100%; }
 .edital-piloto input::placeholder { color: var(--pilot-muted); }
 .edital-piloto .form-control:focus, .edital-piloto .form-select:focus { border-color: var(--pilot-accent); outline: 2px solid var(--pilot-accent); outline-offset: 2px; }
 .edital-piloto input[aria-invalid='true'] { border-color: #db6464; }
-.edital-piloto .campos-perfil { gap: .75rem; grid-template-columns: 1fr 1fr 2fr; }
+.edital-piloto .campos-perfil { gap: .75rem; grid-template-columns: minmax(100px,160px) minmax(100px,160px) minmax(0,1fr); }
 .edital-piloto .notas-simuladas { gap: 1rem; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); }
-.edital-piloto .card-nota { padding: .75rem 0 0; border: 0; border-top: 1px solid var(--pilot-border); border-radius: 0; background: transparent; display: grid; grid-template-columns: 1fr auto; align-items: baseline; gap: .25rem .75rem; }
+.edital-piloto .card-nota { padding: .75rem 0 0; border: 0; border-top: 1px solid var(--pilot-border); border-radius: 0; background: transparent; display: grid; grid-template-columns: max-content auto; justify-content: start; align-items: baseline; gap: .25rem .75rem; }
 .edital-piloto .card-nota h3 { margin: 0; font-size: .875rem; font-weight: 500; }
 .edital-piloto .nota-final { font-size: 1.65rem; letter-spacing: -.025em; color: var(--pilot-text); line-height: 1.3; }
 .edital-piloto .detalhes-calculo { grid-column: 1/-1; font-size: .8125rem; color: var(--pilot-muted); }
@@ -127,6 +127,7 @@ html[data-tema='claro'] { color-scheme: light; }
 .edital-piloto .modo-completo th.coluna-4 { min-width: 76px; width: 76px; }
 .edital-piloto .modo-completo th.coluna-5 { min-width: 150px; }
 .edital-piloto .modo-completo th.coluna-extra { min-width: 140px; width: auto; }
+.edital-piloto .modo-completo th.coluna-idiomas { min-width: 112px; width: 112px; }
 .edital-piloto .detalhes-calculo { display: flex; flex-wrap: wrap; gap: .25rem 1.25rem; }
 .edital-piloto .campo-extra, .edital-piloto .lista-detalhes dd { white-space: pre-line; }
 .edital-piloto .acoes-filtros { align-items: center; flex-wrap: wrap; gap: .25rem 1rem; }
@@ -136,6 +137,7 @@ html[data-tema='claro'] { color-scheme: light; }
 .edital-piloto .abrir-detalhes[aria-expanded='true']::before { transform: rotate(90deg); }
 .edital-piloto .tabela-resultados .linha-detalhes[hidden] { display: none !important; }
 .edital-piloto .tabela-resultados .conteudo-detalhes::before { display: none; }
+.edital-piloto .tabela-resultados .conteudo-detalhes { font-weight: 400; }
 @media (min-width:769px) {
  .edital-piloto .linha-detalhes .lista-detalhes { display: grid; grid-template-columns: repeat(var(--colunas), minmax(0, 1fr)); gap: .35rem 1rem; margin: 0; font-size: .8125rem; }
  .edital-piloto .linha-detalhes .lista-detalhes dt { grid-row: 1; grid-column: var(--coluna); }
@@ -160,7 +162,7 @@ html[data-tema='claro'] { color-scheme: light; }
  .edital-piloto .tabela-resultados .campo-extra { order: 7; grid-column: 1/-1; display: grid; grid-template-columns: 6.5rem minmax(0,1fr); gap: .5rem; }
  .edital-piloto .tabela-resultados .campo-extra:empty { display: none; }
  .edital-piloto .tabela-resultados .campo-extra::before { margin: 0; }
- .edital-piloto .modo-completo .campo-4 { font-size: .8125rem; overflow-wrap: anywhere; }
+ .edital-piloto .modo-completo .campo-4 { font-size: 1rem; overflow-wrap: anywhere; }
  .edital-piloto .tabela-resultados tr { padding: .65rem 0; }
  .edital-piloto .barra-tabela { gap: .25rem .75rem; }
  .edital-piloto .modo-tabela { margin-left: auto; }

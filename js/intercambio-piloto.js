@@ -137,7 +137,11 @@
         const cabecalho = el('tr');
         const titulos = ['Matrícula', 'Curso', 'IRA', 'IPF', 'Nota final', 'Alocação definitiva',
             ...(completo ? visiveis.map(c => c.titulo) : visiveis.length ? ['Detalhes'] : [])];
-        titulos.forEach((titulo, i) => { const th = el('th', i > 5 ? 'coluna-extra' : `coluna-${i}`, titulo); th.scope = 'col'; cabecalho.append(th); });
+        titulos.forEach((titulo, i) => {
+            const th = el('th', i > 5 ? 'coluna-extra' : `coluna-${i}`, titulo);
+            if (titulo === 'Idiomas homologados') th.classList.add('coluna-idiomas');
+            th.scope = 'col'; cabecalho.append(th);
+        });
         tabela.tHead.replaceChildren(cabecalho);
         const fragmento = document.createDocumentFragment();
         linhas.forEach(r => {
@@ -203,7 +207,7 @@
         }
         $('linhasResultados').replaceChildren(fragmento);
         const alocados = linhas.filter(r => CalculosUnB.alocado(r.alocacao)).length;
-        $('contagemResultados').textContent = `${linhas.length} resultado(s) · ${alocados} alocado(s)`;
+        $('contagemResultados').textContent = `${linhas.length} ${linhas.length === 1 ? 'resultado' : 'resultados'} · ${alocados} ${alocados === 1 ? 'alocado' : 'alocados'}`;
     }
 
     function mudarFiltros() { AppUnB.salvar(chaveFiltros, filtros()); renderizarTabela(); }
