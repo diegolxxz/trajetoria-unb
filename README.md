@@ -68,10 +68,24 @@ bun run build
 
 Para aplicar a formatação: `uv run ruff format .` e `bun run format`.
 `bun check` apenas confere os arquivos, sem alterá-los. ESLint verifica o JavaScript,
-Stylelint verifica o CSS e Prettier confere a formatação de HTML, CSS, JavaScript e configurações JSON/YAML.
+Stylelint verifica o CSS, HTML Validate verifica a marcação HTML e Prettier confere a formatação de HTML, CSS, JavaScript e configurações JSON/YAML.
 Os arquivos de dados, `dados.json`, dependências e a saída de build ficam fora da formatação.
 
-As mesmas verificações rodam no GitHub Actions em cada push e pull request.
+`bun check` também valida links e arquivos internos (incluindo diferenças de maiúsculas/minúsculas),
+sitemap, URLs canônicas e integridade dos dados dos editais: matrículas únicas, cursos, opções e campos numéricos.
+Use `bun run check:site` para executar só essa etapa.
+
+O GitHub Actions executa essas verificações em cada push e pull request, além dos testes Python em Linux
+(Python 3.11 e 3.13) e Windows (3.13). O site gerado fica disponível como artefato por sete dias.
+Para bloquear merges com falhas, adicione o status **Verificações obrigatórias** às regras de proteção da `main` no GitHub,
+depois que o workflow tiver rodado. O arquivo de workflow sozinho não ativa essa proteção.
+
+Na Vercel, o comando configurado é `bun run build:verified`: lint, formatação, HTML, links, dados,
+testes JavaScript, build e uma segunda conferência sobre `dist/`. Qualquer falha interrompe a publicação.
+Os testes do servidor Python ficam no GitHub, pois a Vercel publica apenas os arquivos estáticos.
+A formatação de `vercel.json` é conferida por `bun check` e pelo GitHub. No deploy,
+`bun run format:check:deploy` exclui somente esse arquivo da checagem de formatação;
+as demais verificações continuam obrigatórias.
 Mantenha `bun.lock` e `uv.lock` no repositório para instalações reproduzíveis.
 O `pyproject.toml` define as dependências usadas por uv; `requirements.txt` mantém a instalação por pip disponível.
 
@@ -89,7 +103,7 @@ A execução padrão usa `127.0.0.1:8080`. Use `--quiet` para ocultar as requisi
 
 ### Vercel e indexação
 
-`vercel.json` configura a publicação estática: `node scripts/build.mjs` gera `dist/` somente com arquivos públicos. O histórico pessoal e `route.py` ficam fora da publicação. No site público, o histórico é salvo no navegador; a sincronização com `dados.json` é exclusiva do servidor local.
+`vercel.json` configura a publicação estática com `bun run build:verified`, que confere o projeto e gera `dist/` somente com arquivos públicos. O histórico pessoal e `route.py` ficam fora da publicação. No site público, o histórico é salvo no navegador; a sincronização com `dados.json` é exclusiva do servidor local.
 
 Depois de publicar:
 

@@ -1,7 +1,8 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": null,
-  "buildCommand": "node scripts/build.mjs",
+  "buildCommand": "bun run build:verified",
   "outputDirectory": "dist",
-  "trailingSlash": true
+  "trailingSlash": true,
+  "installCommand": "bun install --frozen-lockfile"
 }

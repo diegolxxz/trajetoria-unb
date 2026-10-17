@@ -67,6 +67,8 @@ def pagina(edital=None):
 def serve_favicon():
     filename = request.path.lstrip("/")
     types = {
+        "favicon.ico": "image/x-icon",
+        "favicon.svg": "image/svg+xml",
         "sitemap.xml": "application/xml",
         "robots.txt": "text/plain",
         "site.webmanifest": "application/manifest+json",

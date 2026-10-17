@@ -4,19 +4,30 @@
   "private": true,
   "scripts": {
     "build": "node scripts/build.mjs",
-    "check": "bun run lint && bun run format:check",
-    "lint": "bun run lint:js && bun run lint:css",
-    "lint:js": "eslint js scripts/build.mjs tests/calculos.test.cjs eslint.config.mjs stylelint.config.mjs",
+    "check": "bun run lint && bun run format:check && bun run check:site",
+    "lint": "bun run lint:js && bun run lint:css && bun run lint:html",
+    "lint:js": "eslint js \"scripts/*.mjs\" tests/calculos.test.cjs eslint.config.mjs stylelint.config.mjs",
     "lint:css": "stylelint \"css/**/*.css\"",
     "format:check": "prettier --check .",
     "format": "prettier --write .",
-    "test": "node --test tests/calculos.test.cjs"
+    "test": "node --test tests/calculos.test.cjs",
+    "lint:html": "html-validate \"index.html\" \"ira/**/*.html\" \"intercambio/**/*.html\" \"turmas/**/*.html\"",
+    "check:site": "node scripts/check-site.mjs",
+    "build:verified": "bun run check:deploy && bun run test && bun run build && bun run check:dist",
+    "check:dist": "node scripts/check-site.mjs dist",
+    "format:check:deploy": "prettier --check . \"!vercel.json\"",
+    "check:deploy": "bun run lint && bun run format:check:deploy && bun run check:site"
   },
   "devDependencies": {
-    "eslint": "^9.0.0",
     "@eslint/js": "^9.0.0",
+    "eslint": "^9.0.0",
     "globals": "^16.0.0",
+    "html-validate": "^11.16.3",
+    "linkedom": "^0.18.13",
     "prettier": "^3.0.0",
     "stylelint": "^16.0.0"
+  },
+  "engines": {
+    "node": "24.x"
   }
 }

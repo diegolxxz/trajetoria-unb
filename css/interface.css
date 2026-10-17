@@ -1529,3 +1529,188 @@ html[data-tema='claro'] {
 .pagina-ira .ira-parcial strong {
     font-weight: 650;
 }
+
+/* Página inicial: hierarquia, superfícies sólidas e acesso direto às ferramentas. */
+.pagina-inicial .inicio-hero {
+    padding: clamp(1.75rem, 4vw, 3rem) 0 1.75rem;
+    max-width: 760px;
+}
+.pagina-inicial .inicio-contexto {
+    margin: 0 0 0.65rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.015em;
+    color: var(--pilot-accent);
+}
+.pagina-inicial .inicio-hero h1 {
+    font-size: clamp(2rem, 4.2vw, 3.25rem);
+    line-height: 1.08;
+    letter-spacing: -0.035em;
+    font-weight: 650;
+    font-optical-sizing: auto;
+    margin: 0 0 1rem;
+    text-wrap: balance;
+}
+.pagina-inicial .inicio-descricao {
+    max-width: 58ch;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--pilot-muted);
+    margin: 0;
+}
+.pagina-inicial .inicio-atalhos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.25rem;
+}
+.pagina-inicial .botao-inicio {
+    gap: 0.75rem;
+}
+.pagina-inicial .inicio-ferramentas {
+    padding: 1.25rem 0 1.75rem;
+    border-top: 1px solid var(--pilot-border);
+}
+.pagina-inicial main h2 {
+    font-size: 1.125rem;
+    font-weight: 650;
+    letter-spacing: -0.015em;
+    margin: 0 0 1rem;
+}
+.pagina-inicial .inicio-grade {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+}
+.pagina-inicial .inicio-ferramenta {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    padding: 1.25rem;
+    border: 1px solid var(--pilot-border);
+    border-radius: 12px;
+    background: var(--pilot-surface);
+    min-width: 0;
+}
+.pagina-inicial .inicio-icone {
+    width: 28px;
+    height: 28px;
+    color: var(--pilot-accent);
+    margin-bottom: 0.75rem;
+}
+.pagina-inicial main h3 {
+    font-size: 1.0625rem;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    font-weight: 600;
+    margin: 0 0 0.5rem;
+}
+.pagina-inicial .inicio-ferramenta > p {
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    margin: 0 0 0.75rem;
+    color: var(--pilot-muted);
+}
+.pagina-inicial .inicio-ferramenta ul {
+    padding-left: 1.1rem;
+    margin: 0 0 0.75rem;
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: var(--pilot-muted);
+}
+.pagina-inicial .inicio-ferramenta li + li {
+    margin-top: 0.35rem;
+}
+.pagina-inicial .inicio-ferramenta li::marker {
+    color: var(--pilot-accent);
+}
+.pagina-inicial .inicio-link-recurso {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 44px;
+    margin-top: auto;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-decoration: none;
+}
+.pagina-inicial .inicio-duvidas-nova {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1rem;
+    padding: 1.5rem 0;
+    border-top: 1px solid var(--pilot-border);
+}
+.pagina-inicial .inicio-duvidas-nova > div > p {
+    font-size: 0.875rem;
+    color: var(--pilot-muted);
+}
+.pagina-inicial .inicio-perguntas {
+    min-width: 0;
+}
+.pagina-inicial .inicio-perguntas details {
+    border-bottom: 1px solid var(--pilot-border);
+}
+.pagina-inicial .inicio-perguntas summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    width: 100%;
+    min-height: 48px;
+    color: var(--pilot-text);
+    font-size: 0.875rem;
+    padding: 0.65rem 0;
+    list-style: none;
+}
+.pagina-inicial .inicio-perguntas summary::-webkit-details-marker {
+    display: none;
+}
+.pagina-inicial .inicio-perguntas summary::after {
+    content: '+';
+    flex-shrink: 0;
+    color: var(--pilot-muted);
+}
+.pagina-inicial .inicio-perguntas details[open] summary::after {
+    content: '−';
+}
+.pagina-inicial .inicio-perguntas details p {
+    margin: 0 0 1rem;
+    color: var(--pilot-muted);
+    font-size: 0.875rem;
+    line-height: 1.65;
+}
+@media (hover: hover) and (pointer: fine) {
+    .pagina-inicial .inicio-link-recurso:hover {
+        text-decoration: underline;
+    }
+    .pagina-inicial .botao-inicio:hover {
+        background: var(--pilot-field);
+    }
+    .pagina-inicial .botao-inicio-principal:hover {
+        background: var(--pilot-text);
+    }
+}
+@media (max-width: 991px) {
+    .pagina-inicial .inicio-grade {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 0.75rem;
+    }
+    .pagina-inicial .inicio-ferramenta {
+        padding: 1rem;
+    }
+    .pagina-inicial .inicio-duvidas-nova {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 0.5rem;
+    }
+    .pagina-inicial .inicio-duvidas-nova h2 {
+        margin-bottom: 0.4rem;
+    }
+}
+@media (max-width: 420px) {
+    .pagina-inicial .inicio-atalhos {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 0.5rem;
+    }
+}

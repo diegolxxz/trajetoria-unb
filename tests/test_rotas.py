@@ -1,4 +1,5 @@
 import unittest
+from unittest.mock import patch
 import json
 from pathlib import Path
 from wsgiref.util import setup_testing_defaults
@@ -59,6 +60,13 @@ class RotasTest(unittest.TestCase):
                 self.assertTrue(resposta["status"].startswith("200"))
                 self.assertEqual(resposta["headers"]["Content-Type"], tipo)
                 self.assertEqual(resposta["body"], (route.ROOT / caminho.lstrip("/")).read_bytes())
+
+    def test_favicon_ico_independe_do_mime_do_sistema(self):
+        with patch("bottle.mimetypes.guess_type", return_value=("image/vnd.microsoft.icon", None)):
+            resposta = get("/favicon.ico")
+        self.assertEqual(resposta["status"].split()[0], "200")
+        self.assertEqual(resposta["headers"]["Content-Type"], "image/x-icon")
+        self.assertEqual(resposta["body"], (route.ROOT / "favicon.ico").read_bytes())
 
     def test_sincronizacao_apenas_no_servidor_python(self):
         marcador = b'<meta name="sincronizar-arquivo" content="true">'
