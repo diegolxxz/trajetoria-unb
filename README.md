@@ -50,12 +50,30 @@ O site usa HTML, CSS e JavaScript, com Bootstrap. O servidor local é feito com 
 - `scripts/`: extração dos dados publicados pela INT.
 - `tests/`: testes dos cálculos, das extrações e das rotas.
 
-Para rodar os testes, é necessário ter Python e Node.js:
+## Verificações
+
+Com [uv](https://docs.astral.sh/uv/) e [Bun](https://bun.sh/) instalados, rode na raiz do projeto:
 
 ```sh
-node --test tests/calculos.test.cjs
-python -m unittest discover -s tests -p "test_*.py"
+uv sync --frozen
+bun install --frozen-lockfile
+
+uv run pytest
+uv run ruff check .
+uv run ruff format --check .
+bun check
+bun run test
+bun run build
 ```
+
+Para aplicar a formatação: `uv run ruff format .` e `bun run format`.
+`bun check` apenas confere os arquivos, sem alterá-los. ESLint verifica o JavaScript,
+Stylelint verifica o CSS e Prettier confere a formatação de HTML, CSS, JavaScript e configurações JSON/YAML.
+Os arquivos de dados, `dados.json`, dependências e a saída de build ficam fora da formatação.
+
+As mesmas verificações rodam no GitHub Actions em cada push e pull request.
+Mantenha `bun.lock` e `uv.lock` no repositório para instalações reproduzíveis.
+O `pyproject.toml` define as dependências usadas por uv; `requirements.txt` mantém a instalação por pip disponível.
 
 ## Publicação
 

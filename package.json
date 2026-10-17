@@ -1,0 +1,22 @@
+{
+  "name": "trajetoria-unb",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check": "bun run lint && bun run format:check",
+    "lint": "bun run lint:js && bun run lint:css",
+    "lint:js": "eslint js scripts/build.mjs tests/calculos.test.cjs eslint.config.mjs stylelint.config.mjs",
+    "lint:css": "stylelint \"css/**/*.css\"",
+    "format:check": "prettier --check .",
+    "format": "prettier --write .",
+    "test": "node --test tests/calculos.test.cjs"
+  },
+  "devDependencies": {
+    "eslint": "^9.0.0",
+    "@eslint/js": "^9.0.0",
+    "globals": "^16.0.0",
+    "prettier": "^3.0.0",
+    "stylelint": "^16.0.0"
+  }
+}

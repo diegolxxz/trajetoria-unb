@@ -10,10 +10,10 @@
 const HORAS_POR_CREDITO = CalculosUnB.horasPorCredito;
 const OPCOES_CREDITOS = [
     { texto: 'Créditos', valor: -1 },
-    ...[1, 2, 3, 4, 6, 8, 10, 12].map(creditos => ({
+    ...[1, 2, 3, 4, 6, 8, 10, 12].map((creditos) => ({
         texto: `${creditos} (${creditos * HORAS_POR_CREDITO}h)`,
-        valor: creditos
-    }))
+        valor: creditos,
+    })),
 ];
 
 const OPCOES_MENCOES = [
@@ -35,12 +35,16 @@ document.addEventListener('DOMContentLoaded', inicializar);
 
 async function inicializar() {
     const modo = AppUnB.ler('calculadora-unb:visualizacao-ira', 'expandido');
-    document.querySelector(`[name="visualizacaoIra"][value="${modo === 'compacto' ? 'compacto' : 'expandido'}"]`).checked = true;
+    document.querySelector(
+        `[name="visualizacaoIra"][value="${modo === 'compacto' ? 'compacto' : 'expandido'}"]`,
+    ).checked = true;
     document.body.classList.toggle('ira-compacto', modo === 'compacto');
-    document.querySelectorAll('[name="visualizacaoIra"]').forEach(input => input.addEventListener('change', () => {
-        document.body.classList.toggle('ira-compacto', input.value === 'compacto');
-        AppUnB.salvar('calculadora-unb:visualizacao-ira', input.value);
-    }));
+    document.querySelectorAll('[name="visualizacaoIra"]').forEach((input) =>
+        input.addEventListener('change', () => {
+            document.body.classList.toggle('ira-compacto', input.value === 'compacto');
+            AppUnB.salvar('calculadora-unb:visualizacao-ira', input.value);
+        }),
+    );
     const dadosNavegador = AppUnB.ler(CHAVE_DADOS, {});
     let dadosArquivo = null;
     if (document.querySelector('meta[name="sincronizar-arquivo"]')?.content === 'true') {
@@ -53,24 +57,34 @@ async function inicializar() {
                     sincronizarArquivo = true;
                 }
             }
-        } catch { /* Continua usando os dados do navegador se o servidor estiver indisponível. */ }
+        } catch {
+            /* Continua usando os dados do navegador se o servidor estiver indisponível. */
+        }
     }
-    const temPeriodos = dados => Object.keys(dados).some(chave => /^\d+$/.test(chave));
-    const extrasNavegador = Object.fromEntries(Object.entries(dadosNavegador).filter(([chave]) => !/^\d+$/.test(chave)));
-    const dados = dadosArquivo && temPeriodos(dadosArquivo)
-        ? { ...extrasNavegador, ...dadosArquivo }
-        : dadosNavegador;
+    const temPeriodos = (dados) => Object.keys(dados).some((chave) => /^\d+$/.test(chave));
+    const extrasNavegador = Object.fromEntries(
+        Object.entries(dadosNavegador).filter(([chave]) => !/^\d+$/.test(chave)),
+    );
+    const dados = dadosArquivo && temPeriodos(dadosArquivo) ? { ...extrasNavegador, ...dadosArquivo } : dadosNavegador;
     AppUnB.salvar(CHAVE_DADOS, dados);
-    Object.keys(dados).filter(k => /^\d+$/.test(k)).sort((a, b) => Number(a) - Number(b)).forEach(chave => {
-        criarPeriodo(true);
-        const periodo = document.getElementById('periodos').lastElementChild;
-        Object.keys(dados[chave] || {}).sort((a, b) => Number(a) - Number(b)).forEach(d => {
-            adicionarDisciplina(periodo, dados[chave][d]);
+    Object.keys(dados)
+        .filter((k) => /^\d+$/.test(k))
+        .sort((a, b) => Number(a) - Number(b))
+        .forEach((chave) => {
+            criarPeriodo(true);
+            const periodo = document.getElementById('periodos').lastElementChild;
+            Object.keys(dados[chave] || {})
+                .sort((a, b) => Number(a) - Number(b))
+                .forEach((d) => {
+                    adicionarDisciplina(periodo, dados[chave][d]);
+                });
+            if (!periodo.querySelector('.disciplina-row')) adicionarDisciplina(periodo);
         });
-        if (!periodo.querySelector('.disciplina-row')) adicionarDisciplina(periodo);
-    });
     if (!document.querySelector('.periodo')) criarPeriodo();
-    document.getElementById('periodos').addEventListener('change', () => { calcularIra(); salvarDados(); });
+    document.getElementById('periodos').addEventListener('change', () => {
+        calcularIra();
+        salvarDados();
+    });
     document.getElementById('periodos').addEventListener('input', salvarDados);
     calcularIra();
 }
@@ -81,9 +95,12 @@ function coletarDados() {
     document.querySelectorAll('#periodos .periodo').forEach((periodo, i) => {
         dados[i + 1] = {};
         periodo.querySelectorAll('.disciplina-row').forEach((disc, j) => {
-            dados[i + 1][j + 1] = [disc.querySelector('.input-nome').value,
-                disc.querySelector('.sel-creditos').selectedIndex, disc.querySelector('.sel-mencao').selectedIndex,
-                disc.querySelector('.chk-modulo-livre').checked];
+            dados[i + 1][j + 1] = [
+                disc.querySelector('.input-nome').value,
+                disc.querySelector('.sel-creditos').selectedIndex,
+                disc.querySelector('.sel-mencao').selectedIndex,
+                disc.querySelector('.chk-modulo-livre').checked,
+            ];
         });
     });
     if (anterior.intercambio) dados.intercambio = anterior.intercambio;
@@ -95,26 +112,33 @@ function salvarDados() {
     const dados = coletarDados();
     AppUnB.salvar(CHAVE_DADOS, dados);
     if (!sincronizarArquivo) return;
-    filaSalvamento = filaSalvamento.catch(() => {}).then(async () => {
-        const resposta = await fetch(new URL('save', AppUnB.raiz), {
-            method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(dados)
+    filaSalvamento = filaSalvamento
+        .catch(() => {})
+        .then(async () => {
+            const resposta = await fetch(new URL('save', AppUnB.raiz), {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(dados),
+            });
+            if (!resposta.ok) throw new Error(`HTTP ${resposta.status}`);
+        })
+        .catch(() => {
+            const aviso = document.getElementById('avisoPersistencia');
+            aviso.hidden = false;
+            aviso.textContent = 'Alterações salvas no navegador, mas não foi possível atualizar dados.json.';
         });
-        if (!resposta.ok) throw new Error(`HTTP ${resposta.status}`);
-    }).catch(() => {
-        const aviso = document.getElementById('avisoPersistencia');
-        aviso.hidden = false;
-        aviso.textContent = 'Alterações salvas no navegador, mas não foi possível atualizar dados.json.';
-    });
 }
 
 function calcularIra() {
     const resultado = CalculosUnB.historico(coletarDados());
-    document.getElementById('ira-mp').replaceChildren(
-        AppUnB.elemento('span', '', `IRA: ${AppUnB.numero(resultado.ira)}`),
-        AppUnB.elemento('span', '', `MP: ${AppUnB.numero(resultado.mp)}`)
-    );
+    document
+        .getElementById('ira-mp')
+        .replaceChildren(
+            AppUnB.elemento('span', '', `IRA: ${AppUnB.numero(resultado.ira)}`),
+            AppUnB.elemento('span', '', `MP: ${AppUnB.numero(resultado.mp)}`),
+        );
     const periodos = [...document.querySelectorAll('#periodos .periodo')];
-    document.querySelectorAll('#periodos .ira-parcial').forEach(elemento => elemento.remove());
+    document.querySelectorAll('#periodos .ira-parcial').forEach((elemento) => elemento.remove());
     periodos.forEach((periodo, indice) => {
         const parcial = resultado.parciais[indice];
         if (!parcial) return;
@@ -125,7 +149,7 @@ function calcularIra() {
         cartao.title = `Acumulado até o ${parcial.periodo}º período`;
         cartao.append(
             AppUnB.elemento('span', 'ira-parcial-rotulo', 'Acumulado'),
-            AppUnB.elemento('strong', '', `IRA ${AppUnB.numero(parcial.ira)} · MP ${AppUnB.numero(parcial.mp)}`)
+            AppUnB.elemento('strong', '', `IRA ${AppUnB.numero(parcial.ira)} · MP ${AppUnB.numero(parcial.mp)}`),
         );
         periodo.querySelector('.periodo-rodape').append(cartao);
     });
@@ -173,17 +197,19 @@ function reindexarPeriodos() {
 // ===========================
 
 function gerarOpcoesHtml(opcoes, indiceSelecionado = 0) {
-    return opcoes.map((op, i) => {
-        let attrs = [];
-        if (op.valor === -1) {
-            attrs.push('value=""', 'disabled', 'hidden');
-            if (indiceSelecionado === 0) attrs.push('selected');
-        } else {
-            attrs.push(`value="${op.valor}"`);
-            if (i === indiceSelecionado) attrs.push('selected');
-        }
-        return `<option ${attrs.join(' ')}>${op.texto}</option>`;
-    }).join('');
+    return opcoes
+        .map((op, i) => {
+            let attrs = [];
+            if (op.valor === -1) {
+                attrs.push('value=""', 'disabled', 'hidden');
+                if (indiceSelecionado === 0) attrs.push('selected');
+            } else {
+                attrs.push(`value="${op.valor}"`);
+                if (i === indiceSelecionado) attrs.push('selected');
+            }
+            return `<option ${attrs.join(' ')}>${op.texto}</option>`;
+        })
+        .join('');
 }
 
 function adicionarDisciplina(periodoEl, dados = null) {

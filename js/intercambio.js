@@ -1,5 +1,5 @@
 (() => {
-    const $ = id => document.getElementById(id);
+    const $ = (id) => document.getElementById(id);
     const el = AppUnB.elemento;
     const formato = AppUnB.numero;
     const slug = document.body.dataset.edital;
@@ -16,7 +16,7 @@
     }
 
     function opcoesCurso(select) {
-        dados.cursos.forEach(c => {
+        dados.cursos.forEach((c) => {
             const opcao = el('option', '', c.nome);
             opcao.value = c.nome;
             select.append(opcao);
@@ -28,19 +28,29 @@
         $('meuIra').value = perfil.ira ?? '';
         $('meuIpf').value = perfil.ipf ?? '';
         $('meuCurso').value = perfil.curso || '';
-        const indisponivel = perfil.curso && !dados.cursos.some(c => c.nome === perfil.curso);
+        const indisponivel = perfil.curso && !dados.cursos.some((c) => c.nome === perfil.curso);
         $('avisoCurso').hidden = !indisponivel;
-        $('avisoCurso').textContent = indisponivel ? `O curso salvo (${perfil.curso}) não aparece nesta publicação. Selecione outro curso para simular; nenhuma média de outro edital será usada.` : '';
+        $('avisoCurso').textContent = indisponivel
+            ? `O curso salvo (${perfil.curso}) não aparece nesta publicação. Selecione outro curso para simular; nenhuma média de outro edital será usada.`
+            : '';
     }
 
     function simular() {
-        const curso = dados.cursos.find(c => c.nome === $('meuCurso').value);
+        const curso = dados.cursos.find((c) => c.nome === $('meuCurso').value);
         const ira = $('meuIra').valueAsNumber;
         const ipf = $('meuIpf').valueAsNumber;
         const incompleto = $('meuIra').value === '' || $('meuIpf').value === '';
-        const invalido = !incompleto && (!Number.isFinite(ira) || ira < 0 || ira > 5 || !Number.isFinite(ipf) || ipf < 0 || ipf > 100);
-        $('meuIra').setAttribute('aria-invalid', String($('meuIra').value !== '' && (!Number.isFinite(ira) || ira < 0 || ira > 5)));
-        $('meuIpf').setAttribute('aria-invalid', String($('meuIpf').value !== '' && (!Number.isFinite(ipf) || ipf < 0 || ipf > 100)));
+        const invalido =
+            !incompleto &&
+            (!Number.isFinite(ira) || ira < 0 || ira > 5 || !Number.isFinite(ipf) || ipf < 0 || ipf > 100);
+        $('meuIra').setAttribute(
+            'aria-invalid',
+            String($('meuIra').value !== '' && (!Number.isFinite(ira) || ira < 0 || ira > 5)),
+        );
+        $('meuIpf').setAttribute(
+            'aria-invalid',
+            String($('meuIpf').value !== '' && (!Number.isFinite(ipf) || ipf < 0 || ipf > 100)),
+        );
         $('erroPerfil').hidden = !invalido;
         $('erroPerfil').textContent = 'Informe um IRA entre 0 e 5 e um IPF entre 0% e 100%.';
         $('notasSimuladas').replaceChildren();
@@ -64,7 +74,13 @@
                 $('notasSimuladas').append(card);
                 return;
             }
-            card.append(el('strong', 'nota-final', nota ? `${v.estimada ? '≈ ' : ''}${formato(nota.final, 4)}` : 'Indisponível'));
+            card.append(
+                el(
+                    'strong',
+                    'nota-final',
+                    nota ? `${v.estimada ? '≈ ' : ''}${formato(nota.final, 4)}` : 'Indisponível',
+                ),
+            );
             const detalhes = el('div', 'detalhes-calculo');
             detalhes.append(el('span', '', `Média ${formato(v.media)}`), el('span', '', `Desvio ${formato(v.desvio)}`));
             if (nota) detalhes.append(el('span', '', `IRA padronizado ${formato(nota.padronizado)}`));
@@ -75,22 +91,27 @@
     }
 
     function filtros() {
-        return { curso: $('filtroCurso').value, alocacao: $('filtroAlocacao').value,
-            busca: $('buscaResultado').value, ordem: $('ordemResultado').value,
-            visualizacao: document.querySelector('[name="visualizacao"]:checked').value };
+        return {
+            curso: $('filtroCurso').value,
+            alocacao: $('filtroAlocacao').value,
+            busca: $('buscaResultado').value,
+            ordem: $('ordemResultado').value,
+            visualizacao: document.querySelector('[name="visualizacao"]:checked').value,
+        };
     }
 
     function referenciaDoRegistro(registro) {
-        const curso = dados.cursos.find(c => c.nome === CalculosUnB.cursoBase(registro.curso));
+        const curso = dados.cursos.find((c) => c.nome === CalculosUnB.cursoBase(registro.curso));
         if (!curso || curso.variantes.length < 2) return '';
-        const indice = curso.variantes.findIndex(v => v.cursoFonte === registro.curso &&
-            v.media === registro.media && v.desvio === registro.desvio);
+        const indice = curso.variantes.findIndex(
+            (v) => v.cursoFonte === registro.curso && v.media === registro.media && v.desvio === registro.desvio,
+        );
         return indice >= 0 ? `Referência ${indice + 1}` : '';
     }
 
     function mostrarReferenciasCurso(nome) {
         const container = $('referenciasCurso');
-        const curso = dados.cursos.find(c => c.nome === nome);
+        const curso = dados.cursos.find((c) => c.nome === nome);
         container.replaceChildren();
         if (dados.formula.tipo === 'ira-direto') {
             container.hidden = true;
@@ -116,7 +137,8 @@
             desvio.append(el('strong', '', formato(v.desvio, 4)));
             valores.append(media, desvio);
             card.append(valores);
-            if (v.estimada) card.append(el('small', 'texto-apoio', 'Valores estimados pelo IRA padronizado publicado.'));
+            if (v.estimada)
+                card.append(el('small', 'texto-apoio', 'Valores estimados pelo IRA padronizado publicado.'));
             lista.append(card);
         });
         container.append(lista);
@@ -126,37 +148,69 @@
         const filtro = filtros();
         mostrarReferenciasCurso(filtro.curso);
         const busca = CalculosUnB.normalizar(filtro.busca.trim());
-        const linhas = dados.resultados.filter(r => {
-            if (filtro.curso && CalculosUnB.cursoBase(r.curso) !== filtro.curso) return false;
-            const alocado = CalculosUnB.alocado(r.alocacao);
-            if (filtro.alocacao === 'alocados' && !alocado) return false;
-            if (filtro.alocacao === 'nao-alocados' && alocado) return false;
-            return !busca || CalculosUnB.normalizar([r.matricula, r.curso, ...r.opcoes, r.idiomas, r.alocacao,
-                r.situacaoInscricao, r.classificacao, r.observacao].join(' ')).includes(busca);
-        }).sort((a, b) => b[filtro.ordem] - a[filtro.ordem] || a.matricula.localeCompare(b.matricula));
+        const linhas = dados.resultados
+            .filter((r) => {
+                if (filtro.curso && CalculosUnB.cursoBase(r.curso) !== filtro.curso) return false;
+                const alocado = CalculosUnB.alocado(r.alocacao);
+                if (filtro.alocacao === 'alocados' && !alocado) return false;
+                if (filtro.alocacao === 'nao-alocados' && alocado) return false;
+                return (
+                    !busca ||
+                    CalculosUnB.normalizar(
+                        [
+                            r.matricula,
+                            r.curso,
+                            ...r.opcoes,
+                            r.idiomas,
+                            r.alocacao,
+                            r.situacaoInscricao,
+                            r.classificacao,
+                            r.observacao,
+                        ].join(' '),
+                    ).includes(busca)
+                );
+            })
+            .sort((a, b) => b[filtro.ordem] - a[filtro.ordem] || a.matricula.localeCompare(b.matricula));
         const completo = filtro.visualizacao === 'completo';
-        const extras = [0, 1, 2, 3, 4].map(i => ({ titulo: `${i + 1}ª opção`, valor: r => r.opcoes[i] }));
-        extras.push({ titulo: 'Idiomas homologados', valor: r => AppUnB.idiomas((r.idiomas || '')) });
-        const visiveis = extras.filter(c => linhas.some(r => temConteudo(c.valor(r))));
+        const extras = [0, 1, 2, 3, 4].map((i) => ({ titulo: `${i + 1}ª opção`, valor: (r) => r.opcoes[i] }));
+        extras.push({ titulo: 'Idiomas homologados', valor: (r) => AppUnB.idiomas(r.idiomas || '') });
+        const visiveis = extras.filter((c) => linhas.some((r) => temConteudo(c.valor(r))));
         const campos = ['matricula', 'curso', 'ira', 'ipf', 'notaFinal', 'alocacao'];
-        const baseVisivel = campos.map(c => (linhas.length ? linhas : dados.resultados).some(r => temConteudo(r[c])));
+        const baseVisivel = campos.map((c) =>
+            (linhas.length ? linhas : dados.resultados).some((r) => temConteudo(r[c])),
+        );
         const tabela = document.querySelector('.tabela-resultados');
         tabela.classList.toggle('modo-completo', completo);
         const cabecalho = el('tr');
-        const titulos = ['Matrícula', 'Curso', 'IRA', 'IPF', 'Nota final', 'Alocação definitiva',
-            ...(completo ? visiveis.map(c => c.titulo) : visiveis.length ? ['Detalhes'] : [])];
+        const titulos = [
+            'Matrícula',
+            'Curso',
+            'IRA',
+            'IPF',
+            'Nota final',
+            'Alocação definitiva',
+            ...(completo ? visiveis.map((c) => c.titulo) : visiveis.length ? ['Detalhes'] : []),
+        ];
         titulos.forEach((titulo, i) => {
             if (i < 6 && !baseVisivel[i]) return;
             const th = el('th', i > 5 ? 'coluna-extra' : `coluna-${i}`, titulo);
             if (titulo === 'Idiomas homologados') th.classList.add('coluna-idiomas');
-            th.scope = 'col'; cabecalho.append(th);
+            th.scope = 'col';
+            cabecalho.append(th);
         });
         tabela.tHead.replaceChildren(cabecalho);
         const fragmento = document.createDocumentFragment();
-        linhas.forEach(r => {
+        linhas.forEach((r) => {
             const tr = el('tr');
             const referencia = referenciaDoRegistro(r);
-            const valores = [r.matricula, r.curso, r.ira == null ? '—' : formato(r.ira), r.ipf == null ? '—' : `${formato(r.ipf, 2)}%`, r.notaFinal == null ? '—' : formato(r.notaFinal), r.alocacao || 'n/a'];
+            const valores = [
+                r.matricula,
+                r.curso,
+                r.ira == null ? '—' : formato(r.ira),
+                r.ipf == null ? '—' : `${formato(r.ipf, 2)}%`,
+                r.notaFinal == null ? '—' : formato(r.notaFinal),
+                r.alocacao || 'n/a',
+            ];
             const rotulos = ['Matrícula', 'Curso', 'IRA', 'IPF', 'Nota final', 'Alocação definitiva'];
             valores.forEach((valor, i) => {
                 if (!baseVisivel[i]) return;
@@ -167,11 +221,18 @@
                 tr.append(td);
             });
             if (completo) {
-                visiveis.forEach(c => { const td = el('td', 'campo-extra', temConteudo(c.valor(r)) ? c.valor(r) : ''); td.dataset.label = c.titulo; tr.append(td); });
+                visiveis.forEach((c) => {
+                    const td = el('td', 'campo-extra', temConteudo(c.valor(r)) ? c.valor(r) : '');
+                    td.dataset.label = c.titulo;
+                    tr.append(td);
+                });
                 fragmento.append(tr);
                 return;
             }
-            if (!visiveis.length) { fragmento.append(tr); return; }
+            if (!visiveis.length) {
+                fragmento.append(tr);
+                return;
+            }
             const td = el('td', 'campo-detalhes');
             const botao = el('button', 'abrir-detalhes', 'Ver detalhes');
             botao.type = 'button';
@@ -192,7 +253,9 @@
                 descricao.style.setProperty('--coluna', coluna);
                 lista.append(termo, descricao);
             };
-            r.opcoes.forEach((v, i) => { if (temConteudo(v)) adicionar(`${i + 1}ª opção`, v); });
+            r.opcoes.forEach((v, i) => {
+                if (temConteudo(v)) adicionar(`${i + 1}ª opção`, v);
+            });
             if (temConteudo(r.idiomas)) adicionar('Idiomas homologados', AppUnB.idiomas(r.idiomas));
             if (lista.children.length) {
                 lista.style.setProperty('--colunas', lista.children.length / 2);
@@ -203,70 +266,121 @@
                     const aberto = botao.getAttribute('aria-expanded') !== 'true';
                     botao.setAttribute('aria-expanded', String(aberto));
                     botao.textContent = aberto ? 'Ocultar detalhes' : 'Ver detalhes';
-                    botao.setAttribute('aria-label', `${aberto ? 'Ocultar' : 'Ver'} detalhes da matrícula ${r.matricula}`);
+                    botao.setAttribute(
+                        'aria-label',
+                        `${aberto ? 'Ocultar' : 'Ver'} detalhes da matrícula ${r.matricula}`,
+                    );
                     linhaDetalhes.hidden = !aberto;
                 });
             }
-            tr.append(td); fragmento.append(tr);
+            tr.append(td);
+            fragmento.append(tr);
             if (lista.children.length) fragmento.append(linhaDetalhes);
         });
         if (!linhas.length) {
             const tr = el('tr');
             const td = el('td', 'estado-vazio', 'Nenhum candidato encontrado. Tente outra busca ou limpe os filtros.');
-            td.colSpan = cabecalho.children.length; tr.append(td); fragmento.append(tr);
+            td.colSpan = cabecalho.children.length;
+            tr.append(td);
+            fragmento.append(tr);
         }
         $('linhasResultados').replaceChildren(fragmento);
-        const alocados = linhas.filter(r => CalculosUnB.alocado(r.alocacao)).length;
-        $('contagemResultados').textContent = `${linhas.length} ${linhas.length === 1 ? 'resultado' : 'resultados'} · ${alocados} ${alocados === 1 ? 'alocado' : 'alocados'}`;
+        const alocados = linhas.filter((r) => CalculosUnB.alocado(r.alocacao)).length;
+        $('contagemResultados').textContent =
+            `${linhas.length} ${linhas.length === 1 ? 'resultado' : 'resultados'} · ${alocados} ${alocados === 1 ? 'alocado' : 'alocados'}`;
     }
 
-    function mudarFiltros() { AppUnB.salvar(chaveFiltros, filtros()); renderizarTabela(); }
+    function mudarFiltros() {
+        AppUnB.salvar(chaveFiltros, filtros());
+        renderizarTabela();
+    }
 
     async function inicializar() {
         try {
             if (!slug) {
                 const editais = await carregarJson('data/editais/index.json');
                 $('listaEditais').replaceChildren();
-                editais.sort((a, b) => Number(b.titulo.match(/\/(\d{4})/)[1]) - Number(a.titulo.match(/\/(\d{4})/)[1]) || Number(b.titulo.match(/nº (\d+)/)[1]) - Number(a.titulo.match(/nº (\d+)/)[1]));
-                editais.forEach(edital => {
+                editais.sort(
+                    (a, b) =>
+                        Number(b.titulo.match(/\/(\d{4})/)[1]) - Number(a.titulo.match(/\/(\d{4})/)[1]) ||
+                        Number(b.titulo.match(/nº (\d+)/)[1]) - Number(a.titulo.match(/nº (\d+)/)[1]),
+                );
+                editais.forEach((edital) => {
                     const card = el('a', 'card-edital');
                     card.href = new URL(`intercambio/${edital.slug}/`, AppUnB.raiz);
                     const identificacao = el('div', 'edital-identificacao');
-                    identificacao.append(el('h2', '', edital.titulo), el('p', 'texto-apoio', `Mobilidade: ${edital.mobilidade}`));
+                    identificacao.append(
+                        el('h2', '', edital.titulo),
+                        el('p', 'texto-apoio', `Mobilidade: ${edital.mobilidade}`),
+                    );
                     card.append(identificacao, el('span', 'abrir-edital', 'Consultar edital'));
                     $('listaEditais').append(card);
                 });
                 return;
             }
             dados = await carregarJson(`data/editais/${slug}.json`);
-            opcoesCurso($('meuCurso')); opcoesCurso($('filtroCurso'));
+            opcoesCurso($('meuCurso'));
+            opcoesCurso($('filtroCurso'));
             restaurarPerfil();
             const perfil = AppUnB.perfil();
-            const salvo = AppUnB.ler(chaveFiltros, { curso: perfil.curso || '', alocacao: 'todos', busca: '', ordem: 'notaFinal' });
+            const salvo = AppUnB.ler(chaveFiltros, {
+                curso: perfil.curso || '',
+                alocacao: 'todos',
+                busca: '',
+                ordem: 'notaFinal',
+            });
             $('filtroCurso').value = salvo.curso || '';
-            $('filtroAlocacao').value = ['todos', 'alocados', 'nao-alocados'].includes(salvo.alocacao) ? salvo.alocacao : 'todos';
+            $('filtroAlocacao').value = ['todos', 'alocados', 'nao-alocados'].includes(salvo.alocacao)
+                ? salvo.alocacao
+                : 'todos';
             $('buscaResultado').value = salvo.busca || '';
             $('ordemResultado').value = ['notaFinal', 'ira', 'ipf'].includes(salvo.ordem) ? salvo.ordem : 'notaFinal';
-            document.querySelector(`[name="visualizacao"][value="${salvo.visualizacao === 'completo' ? 'completo' : 'compacto'}"]`).checked = true;
-            document.querySelectorAll('[name="visualizacao"]').forEach(input => input.addEventListener('change', mudarFiltros));
-            $('meuIra').addEventListener('input', () => { AppUnB.salvarPerfil({ ira: $('meuIra').value }); simular(); });
-            $('meuIpf').addEventListener('input', () => { AppUnB.salvarPerfil({ ipf: $('meuIpf').value }); simular(); });
+            document.querySelector(
+                `[name="visualizacao"][value="${salvo.visualizacao === 'completo' ? 'completo' : 'compacto'}"]`,
+            ).checked = true;
+            document
+                .querySelectorAll('[name="visualizacao"]')
+                .forEach((input) => input.addEventListener('change', mudarFiltros));
+            $('meuIra').addEventListener('input', () => {
+                AppUnB.salvarPerfil({ ira: $('meuIra').value });
+                simular();
+            });
+            $('meuIpf').addEventListener('input', () => {
+                AppUnB.salvarPerfil({ ipf: $('meuIpf').value });
+                simular();
+            });
             $('meuCurso').addEventListener('change', () => {
                 AppUnB.salvarPerfil({ curso: $('meuCurso').value });
                 $('avisoCurso').hidden = true;
                 simular();
             });
-            $('usarMeuCurso').addEventListener('click', () => { $('filtroCurso').value = $('meuCurso').value; mudarFiltros(); });
-            $('limparFiltros').addEventListener('click', () => {
-                $('filtroCurso').value = ''; $('filtroAlocacao').value = 'todos';
-                $('buscaResultado').value = ''; $('ordemResultado').value = 'notaFinal'; mudarFiltros();
+            $('usarMeuCurso').addEventListener('click', () => {
+                $('filtroCurso').value = $('meuCurso').value;
+                mudarFiltros();
             });
-            ['filtroCurso', 'filtroAlocacao', 'ordemResultado'].forEach(id => $(id).addEventListener('change', mudarFiltros));
+            $('limparFiltros').addEventListener('click', () => {
+                $('filtroCurso').value = '';
+                $('filtroAlocacao').value = 'todos';
+                $('buscaResultado').value = '';
+                $('ordemResultado').value = 'notaFinal';
+                mudarFiltros();
+            });
+            ['filtroCurso', 'filtroAlocacao', 'ordemResultado'].forEach((id) =>
+                $(id).addEventListener('change', mudarFiltros),
+            );
             $('buscaResultado').addEventListener('input', mudarFiltros);
-            window.addEventListener('storage', event => { if (event.key === AppUnB.chavePerfil) { restaurarPerfil(); simular(); } });
+            window.addEventListener('storage', (event) => {
+                if (event.key === AppUnB.chavePerfil) {
+                    restaurarPerfil();
+                    simular();
+                }
+            });
             const descricao = '';
-            if ($('resumoDados')) $('resumoDados').textContent = `${dados.resultados.length} registros · ${dados.cursos.length} cursos · ${dados.resultados.filter(r => CalculosUnB.alocado(r.alocacao)).length} alocados.${descricao ? ` ${descricao}` : ''}`;
-            simular(); renderizarTabela();
+            if ($('resumoDados'))
+                $('resumoDados').textContent =
+                    `${dados.resultados.length} registros · ${dados.cursos.length} cursos · ${dados.resultados.filter((r) => CalculosUnB.alocado(r.alocacao)).length} alocados.${descricao ? ` ${descricao}` : ''}`;
+            simular();
+            renderizarTabela();
             $('carregando').hidden = true;
             $('conteudoEdital').hidden = false;
         } catch (erro) {
@@ -274,7 +388,8 @@
             if ($('carregando')) $('carregando').hidden = true;
             if ($('listaEditais')) $('listaEditais').replaceChildren();
             $('erroCarregamento').hidden = false;
-            $('erroCarregamento').textContent = 'Não foi possível carregar os dados. Recarregue a página para tentar novamente.';
+            $('erroCarregamento').textContent =
+                'Não foi possível carregar os dados. Recarregue a página para tentar novamente.';
         }
     }
     document.addEventListener('DOMContentLoaded', inicializar);

@@ -1,0 +1,11 @@
+dist/
+node_modules/
+.venv/
+.playwright-mcp/
+data/
+dados.json
+bun.lock
+uv.lock
+*.md
+*.csv
+*.svg

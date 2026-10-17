@@ -1,84 +1,213 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR" data-tema="escuro">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, interactive-widget=resizes-content">
-    <meta name="theme-color" content="#17191d">
-    <script>try { document.documentElement.dataset.tema = localStorage.getItem("calculadora-ira-tema") || "escuro"; } catch {}</script>
-    <meta name="app-root" content="../../">
-    <meta name="description" content="Simulador do Edital INT nº 3/2024 — Trajetória Unb.">
-    <title>Edital INT nº 3/2024 | Trajetória Unb</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../css/style.css">
-    <link rel="stylesheet" href="../../css/intercambio.css">
-    <link rel="stylesheet" href="../../css/interface.css">
-    <link rel="canonical" href="https://trajetoriaunb.vercel.app/intercambio/edital-int-no-3-2024-processo-de-pre-selecao-de-alunos-de-graduacao-da-unb-ao-intercambio-para-mobilidade-no-periodo-de-agosto-a-dezembro-de-2024/">
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Trajetória Unb">
-    <meta property="og:title" content="Edital INT nº 3/2024 | Trajetória Unb">
-    <meta property="og:description" content="Simulador do Edital INT nº 3/2024 — Trajetória Unb.">
-    <meta property="og:url" content="https://trajetoriaunb.vercel.app/intercambio/edital-int-no-3-2024-processo-de-pre-selecao-de-alunos-de-graduacao-da-unb-ao-intercambio-para-mobilidade-no-periodo-de-agosto-a-dezembro-de-2024/">
-    <link rel="icon" href="../../favicon.ico" sizes="16x16 32x32 48x48 64x64 128x128 256x256">
-    <link rel="icon" href="../../favicon.svg" type="image/svg+xml" sizes="any">
-    <link rel="icon" href="../../favicon-96x96.png" type="image/png" sizes="96x96">
-    <link rel="apple-touch-icon" href="../../apple-touch-icon.png" sizes="180x180">
-    <link rel="manifest" href="../../site.webmanifest">
-</head>
-<body class="interface-unb edital-enxuto" data-edital="edital-int-no-3-2024-processo-de-pre-selecao-de-alunos-de-graduacao-da-unb-ao-intercambio-para-mobilidade-no-periodo-de-agosto-a-dezembro-de-2024">
-    <header class="cabecalho">
-        <div class="container topo-site">
-            <a class="marca-site" href="../../">Trajetória<span class="badge-unb">Unb</span></a>
-            <nav aria-label="Navegação principal">
-                <a href="../../ira/"><span class="nav-ira-completo">Calculadora IRA e MP</span><span class="nav-ira-curto">IRA e MP</span></a>
-                <a href="../../intercambio/" aria-current="page">Intercâmbio</a>
-                <a href="../../turmas/">Turmas</a>
-            </nav>
-        </div>
-    </header>
-    <main class="container pagina-conteudo">
-        <p id="avisoPersistencia" class="aviso" role="status" hidden></p>
-        <a class="voltar-link" href="../">← Todos os editais</a>
-        <div class="intro-pagina">
-            <div class="edital-titulo-linha"><h1>Edital INT nº 3/2024</h1><a class="edital-link-oficial" href="https://int.unb.br/edital-int-no-3-2024-processo-de-pre-selecao-de-alunos-de-graduacao-da-unb-ao-intercambio-para-mobilidade-no-periodo-de-agosto-a-dezembro-de-2024/" rel="noopener noreferrer" target="_blank" aria-label="Página oficial do Edital INT nº 3/2024 (abre em nova aba)">Edital ↗</a></div>
-            <p>Mobilidade no 2º semestre de 2024</p>
-        </div>
-        <p id="erroCarregamento" class="aviso" role="alert" hidden></p>
-        <p id="carregando" role="status">Carregando dados do edital…</p>
-        <div id="conteudoEdital" hidden>
-            <section class="simulacao-direta" aria-labelledby="tituloSimulacao">
-                <div class="cabecalho-secao"><h2 id="tituloSimulacao">Sua nota neste edital</h2></div>
-                <p class="formula formula-destaque"><strong>Cálculo deste edital: IRA + 2 × (IPF ÷ 100).</strong> O IRA é usado diretamente, sem média ou desvio padrão do curso.</p>
-                <div class="campos-perfil">
-                    <div><label class="form-label" for="meuIra">Meu IRA</label><input class="form-control" id="meuIra" type="number" min="0" max="5" step="any" inputmode="decimal" aria-describedby="erroPerfil" placeholder="Ex.: 4,2"></div>
-                    <div><label class="form-label" for="meuIpf">IPF (%)</label><input class="form-control" id="meuIpf" type="number" min="0" max="100" step="any" inputmode="decimal" aria-describedby="erroPerfil" placeholder="Ex.: 55"></div>
-                    <div><label class="form-label" for="meuCurso">Curso da simulação</label><select id="meuCurso" class="form-select"><option value="">Selecione seu curso (opcional)</option></select></div>
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, viewport-fit=cover, interactive-widget=resizes-content"
+        />
+        <meta name="theme-color" content="#17191d" />
+        <script>
+            try {
+                document.documentElement.dataset.tema = localStorage.getItem('calculadora-ira-tema') || 'escuro';
+            } catch {}
+        </script>
+        <meta name="app-root" content="../../" />
+        <meta name="description" content="Simulador do Edital INT nº 3/2024 — Trajetória Unb." />
+        <title>Edital INT nº 3/2024 | Trajetória Unb</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../css/style.css" />
+        <link rel="stylesheet" href="../../css/intercambio.css" />
+        <link rel="stylesheet" href="../../css/interface.css" />
+        <link
+            rel="canonical"
+            href="https://trajetoriaunb.vercel.app/intercambio/edital-int-no-3-2024-processo-de-pre-selecao-de-alunos-de-graduacao-da-unb-ao-intercambio-para-mobilidade-no-periodo-de-agosto-a-dezembro-de-2024/"
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Trajetória Unb" />
+        <meta property="og:title" content="Edital INT nº 3/2024 | Trajetória Unb" />
+        <meta property="og:description" content="Simulador do Edital INT nº 3/2024 — Trajetória Unb." />
+        <meta
+            property="og:url"
+            content="https://trajetoriaunb.vercel.app/intercambio/edital-int-no-3-2024-processo-de-pre-selecao-de-alunos-de-graduacao-da-unb-ao-intercambio-para-mobilidade-no-periodo-de-agosto-a-dezembro-de-2024/"
+        />
+        <link rel="icon" href="../../favicon.ico" sizes="16x16 32x32 48x48 64x64 128x128 256x256" />
+        <link rel="icon" href="../../favicon.svg" type="image/svg+xml" sizes="any" />
+        <link rel="icon" href="../../favicon-96x96.png" type="image/png" sizes="96x96" />
+        <link rel="apple-touch-icon" href="../../apple-touch-icon.png" sizes="180x180" />
+        <link rel="manifest" href="../../site.webmanifest" />
+    </head>
+    <body
+        class="interface-unb edital-enxuto"
+        data-edital="edital-int-no-3-2024-processo-de-pre-selecao-de-alunos-de-graduacao-da-unb-ao-intercambio-para-mobilidade-no-periodo-de-agosto-a-dezembro-de-2024"
+    >
+        <header class="cabecalho">
+            <div class="container topo-site">
+                <a class="marca-site" href="../../">Trajetória<span class="badge-unb">Unb</span></a>
+                <nav aria-label="Navegação principal">
+                    <a href="../../ira/"
+                        ><span class="nav-ira-completo">Calculadora IRA e MP</span
+                        ><span class="nav-ira-curto">IRA e MP</span></a
+                    >
+                    <a href="../../intercambio/" aria-current="page">Intercâmbio</a>
+                    <a href="../../turmas/">Turmas</a>
+                </nav>
+            </div>
+        </header>
+        <main class="container pagina-conteudo">
+            <p id="avisoPersistencia" class="aviso" role="status" hidden></p>
+            <a class="voltar-link" href="../">← Todos os editais</a>
+            <div class="intro-pagina">
+                <div class="edital-titulo-linha">
+                    <h1>Edital INT nº 3/2024</h1>
+                    <a
+                        class="edital-link-oficial"
+                        href="https://int.unb.br/edital-int-no-3-2024-processo-de-pre-selecao-de-alunos-de-graduacao-da-unb-ao-intercambio-para-mobilidade-no-periodo-de-agosto-a-dezembro-de-2024/"
+                        rel="noopener noreferrer"
+                        target="_blank"
+                        aria-label="Página oficial do Edital INT nº 3/2024 (abre em nova aba)"
+                        >Edital ↗</a
+                    >
                 </div>
-                <p id="avisoCurso" class="aviso" hidden></p>
-                <p id="erroPerfil" class="aviso" role="status" hidden></p>
-                <div id="notasSimuladas" class="notas-simuladas" aria-live="polite"></div>
-            </section>
-            <section aria-labelledby="tituloResultados">
-                <div class="cabecalho-secao"><div><h2 id="tituloResultados">Candidatos e destinos</h2></div></div>
-                <div class="filtros-tabela">
-                    <div><label class="form-label" for="filtroCurso">Curso dos resultados</label><select class="form-select" id="filtroCurso"><option value="">Todos os cursos</option></select></div>
-                    <div><label class="form-label" for="filtroAlocacao">Alocação</label><select class="form-select" id="filtroAlocacao"><option value="todos">Todos os resultados</option><option value="alocados">Somente alocados</option><option value="nao-alocados">Não alocados</option></select></div>
-                    <div><label class="form-label" for="buscaResultado">Buscar na tabela</label><input class="form-control" id="buscaResultado" type="search" enterkeyhint="search" placeholder="Matrícula, destino ou idioma"></div>
-                    <div><label class="form-label" for="ordemResultado">Ordenar por</label><select class="form-select" id="ordemResultado"><option value="notaFinal">Maior nota final</option><option value="ira">Maior IRA</option><option value="ipf">Maior IPF</option></select></div>
-                </div>
-                <div class="barra-tabela">
-                    <div class="acoes-filtros"><button id="usarMeuCurso" type="button">Usar meu curso</button><button id="limparFiltros" type="button">Limpar filtros</button><p id="contagemResultados" class="texto-apoio" role="status"></p></div>
-                    <fieldset class="modo-tabela"><legend class="visually-hidden">Exibição da tabela</legend><label><input type="radio" name="visualizacao" value="compacto" checked><span>Resumido</span></label><label><input type="radio" name="visualizacao" value="completo"><span>Detalhado</span></label></fieldset>
-                </div>
-                <div id="referenciasCurso" class="referencias-curso" aria-live="polite" hidden></div>
-                <div class="tabela-scroll" role="region" aria-label="Tabela de resultados" tabindex="0">
-                    <table class="tabela-resultados"><caption class="visually-hidden">Candidatos e alocação definitiva do Edital INT nº 3/2024</caption><thead><tr><th scope="col">Matrícula</th><th scope="col">Curso</th><th scope="col">IRA</th><th scope="col">IPF</th><th scope="col">Nota final</th><th scope="col">Alocação definitiva</th><th scope="col">Detalhes</th></tr></thead><tbody id="linhasResultados"></tbody></table>
-                </div>
-            </section>
-        </div>
-    </main>
-    <footer class="text-center py-4"><div class="container">Projeto independente, sem vínculo oficial com a Unb. Confira seus dados no SIGAA e as regras do edital na INT.</div></footer>
-    <script src="../../js/calculos.js"></script>
-    <script src="../../js/common.js"></script>
-    <script src="../../js/intercambio.js"></script>
-</body>
+                <p>Mobilidade no 2º semestre de 2024</p>
+            </div>
+            <p id="erroCarregamento" class="aviso" role="alert" hidden></p>
+            <p id="carregando" role="status">Carregando dados do edital…</p>
+            <div id="conteudoEdital" hidden>
+                <section class="simulacao-direta" aria-labelledby="tituloSimulacao">
+                    <div class="cabecalho-secao"><h2 id="tituloSimulacao">Sua nota neste edital</h2></div>
+                    <p class="formula formula-destaque">
+                        <strong>Cálculo deste edital: IRA + 2 × (IPF ÷ 100).</strong> O IRA é usado diretamente, sem
+                        média ou desvio padrão do curso.
+                    </p>
+                    <div class="campos-perfil">
+                        <div>
+                            <label class="form-label" for="meuIra">Meu IRA</label
+                            ><input
+                                class="form-control"
+                                id="meuIra"
+                                type="number"
+                                min="0"
+                                max="5"
+                                step="any"
+                                inputmode="decimal"
+                                aria-describedby="erroPerfil"
+                                placeholder="Ex.: 4,2"
+                            />
+                        </div>
+                        <div>
+                            <label class="form-label" for="meuIpf">IPF (%)</label
+                            ><input
+                                class="form-control"
+                                id="meuIpf"
+                                type="number"
+                                min="0"
+                                max="100"
+                                step="any"
+                                inputmode="decimal"
+                                aria-describedby="erroPerfil"
+                                placeholder="Ex.: 55"
+                            />
+                        </div>
+                        <div>
+                            <label class="form-label" for="meuCurso">Curso da simulação</label
+                            ><select id="meuCurso" class="form-select">
+                                <option value="">Selecione seu curso (opcional)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <p id="avisoCurso" class="aviso" hidden></p>
+                    <p id="erroPerfil" class="aviso" role="status" hidden></p>
+                    <div id="notasSimuladas" class="notas-simuladas" aria-live="polite"></div>
+                </section>
+                <section aria-labelledby="tituloResultados">
+                    <div class="cabecalho-secao">
+                        <div><h2 id="tituloResultados">Candidatos e destinos</h2></div>
+                    </div>
+                    <div class="filtros-tabela">
+                        <div>
+                            <label class="form-label" for="filtroCurso">Curso dos resultados</label
+                            ><select class="form-select" id="filtroCurso">
+                                <option value="">Todos os cursos</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="form-label" for="filtroAlocacao">Alocação</label
+                            ><select class="form-select" id="filtroAlocacao">
+                                <option value="todos">Todos os resultados</option>
+                                <option value="alocados">Somente alocados</option>
+                                <option value="nao-alocados">Não alocados</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="form-label" for="buscaResultado">Buscar na tabela</label
+                            ><input
+                                class="form-control"
+                                id="buscaResultado"
+                                type="search"
+                                enterkeyhint="search"
+                                placeholder="Matrícula, destino ou idioma"
+                            />
+                        </div>
+                        <div>
+                            <label class="form-label" for="ordemResultado">Ordenar por</label
+                            ><select class="form-select" id="ordemResultado">
+                                <option value="notaFinal">Maior nota final</option>
+                                <option value="ira">Maior IRA</option>
+                                <option value="ipf">Maior IPF</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="barra-tabela">
+                        <div class="acoes-filtros">
+                            <button id="usarMeuCurso" type="button">Usar meu curso</button
+                            ><button id="limparFiltros" type="button">Limpar filtros</button>
+                            <p id="contagemResultados" class="texto-apoio" role="status"></p>
+                        </div>
+                        <fieldset class="modo-tabela">
+                            <legend class="visually-hidden">Exibição da tabela</legend>
+                            <label
+                                ><input type="radio" name="visualizacao" value="compacto" checked /><span
+                                    >Resumido</span
+                                ></label
+                            ><label
+                                ><input type="radio" name="visualizacao" value="completo" /><span
+                                    >Detalhado</span
+                                ></label
+                            >
+                        </fieldset>
+                    </div>
+                    <div id="referenciasCurso" class="referencias-curso" aria-live="polite" hidden></div>
+                    <div class="tabela-scroll" role="region" aria-label="Tabela de resultados" tabindex="0">
+                        <table class="tabela-resultados">
+                            <caption class="visually-hidden">
+                                Candidatos e alocação definitiva do Edital INT nº 3/2024
+                            </caption>
+                            <thead>
+                                <tr>
+                                    <th scope="col">Matrícula</th>
+                                    <th scope="col">Curso</th>
+                                    <th scope="col">IRA</th>
+                                    <th scope="col">IPF</th>
+                                    <th scope="col">Nota final</th>
+                                    <th scope="col">Alocação definitiva</th>
+                                    <th scope="col">Detalhes</th>
+                                </tr>
+                            </thead>
+                            <tbody id="linhasResultados"></tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+        </main>
+        <footer class="text-center py-4">
+            <div class="container">
+                Projeto independente, sem vínculo oficial com a Unb. Confira seus dados no SIGAA e as regras do edital
+                na INT.
+            </div>
+        </footer>
+        <script src="../../js/calculos.js"></script>
+        <script src="../../js/common.js"></script>
+        <script src="../../js/intercambio.js"></script>
+    </body>
 </html>

@@ -1,0 +1,11 @@
+export default {
+  ignoreFiles: ['dist/**', 'node_modules/**'],
+  rules: {
+    'block-no-empty': true,
+    'color-no-invalid-hex': true,
+    'declaration-block-no-duplicate-properties': [true, { ignore: ['consecutive-duplicates-with-different-values'] }],
+    'declaration-block-no-shorthand-property-overrides': true,
+    'property-no-unknown': true,
+    'unit-no-unknown': true,
+  },
+};

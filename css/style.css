@@ -39,7 +39,7 @@
 }
 
 /* Modo Claro */
-[data-tema="claro"] {
+[data-tema='claro'] {
     --bg-body: #f0f2f5;
     --bg-surface: #ffffff;
     --bg-surface-hover: #f6f8fa;
@@ -82,7 +82,9 @@ body {
     min-height: 100vh;
     margin: 0;
     padding-bottom: 1rem;
-    transition: background-color var(--transition), color var(--transition);
+    transition:
+        background-color var(--transition),
+        color var(--transition);
 }
 
 /* Scrollbar personalizada */
@@ -114,7 +116,9 @@ body {
     top: 0;
     z-index: 100;
     backdrop-filter: blur(12px);
-    transition: background-color var(--transition), border-color var(--transition);
+    transition:
+        background-color var(--transition),
+        border-color var(--transition);
 }
 
 .titulo-principal {
@@ -186,7 +190,9 @@ body {
     font-variant-numeric: tabular-nums;
     box-shadow: var(--shadow-sm);
     letter-spacing: 0.01em;
-    transition: background-color var(--transition), border-color var(--transition);
+    transition:
+        background-color var(--transition),
+        border-color var(--transition);
 }
 
 /* ===========================
@@ -200,7 +206,10 @@ body {
     padding: 1.2rem 1.4rem;
     margin-bottom: 1rem;
     box-shadow: var(--shadow-sm);
-    transition: background-color var(--transition), border-color var(--transition), box-shadow var(--transition);
+    transition:
+        background-color var(--transition),
+        border-color var(--transition),
+        box-shadow var(--transition);
 }
 
 .periodo:hover {
@@ -270,7 +279,9 @@ body {
     margin-top: 2rem;
     margin-bottom: 2rem;
     box-shadow: var(--shadow-md);
-    transition: background-color var(--transition), border-color var(--transition);
+    transition:
+        background-color var(--transition),
+        border-color var(--transition);
 }
 
 .painel-titulo {
@@ -294,7 +305,9 @@ body {
     border-radius: var(--radius-sm);
     padding: 1.2rem 0.5rem;
     margin-top: 1rem;
-    transition: background-color var(--transition), border-color var(--transition);
+    transition:
+        background-color var(--transition),
+        border-color var(--transition);
 }
 
 .resultado-item {
@@ -346,7 +359,10 @@ body {
     border-color: var(--border-color);
     color: var(--text-primary);
     border-radius: var(--radius-sm);
-    transition: border-color var(--transition), box-shadow var(--transition), background-color var(--transition);
+    transition:
+        border-color var(--transition),
+        box-shadow var(--transition),
+        background-color var(--transition);
 }
 
 .form-control::placeholder,
@@ -378,7 +394,7 @@ body {
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%238b949e' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
 }
 
-[data-tema="claro"] .form-select {
+[data-tema='claro'] .form-select {
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
 }
 
@@ -387,7 +403,9 @@ body {
     border-color: var(--border-color);
     color: var(--text-secondary);
     font-size: 0.85rem;
-    transition: background-color var(--transition), border-color var(--transition);
+    transition:
+        background-color var(--transition),
+        border-color var(--transition);
 }
 
 .form-label {
@@ -457,7 +475,9 @@ footer {
     font-size: 0.82rem;
     border-top: 1px solid var(--border-subtle);
     margin-top: 1rem;
-    transition: color var(--transition), border-color var(--transition);
+    transition:
+        color var(--transition),
+        border-color var(--transition);
 }
 
 /* ===========================

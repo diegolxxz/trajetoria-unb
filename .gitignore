@@ -16,3 +16,9 @@ find_mp.py
 # Arquivos de backup
 *.bak
 *.url
+
+# Dependências e caches de desenvolvimento
+node_modules/
+.venv/
+.ruff_cache/
+.pytest_cache/
