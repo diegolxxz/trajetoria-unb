@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-tema="escuro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, interactive-widget=resizes-content">
+    <meta name="theme-color" content="#1b1d21">
+    <script>try { document.documentElement.dataset.tema = localStorage.getItem("calculadora-ira-tema") || "escuro"; } catch {}</script>
+    <meta name="app-root" content="../">
+    <meta name="description" content="Consulte disciplinas, professores, horários e vagas por semestre na Unb.">
+    <title>Turmas | Trajetória Unb</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/intercambio.css">
+    <link rel="stylesheet" href="../css/interface.css">
+    <link rel="canonical" href="https://trajetoriaunb.vercel.app/turmas/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Trajetória Unb">
+    <meta property="og:title" content="Turmas | Trajetória Unb">
+    <meta property="og:description" content="Consulte disciplinas, professores, horários e vagas por semestre na Unb.">
+    <meta property="og:url" content="https://trajetoriaunb.vercel.app/turmas/">
+    <link rel="icon" href="../favicon.ico" sizes="16x16 32x32 48x48 64x64 128x128 256x256">
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml" sizes="any">
+    <link rel="icon" href="../favicon-96x96.png" type="image/png" sizes="96x96">
+    <link rel="apple-touch-icon" href="../apple-touch-icon.png" sizes="180x180">
+    <link rel="manifest" href="../site.webmanifest">
+</head>
+<body class="interface-unb pagina-turmas">
+    <header class="cabecalho">
+        <div class="container topo-site">
+            <a class="marca-site" href="../">Trajetória<span class="badge-unb">Unb</span></a>
+            <nav aria-label="Navegação principal">
+                <a href="../ira/"><span class="nav-ira-completo">Calculadora IRA e MP</span><span class="nav-ira-curto">IRA e MP</span></a>
+                <a href="../intercambio/">Intercâmbio</a>
+                <a href="../turmas/" aria-current="page">Turmas</a>
+            </nav>
+        </div>
+    </header>
+<main class="container pagina-conteudo">
+<div class="turmas-titulo">
+    <h1>Turmas</h1>
+    <label class="visually-hidden" for="semestreTurmas">Semestre</label>
+    <select class="form-select" id="semestreTurmas" disabled aria-describedby="estadoTurmas"><option>Semestre indisponível</option></select>
+</div>
+<section class="turmas-controles" aria-label="Consulta de disciplinas">
+    <label class="visually-hidden" for="buscaTurmas">Buscar disciplina por nome, código, professor ou local</label>
+    <input class="form-control" type="search" id="buscaTurmas" placeholder="Buscar disciplina, código, professor ou local" disabled aria-describedby="estadoTurmas">
+    <div class="turmas-barra">
+        <details class="turmas-mais-filtros">
+            <summary>Mais filtros</summary>
+            <div class="turmas-filtro-horario"><label class="form-label" for="horarioTurmas">Código do horário</label><input class="form-control" id="horarioTurmas" placeholder="Ex.: 24M12" disabled></div>
+        </details>
+        <label class="turmas-modo" for="modoAvancadoTurmas"><input type="checkbox" id="modoAvancadoTurmas" aria-controls="listaDisciplinas detalhesModo">Modo avançado</label>
+    </div>
+    <p id="detalhesModo" class="texto-apoio" hidden>Inclui solicitações de matrícula, rematrícula e reservas por curso nas turmas.</p>
+</section>
+<section class="turmas-resultados" aria-labelledby="tituloDisciplinas">
+    <h2 id="tituloDisciplinas">Disciplinas</h2>
+    <div id="listaDisciplinas"></div>
+    <div class="turmas-vazio" id="estadoTurmas" role="status"><p>Nenhum semestre publicado ainda.</p><p>As disciplinas e suas turmas aparecerão aqui quando os dados forem adicionados.</p></div>
+</section>
+<noscript><p class="aviso">Ative o JavaScript para alternar o modo avançado.</p></noscript>
+</main>
+<footer class="text-center py-4"><div class="container">Projeto independente, sem vínculo oficial com a Unb. Confira a oferta e as regras de matrícula no SIGAA.</div></footer>
+<script src="../js/common.js"></script>
+<script src="../js/turmas.js"></script>
+</body>
+</html>

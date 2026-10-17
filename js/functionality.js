@@ -123,7 +123,10 @@ function calcularIra() {
         cartao.setAttribute('aria-live', 'polite');
         cartao.setAttribute('aria-label', `Acumulado até o ${parcial.periodo}º período`);
         cartao.title = `Acumulado até o ${parcial.periodo}º período`;
-        cartao.textContent = `IRA ${AppUnB.numero(parcial.ira)} · MP ${AppUnB.numero(parcial.mp)}`;
+        cartao.append(
+            AppUnB.elemento('span', 'ira-parcial-rotulo', 'Acumulado'),
+            AppUnB.elemento('strong', '', `IRA ${AppUnB.numero(parcial.ira)} · MP ${AppUnB.numero(parcial.mp)}`)
+        );
         periodo.querySelector('.periodo-rodape').append(cartao);
     });
 }

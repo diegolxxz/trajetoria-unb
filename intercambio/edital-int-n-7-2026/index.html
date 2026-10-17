@@ -24,26 +24,29 @@
     <link rel="apple-touch-icon" href="../../apple-touch-icon.png" sizes="180x180">
     <link rel="manifest" href="../../site.webmanifest">
 </head>
-<body class="interface-unb" data-edital="edital-int-n-7-2026">
+<body class="interface-unb edital-enxuto" data-edital="edital-int-n-7-2026">
     <header class="cabecalho">
         <div class="container topo-site">
             <a class="marca-site" href="../../">Trajetória<span class="badge-unb">Unb</span></a>
             <nav aria-label="Navegação principal">
-                <a href="../../ira/">Calculadora IRA e MP</a>
+                <a href="../../ira/"><span class="nav-ira-completo">Calculadora IRA e MP</span><span class="nav-ira-curto">IRA e MP</span></a>
                 <a href="../../intercambio/" aria-current="page">Intercâmbio</a>
+                <a href="../../turmas/">Turmas</a>
             </nav>
         </div>
     </header>
     <main class="container pagina-conteudo">
         <p id="avisoPersistencia" class="aviso" role="status" hidden></p>
         <a class="voltar-link" href="../">← Todos os editais</a>
-        <div class="intro-pagina"><h1>Edital INT nº 7/2026</h1><p>Mobilidade no 1º semestre de 2027 · Resultado de 31/08/2026</p><p id="resumoDados" class="texto-apoio"></p></div>
-        <div class="links-fonte"><a href="https://int.unb.br/edital-int-n-7-2026/" rel="noopener noreferrer" target="_blank">Página do edital ↗</a><a href="https://sei.unb.br/sei/publicacoes/controlador_publicacoes.php?acao=publicacao_visualizar&amp;id_documento=16862911&amp;id_orgao_publicacao=0" id="fonteResultado" rel="noopener noreferrer" target="_blank">Alocação definitiva ↗</a></div>
+        <div class="intro-pagina">
+            <div class="edital-titulo-linha"><h1>Edital INT nº 7/2026</h1><a class="edital-link-oficial" href="https://int.unb.br/edital-int-n-7-2026/" rel="noopener noreferrer" target="_blank" aria-label="Página oficial do Edital INT nº 7/2026 (abre em nova aba)">Edital ↗</a></div>
+            <p>Mobilidade no 1º semestre de 2027</p>
+        </div>
         <p id="erroCarregamento" class="aviso" role="alert" hidden></p>
         <p id="carregando" role="status">Carregando dados do edital…</p>
         <div id="conteudoEdital" hidden>
-            <section class="painel-intercambio" aria-labelledby="tituloSimulacao">
-                <div class="cabecalho-secao"><div><h2 id="tituloSimulacao" class="painel-titulo">Sua nota neste edital</h2></div></div>
+            <section class="simulacao-direta" aria-labelledby="tituloSimulacao">
+                <div class="cabecalho-secao"><h2 id="tituloSimulacao">Sua nota neste edital</h2></div>
                 <div class="campos-perfil">
                     <div><label class="form-label" for="meuIra">Meu IRA</label><input class="form-control" id="meuIra" type="number" min="0" max="5" step="any" inputmode="decimal" aria-describedby="erroPerfil" placeholder="Ex.: 4,2"></div>
                     <div><label class="form-label" for="meuIpf">IPF (%)</label><input class="form-control" id="meuIpf" type="number" min="0" max="100" step="any" inputmode="decimal" aria-describedby="erroPerfil" placeholder="Ex.: 55"></div>
@@ -63,7 +66,7 @@
                 </div>
                 <div class="barra-tabela">
                     <div class="acoes-filtros"><button id="usarMeuCurso" type="button">Usar meu curso</button><button id="limparFiltros" type="button">Limpar filtros</button><p id="contagemResultados" class="texto-apoio" role="status"></p></div>
-                    <fieldset class="modo-tabela"><legend class="visually-hidden">Exibição da tabela</legend><label><input type="radio" name="visualizacao" value="compacto" checked><span>Compacto</span></label><label><input type="radio" name="visualizacao" value="completo"><span>Completo</span></label></fieldset>
+                    <fieldset class="modo-tabela"><legend class="visually-hidden">Exibição da tabela</legend><label><input type="radio" name="visualizacao" value="compacto" checked><span>Resumido</span></label><label><input type="radio" name="visualizacao" value="completo"><span>Detalhado</span></label></fieldset>
                 </div>
                 <div id="referenciasCurso" class="referencias-curso" aria-live="polite" hidden></div>
                 <div class="tabela-scroll" role="region" aria-label="Tabela de resultados" tabindex="0">

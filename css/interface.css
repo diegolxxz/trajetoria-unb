@@ -261,7 +261,7 @@ html[data-tema='claro'] { color-scheme: light; }
 .interface-unb .cabecalho .marca-site { grid-column: 1; grid-row: 1; }
 .interface-unb .cabecalho #ira-mp { grid-column: 2; grid-row: 1; justify-self: end; margin: 0; padding: 0; font-variant-numeric: tabular-nums; }
 .interface-unb .cabecalho .topo-site nav { grid-column: 3; grid-row: 1; width: auto; margin: 0; }
-@media (max-width:768px) {
+@media (max-width:991px) {
  .interface-unb .cabecalho .topo-site { grid-template-columns: auto minmax(0,1fr); grid-template-rows: 44px 44px; gap: .25rem .5rem; }
  .interface-unb .cabecalho .topo-site nav { grid-column: 1/-1; grid-row: 2; justify-self: start; }
  .interface-unb .cabecalho #ira-mp { font-size: .8125rem; }
@@ -273,3 +273,77 @@ html[data-tema='claro'] { color-scheme: light; }
 @media (max-width:360px) {
  .interface-unb .cabecalho #ira-mp { flex-direction: column; align-items: end; gap: 0; line-height: 1.5; }
 }
+
+/* Consulta de turmas: cores, controles e densidade compartilhados. */
+.nav-ira-curto { display: none; }
+.turmas-titulo { display: flex; align-items: center; justify-content: space-between; gap: .75rem; margin: .5rem 0 .75rem; }
+.turmas-titulo h1 { font-size: clamp(1.65rem,3vw,2rem); font-weight: 650; letter-spacing: -.035em; margin: 0; }
+.interface-unb .turmas-titulo .form-select { width: auto; max-width: 65%; font-size: .8125rem; }
+.turmas-controles { margin-bottom: .75rem; }
+.turmas-barra { display: flex; justify-content: space-between; align-items: start; gap: .5rem; margin-top: .25rem; }
+.turmas-modo { display: inline-flex; align-items: center; gap: .5rem; min-height: 44px; font-size: .8125rem; cursor: pointer; flex-shrink: 0; }
+.turmas-modo input { width: 18px; height: 18px; accent-color: var(--pilot-accent); }
+.turmas-controles #detalhesModo { margin: .25rem 0 .5rem; font-size: .8125rem; }
+.turmas-mais-filtros { min-width: 0; }
+.turmas-mais-filtros summary { min-height: 44px; display: flex; align-items: center; gap: .4rem; color: var(--pilot-accent); font-size: .8125rem; cursor: pointer; list-style: none; }
+.turmas-mais-filtros summary::-webkit-details-marker { display: none; }
+.turmas-mais-filtros summary::before { content: '+'; }
+.turmas-mais-filtros[open] summary::before { content: '−'; }
+.turmas-filtro-horario { max-width: 220px; padding-bottom: .5rem; }
+.turmas-resultados { border-top: 1px solid var(--pilot-border); padding-top: .75rem; }
+.turmas-resultados > h2 { font-size: .875rem; font-weight: 600; margin: 0 0 .75rem; }
+.turmas-vazio { padding: 1rem; border: 1px solid var(--pilot-border); border-radius: 10px; background: var(--pilot-surface); }
+.turmas-vazio p { margin: 0; font-size: .875rem; }
+.turmas-vazio p + p { margin-top: .25rem; color: var(--pilot-muted); font-size: .8125rem; }
+@media (max-width:991px) {
+ .nav-ira-completo { display: none; }
+ .nav-ira-curto { display: inline; }
+ .interface-unb .cabecalho .topo-site nav { gap: .25rem; }
+ .interface-unb .cabecalho nav a { padding: .5rem; }
+}
+
+/* Apresentação compacta compartilhada pelos editais. */
+.edital-enxuto .edital-titulo-linha { display: flex; align-items: center; flex-wrap: wrap; gap: .25rem .75rem; }
+.edital-enxuto .edital-titulo-linha h1 { margin: 0; }
+.edital-enxuto .edital-link-oficial { display: inline-flex; align-items: center; min-height: 44px; font-size: .8125rem; white-space: nowrap; }
+.edital-enxuto .intro-pagina { margin: .25rem 0 .5rem; }
+.edital-enxuto .intro-pagina > p { font-size: .8125rem; }
+.edital-enxuto .simulacao-direta { padding: .5rem 0 .75rem; margin: 0 0 .75rem; border-bottom: 1px solid var(--pilot-border); }
+.edital-enxuto .cabecalho-secao { margin-bottom: .5rem; }
+.edital-enxuto .cabecalho-secao h2 { margin: 0; font-size: 1rem; }
+.edital-enxuto .filtros-tabela { gap: .5rem .75rem; }
+.edital-enxuto .barra-tabela { margin: .75rem 0 .25rem; gap: .5rem .75rem; }
+.edital-enxuto .acoes-filtros { margin-top: 0; gap: .25rem .75rem; }
+.edital-enxuto .modo-tabela { padding: 2px; }
+.edital-enxuto .modo-tabela span { padding: .25rem .6rem; }
+.edital-enxuto .tabela-scroll { margin-top: .5rem; }
+@media (max-width:768px) {
+ .edital-enxuto .barra-tabela { display: grid; grid-template-columns: minmax(0,1fr) auto; }
+ .edital-enxuto .barra-tabela > .acoes-filtros { grid-column: 1/-1; }
+ .edital-enxuto .modo-tabela { grid-column: 2; }
+}
+
+/* Apresentação da calculadora IRA. */
+.interface-unb.pagina-ira .ira-abertura { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .5rem 1rem; margin: .5rem 0 .75rem; }
+.pagina-ira .ira-abertura h1 { font-size: clamp(1.5rem,3vw,2rem); letter-spacing: -.035em; line-height: 1.2; font-weight: 650; margin: 0; }
+.pagina-ira .ira-ferramentas { display: flex; align-items: center; flex-wrap: wrap; gap: .5rem .75rem; }
+.interface-unb.pagina-ira .periodo { padding: 1rem; border-radius: 10px; margin-bottom: .5rem; }
+.pagina-ira .periodo-header { margin-bottom: .6rem; }
+.interface-unb.pagina-ira .periodo-header h4 { font-size: .9375rem; }
+.pagina-ira .disciplina-row { padding: 8px 0; }
+.interface-unb.pagina-ira .periodo-rodape { margin-top: .5rem; gap: .5rem 1rem; }
+.pagina-ira .ira-ferramentas .modo-tabela { padding: 2px; }
+.pagina-ira .ira-ferramentas .modo-tabela span { padding: .25rem .6rem; }
+.pagina-ira .ira-ferramentas .btn-novo-periodo { padding: .4rem .75rem; }
+@media (max-width:768px) {
+ .pagina-ira .ira-abertura { align-items: start; }
+ .pagina-ira .ira-ferramentas { width: 100%; justify-content: space-between; gap: .5rem; }
+ .interface-unb.pagina-ira .periodo { padding: 1rem; }
+ .pagina-ira .disciplina-row > .row { row-gap: .5rem; }
+}
+
+
+.pagina-ira .ira-acoes-finais { display: flex; align-items: center; flex-wrap: wrap; gap: .5rem 1rem; margin: .75rem 0 .25rem; }
+.interface-unb.pagina-ira .ira-parcial { display: flex; align-items: baseline; flex-wrap: wrap; gap: .25rem .75rem; padding: .5rem .75rem; border-left: 3px solid var(--pilot-accent); border-radius: 6px; background: var(--pilot-field); color: var(--pilot-text); font-size: .9375rem; }
+.pagina-ira .ira-parcial-rotulo { font-size: .75rem; font-weight: 400; color: var(--pilot-muted); }
+.pagina-ira .ira-parcial strong { font-weight: 650; }

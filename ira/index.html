@@ -30,25 +30,29 @@
             <a class="marca-site" href="../">Trajetória<span class="badge-unb">Unb</span></a>
             <div id="ira-mp" class="badge-resultado" aria-live="polite"><span>IRA: 0</span><span>MP: 0</span></div>
             <nav aria-label="Navegação principal">
-                <a href="../ira/" aria-current="page">Calculadora IRA e MP</a>
+                <a href="../ira/" aria-current="page"><span class="nav-ira-completo">Calculadora IRA e MP</span><span class="nav-ira-curto">IRA e MP</span></a>
                 <a href="../intercambio/" >Intercâmbio</a>
+                <a href="../turmas/">Turmas</a>
             </nav>
         </div>
     </header>
     <main class="container pagina-conteudo">
         <p id="avisoPersistencia" class="aviso" role="status" hidden></p>
-        <div class="intro-pagina"><h1>Calculadora IRA e MP</h1></div>
-        <div class="barra-superior">
+        <div class="ira-abertura">
+            <h1>Calculadora IRA e MP</h1>
+            <div class="ira-ferramentas">
             <button class="btn btn-success btn-novo-periodo" onclick="criarPeriodo()">+ Novo período</button>
 
-            <fieldset class="modo-tabela"><legend class="visually-hidden">Exibição da calculadora</legend><label><input type="radio" name="visualizacaoIra" value="expandido" checked><span>Expandido</span></label><label><input type="radio" name="visualizacaoIra" value="compacto"><span>Compacto</span></label></fieldset>
+            <fieldset class="modo-tabela"><legend class="visually-hidden">Exibição da calculadora</legend><label><input type="radio" name="visualizacaoIra" value="expandido" checked><span>Detalhado</span></label><label><input type="radio" name="visualizacaoIra" value="compacto"><span>Resumido</span></label></fieldset>
+            </div>
         </div>
         <div id="periodos"></div>
-        <p class="texto-apoio">Módulo livre: entra no IRA, mas não na MP. Cada crédito equivale a 15 horas.</p>
+        <div class="ira-acoes-finais"><button type="button" class="btn btn-novo-periodo" onclick="criarPeriodo()">+ Novo período</button></div>
+        <p class="texto-apoio">Módulo livre: entra no IRA, mas não na MP.</p>
     </main>
     <footer class="text-center py-4"><div class="container">Projeto independente, sem vínculo oficial com a Unb. Confira seus dados no SIGAA.</div></footer>
     <script src="../js/calculos.js?v=2"></script>
     <script src="../js/common.js"></script>
-    <script src="../js/functionality.js?v=3"></script>
+    <script src="../js/functionality.js?v=4"></script>
 </body>
 </html>

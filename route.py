@@ -23,6 +23,8 @@ def cache_local():
 def index():
     return static_file('index.html', root=str(ROOT))
 
+@route('/turmas')
+@route('/turmas/')
 @route('/ira')
 @route('/ira/')
 @route('/intercambio')
@@ -30,7 +32,7 @@ def index():
 @route('/intercambio/<edital>')
 @route('/intercambio/<edital>/')
 def pagina(edital=None):
-    pasta = 'ira' if request.path.startswith('/ira') else 'intercambio'
+    pasta = request.path.strip('/').split('/')[0]
     if edital:
         pasta += '/' + edital
     arquivo = ROOT / pasta / 'index.html'

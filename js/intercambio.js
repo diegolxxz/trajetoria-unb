@@ -265,7 +265,7 @@
             $('buscaResultado').addEventListener('input', mudarFiltros);
             window.addEventListener('storage', event => { if (event.key === AppUnB.chavePerfil) { restaurarPerfil(); simular(); } });
             const descricao = '';
-            $('resumoDados').textContent = `${dados.resultados.length} registros · ${dados.cursos.length} cursos · ${dados.resultados.filter(r => CalculosUnB.alocado(r.alocacao)).length} alocados.${descricao ? ` ${descricao}` : ''}`;
+            if ($('resumoDados')) $('resumoDados').textContent = `${dados.resultados.length} registros · ${dados.cursos.length} cursos · ${dados.resultados.filter(r => CalculosUnB.alocado(r.alocacao)).length} alocados.${descricao ? ` ${descricao}` : ''}`;
             simular(); renderizarTabela();
             $('carregando').hidden = true;
             $('conteudoEdital').hidden = false;
