@@ -1,14 +1,27 @@
-from bottle import route, run, static_file, request, response, redirect, abort, HTTPResponse
+from bottle import route, static_file, request, response, redirect, abort, HTTPResponse, default_app, debug, hook
 from pathlib import Path
+import argparse
 import json
 import os
+import sys
+import tempfile
+from datetime import datetime
+from wsgiref.simple_server import make_server, WSGIRequestHandler
 
 ROOT = Path(__file__).resolve().parent
 DATA_FILE = ROOT / 'dados.json'
 
+
+@hook('after_request')
+def cache_local():
+    # Local edits must appear on reload, including updated CSS and JavaScript.
+    response.set_header('Cache-Control', 'no-store')
+    if request.path in ('/load', '/save'):
+        response.set_header('X-Robots-Tag', 'noindex')
+
 @route('/')
 def index():
-    return redirect('/ira/')
+    return static_file('index.html', root=str(ROOT))
 
 @route('/ira')
 @route('/ira/')
@@ -38,10 +51,18 @@ def pagina(edital=None):
 
 @route('/favicon.ico')
 @route('/favicon.svg')
+@route('/favicon-96x96.png')
+@route('/apple-touch-icon.png')
+@route('/icon-192.png')
+@route('/icon-512.png')
+@route('/site.webmanifest')
+@route('/robots.txt')
+@route('/sitemap.xml')
 def serve_favicon():
     filename = request.path.lstrip('/')
-    mimetype = 'image/svg+xml' if filename.endswith('.svg') else 'image/x-icon'
-    return static_file(filename, root=str(ROOT), mimetype=mimetype)
+    types = {'sitemap.xml': 'application/xml', 'robots.txt': 'text/plain',
+             'site.webmanifest': 'application/manifest+json'}
+    return static_file(filename, root=str(ROOT), mimetype=types.get(filename, True))
 
 @route('/css/<filename>')
 def serve_css(filename):
@@ -64,8 +85,19 @@ def save_data():
     """Salva dados no arquivo JSON (backup local)."""
     try:
         data = request.json
-        with open(DATA_FILE, 'w', encoding='utf-8') as f:
-            json.dump(data, f, ensure_ascii=False, indent=4)
+        if not isinstance(data, dict):
+            response.status = 400
+            return {"status": "error", "message": "O histórico deve ser um objeto JSON."}
+        temporary = None
+        try:
+            with tempfile.NamedTemporaryFile(mode='w', encoding='utf-8', dir=ROOT,
+                                             prefix='.historico-', suffix='.tmp', delete=False) as f:
+                temporary = Path(f.name)
+                json.dump(data, f, ensure_ascii=False, indent=4, allow_nan=False)
+            os.replace(temporary, DATA_FILE)
+        finally:
+            if temporary and temporary.exists():
+                temporary.unlink()
         return {"status": "success"}
     except Exception as e:
         response.status = 500
@@ -79,9 +111,51 @@ def load_data():
             try:
                 return json.load(f)
             except json.JSONDecodeError:
-                return {}
+                response.status = 500
+                print('Histórico inválido em dados.json; arquivo preservado.', file=sys.stderr)
+                return {"erro": "Não foi possível ler o histórico local."}
     return {}
 
+def main():
+    parser = argparse.ArgumentParser(description='Servidor local do Trajetória Unb, com histórico em dados.json.')
+    parser.add_argument('--host', default='127.0.0.1', help='Endereço de escuta (padrão: 127.0.0.1).')
+    parser.add_argument('--port', type=int, default=8080, help='Porta HTTP (padrão: 8080).')
+    parser.add_argument('--debug', action='store_true', help='Exibir detalhes de erros do servidor.')
+    parser.add_argument('--quiet', action='store_true', help='Ocultar registros de requisições.')
+    args = parser.parse_args()
+    if not 1 <= args.port <= 65535:
+        parser.error('A porta deve estar entre 1 e 65535.')
+    debug(args.debug)
+
+    class LocalHandler(WSGIRequestHandler):
+        def log_request(self, code='-', size='-'):
+            if not args.quiet:
+                print(f'{datetime.now():%H:%M:%S}  {code}  {self.command} {self.path.split("?")[0]}', flush=True)
+
+    try:
+        server = make_server(args.host, args.port, default_app(), handler_class=LocalHandler)
+    except OSError as erro:
+        print(f'Não foi possível iniciar em {args.host}:{args.port}: {erro}', file=sys.stderr)
+        print('Se a porta estiver ocupada, tente: python route.py --port 8081', file=sys.stderr)
+        return 1
+    url_host = '127.0.0.1' if args.host == '0.0.0.0' else args.host
+    url = f'http://{url_host}:{args.port}'
+    print(f'\nTrajetória Unb | servidor local\n\n'
+          f'  Início       {url}/\n'
+          f'  Calculadora  {url}/ira/\n'
+          f'  Intercâmbio  {url}/intercambio/\n\n'
+          f'  Histórico    {DATA_FILE}\n'
+          f'  Arquivo      {"encontrado" if DATA_FILE.exists() else "será criado ao salvar"}\n'
+          f'  Debug        {"ativado" if args.debug else "desativado"}\n\n'
+          'Recarregue a página após editar HTML, CSS ou JavaScript.\n'
+          'Reinicie o servidor após editar Python. Ctrl+C para encerrar.\n', flush=True)
+    try:
+        with server:
+            server.serve_forever()
+    except KeyboardInterrupt:
+        print('\nServidor encerrado.')
+    return 0
+
+
 if __name__ == '__main__':
-    print('Servidor rodando em http://localhost:8080')
-    run(host='localhost', port=8080, debug=True, reloader=True)
+    sys.exit(main())

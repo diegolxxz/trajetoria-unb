@@ -20,7 +20,8 @@ const CalculosUnB = (() => {
                 if (!d[3]) { pontosMp += credito * mencao; pesosMp += credito; }
                 if (mencao >= 3) horas += credito * horasPorCredito;
             });
-            parciais.push({ periodo: Number(k), ira: pesosIra ? pontosIra / pesosIra : 0 });
+            parciais.push({ periodo: Number(k), ira: pesosIra ? pontosIra / pesosIra : 0,
+                mp: pesosMp ? pontosMp / pesosMp : 0 });
         });
         return { ira: pesosIra ? pontosIra / pesosIra : 0, mp: pesosMp ? pontosMp / pesosMp : 0,
             horas, temDisciplinas: pesosIra > 0, parciais };

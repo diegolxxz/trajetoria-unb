@@ -31,6 +31,8 @@ const AppUnB = (() => {
         let valor = 'escuro';
         try { valor = localStorage.getItem('calculadora-ira-tema') || valor; } catch {}
         document.documentElement.dataset.tema = valor;
+        const metaTema = document.querySelector('meta[name="theme-color"]');
+        if (metaTema) metaTema.content = valor === 'escuro' ? '#1b1d21' : '#ffffff';
         iconeTema();
     }
     function iconeTema() {

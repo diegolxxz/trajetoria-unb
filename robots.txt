@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /load
+Disallow: /save
+Disallow: /dados.json
+
+Sitemap: https://trajetoriaunb.vercel.app/sitemap.xml

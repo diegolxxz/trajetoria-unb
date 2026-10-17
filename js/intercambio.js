@@ -5,32 +5,8 @@
     const slug = document.body.dataset.edital;
     const chaveFiltros = `calculadora-unb:filtros:${slug}`;
     let dados;
-    let colunasTabela = [];
-
     function temConteudo(valor) {
         return valor != null && !/^(?:\s*|[-–—]+|n\/a)$/i.test(String(valor).trim());
-    }
-
-    function valoresRegistro(r) {
-        return [r.matricula, r.curso, r.ira, r.ipf, r.notaFinal,
-            ...Array.from({ length: 5 }, (_, i) => r.opcoes?.[i]), r.idiomas, r.alocacao,
-            ...(dados.colunasExtras || []).map(c => r[c.campo])];
-    }
-
-    function atualizarColunas(linhas) {
-        // Sem resultados, manter os cabeçalhos pertinentes ao edital para o estado vazio.
-        const registros = linhas.length ? linhas : dados.resultados;
-        const visiveis = colunasTabela.map(() => false);
-        registros.forEach(r => valoresRegistro(r).forEach((valor, i) => {
-            if (temConteudo(valor)) visiveis[i] = true;
-        }));
-        const tabela = document.querySelector('.tabela-resultados');
-        tabela.querySelectorAll('thead th').forEach((th, i) => { th.hidden = !visiveis[i]; });
-        tabela.querySelector('colgroup').replaceChildren(...colunasTabela
-            .filter((_, i) => visiveis[i]).map(c => c.elemento.cloneNode()));
-        const largura = colunasTabela.reduce((soma, c, i) => soma + (visiveis[i] ? c.largura : 0), 0);
-        tabela.style.setProperty('--tabela-largura', `${largura}px`);
-        return visiveis;
     }
 
     async function carregarJson(caminho) {
@@ -81,25 +57,27 @@
         curso.variantes.forEach((v, i) => {
             const nota = CalculosUnB.nota(ira, ipf, v.media, v.desvio, dados.formula);
             const card = el('article', 'card-nota');
-            const identificacao = v.turno ? `${curso.nome} — ${v.turno}` : curso.variantes.length > 1 ? `Referência ${i + 1} · turno não informado` : curso.nome;
-            card.append(el('h3', '', identificacao));
+            const titulo = curso.variantes.length > 1 ? `Referência ${i + 1}` : 'Sua nota';
+            card.append(el('h3', '', v.turno ? `${titulo} · ${v.turno}` : titulo));
             if (v.motivo) {
-                card.append(el('p', 'texto-apoio', v.motivo));
+                card.append(el('p', 'texto-apoio detalhes-calculo', v.motivo));
                 $('notasSimuladas').append(card);
                 return;
             }
-            card.append(el('p', 'referencia-dados', `${v.estimada ? 'Estimativa · ' : ''}Média ${formato(v.media, v.estimada ? 4 : 9)} · Desvio ${formato(v.desvio, v.estimada ? 4 : 9)}`));
-            card.append(el('span', 'resultado-label', 'Sua nota final'));
-            card.append(el('strong', 'nota-final', nota ? `${v.estimada ? '≈ ' : ''}${formato(nota.final, v.estimada ? 4 : 9)}` : 'Indisponível'));
-            if (nota) card.append(el('p', 'texto-apoio', `IRA padronizado: ${v.estimada ? '≈ ' : ''}${formato(nota.padronizado, v.estimada ? 4 : 9)}`));
-            card.append(el('small', 'texto-apoio', v.estimada ? `Estimativa a partir de ${v.registros} registro(s), sujeita ao arredondamento da fonte. Turno não informado.` : `Referência encontrada em ${v.registros} registro(s) da publicação.`));
+            card.append(el('strong', 'nota-final', nota ? `${v.estimada ? '≈ ' : ''}${formato(nota.final, 4)}` : 'Indisponível'));
+            const detalhes = el('div', 'detalhes-calculo');
+            detalhes.append(el('span', '', `Média ${formato(v.media)}`), el('span', '', `Desvio ${formato(v.desvio)}`));
+            if (nota) detalhes.append(el('span', '', `IRA padronizado ${formato(nota.padronizado)}`));
+            if (v.estimada) detalhes.append(el('span', '', 'Valores estimados pelo IRA padronizado publicado.'));
+            card.append(detalhes);
             $('notasSimuladas').append(card);
         });
     }
 
     function filtros() {
         return { curso: $('filtroCurso').value, alocacao: $('filtroAlocacao').value,
-            busca: $('buscaResultado').value, ordem: $('ordemResultado').value };
+            busca: $('buscaResultado').value, ordem: $('ordemResultado').value,
+            visualizacao: document.querySelector('[name="visualizacao"]:checked').value };
     }
 
     function referenciaDoRegistro(registro) {
@@ -133,9 +111,9 @@
             }
             const valores = el('div', 'referencia-valores');
             const media = el('p', '', 'IRA médio ');
-            media.append(el('strong', '', formato(v.media, v.estimada ? 4 : 9)));
+            media.append(el('strong', '', formato(v.media, 4)));
             const desvio = el('p', '', 'Desvio padrão ');
-            desvio.append(el('strong', '', formato(v.desvio, v.estimada ? 4 : 9)));
+            desvio.append(el('strong', '', formato(v.desvio, 4)));
             valores.append(media, desvio);
             card.append(valores);
             if (v.estimada) card.append(el('small', 'texto-apoio', 'Valores estimados pelo IRA padronizado publicado.'));
@@ -156,36 +134,90 @@
             return !busca || CalculosUnB.normalizar([r.matricula, r.curso, ...r.opcoes, r.idiomas, r.alocacao,
                 r.situacaoInscricao, r.classificacao, r.observacao].join(' ')).includes(busca);
         }).sort((a, b) => b[filtro.ordem] - a[filtro.ordem] || a.matricula.localeCompare(b.matricula));
+        const completo = filtro.visualizacao === 'completo';
+        const extras = [0, 1, 2, 3, 4].map(i => ({ titulo: `${i + 1}ª opção`, valor: r => r.opcoes[i] }));
+        extras.push({ titulo: 'Idiomas homologados', valor: r => AppUnB.idiomas((r.idiomas || '')) });
+        const visiveis = extras.filter(c => linhas.some(r => temConteudo(c.valor(r))));
+        const campos = ['matricula', 'curso', 'ira', 'ipf', 'notaFinal', 'alocacao'];
+        const baseVisivel = campos.map(c => (linhas.length ? linhas : dados.resultados).some(r => temConteudo(r[c])));
+        const tabela = document.querySelector('.tabela-resultados');
+        tabela.classList.toggle('modo-completo', completo);
+        const cabecalho = el('tr');
+        const titulos = ['Matrícula', 'Curso', 'IRA', 'IPF', 'Nota final', 'Alocação definitiva',
+            ...(completo ? visiveis.map(c => c.titulo) : visiveis.length ? ['Detalhes'] : [])];
+        titulos.forEach((titulo, i) => {
+            if (i < 6 && !baseVisivel[i]) return;
+            const th = el('th', i > 5 ? 'coluna-extra' : `coluna-${i}`, titulo);
+            if (titulo === 'Idiomas homologados') th.classList.add('coluna-idiomas');
+            th.scope = 'col'; cabecalho.append(th);
+        });
+        tabela.tHead.replaceChildren(cabecalho);
         const fragmento = document.createDocumentFragment();
-        const extras = dados.colunasExtras || [];
-        const visiveis = atualizarColunas(linhas);
-        const rotulos = ['Matrícula', 'Curso', 'IRA', 'IPF', 'Nota final', '1ª opção', '2ª opção', '3ª opção', '4ª opção', '5ª opção', 'Idiomas', 'Alocação',
-            ...extras.map(c => c.rotulo)];
         linhas.forEach(r => {
             const tr = el('tr');
             const referencia = referenciaDoRegistro(r);
-            const nomeCurso = referencia ? `${r.curso} · ${referencia}` : r.curso;
-            const valores = [r.matricula, nomeCurso, formato(r.ira), `${formato(r.ipf, 2)}%`, formato(r.notaFinal, 9),
-                ...r.opcoes.map(v => v || '—'), AppUnB.idiomas((r.idiomas || '—')), r.alocacao || '—',
-                ...extras.map(c => r[c.campo] || '—')];
+            const valores = [r.matricula, r.curso, r.ira == null ? '—' : formato(r.ira), r.ipf == null ? '—' : `${formato(r.ipf, 2)}%`, r.notaFinal == null ? '—' : formato(r.notaFinal), r.alocacao || 'n/a'];
+            const rotulos = ['Matrícula', 'Curso', 'IRA', 'IPF', 'Nota final', 'Alocação definitiva'];
             valores.forEach((valor, i) => {
-                const td = el('td', i >= 2 && i <= 4 ? 'celula-numero' : '', valor);
-                td.hidden = !visiveis[i];
+                if (!baseVisivel[i]) return;
+                const td = el('td', `campo-${i}`, valor);
                 td.dataset.label = rotulos[i];
-                if (i === 10) td.classList.add('celula-idiomas');
-                if (i === 11 && CalculosUnB.alocado(r.alocacao)) td.classList.add('celula-alocada');
+                if (i === 1 && referencia) td.append(el('small', 'referencia-linha', referencia));
+                if (i === 5 && CalculosUnB.alocado(r.alocacao)) td.classList.add('celula-alocada');
                 tr.append(td);
             });
-            fragmento.append(tr);
+            if (completo) {
+                visiveis.forEach(c => { const td = el('td', 'campo-extra', temConteudo(c.valor(r)) ? c.valor(r) : ''); td.dataset.label = c.titulo; tr.append(td); });
+                fragmento.append(tr);
+                return;
+            }
+            if (!visiveis.length) { fragmento.append(tr); return; }
+            const td = el('td', 'campo-detalhes');
+            const botao = el('button', 'abrir-detalhes', 'Ver detalhes');
+            botao.type = 'button';
+            botao.setAttribute('aria-label', `Ver detalhes da matrícula ${r.matricula}`);
+            botao.setAttribute('aria-expanded', 'false');
+            const linhaDetalhes = el('tr', 'linha-detalhes');
+            linhaDetalhes.id = `detalhes-${r.matricula}`;
+            linhaDetalhes.hidden = true;
+            botao.setAttribute('aria-controls', linhaDetalhes.id);
+            const celulaDetalhes = el('td', 'conteudo-detalhes');
+            celulaDetalhes.colSpan = cabecalho.children.length;
+            const lista = el('dl', 'lista-detalhes');
+            const adicionar = (titulo, valor) => {
+                const coluna = lista.children.length / 2 + 1;
+                const termo = el('dt', '', titulo);
+                const descricao = el('dd', '', valor);
+                termo.style.setProperty('--coluna', coluna);
+                descricao.style.setProperty('--coluna', coluna);
+                lista.append(termo, descricao);
+            };
+            r.opcoes.forEach((v, i) => { if (temConteudo(v)) adicionar(`${i + 1}ª opção`, v); });
+            if (temConteudo(r.idiomas)) adicionar('Idiomas homologados', AppUnB.idiomas(r.idiomas));
+            if (lista.children.length) {
+                lista.style.setProperty('--colunas', lista.children.length / 2);
+                celulaDetalhes.append(lista);
+                linhaDetalhes.append(celulaDetalhes);
+                td.append(botao);
+                botao.addEventListener('click', () => {
+                    const aberto = botao.getAttribute('aria-expanded') !== 'true';
+                    botao.setAttribute('aria-expanded', String(aberto));
+                    botao.textContent = aberto ? 'Ocultar detalhes' : 'Ver detalhes';
+                    botao.setAttribute('aria-label', `${aberto ? 'Ocultar' : 'Ver'} detalhes da matrícula ${r.matricula}`);
+                    linhaDetalhes.hidden = !aberto;
+                });
+            }
+            tr.append(td); fragmento.append(tr);
+            if (lista.children.length) fragmento.append(linhaDetalhes);
         });
         if (!linhas.length) {
             const tr = el('tr');
-            const td = el('td', 'estado-vazio', 'Nenhum candidato encontrado para estes filtros.');
-            td.colSpan = Math.max(1, visiveis.filter(Boolean).length); tr.append(td); fragmento.append(tr);
+            const td = el('td', 'estado-vazio', 'Nenhum candidato encontrado. Tente outra busca ou limpe os filtros.');
+            td.colSpan = cabecalho.children.length; tr.append(td); fragmento.append(tr);
         }
         $('linhasResultados').replaceChildren(fragmento);
         const alocados = linhas.filter(r => CalculosUnB.alocado(r.alocacao)).length;
-        $('contagemResultados').textContent = `${linhas.length} resultado(s) · ${alocados} alocado(s)`;
+        $('contagemResultados').textContent = `${linhas.length} ${linhas.length === 1 ? 'resultado' : 'resultados'} · ${alocados} ${alocados === 1 ? 'alocado' : 'alocados'}`;
     }
 
     function mudarFiltros() { AppUnB.salvar(chaveFiltros, filtros()); renderizarTabela(); }
@@ -195,38 +227,18 @@
             if (!slug) {
                 const editais = await carregarJson('data/editais/index.json');
                 $('listaEditais').replaceChildren();
+                editais.sort((a, b) => Number(b.titulo.match(/\/(\d{4})/)[1]) - Number(a.titulo.match(/\/(\d{4})/)[1]) || Number(b.titulo.match(/nº (\d+)/)[1]) - Number(a.titulo.match(/nº (\d+)/)[1]));
                 editais.forEach(edital => {
                     const card = el('a', 'card-edital');
                     card.href = new URL(`intercambio/${edital.slug}/`, AppUnB.raiz);
-                    card.append(el('span', 'selo', edital.situacao), el('h2', '', edital.titulo),
-                        el('p', 'texto-apoio', `Mobilidade: ${edital.mobilidade}`), el('span', 'abrir-edital', 'Calcular e consultar resultados →'));
+                    const identificacao = el('div', 'edital-identificacao');
+                    identificacao.append(el('h2', '', edital.titulo), el('p', 'texto-apoio', `Mobilidade: ${edital.mobilidade}`));
+                    card.append(identificacao, el('span', 'abrir-edital', 'Consultar edital'));
                     $('listaEditais').append(card);
                 });
                 return;
             }
             dados = await carregarJson(`data/editais/${slug}.json`);
-            if (dados.colunasExtras?.length) {
-                const tabela = document.querySelector('.tabela-resultados');
-                const colunas = tabela.querySelector('colgroup');
-                const cabecalho = tabela.querySelector('thead tr');
-                dados.colunasExtras.forEach(c => {
-                    const coluna = document.createElement('col');
-                    coluna.style.width = `${c.largura}px`;
-                    colunas.append(coluna);
-                    const th = el('th', '', c.rotulo);
-                    th.scope = 'col';
-                    cabecalho.append(th);
-                });
-                tabela.style.setProperty('--tabela-largura', `${1535 + dados.colunasExtras.reduce((soma, c) => soma + c.largura, 0)}px`);
-            }
-            colunasTabela = [...document.querySelectorAll('.tabela-resultados colgroup col')].flatMap(col => {
-                const largura = parseFloat(getComputedStyle(col).width);
-                return Array.from({ length: col.span || 1 }, () => {
-                    const elemento = col.cloneNode();
-                    elemento.removeAttribute('span');
-                    return { elemento, largura };
-                });
-            });
             opcoesCurso($('meuCurso')); opcoesCurso($('filtroCurso'));
             restaurarPerfil();
             const perfil = AppUnB.perfil();
@@ -235,18 +247,24 @@
             $('filtroAlocacao').value = ['todos', 'alocados', 'nao-alocados'].includes(salvo.alocacao) ? salvo.alocacao : 'todos';
             $('buscaResultado').value = salvo.busca || '';
             $('ordemResultado').value = ['notaFinal', 'ira', 'ipf'].includes(salvo.ordem) ? salvo.ordem : 'notaFinal';
+            document.querySelector(`[name="visualizacao"][value="${salvo.visualizacao === 'completo' ? 'completo' : 'compacto'}"]`).checked = true;
+            document.querySelectorAll('[name="visualizacao"]').forEach(input => input.addEventListener('change', mudarFiltros));
             $('meuIra').addEventListener('input', () => { AppUnB.salvarPerfil({ ira: $('meuIra').value }); simular(); });
             $('meuIpf').addEventListener('input', () => { AppUnB.salvarPerfil({ ipf: $('meuIpf').value }); simular(); });
             $('meuCurso').addEventListener('change', () => {
                 AppUnB.salvarPerfil({ curso: $('meuCurso').value });
                 $('avisoCurso').hidden = true;
-                $('filtroCurso').value = $('meuCurso').value;
-                simular(); mudarFiltros();
+                simular();
+            });
+            $('usarMeuCurso').addEventListener('click', () => { $('filtroCurso').value = $('meuCurso').value; mudarFiltros(); });
+            $('limparFiltros').addEventListener('click', () => {
+                $('filtroCurso').value = ''; $('filtroAlocacao').value = 'todos';
+                $('buscaResultado').value = ''; $('ordemResultado').value = 'notaFinal'; mudarFiltros();
             });
             ['filtroCurso', 'filtroAlocacao', 'ordemResultado'].forEach(id => $(id).addEventListener('change', mudarFiltros));
             $('buscaResultado').addEventListener('input', mudarFiltros);
             window.addEventListener('storage', event => { if (event.key === AppUnB.chavePerfil) { restaurarPerfil(); simular(); } });
-            const descricao = dados.descricaoResultados ?? 'Inclui registros sem alocação e com “n/a”, conforme a fonte.';
+            const descricao = '';
             $('resumoDados').textContent = `${dados.resultados.length} registros · ${dados.cursos.length} cursos · ${dados.resultados.filter(r => CalculosUnB.alocado(r.alocacao)).length} alocados.${descricao ? ` ${descricao}` : ''}`;
             simular(); renderizarTabela();
             $('carregando').hidden = true;

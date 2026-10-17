@@ -2,34 +2,45 @@
 <html lang="pt-BR" data-tema="escuro">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, interactive-widget=resizes-content">
+    <meta name="theme-color" content="#1b1d21">
+    <script>try { document.documentElement.dataset.tema = localStorage.getItem("calculadora-ira-tema") || "escuro"; } catch {}</script>
     <meta name="app-root" content="../">
-    <meta name="description" content="Editais e simulações de intercâmbio da UnB — TrajetoriaUNB.">
-    <title>Intercâmbio — TrajetoriaUNB</title>
-    <link rel="icon" href="../favicon.ico" sizes="any">
-    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <meta name="description" content="Editais e simulações de intercâmbio da Unb — Trajetória Unb.">
+    <title>Intercâmbio | Trajetória Unb</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/intercambio.css">
+    <link rel="stylesheet" href="../css/interface.css">
+    <link rel="canonical" href="https://trajetoriaunb.vercel.app/intercambio/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Trajetória Unb">
+    <meta property="og:title" content="Intercâmbio | Trajetória Unb">
+    <meta property="og:description" content="Editais e simulações de intercâmbio da Unb — Trajetória Unb.">
+    <meta property="og:url" content="https://trajetoriaunb.vercel.app/intercambio/">
+    <link rel="icon" href="../favicon.ico" sizes="16x16 32x32 48x48 64x64 128x128 256x256">
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml" sizes="any">
+    <link rel="icon" href="../favicon-96x96.png" type="image/png" sizes="96x96">
+    <link rel="apple-touch-icon" href="../apple-touch-icon.png" sizes="180x180">
+    <link rel="manifest" href="../site.webmanifest">
 </head>
-<body >
+<body class="interface-unb pagina-editais">
     <header class="cabecalho">
         <div class="container topo-site">
-            <a class="marca-site" href="../ira/">Trajetoria<span class="badge-unb">UNB</span></a>
+            <a class="marca-site" href="../">Trajetória<span class="badge-unb">Unb</span></a>
             <nav aria-label="Navegação principal">
                 <a href="../ira/">Calculadora IRA e MP</a>
                 <a href="../intercambio/" aria-current="page">Intercâmbio</a>
             </nav>
-            <button id="btnTema" class="btn-tema" type="button" aria-label="Ativar tema claro">☀️</button>
         </div>
     </header>
     <main class="container pagina-conteudo">
         <p id="avisoPersistencia" class="aviso" role="status" hidden></p>
-        <div class="intro-pagina"><p class="sobretitulo">MOBILIDADE INTERNACIONAL</p><h1>Encontre seu edital.</h1><p>Cada seleção tem sua própria calculadora e seus próprios dados. Seu IRA e IPF acompanham você entre os editais.</p></div>
+        <div class="intro-pagina"><h1>Editais de intercâmbio</h1><p>Consulte os resultados e simule sua nota em cada seleção.</p></div>
         <p id="erroCarregamento" class="aviso" role="alert" hidden></p>
-        <div id="listaEditais" class="lista-editais" aria-live="polite"><p>Carregando editais…</p></div>
+        <div id="listaEditais" class="lista-editais" aria-live="polite"><a class="card-edital" href="edital-int-n-7-2026/"><div class="edital-identificacao"><h2>Edital INT nº 7/2026</h2><p class="texto-apoio">Mobilidade: 1º semestre de 2027</p></div><span class="abrir-edital">Consultar edital</span></a><a class="card-edital" href="edital-int-n-1-2026-processo-de-pre-selecao-de-alunos-de-graduacao-da-unb-ao-intercambio-para-mobilidade-no-periodo-de-agosto-a-dezembro-de-2026/"><div class="edital-identificacao"><h2>Edital INT nº 1/2026</h2><p class="texto-apoio">Mobilidade: 2º semestre de 2026</p></div><span class="abrir-edital">Consultar edital</span></a><a class="card-edital" href="edital-int-n-1-2025-processo-de-pre-selecao-de-alunos-de-graduacao-da-unb-ao-intercambio-para-mobilidade-no-periodo-de-agosto-a-dezembro-de-2025/"><div class="edital-identificacao"><h2>Edital INT nº 1/2025</h2><p class="texto-apoio">Mobilidade: 2º semestre de 2025</p></div><span class="abrir-edital">Consultar edital</span></a><a class="card-edital" href="edital-int-no-10-2024-processo-de-pre-selecao-de-alunos-de-graduacao-da-unb-ao-intercambio-para-mobilidade-no-periodo-de-janeiro-a-julho-de-2025/"><div class="edital-identificacao"><h2>Edital INT nº 10/2024</h2><p class="texto-apoio">Mobilidade: 1º semestre de 2025</p></div><span class="abrir-edital">Consultar edital</span></a><a class="card-edital" href="edital-int-no-3-2024-processo-de-pre-selecao-de-alunos-de-graduacao-da-unb-ao-intercambio-para-mobilidade-no-periodo-de-agosto-a-dezembro-de-2024/"><div class="edital-identificacao"><h2>Edital INT nº 3/2024</h2><p class="texto-apoio">Mobilidade: 2º semestre de 2024</p></div><span class="abrir-edital">Consultar edital</span></a></div>
     </main>
-    <footer class="text-center py-4"><div class="container">Projeto independente, sem vínculo oficial com a UnB. Confira seus dados no SIGAA e as regras do edital na INT.</div></footer>
+    <footer class="text-center py-4"><div class="container">Projeto independente, sem vínculo oficial com a Unb. Confira seus dados no SIGAA e as regras do edital na INT.</div></footer>
     <script src="../js/calculos.js"></script>
     <script src="../js/common.js"></script>
     <script src="../js/intercambio.js"></script>

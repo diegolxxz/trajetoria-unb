@@ -34,6 +34,13 @@ let filaSalvamento = Promise.resolve();
 document.addEventListener('DOMContentLoaded', inicializar);
 
 async function inicializar() {
+    const modo = AppUnB.ler('calculadora-unb:visualizacao-ira', 'expandido');
+    document.querySelector(`[name="visualizacaoIra"][value="${modo === 'compacto' ? 'compacto' : 'expandido'}"]`).checked = true;
+    document.body.classList.toggle('ira-compacto', modo === 'compacto');
+    document.querySelectorAll('[name="visualizacaoIra"]').forEach(input => input.addEventListener('change', () => {
+        document.body.classList.toggle('ira-compacto', input.value === 'compacto');
+        AppUnB.salvar('calculadora-unb:visualizacao-ira', input.value);
+    }));
     const dadosNavegador = AppUnB.ler(CHAVE_DADOS, {});
     let dadosArquivo = null;
     if (document.querySelector('meta[name="sincronizar-arquivo"]')?.content === 'true') {
@@ -102,7 +109,10 @@ function salvarDados() {
 
 function calcularIra() {
     const resultado = CalculosUnB.historico(coletarDados());
-    document.getElementById('ira-mp').textContent = `IRA: ${AppUnB.numero(resultado.ira)}   MP: ${AppUnB.numero(resultado.mp)}`;
+    document.getElementById('ira-mp').replaceChildren(
+        AppUnB.elemento('span', '', `IRA: ${AppUnB.numero(resultado.ira)}`),
+        AppUnB.elemento('span', '', `MP: ${AppUnB.numero(resultado.mp)}`)
+    );
     const periodos = [...document.querySelectorAll('#periodos .periodo')];
     document.querySelectorAll('#periodos .ira-parcial').forEach(elemento => elemento.remove());
     periodos.forEach((periodo, indice) => {
@@ -111,8 +121,10 @@ function calcularIra() {
         const cartao = document.createElement('div');
         cartao.className = 'ira-parcial';
         cartao.setAttribute('aria-live', 'polite');
-        cartao.textContent = `IRA parcial após o ${parcial.periodo}º período: ${AppUnB.numero(parcial.ira)}`;
-        periodo.after(cartao);
+        cartao.setAttribute('aria-label', `Acumulado até o ${parcial.periodo}º período`);
+        cartao.title = `Acumulado até o ${parcial.periodo}º período`;
+        cartao.textContent = `IRA ${AppUnB.numero(parcial.ira)} · MP ${AppUnB.numero(parcial.mp)}`;
+        periodo.querySelector('.periodo-rodape').append(cartao);
     });
 }
 
@@ -129,10 +141,10 @@ function criarPeriodo(salvo = false) {
             <h4>${numeroPeriodo}º Período</h4>
         </div>
         <div class="periodo-disciplinas"></div>
-        <button type="button" class="btn btn-sm btn-outline-primary btn-add-disc"
+        <div class="periodo-rodape"><button type="button" class="btn btn-sm btn-outline-primary btn-add-disc"
                 onclick="adicionarDisciplina(this.closest('.periodo'))">
             + Adicionar Disciplina
-        </button>
+        </button></div>
     `;
 
     container.appendChild(divPeriodo);
@@ -206,7 +218,7 @@ function adicionarDisciplina(periodoEl, dados = null) {
         <div class="row g-2 align-items-center">
             <div class="col-lg-4 col-md-4 col-sm-12">
                 <input type="text" class="form-control form-control-sm input-nome"
-                       placeholder="Nome da Disciplina (Opcional)" >
+                       placeholder="Nome da disciplina (opcional)" aria-label="Nome da disciplina" >
             </div>
             <div class="col-lg-2 col-md-2 col-4">
                 <select class="form-select form-select-sm sel-creditos" aria-label="Créditos da disciplina" required>
@@ -226,7 +238,7 @@ function adicionarDisciplina(periodoEl, dados = null) {
             </div>
             <div class="col-lg-1 col-md-1 col-1 text-end">
                 <button type="button" class="btn btn-sm btn-outline-danger btn-remover-disc"
-                        onclick="removerDisciplina(this)" title="Remover disciplina">✕</button>
+                        onclick="removerDisciplina(this)" title="Remover disciplina" aria-label="Remover disciplina">×</button>
             </div>
         </div>
     `;

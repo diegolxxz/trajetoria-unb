@@ -1,71 +1,80 @@
 <!DOCTYPE html>
-
-<html data-tema="escuro" lang="pt-BR">
+<html lang="pt-BR" data-tema="escuro">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<meta content="../../" name="app-root"/>
-<meta content="Simulador do Edital INT nº 1/2026 — TrajetoriaUNB." name="description"/>
-<title>Edital INT nº 1/2025 — Calculadoras UnB</title>
-<link href="../../favicon.ico" rel="icon" sizes="any"/>
-<link href="../../favicon.svg" rel="icon" type="image/svg+xml"/>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
-<link href="../../css/style.css" rel="stylesheet"/>
-<link href="../../css/intercambio.css" rel="stylesheet"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, interactive-widget=resizes-content">
+    <meta name="theme-color" content="#17191d">
+    <script>try { document.documentElement.dataset.tema = localStorage.getItem("calculadora-ira-tema") || "escuro"; } catch {}</script>
+    <meta name="app-root" content="../../">
+    <meta name="description" content="Simulador do Edital INT nº 1/2025 — Trajetória Unb.">
+    <title>Edital INT nº 1/2025 | Trajetória Unb</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/intercambio.css">
+    <link rel="stylesheet" href="../../css/interface.css">
+    <link rel="canonical" href="https://trajetoriaunb.vercel.app/intercambio/edital-int-n-1-2025-processo-de-pre-selecao-de-alunos-de-graduacao-da-unb-ao-intercambio-para-mobilidade-no-periodo-de-agosto-a-dezembro-de-2025/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Trajetória Unb">
+    <meta property="og:title" content="Edital INT nº 1/2025 | Trajetória Unb">
+    <meta property="og:description" content="Simulador do Edital INT nº 1/2025 — Trajetória Unb.">
+    <meta property="og:url" content="https://trajetoriaunb.vercel.app/intercambio/edital-int-n-1-2025-processo-de-pre-selecao-de-alunos-de-graduacao-da-unb-ao-intercambio-para-mobilidade-no-periodo-de-agosto-a-dezembro-de-2025/">
+    <link rel="icon" href="../../favicon.ico" sizes="16x16 32x32 48x48 64x64 128x128 256x256">
+    <link rel="icon" href="../../favicon.svg" type="image/svg+xml" sizes="any">
+    <link rel="icon" href="../../favicon-96x96.png" type="image/png" sizes="96x96">
+    <link rel="apple-touch-icon" href="../../apple-touch-icon.png" sizes="180x180">
+    <link rel="manifest" href="../../site.webmanifest">
 </head>
-<body data-edital="edital-int-n-1-2025-processo-de-pre-selecao-de-alunos-de-graduacao-da-unb-ao-intercambio-para-mobilidade-no-periodo-de-agosto-a-dezembro-de-2025">
-<header class="cabecalho">
-<div class="container topo-site">
-<a class="marca-site" href="../../ira/">Trajetoria<span class="badge-unb">UNB</span></a>
-<nav aria-label="Navegação principal">
-<a href="../../ira/">Calculadora IRA e MP</a>
-<a aria-current="page" href="../../intercambio/">Intercâmbio</a>
-</nav>
-<button aria-label="Ativar tema claro" class="btn-tema" id="btnTema" type="button">☀️</button>
-</div>
-</header>
-<main class="container pagina-conteudo">
-<p class="aviso" hidden="" id="avisoPersistencia" role="status"></p>
-<a class="voltar-link" href="../">← Todos os editais</a>
-<div class="intro-pagina"><p class="sobretitulo">MOBILIDADE · 2º SEMESTRE DE 2025</p><h1>Edital INT nº 1/2025</h1><p>Simule sua nota e consulte a homologação cruzada com a alocação final corrigida.</p></div>
-<div class="links-fonte"><a href="https://int.unb.br/edital-int-n-1-2025-processo-de-pre-selecao-de-alunos-de-graduacao-da-unb-ao-intercambio-para-mobilidade-no-periodo-de-agosto-a-dezembro-de-2025/" rel="noopener noreferrer" target="_blank">Página oficial do edital ↗</a><a href="https://sei.unb.br/sei/publicacoes/controlador_publicacoes.php?acao=publicacao_visualizar&amp;id_documento=14172636&amp;id_orgao_publicacao=0" rel="noopener noreferrer" target="_blank">Homologação ↗</a><a href="https://sei.unb.br/sei/modulos/pesquisa/md_pesq_documento_consulta_externa.php?1XQweiWbpuyJUe5JOteiAz9uez3vQ1IVgO2H4YBOBedcIXVVXt1H3JU20qPcLf4KVfTnOkiLkNNG3Lqi_ISB14e9djaTUSX0q0-vZjMyojvsK2dEIVklNeLjcpZSxsnv" rel="noopener noreferrer" target="_blank">Alocação corrigida ↗</a><a href="https://sei.unb.br/sei/publicacoes/controlador_publicacoes.php?acao=publicacao_visualizar&amp;id_documento=14157383&amp;id_orgao_publicacao=0" rel="noopener noreferrer" target="_blank">Médias e desvios ↗</a></div>
-<p class="aviso" hidden="" id="erroCarregamento" role="alert"></p>
-<p id="carregando" role="status">Carregando dados do edital…</p>
-<div hidden="" id="conteudoEdital">
-<section aria-labelledby="tituloSimulacao" class="painel-intercambio">
-<div class="cabecalho-secao"><div><p class="sobretitulo">SIMULAÇÃO</p><h2 class="painel-titulo" id="tituloSimulacao">Sua nota neste edital</h2></div></div>
-<div class="campos-perfil">
-<div><label class="form-label" for="meuIra">Meu IRA</label><input class="form-control" id="meuIra" inputmode="decimal" max="5" min="0" placeholder="Ex.: 4,2" step="any" type="number"/></div>
-<div><label class="form-label" for="meuIpf">Meu IPF / integralização (%)</label><input class="form-control" id="meuIpf" inputmode="decimal" max="100" min="0" placeholder="Ex.: 55" step="any" type="number"/></div>
-<div><label class="form-label" for="meuCurso">Meu curso</label><select class="form-select" id="meuCurso"><option value="">Selecione seu curso</option></select></div>
-</div>
-<p class="aviso" hidden="" id="avisoCurso"></p>
-<p class="aviso" hidden="" id="erroPerfil" role="status"></p>
-<div aria-live="polite" class="notas-simuladas" id="notasSimuladas"></div>
-</section>
-<section aria-labelledby="tituloResultados">
-<div class="cabecalho-secao"><div><p class="sobretitulo">HOMOLOGAÇÃO E ALOCAÇÃO</p><h2 id="tituloResultados">Consulte os candidatos</h2></div></div>
-<p class="texto-apoio" id="resumoDados"></p>
-<div class="filtros-tabela">
-<div><label class="form-label" for="filtroCurso">Filtrar por curso</label><select class="form-select" id="filtroCurso"><option value="">Todos os cursos</option></select></div>
-<div><label class="form-label" for="filtroAlocacao">Alocação</label><select class="form-select" id="filtroAlocacao"><option value="todos">Todos os resultados</option><option value="alocados">Somente alocados</option><option value="nao-alocados">Não alocados</option></select></div>
-<div><label class="form-label" for="buscaResultado">Buscar na tabela</label><input class="form-control" id="buscaResultado" placeholder="Matrícula, destino ou idioma" type="search"/></div>
-<div><label class="form-label" for="ordemResultado">Ordenar por</label><select class="form-select" id="ordemResultado"><option value="notaFinal">Maior nota final</option><option value="ira">Maior IRA</option><option value="ipf">Maior IPF</option></select></div>
-</div>
-<div aria-live="polite" class="referencias-curso" hidden="" id="referenciasCurso"></div>
-<p class="texto-apoio" id="contagemResultados" role="status"></p>
-<div aria-label="Tabela de resultados" class="tabela-scroll" role="region" tabindex="0">
-<table class="tabela-resultados"><caption class="visually-hidden">Homologação e alocação — Edital INT nº 1/2025</caption><colgroup><col class="col-matricula"/><col class="col-curso"/><col class="col-ira"/><col class="col-ipf"/><col class="col-nota"/><col class="col-opcao" span="5"/><col class="col-idiomas"/><col class="col-alocacao"/></colgroup><thead><tr>
-<th scope="col">Matrícula</th><th scope="col">Curso</th><th scope="col">IRA</th><th scope="col">IPF</th><th scope="col">Nota final</th><th scope="col">1ª opção</th><th scope="col">2ª opção</th><th scope="col">3ª opção</th><th scope="col">4ª opção</th><th scope="col">5ª opção</th><th scope="col">Idiomas Homologados</th><th scope="col">Alocação Definitiva</th>
-</tr></thead><tbody id="linhasResultados"></tbody></table>
-</div>
-</section>
-</div>
-</main>
-<footer class="text-center py-4"><div class="container">Projeto independente, sem vínculo oficial com a UnB. Confira seus dados no SIGAA e as regras do edital na INT.</div></footer>
-<script src="../../js/calculos.js"></script>
-<script src="../../js/common.js"></script>
-<script src="../../js/intercambio.js"></script>
+<body class="interface-unb" data-edital="edital-int-n-1-2025-processo-de-pre-selecao-de-alunos-de-graduacao-da-unb-ao-intercambio-para-mobilidade-no-periodo-de-agosto-a-dezembro-de-2025">
+    <header class="cabecalho">
+        <div class="container topo-site">
+            <a class="marca-site" href="../../">Trajetória<span class="badge-unb">Unb</span></a>
+            <nav aria-label="Navegação principal">
+                <a href="../../ira/">Calculadora IRA e MP</a>
+                <a href="../../intercambio/" aria-current="page">Intercâmbio</a>
+            </nav>
+        </div>
+    </header>
+    <main class="container pagina-conteudo">
+        <p id="avisoPersistencia" class="aviso" role="status" hidden></p>
+        <a class="voltar-link" href="../">← Todos os editais</a>
+        <div class="intro-pagina"><h1>Edital INT nº 1/2025</h1><p>Mobilidade no 2º semestre de 2025 · Resultado final corrigido disponível</p><p id="resumoDados" class="texto-apoio"></p></div>
+        <div class="links-fonte"><a href="https://int.unb.br/edital-int-n-1-2025-processo-de-pre-selecao-de-alunos-de-graduacao-da-unb-ao-intercambio-para-mobilidade-no-periodo-de-agosto-a-dezembro-de-2025/" rel="noopener noreferrer" target="_blank">Página do edital ↗</a><a href="https://sei.unb.br/sei/publicacoes/controlador_publicacoes.php?acao=publicacao_visualizar&amp;id_documento=14172636&amp;id_orgao_publicacao=0" rel="noopener noreferrer" target="_blank">Homologação definitiva ↗</a><a href="https://sei.unb.br/sei/modulos/pesquisa/md_pesq_documento_consulta_externa.php?1XQweiWbpuyJUe5JOteiAz9uez3vQ1IVgO2H4YBOBedcIXVVXt1H3JU20qPcLf4KVfTnOkiLkNNG3Lqi_ISB14e9djaTUSX0q0-vZjMyojvsK2dEIVklNeLjcpZSxsnv" rel="noopener noreferrer" target="_blank">Alocação definitiva (corrigida) ↗</a><a href="https://sei.unb.br/sei/publicacoes/controlador_publicacoes.php?acao=publicacao_visualizar&amp;id_documento=14157383&amp;id_orgao_publicacao=0" rel="noopener noreferrer" target="_blank">Médias e desvios ↗</a></div>
+        <p id="erroCarregamento" class="aviso" role="alert" hidden></p>
+        <p id="carregando" role="status">Carregando dados do edital…</p>
+        <div id="conteudoEdital" hidden>
+            <section class="painel-intercambio" aria-labelledby="tituloSimulacao">
+                <div class="cabecalho-secao"><div><h2 id="tituloSimulacao" class="painel-titulo">Sua nota neste edital</h2></div></div>
+                <div class="campos-perfil">
+                    <div><label class="form-label" for="meuIra">Meu IRA</label><input class="form-control" id="meuIra" type="number" min="0" max="5" step="any" inputmode="decimal" aria-describedby="erroPerfil" placeholder="Ex.: 4,2"></div>
+                    <div><label class="form-label" for="meuIpf">IPF (%)</label><input class="form-control" id="meuIpf" type="number" min="0" max="100" step="any" inputmode="decimal" aria-describedby="erroPerfil" placeholder="Ex.: 55"></div>
+                    <div><label class="form-label" for="meuCurso">Curso da simulação</label><select id="meuCurso" class="form-select"><option value="">Selecione seu curso</option></select></div>
+                </div>
+                <p id="avisoCurso" class="aviso" hidden></p>
+                <p id="erroPerfil" class="aviso" role="status" hidden></p>
+                <div id="notasSimuladas" class="notas-simuladas" aria-live="polite"></div>
+            </section>
+            <section aria-labelledby="tituloResultados">
+                <div class="cabecalho-secao"><div><h2 id="tituloResultados">Candidatos e destinos</h2></div></div>
+                <div class="filtros-tabela">
+                    <div><label class="form-label" for="filtroCurso">Curso dos resultados</label><select class="form-select" id="filtroCurso"><option value="">Todos os cursos</option></select></div>
+                    <div><label class="form-label" for="filtroAlocacao">Alocação</label><select class="form-select" id="filtroAlocacao"><option value="todos">Todos os resultados</option><option value="alocados">Somente alocados</option><option value="nao-alocados">Não alocados</option></select></div>
+                    <div><label class="form-label" for="buscaResultado">Buscar na tabela</label><input class="form-control" id="buscaResultado" type="search" enterkeyhint="search" placeholder="Matrícula, destino ou idioma"></div>
+                    <div><label class="form-label" for="ordemResultado">Ordenar por</label><select class="form-select" id="ordemResultado"><option value="notaFinal">Maior nota final</option><option value="ira">Maior IRA</option><option value="ipf">Maior IPF</option></select></div>
+                </div>
+                <div class="barra-tabela">
+                    <div class="acoes-filtros"><button id="usarMeuCurso" type="button">Usar meu curso</button><button id="limparFiltros" type="button">Limpar filtros</button><p id="contagemResultados" class="texto-apoio" role="status"></p></div>
+                    <fieldset class="modo-tabela"><legend class="visually-hidden">Exibição da tabela</legend><label><input type="radio" name="visualizacao" value="compacto" checked><span>Compacto</span></label><label><input type="radio" name="visualizacao" value="completo"><span>Completo</span></label></fieldset>
+                </div>
+                <div id="referenciasCurso" class="referencias-curso" aria-live="polite" hidden></div>
+                <div class="tabela-scroll" role="region" aria-label="Tabela de resultados" tabindex="0">
+                    <table class="tabela-resultados"><caption class="visually-hidden">Candidatos e alocação definitiva do Edital INT nº 1/2025</caption><thead><tr><th scope="col">Matrícula</th><th scope="col">Curso</th><th scope="col">IRA</th><th scope="col">IPF</th><th scope="col">Nota final</th><th scope="col">Alocação definitiva</th><th scope="col">Detalhes</th></tr></thead><tbody id="linhasResultados"></tbody></table>
+                </div>
+            </section>
+        </div>
+    </main>
+    <footer class="text-center py-4"><div class="container">Projeto independente, sem vínculo oficial com a Unb. Confira seus dados no SIGAA e as regras do edital na INT.</div></footer>
+    <script src="../../js/calculos.js"></script>
+    <script src="../../js/common.js"></script>
+    <script src="../../js/intercambio.js"></script>
 </body>
 </html>
-

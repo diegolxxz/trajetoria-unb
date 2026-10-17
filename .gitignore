@@ -1,4 +1,6 @@
 __pycache__/
+dist/
+.vercel/
 *.py[cod]
 *$py.class
 .playwright-mcp

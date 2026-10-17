@@ -1,4 +1,4 @@
-# Calculadoras UnB
+# Trajetória Unb
 
 Calculadora de IRA e média ponderada, com uma área para simular notas de intercâmbio e consultar os resultados dos editais da INT.
 
@@ -15,7 +15,7 @@ pip install -r requirements.txt
 python route.py
 ```
 
-Abra [localhost:8080](http://localhost:8080). A calculadora fica em `/ira/` e os editais em `/intercambio/`.
+Abra [localhost:8080](http://localhost:8080). A apresentação fica em `/`, a calculadora em `/ira/` e os editais em `/intercambio/`.
 
 O servidor carrega o histórico de disciplinas de `dados.json`, quando disponível, e salva as alterações nesse arquivo e no navegador. Também é possível servir o site com `python -m http.server 8080`; nesse caso, o histórico fica apenas no navegador.
 
@@ -56,3 +56,28 @@ Para rodar os testes, é necessário ter Python e Node.js:
 node --test tests/calculos.test.cjs
 python -m unittest discover -s tests -p "test_*.py"
 ```
+
+## Publicação
+
+O domínio configurado nos links canônicos, `robots.txt` e `sitemap.xml` é `https://trajetoriaunb.vercel.app/`. Ao adicionar uma página pública, inclua sua URL no sitemap. Os favicons ficam na raiz, em SVG, ICO e PNG.
+
+### Servidor local
+
+```sh
+python route.py --port 8081
+```
+
+A execução padrão usa `127.0.0.1:8080`. Use `--quiet` para ocultar as requisições ou `--debug` para investigar erros. HTML, CSS e JavaScript são atualizados ao recarregar a página; alterações em Python exigem reiniciar o servidor. Encerre com Ctrl+C.
+
+### Vercel e indexação
+
+`vercel.json` configura a publicação estática: `node scripts/build.mjs` gera `dist/` somente com arquivos públicos. O histórico pessoal e `route.py` ficam fora da publicação. No site público, o histórico é salvo no navegador; a sincronização com `dados.json` é exclusiva do servidor local.
+
+Depois de publicar:
+
+- Use o domínio de produção `https://trajetoriaunb.vercel.app/`, com acesso público.
+- Confira se páginas, `robots.txt`, `sitemap.xml` e favicons respondem normalmente, sem `noindex` nas páginas de produção.
+- Cadastre a propriedade de prefixo de URL no Google Search Console, conclua a verificação de propriedade e envie `sitemap.xml`.
+- Solicite a inspeção da página inicial. A descoberta e a indexação são decisões do buscador; sitemap e metadados não garantem inclusão.
+
+Ao adicionar um edital, mantenha também seus links no HTML inicial de `intercambio/index.html`, para que possam ser encontrados antes de executar JavaScript.
