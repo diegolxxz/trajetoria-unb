@@ -6,8 +6,8 @@
     <meta name="theme-color" content="#1b1d21">
     <script>try { document.documentElement.dataset.tema = localStorage.getItem("calculadora-ira-tema") || "escuro"; } catch {}</script>
     <meta name="app-root" content="./">
-    <meta name="description" content="Calcule seu IRA e média ponderada, organize disciplinas por período e consulte os editais de intercâmbio da Unb.">
-    <title>Trajetória Unb | IRA, média ponderada e intercâmbio</title>
+    <meta name="description" content="Calcule IRA e MP por período, simule notas de intercâmbio e conheça a nova consulta de turmas da Unb.">
+    <title>Trajetória Unb | IRA, intercâmbio e turmas</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/intercambio.css">
@@ -15,15 +15,15 @@
     <link rel="canonical" href="https://trajetoriaunb.vercel.app/">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Trajetória Unb">
-    <meta property="og:title" content="Trajetória Unb | IRA, média ponderada e intercâmbio">
-    <meta property="og:description" content="Calcule seu IRA e média ponderada, organize disciplinas por período e consulte os editais de intercâmbio da Unb.">
+    <meta property="og:title" content="Trajetória Unb | IRA, intercâmbio e turmas">
+    <meta property="og:description" content="Calcule IRA e MP por período, simule notas de intercâmbio e conheça a nova consulta de turmas da Unb.">
     <meta property="og:url" content="https://trajetoriaunb.vercel.app/">
     <link rel="icon" href="favicon.ico" sizes="16x16 32x32 48x48 64x64 128x128 256x256">
     <link rel="icon" href="favicon.svg" type="image/svg+xml" sizes="any">
     <link rel="icon" href="favicon-96x96.png" type="image/png" sizes="96x96">
     <link rel="apple-touch-icon" href="apple-touch-icon.png" sizes="180x180">
     <link rel="manifest" href="site.webmanifest">
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "Trajetória Unb", "url": "https://trajetoriaunb.vercel.app/", "inLanguage": "pt-BR", "description": "Calculadora de IRA e média ponderada e consulta a editais de intercâmbio da Unb."}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "Trajetória Unb", "url": "https://trajetoriaunb.vercel.app/", "inLanguage": "pt-BR", "description": "Calculadora de IRA e MP, simulações de intercâmbio e nova consulta de turmas da Unb."}</script>
 </head>
 <body class="interface-unb pagina-inicial">
     <header class="cabecalho">
@@ -37,22 +37,43 @@
         </div>
     </header>
     <main class="container">
-        <section class="inicio-apresentacao" aria-labelledby="tituloInicio">
-            <div><h1 id="tituloInicio">Seu IRA e seu próximo<br>intercâmbio, no mesmo lugar.</h1>
-            <p>Calcule suas médias por período e simule sua nota nos editais de intercâmbio. Consulte os resultados com filtros para o seu curso.</p>
-            <div class="inicio-acoes"><a class="botao-inicio botao-inicio-principal" href="ira/">Calcular IRA e MP</a><a class="botao-inicio" href="intercambio/">Consultar editais</a></div></div>
-            <aside class="inicio-resumo"><h2>O que você encontra aqui</h2><dl><dt>IRA e MP</dt><dd>Médias acumuladas em cada período.</dd><dt>Disciplinas</dt><dd>Créditos, horas, menções e módulo livre.</dd><dt>Intercâmbio</dt><dd>Notas, destinos e idiomas por curso.</dd></dl></aside>
+        <section class="inicio-hero" aria-labelledby="tituloInicio">
+            <p class="inicio-contexto">Para sua graduação na Unb</p>
+            <h1 id="tituloInicio">Acompanhe seu IRA.<br>Planeje seu intercâmbio.</h1>
+            <p class="inicio-descricao">Calcule suas médias, simule sua nota nos editais e consulte os resultados do seu curso. Tudo com seus dados salvos neste navegador.</p>
+            <div class="inicio-atalhos"><a class="botao-inicio botao-inicio-principal" href="ira/">Calcular IRA e MP <span aria-hidden="true">→</span></a><a class="botao-inicio" href="intercambio/">Consultar editais <span aria-hidden="true">→</span></a></div>
         </section>
-        <section class="inicio-recursos" aria-labelledby="tituloRecursos"><h2 id="tituloRecursos">Escolha por onde começar</h2>
-            <article><div><h3>Calculadora de IRA e MP</h3><p>Informe os créditos e as menções das disciplinas. Acompanhe o IRA e a MP acumulados e veja como novas menções mudam suas médias.</p></div><a class="botao-inicio" href="ira/">Calcular IRA e MP</a></article>
-            <article><div><h3>Editais de intercâmbio</h3><p>Use seu IRA e IPF para simular a nota de cada seleção. Compare os resultados do seu curso e consulte as opções de destino e os idiomas publicados.</p></div><a class="botao-inicio" href="intercambio/">Consultar editais</a></article>
-            <article><div><h3>Consulta de turmas</h3><p>Em preparação: oferta por semestre, professores, horários e vagas. Conheça a estrutura da nova consulta.</p></div><a class="botao-inicio" href="turmas/">Ver turmas</a></article>
+        <section class="inicio-ferramentas" aria-labelledby="tituloRecursos">
+            <h2 id="tituloRecursos">Escolha o que você quer fazer</h2>
+            <div class="inicio-grade">
+                <article class="inicio-ferramenta">
+                    <svg class="inicio-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2.5" width="14" height="19" rx="3"/><path d="M8.5 6.5h7M9 11h.01M15 11h.01M9 15h.01M15 15h.01M9 18h.01M15 18h.01"/></svg>
+                    <h3>Calculadora de IRA e MP</h3>
+                    <p>Veja como suas menções mudam as médias ao longo da graduação.</p>
+                    <ul><li>Organize disciplinas por período, com créditos, horas e módulo livre.</li><li>Acompanhe o IRA e a MP acumulados ao final de cada período.</li><li>Alterne entre a visualização detalhada e a resumida.</li></ul>
+                    <a class="inicio-link-recurso" href="ira/">Abrir calculadora <span aria-hidden="true">→</span></a>
+                </article>
+                <article class="inicio-ferramenta">
+                    <svg class="inicio-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18M5 6.5h14M5 17.5h14"/></svg>
+                    <h3>Editais de intercâmbio</h3>
+                    <p>Simule sua nota e conheça os resultados de cada seleção.</p>
+                    <ul><li>Use seu IRA e IPF nas simulações de diferentes editais.</li><li>Filtre candidatos por curso, alocação, destino ou idioma.</li><li>Consulte notas, preferências e idiomas em tabelas resumidas ou detalhadas.</li></ul>
+                    <a class="inicio-link-recurso" href="intercambio/">Explorar editais <span aria-hidden="true">→</span></a>
+                </article>
+            </div>
+            <article class="inicio-turmas">
+                <div><div class="inicio-turmas-titulo"><h3>Consulta de turmas</h3><span class="inicio-status">Em preparação</span></div><p>A nova página já tem sua estrutura. A oferta de disciplinas por semestre, com professores, horários, vagas e demandas, será adicionada em seguida.</p></div>
+                <a class="botao-inicio" href="turmas/">Conhecer a página <span aria-hidden="true">→</span></a>
+            </article>
         </section>
-        <section class="inicio-duvidas" aria-labelledby="tituloDuvidas"><h2 id="tituloDuvidas">Perguntas frequentes</h2>
-            <details><summary>Este é um site oficial da Unb?</summary><p>Não. O Trajetória Unb é um projeto independente. Confira seu histórico no SIGAA e as regras e publicações de intercâmbio nos canais oficiais da INT.</p></details>
-            <details><summary>Qual é a diferença entre IRA e MP?</summary><p>A média ponderada considera créditos e menções. No cálculo do IRA, os períodos também têm pesos. Disciplinas marcadas como módulo livre entram no IRA, mas não na MP.</p></details>
-            <details><summary>Meus dados ficam salvos?</summary><p>O histórico e as preferências ficam salvos neste navegador. O IRA e o IPF informados nas simulações podem ser reutilizados entre editais. Limpar os dados do navegador pode apagar essas informações.</p></details>
-            <details><summary>A nota simulada garante uma vaga?</summary><p>Não. A alocação depende das regras do edital, das vagas e dos requisitos de cada destino. As páginas indicam as fontes oficiais e identificam médias e desvios estimados quando necessário.</p></details>
+        <section class="inicio-duvidas-nova" aria-labelledby="tituloDuvidas">
+            <div><h2 id="tituloDuvidas">Antes de começar</h2><p>Sobre os cálculos, seus dados e as fontes.</p></div>
+            <div class="inicio-perguntas">
+                <details><summary>Qual é a diferença entre IRA e MP?</summary><p>A MP considera os créditos e as menções das disciplinas. No IRA, os períodos também recebem pesos. Disciplinas marcadas como módulo livre entram no IRA, mas não na MP. Os valores exibidos têm até quatro casas decimais; os cálculos mantêm a precisão original.</p></details>
+                <details><summary>Preciso preencher tudo de novo ao voltar?</summary><p>Seu histórico e suas preferências ficam salvos neste navegador. No intercâmbio, o IRA, o IPF e o curso da simulação são reutilizados entre editais, e cada edital lembra seus próprios filtros. Esses dados não sincronizam entre dispositivos. Limpar os dados do site pode apagá-los.</p></details>
+                <details><summary>A simulação garante uma vaga de intercâmbio?</summary><p>A nota ajuda a comparar resultados, mas a elegibilidade e a alocação dependem das regras de cada edital, das vagas e dos requisitos do destino. Cada seleção usa sua própria fórmula e suas referências de curso; estimativas de médias e desvios são identificadas quando utilizadas.</p></details>
+                <details><summary>O Trajetória Unb é oficial?</summary><p>É um projeto independente, sem vínculo com a Unb. Consulte seu histórico no SIGAA. Nos editais, o link junto ao título leva à página oficial da INT para conferir os documentos e as regras da seleção.</p></details>
+            </div>
         </section>
     </main>
     <footer class="text-center py-4"><div class="container">Projeto independente, sem vínculo oficial com a Unb. Confira seus dados no SIGAA e as regras do edital na INT.<p><a class="link-github" href="https://github.com/diegolxxz/trajetoria-unb" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 16 16" width="20" height="20" fill="currentColor" aria-hidden="true" focusable="false"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg><span>Código e sugestões no GitHub</span></a></p></div></footer>
