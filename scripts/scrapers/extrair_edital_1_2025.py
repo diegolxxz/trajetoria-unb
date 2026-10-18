@@ -152,7 +152,9 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     for campo in ["homologacao", "alocacao", "medias"]:
         parser.add_argument(f"--{campo}-html", type=Path)
-    parser.add_argument("--destino", type=Path, default=Path(__file__).resolve().parents[1] / "data" / "editais")
+    parser.add_argument(
+        "--destino", type=Path, default=Path(__file__).resolve().parents[2] / "public" / "data" / "editais"
+    )
     args = parser.parse_args()
 
     def ler(campo, fonte):

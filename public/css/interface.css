@@ -1280,10 +1280,16 @@ html[data-tema='claro'] {
 }
 .turmas-barra {
     display: flex;
-    justify-content: space-between;
-    align-items: start;
-    gap: 0.5rem;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.25rem 1rem;
     margin-top: 0.25rem;
+}
+.turmas-filtro-departamento {
+    width: min(100%, 340px);
+}
+.turmas-filtro-departamento .form-select {
+    font-size: 0.8125rem;
 }
 .turmas-modo {
     display: inline-flex;
@@ -1336,7 +1342,47 @@ html[data-tema='claro'] {
 .turmas-resultados > h2 {
     font-size: 0.875rem;
     font-weight: 600;
-    margin: 0 0 0.75rem;
+    margin: 0;
+}
+.turmas-contagem {
+    margin: 0.25rem 0 0.5rem;
+    color: var(--pilot-muted);
+    font-size: 0.75rem;
+}
+.turmas-tabela-scroll {
+    margin-top: 0;
+}
+.turmas-tabela {
+    min-width: 760px;
+}
+.turmas-tabela th:first-child,
+.turmas-tabela td:first-child {
+    width: 27%;
+}
+.turmas-tabela td {
+    vertical-align: top;
+}
+.turmas-disciplina strong,
+.turmas-disciplina small {
+    display: block;
+}
+.turmas-disciplina strong {
+    font-weight: 550;
+}
+.turmas-disciplina small {
+    margin-top: 0.15rem;
+    color: var(--pilot-muted);
+}
+.turmas-mais-resultados {
+    display: block;
+    width: 100%;
+    min-height: 44px;
+    margin-top: 0.5rem;
+    border: 1px solid var(--pilot-border);
+    border-radius: 8px;
+    background: var(--pilot-surface);
+    color: var(--pilot-accent);
+    font-size: 0.8125rem;
 }
 .turmas-vazio {
     padding: 1rem;
@@ -1352,6 +1398,21 @@ html[data-tema='claro'] {
     margin-top: 0.25rem;
     color: var(--pilot-muted);
     font-size: 0.8125rem;
+}
+@media (max-width: 575px) {
+    .turmas-barra {
+        align-items: stretch;
+    }
+    .turmas-filtro-departamento {
+        width: 100%;
+    }
+    .turmas-tabela {
+        min-width: 680px;
+    }
+    .turmas-tabela td,
+    .turmas-tabela th {
+        padding: 0.4rem;
+    }
 }
 @media (max-width: 991px) {
     .nav-ira-completo {
@@ -1712,5 +1773,98 @@ html[data-tema='claro'] {
         display: grid;
         grid-template-columns: minmax(0, 1fr);
         gap: 0.5rem;
+    }
+}
+
+/* Página de erro: recuperação simples, com os mesmos tokens do site. */
+.pagina-erro {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+}
+.erro-pagina {
+    width: min(100% - 2.5rem, 44rem);
+    margin: auto;
+    padding-block: clamp(2.5rem, 8vh, 5rem);
+}
+.erro-codigo {
+    display: inline-block;
+    padding: 0.375rem 0.75rem;
+    border: 1px solid var(--pilot-border);
+    border-radius: 8px;
+    background: var(--pilot-surface);
+    color: var(--pilot-muted);
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+.erro-pagina h1 {
+    max-width: 18ch;
+    margin: 1.25rem 0 0.75rem;
+    font-size: clamp(2rem, 5vw, 3rem);
+    line-height: 1.12;
+    letter-spacing: -0.035em;
+    text-wrap: balance;
+}
+.erro-pagina > p {
+    max-width: 48ch;
+    margin-bottom: 1.5rem;
+    color: var(--pilot-muted);
+    line-height: 1.6;
+}
+.pagina-erro .erro-inicio {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    min-height: 44px;
+    padding: 0.625rem 1rem;
+    border: 1px solid var(--pilot-text);
+    border-radius: 8px;
+    background: var(--pilot-text);
+    color: var(--pilot-bg);
+    text-decoration: none;
+    font-weight: 600;
+}
+.pagina-erro .erro-inicio:hover {
+    background: var(--pilot-accent);
+    color: var(--pilot-bg);
+    border-color: var(--pilot-accent);
+}
+.erro-caminhos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--pilot-border);
+}
+.pagina-erro .erro-caminhos a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 44px;
+    color: var(--pilot-muted);
+    padding-inline: 0;
+    text-decoration: none;
+    text-underline-offset: 4px;
+}
+.pagina-erro .erro-caminhos a:hover {
+    text-decoration: underline;
+    color: var(--pilot-accent);
+}
+.erro-pagina a:focus-visible {
+    outline: 2px solid var(--pilot-accent);
+    outline-offset: 4px;
+}
+.erro-rodape {
+    padding: 1.25rem;
+    color: var(--pilot-muted);
+    font-size: 0.875rem;
+    text-align: center;
+}
+@media (max-width: 480px) {
+    .erro-caminhos {
+        flex-direction: column;
+        align-items: flex-start;
     }
 }

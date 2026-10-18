@@ -1,4 +1,4 @@
-from bottle import route, static_file, request, response, redirect, abort, HTTPResponse, default_app, debug, hook
+from bottle import route, static_file, request, response, redirect, abort, HTTPResponse, default_app, debug, hook, error
 from pathlib import Path
 import argparse
 import json
@@ -8,8 +8,9 @@ import tempfile
 from datetime import datetime
 from wsgiref.simple_server import make_server, WSGIRequestHandler
 
-ROOT = Path(__file__).resolve().parent
-DATA_FILE = ROOT / "dados.json"
+PROJECT = Path(__file__).resolve().parents[1]
+ROOT = PROJECT / "public"
+DATA_FILE = PROJECT / "local" / "dados.json"
 
 
 @hook("after_request")
@@ -18,6 +19,13 @@ def cache_local():
     response.set_header("Cache-Control", "no-store")
     if request.path in ("/load", "/save"):
         response.set_header("X-Robots-Tag", "noindex")
+
+
+@error(404)
+def pagina_nao_encontrada(erro):
+    response.content_type = "text/html; charset=UTF-8"
+    response.set_header("X-Robots-Tag", "noindex")
+    return (ROOT / "404.html").read_text(encoding="utf-8")
 
 
 @route("/")
@@ -88,6 +96,13 @@ def serve_js(filename):
     return static_file(filename, root=str(ROOT / "js"))
 
 
+@route("/data/turmas/<filename>")
+def serve_turmas(filename):
+    resp = static_file(filename, root=str(ROOT / "data" / "turmas"))
+    resp.set_header("Cache-Control", "no-cache")
+    return resp
+
+
 @route("/data/editais/<filename>")
 def serve_edital(filename):
     resp = static_file(filename, root=str(ROOT / "data" / "editais"))
@@ -103,10 +118,11 @@ def save_data():
         if not isinstance(data, dict):
             response.status = 400
             return {"status": "error", "message": "O histórico deve ser um objeto JSON."}
+        DATA_FILE.parent.mkdir(parents=True, exist_ok=True)
         temporary = None
         try:
             with tempfile.NamedTemporaryFile(
-                mode="w", encoding="utf-8", dir=ROOT, prefix=".historico-", suffix=".tmp", delete=False
+                mode="w", encoding="utf-8", dir=DATA_FILE.parent, prefix=".historico-", suffix=".tmp", delete=False
             ) as f:
                 temporary = Path(f.name)
                 json.dump(data, f, ensure_ascii=False, indent=4, allow_nan=False)
@@ -154,7 +170,7 @@ def main():
         server = make_server(args.host, args.port, default_app(), handler_class=LocalHandler)
     except OSError as erro:
         print(f"Não foi possível iniciar em {args.host}:{args.port}: {erro}", file=sys.stderr)
-        print("Se a porta estiver ocupada, tente: python route.py --port 8081", file=sys.stderr)
+        print("Se a porta estiver ocupada, tente: uv run python server/route.py --port 8081", file=sys.stderr)
         return 1
     url_host = "127.0.0.1" if args.host == "0.0.0.0" else args.host
     url = f"http://{url_host}:{args.port}"
@@ -162,7 +178,8 @@ def main():
         f"\nTrajetória Unb | servidor local\n\n"
         f"  Início       {url}/\n"
         f"  Calculadora  {url}/ira/\n"
-        f"  Intercâmbio  {url}/intercambio/\n\n"
+        f"  Intercâmbio  {url}/intercambio/\n"
+        f"  Turmas       {url}/turmas/\n\n"
         f"  Histórico    {DATA_FILE}\n"
         f"  Arquivo      {'encontrado' if DATA_FILE.exists() else 'será criado ao salvar'}\n"
         f"  Debug        {'ativado' if args.debug else 'desativado'}\n\n"

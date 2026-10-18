@@ -3,7 +3,7 @@ from unittest.mock import patch
 import json
 from pathlib import Path
 from wsgiref.util import setup_testing_defaults
-import route
+from server import route
 from bottle import default_app
 
 
@@ -48,10 +48,21 @@ class RotasTest(unittest.TestCase):
             "/js/intercambio.js",
             "/css/intercambio.css",
             "/data/editais/index.json",
+            "/data/turmas/unidades.json",
             "/data/editais/edital-int-n-7-2026.json",
             "/data/editais/edital-int-n-7-2026.csv",
         ]:
             self.assertTrue(get(caminho)["status"].startswith("200"), caminho)
+
+    def test_pagina_404_personalizada(self):
+        for caminho in ["/pagina-inexistente/", "/intercambio/inexistente/", "/caminho/profundo/inexistente/"]:
+            with self.subTest(caminho=caminho):
+                resposta = get(caminho)
+                self.assertEqual(resposta["status"].split()[0], "404")
+                self.assertEqual(resposta["headers"]["X-Robots-Tag"], "noindex")
+                self.assertEqual(resposta["body"], (route.ROOT / "404.html").read_bytes())
+                self.assertIn(b'href="/css/interface.css"', resposta["body"])
+                self.assertIn(b'href="/"', resposta["body"])
 
     def test_favicons(self):
         for caminho, tipo in [("/favicon.ico", "image/x-icon"), ("/favicon.svg", "image/svg+xml")]:

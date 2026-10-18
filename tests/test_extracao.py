@@ -1,6 +1,6 @@
 import html
 import unittest
-from scripts.extrair_edital_7_2026 import COLUNAS, extrair
+from scripts.scrapers.extrair_edital_7_2026 import COLUNAS, extrair
 
 
 def tabela(linhas, cabecalho=COLUNAS):

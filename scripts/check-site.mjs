@@ -3,10 +3,11 @@ import { readdir, readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parseHTML } from 'linkedom';
-import calculos from '../js/calculos.js';
+import calculos from '../public/js/calculos.js';
 
 const project = fileURLToPath(new URL('../', import.meta.url));
-const root = process.argv[2] === 'dist' ? path.join(project, 'dist') : project;
+const source = path.join(project, 'public');
+const root = process.argv[2] === 'dist' ? path.join(project, 'dist') : source;
 const origin = 'https://trajetoriaunb.vercel.app';
 const files = new Set();
 const pages = new Map();
@@ -22,7 +23,8 @@ async function collect(directory) {
     else files.add(file);
   }
 }
-for (const directory of ['ira', 'intercambio', 'turmas', 'css', 'js', 'data/editais']) await collect(directory);
+for (const directory of ['ira', 'intercambio', 'turmas', 'css', 'js', 'data/editais', 'data/turmas'])
+  await collect(directory);
 for (const entry of await readdir(root, { withFileTypes: true })) {
   if (entry.isFile()) files.add(entry.name);
 }
@@ -42,6 +44,14 @@ for (const file of files) {
   check(Boolean(document.querySelector('title')?.textContent.trim()), `${file}: título ausente.`);
   check(document.querySelectorAll('h1').length === 1, `${file}: deve ter um h1.`);
   const canonical = document.querySelector('link[rel="canonical"]')?.getAttribute('href');
+  if (file === '404.html') {
+    check(!canonical, '404 não deve declarar canonical.');
+    check(
+      document.querySelector('meta[name="robots"]')?.getAttribute('content')?.includes('noindex'),
+      '404 deve ter noindex.',
+    );
+    continue;
+  }
   check(canonical === urlFor(file).href, `${file}: canonical não corresponde à rota.`);
   check(
     !document.querySelector('meta[name="robots"]')?.getAttribute('content')?.includes('noindex'),
@@ -70,7 +80,10 @@ for (const location of locations) {
   const url = new URL(location);
   check(url.origin === origin && pages.has(fileFor(url)), `Sitemap: rota inválida ${location}`);
 }
-for (const file of pages.keys()) check(locations.includes(urlFor(file).href), `Sitemap: falta ${urlFor(file)}`);
+for (const file of pages.keys()) {
+  if (file === '404.html') check(!locations.includes(urlFor(file).href), '404 deve ficar fora do sitemap.');
+  else check(locations.includes(urlFor(file).href), `Sitemap: falta ${urlFor(file)}`);
+}
 const catalog = await json('data/editais/index.json');
 const slugs = new Set();
 let candidates = 0;
@@ -99,12 +112,85 @@ for (const edital of catalog) {
   }
   candidates += data.resultados.length;
 }
-if (root !== project) {
-  for (const privateFile of ['dados.json', 'route.py', 'pyproject.toml', 'package.json']) {
+const complete = await json('data/turmas/classroom_code_units.json');
+const completeIds = new Set(Object.keys(complete.units));
+check(completeIds.size > 0, 'Cadastro completo vazio.');
+check(
+  complete.semesters.length === 1 && /^20\d{2}\.[12]$/.test(complete.semesters[0]),
+  'Semestre do cadastro completo inválido.',
+);
+const emptyUnits = new Set(complete.units_without_classes.map(String));
+check(
+  [...emptyUnits].every((id) => completeIds.has(id)),
+  'Unidade vazia ausente no cadastro completo.',
+);
+for (const ids of Object.values(complete.prefixes)) {
+  check(
+    ids.length > 0 && ids.every((id) => completeIds.has(String(id)) && !emptyUnits.has(String(id))),
+    'Prefixo associado a unidade inválida ou sem turmas.',
+  );
+}
+const units = (await json('data/turmas/unidades.json')).unidades;
+check(Object.keys(units).length > 0, 'Cadastro de unidades vazio.');
+for (const [id, name] of Object.entries(units)) {
+  check(/^[1-9]\d*$/.test(id) && typeof name === 'string' && name.trim(), `Unidade inválida: ${id}`);
+}
+if (files.has('data/turmas/index.json')) {
+  const catalog = await json('data/turmas/index.json');
+  const semesters = new Set();
+  for (const entry of catalog.semestres) {
+    check(!semesters.has(entry.semestre), `Semestre duplicado: ${entry.semestre}`);
+    semesters.add(entry.semestre);
+    const expectedFile = `${entry.semestre.replace('.', '-')}.json`;
+    assert(/^20\d{2}\.[12]$/.test(entry.semestre) && entry.arquivo === expectedFile, 'Arquivo de semestre inválido.');
+    const data = await json(`data/turmas/${entry.arquivo}`);
+    check(Array.isArray(data.disciplinas), `${entry.arquivo}: disciplinas ausentes.`);
+    check(data.disciplinas.length === entry.disciplinas, `${entry.arquivo}: contagem de disciplinas incorreta.`);
+    const codes = new Set();
+    let total = 0;
+    for (const subject of data.disciplinas) {
+      check(
+        Boolean(subject.codigo && subject.nome) && !codes.has(subject.codigo),
+        `${entry.arquivo}: disciplina inválida ou duplicada.`,
+      );
+      codes.add(subject.codigo);
+      for (const classroom of subject.turmas) {
+        check(typeof classroom.numero === 'string' && classroom.numero, `${subject.codigo}: número de turma inválido.`);
+        check(
+          classroom.unidades.length > 0 && classroom.unidades.every((id) => /^[1-9]\d*$/.test(id)),
+          `${subject.codigo}: unidade inválida.`,
+        );
+        check(
+          Array.isArray(classroom.professores) &&
+            classroom.professores.every((name) => typeof name === 'string' && name.trim()),
+          `${subject.codigo}: professores inválidos.`,
+        );
+        for (const key of ['vagas', 'matriculados']) {
+          check(
+            classroom[key] === null || (Number.isInteger(classroom[key]) && classroom[key] >= 0),
+            `${subject.codigo}: ${key} inválido.`,
+          );
+        }
+        total++;
+      }
+    }
+    check(total === entry.turmas, `${entry.arquivo}: contagem de turmas incorreta.`);
+  }
+}
+if (root !== source) {
+  for (const privateFile of [
+    'dados.json',
+    'route.py',
+    'pyproject.toml',
+    'package.json',
+    'local/dados.json',
+    'server/route.py',
+    'config/coleta.json',
+  ]) {
     check(!files.has(privateFile), `Publicação contém arquivo privado ou de desenvolvimento: ${privateFile}`);
   }
 }
 assert(errors.length === 0, errors.join('\n'));
 console.log(
-  `${pages.size} páginas, ${slugs.size} editais e ${candidates} candidatos verificados em ${root === project ? 'fontes' : 'dist'}.`,
+  `${pages.size} páginas, ${slugs.size} editais e ${candidates} candidatos verificados em ${root === source ? 'fontes' : 'dist'}.`,
 );

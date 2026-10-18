@@ -6,6 +6,7 @@ dist/
 .playwright-mcp
 
 # Dados locais do usuário
+/local/
 dados.json
 test_ira.py
 brute.py

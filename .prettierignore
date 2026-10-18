@@ -2,7 +2,8 @@ dist/
 node_modules/
 .venv/
 .playwright-mcp/
-data/
+public/data/
+local/
 dados.json
 bun.lock
 uv.lock

@@ -1,6 +1,6 @@
 import html
 import unittest
-from scripts.extrair_edital_1_2025 import extrair
+from scripts.scrapers.extrair_edital_1_2025 import extrair
 
 
 def tabela(cabecalho, linhas):

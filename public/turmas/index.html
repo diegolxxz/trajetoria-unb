@@ -69,6 +69,18 @@
                     aria-describedby="estadoTurmas"
                 />
                 <div class="turmas-barra">
+                    <div class="turmas-filtro-departamento">
+                        <label class="visually-hidden" for="departamentoTurmas">Departamento</label>
+                        <input
+                            class="form-control"
+                            id="departamentoTurmas"
+                            type="search"
+                            list="listaDepartamentosTurmas"
+                            placeholder="Buscar departamento"
+                            disabled
+                        />
+                        <datalist id="listaDepartamentosTurmas"></datalist>
+                    </div>
                     <details class="turmas-mais-filtros">
                         <summary>Mais filtros</summary>
                         <div class="turmas-filtro-horario">
@@ -90,16 +102,16 @@
                         />Modo avançado</label
                     >
                 </div>
-                <p id="detalhesModo" class="texto-apoio" hidden>
-                    Inclui solicitações de matrícula, rematrícula e reservas por curso nas turmas.
-                </p>
+                <p id="detalhesModo" class="texto-apoio" hidden>Os dados avançados serão exibidos quando publicados.</p>
             </section>
             <section class="turmas-resultados" aria-labelledby="tituloDisciplinas">
-                <h2 id="tituloDisciplinas">Disciplinas</h2>
-                <div id="listaDisciplinas"></div>
-                <div class="turmas-vazio" id="estadoTurmas" role="status">
+                <h2 id="tituloDisciplinas">Turmas</h2>
+                <p id="contagemTurmas" class="turmas-contagem" aria-live="polite"></p>
+                <div id="listaDisciplinas" class="tabela-scroll turmas-tabela-scroll"></div>
+                <button id="maisTurmas" class="turmas-mais-resultados" type="button" hidden>Mostrar mais turmas</button>
+                <div class="turmas-vazio" id="estadoTurmas" role="status" hidden>
                     <p>Nenhum semestre publicado ainda.</p>
-                    <p>As disciplinas e suas turmas aparecerão aqui quando os dados forem adicionados.</p>
+                    <p>Escolha outro filtro ou tente novamente mais tarde.</p>
                 </div>
             </section>
             <noscript><p class="aviso">Ative o JavaScript para alternar o modo avançado.</p></noscript>

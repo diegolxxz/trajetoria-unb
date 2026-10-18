@@ -120,7 +120,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--homologacao-html", type=Path)
     parser.add_argument("--alocacao-pdf", type=Path)
-    parser.add_argument("--destino", type=Path, default=Path(__file__).resolve().parents[1] / "data/editais")
+    parser.add_argument("--destino", type=Path, default=Path(__file__).resolve().parents[2] / "public" / "data/editais")
     args = parser.parse_args()
 
     def ler(path, fonte):

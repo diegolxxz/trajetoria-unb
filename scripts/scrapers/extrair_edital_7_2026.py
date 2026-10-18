@@ -115,7 +115,9 @@ def extrair(html):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--html", type=Path, help="HTML já baixado; dispensa acesso à rede.")
-    parser.add_argument("--destino", type=Path, default=Path(__file__).resolve().parents[1] / "data" / "editais")
+    parser.add_argument(
+        "--destino", type=Path, default=Path(__file__).resolve().parents[2] / "public" / "data" / "editais"
+    )
     args = parser.parse_args()
     if args.html:
         html = args.html.read_bytes()

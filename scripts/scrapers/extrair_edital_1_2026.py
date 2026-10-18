@@ -238,7 +238,9 @@ def main():
     parser.add_argument("--homologacao-html", type=Path)
     parser.add_argument("--alocacao-html", type=Path)
     parser.add_argument("--medias-pdf", type=Path)
-    parser.add_argument("--destino", type=Path, default=Path(__file__).resolve().parents[1] / "data" / "editais")
+    parser.add_argument(
+        "--destino", type=Path, default=Path(__file__).resolve().parents[2] / "public" / "data" / "editais"
+    )
     args = parser.parse_args()
     dados, linhas = extrair(
         ler_fonte(args.homologacao_html, HOMOLOGACAO),

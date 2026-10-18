@@ -1,115 +1,155 @@
 # Trajetória Unb
 
-Calculadora de IRA e média ponderada, com uma área para simular notas de intercâmbio e consultar os resultados dos editais da INT.
+Calculadora de IRA e média ponderada, simulação de intercâmbio e consulta de turmas da Unb.
+Projeto independente, sem vínculo oficial com a universidade.
 
-Na calculadora de IRA, você organiza as disciplinas por período, informa os créditos e as menções. Na área de intercâmbio, pode filtrar os candidatos por curso e comparar sua nota usando as médias e os desvios de cada edital. Seu IRA e IPF ficam salvos no navegador para usar nos outros editais.
+## Rodar localmente
 
-O projeto é independente e não tem vínculo oficial com a UnB.
-
-## Como rodar
-
-Com Python instalado:
+Na raiz do projeto:
 
 ```sh
-pip install -r requirements.txt
-python route.py
+uv sync --frozen
+uv run python server/route.py
 ```
 
-Abra [localhost:8080](http://localhost:8080). A apresentação fica em `/`, a calculadora em `/ira/` e os editais em `/intercambio/`.
-
-O servidor carrega o histórico de disciplinas de `dados.json`, quando disponível, e salva as alterações nesse arquivo e no navegador. Também é possível servir o site com `python -m http.server 8080`; nesse caso, o histórico fica apenas no navegador.
-
-## Editais
-
-Estão disponíveis os editais **3/2024**, **10/2024**, **1/2025**, **1/2026** e **7/2026**. Os dados vêm das publicações oficiais da INT, com links para as fontes em cada página.
-
-Os arquivos ficam em `data/editais/`. Cada edital tem seu próprio script de extração, porque as publicações nem sempre seguem o mesmo formato. Para atualizar os dados:
+Abra [localhost:8080](http://localhost:8080). As páginas ficam em `/`, `/ira/`,
+`/intercambio/` e `/turmas/`. Para usar outra porta:
 
 ```sh
-python scripts/extrair_edital_3_2024.py
-python scripts/extrair_edital_10_2024.py
-python scripts/extrair_edital_1_2025.py
-python scripts/extrair_edital_1_2026.py
-python scripts/extrair_edital_7_2026.py
+uv run python server/route.py --port 8081
 ```
 
-Execute o script do edital que quiser atualizar. Nos editais 1/2025 e 1/2026, homologação e alocação são cruzadas pela matrícula. Médias e desvios são específicos de cada seleção; quando há mais de uma referência para o curso, a calculadora mostra as alternativas.
+`uv run` usa o ambiente Python do projeto. Também funciona com
+`python server/route.py`, desde que o Python usado tenha as dependências
+instaladas. A alternativa por pip continua disponível:
 
-O 3/2024 usa o IRA diretamente: `IRA + 2 × (IPF / 100)`, sem média ou desvio por curso. As opções de destino não constam nas tabelas consultadas.
+```sh
+python -m pip install -r requirements.txt
+python server/route.py
+```
 
-No 10/2024, as opções de destino não foram encontradas nas publicações consultadas. As médias e os desvios são estimados pelo IRA e pelo escore publicado, sem atribuir turnos. Quando os dados não permitem distinguir uma referência, a simulação fica indisponível. O JSON registra o método e as matrículas usadas em cada estimativa.
+Recarregue a página após editar HTML, CSS ou JavaScript. Ao alterar Python,
+reinicie o servidor. Use Ctrl+C para encerrar.
 
-Para incluir um novo edital, crie o extrator em `scripts/`, os dados em `data/editais/` e a página em `intercambio/`. Depois, adicione a entrada em `data/editais/index.json`.
+## Onde fica cada coisa
 
-## Código
+| Pasta | Conteúdo |
+| --- | --- |
+| `public/` | Site completo: páginas, CSS, JavaScript, ícones e dados públicos |
+| `server/` | Servidor local Bottle |
+| `scripts/` | Build, validação e scrapers em `scripts/scrapers/` |
+| `local/` | Histórico pessoal; fora do Git e da publicação |
+| `config/` | Semestre atual usado pelos scrapers |
+| `tests/` | Testes de cálculos, scrapers e servidor |
+| `docs/` | Detalhes dos dados e de sua atualização |
 
-O site usa HTML, CSS e JavaScript, com Bootstrap. O servidor local é feito com Bottle.
+`dist/` é gerado pelo build. Edite os arquivos em `public/`.
+As configurações, `bun.lock` e `uv.lock` permanecem na raiz.
 
-- `ira/` e `intercambio/`: páginas do site.
-- `js/` e `css/`: cálculos, filtros e estilos.
-- `scripts/`: extração dos dados publicados pela INT.
-- `tests/`: testes dos cálculos, das extrações e das rotas.
+## Dados e histórico
 
-## Verificações
+A calculadora salva o histórico no navegador. No servidor local, também lê e
+salva `local/dados.json`. Esse arquivo não vai para o Git nem para a Vercel.
+IRA, IPF e preferências de intercâmbio ficam no navegador; são separados por
+origem, então localhost e o site publicado têm armazenamentos distintos.
 
-Com [uv](https://docs.astral.sh/uv/) e [Bun](https://bun.sh/) instalados, rode na raiz do projeto:
+Para servir apenas os arquivos estáticos, sem sincronizar o histórico local:
+
+```sh
+python -m http.server 8080 --directory public
+```
+
+### Atualizar turmas
+
+Defina o semestre em `config/coleta.json`:
+
+```json
+{
+  "semestre": "2026.2"
+}
+```
+
+Todos os comandos abaixo leem esse arquivo. Não existe mais a opção `--semestre`.
+Ao mudar de semestre ou revisar as unidades, execute:
+
+```sh
+uv run python scripts/scrapers/coletar_classroom_code_units.py
+uv run python scripts/scrapers/coletar_unidades.py
+uv run python scripts/scrapers/coletar_turmas.py turmas
+```
+
+O primeiro consulta todos os departamentos e registra a oferta e os prefixos em
+`public/data/turmas/classroom_code_units.json`. O segundo gera `unidades.json`
+localmente, excluindo pós-graduação e unidades sem turmas. O terceiro consulta
+somente a seleção e atualiza o JSON do semestre e o `index.json`.
+
+No dia a dia, basta o terceiro comando. O filtro de nível de ensino do SIGAA fica
+vazio. Os arquivos são gravados com indentação para facilitar a leitura.
+O `index.json` mantém uma entrada por semestre, sem duplicar ao atualizar.
+
+Os campos avançados e a integração dos dados com a interface de Turmas ainda
+estão pendentes. Veja o formato dos arquivos em [docs/dados.md](docs/dados.md).
+
+### Atualizar editais
+
+Execute somente o extrator do edital desejado, por exemplo:
+
+```sh
+uv run python scripts/scrapers/extrair_edital_7_2026.py
+```
+
+Os dados ficam em `public/data/editais/`. Veja as fontes, particularidades das
+fórmulas e o procedimento para incluir um edital em [docs/dados.md](docs/dados.md).
+Esse documento também explica o formato e os cuidados da coleta de turmas.
+
+## Verificar o projeto
+
+Com uv, Bun e Node.js 24 instalados, execute na raiz:
 
 ```sh
 uv sync --frozen
 bun install --frozen-lockfile
-
 uv run pytest
 uv run ruff check .
 uv run ruff format --check .
 bun check
-bun run test
-bun run build
+bun run build:verified
 ```
 
-Para aplicar a formatação: `uv run ruff format .` e `bun run format`.
-`bun check` apenas confere os arquivos, sem alterá-los. ESLint verifica o JavaScript,
-Stylelint verifica o CSS, HTML Validate verifica a marcação HTML e Prettier confere a formatação de HTML, CSS, JavaScript e configurações JSON/YAML.
-Os arquivos de dados, `dados.json`, dependências e a saída de build ficam fora da formatação.
+`bun check` confere JavaScript, CSS, HTML, formatação, links, sitemap e dados.
+`build:verified` também executa os testes JavaScript, gera `dist/` e confere o
+resultado. Os testes Python usam arquivos temporários para testar a gravação;
+o histórico pessoal não deve ser usado como fixture.
 
-`bun check` também valida links e arquivos internos (incluindo diferenças de maiúsculas/minúsculas),
-sitemap, URLs canônicas e integridade dos dados dos editais: matrículas únicas, cursos, opções e campos numéricos.
-Use `bun run check:site` para executar só essa etapa.
-
-O GitHub Actions executa essas verificações em cada push e pull request, além dos testes Python em Linux
-(Python 3.11 e 3.13) e Windows (3.13). O site gerado fica disponível como artefato por sete dias.
-Para bloquear merges com falhas, adicione o status **Verificações obrigatórias** às regras de proteção da `main` no GitHub,
-depois que o workflow tiver rodado. O arquivo de workflow sozinho não ativa essa proteção.
-
-Na Vercel, o comando configurado é `bun run build:verified`: lint, formatação, HTML, links, dados,
-testes JavaScript, build e uma segunda conferência sobre `dist/`. Qualquer falha interrompe a publicação.
-Os testes do servidor Python ficam no GitHub, pois a Vercel publica apenas os arquivos estáticos.
-A formatação de `vercel.json` é conferida por `bun check` e pelo GitHub. No deploy,
-`bun run format:check:deploy` exclui somente esse arquivo da checagem de formatação;
-as demais verificações continuam obrigatórias.
-Mantenha `bun.lock` e `uv.lock` no repositório para instalações reproduzíveis.
-O `pyproject.toml` define as dependências usadas por uv; `requirements.txt` mantém a instalação por pip disponível.
-
-## Publicação
-
-O domínio configurado nos links canônicos, `robots.txt` e `sitemap.xml` é `https://trajetoriaunb.vercel.app/`. Ao adicionar uma página pública, inclua sua URL no sitemap. Os favicons ficam na raiz, em SVG, ICO e PNG.
-
-### Servidor local
+Para aplicar a formatação:
 
 ```sh
-python route.py --port 8081
+uv run ruff format .
+bun run format
 ```
 
-A execução padrão usa `127.0.0.1:8080`. Use `--quiet` para ocultar as requisições ou `--debug` para investigar erros. HTML, CSS e JavaScript são atualizados ao recarregar a página; alterações em Python exigem reiniciar o servidor. Encerre com Ctrl+C.
+O GitHub Actions roda as verificações em pushes e pull requests, com testes
+Python em Linux (3.11 e 3.13) e Windows (3.13). Para exigir aprovação dos checks
+antes do merge, configure o status **Verificações obrigatórias** na proteção da
+`main`; o workflow sozinho não ativa essa regra.
 
-### Vercel e indexação
+## Publicar
 
-`vercel.json` configura a publicação estática com `bun run build:verified`, que confere o projeto e gera `dist/` somente com arquivos públicos. O histórico pessoal e `route.py` ficam fora da publicação. No site público, o histórico é salvo no navegador; a sincronização com `dados.json` é exclusiva do servidor local.
+A Vercel executa `bun run build:verified` e publica `dist/`, que recebe somente o
+conteúdo de `public/`. Python e scrapers não rodam na Vercel. Atualize os dados
+localmente e envie os JSONs por commit e push quando quiser publicá-los.
 
-Depois de publicar:
+A formatação de `vercel.json` é conferida localmente por `bun check` e no GitHub.
+Na checagem de deploy, somente esse arquivo é excluído do Prettier.
 
-- Use o domínio de produção `https://trajetoriaunb.vercel.app/`, com acesso público.
-- Confira se páginas, `robots.txt`, `sitemap.xml` e favicons respondem normalmente, sem `noindex` nas páginas de produção.
-- Cadastre a propriedade de prefixo de URL no Google Search Console, conclua a verificação de propriedade e envie `sitemap.xml`.
-- Solicite a inspeção da página inicial. A descoberta e a indexação são decisões do buscador; sitemap e metadados não garantem inclusão.
+O endereço configurado é [trajetoriaunb.vercel.app](https://trajetoriaunb.vercel.app/).
+Ao adicionar páginas, atualize `public/sitemap.xml` e os links de navegação.
+Ícones, `robots.txt` e sitemap ficam em `public/`, mas continuam acessíveis na
+raiz do site. Após publicar, envie o sitemap ao Google Search Console; a
+indexação depende do buscador.
 
-Ao adicionar um edital, mantenha também seus links no HTML inicial de `intercambio/index.html`, para que possam ser encontrados antes de executar JavaScript.
+A página `public/404.html` é usada pelo servidor local e publicada junto do site
+para rotas inexistentes. Ela fica fora do sitemap e tem `noindex`.
+
+`node_modules/` contém as ferramentas de lint, testes JavaScript e build. É
+recriado por `bun install --frozen-lockfile`, fica fora do Git e não é publicado.

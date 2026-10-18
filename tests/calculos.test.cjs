@@ -3,8 +3,8 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 const vm = require('node:vm');
-const calc = require('../js/calculos.js');
-const dados = require('../data/editais/edital-int-n-7-2026.json');
+const calc = require('../public/js/calculos.js');
+const dados = require('../public/data/editais/edital-int-n-7-2026.json');
 
 test('a fórmula reproduz os 317 resultados respeitando o arredondamento do IPF publicado', () => {
     assert.equal(dados.resultados.length, 317);
@@ -73,7 +73,10 @@ function app(storage, slug = 'edital-int-n-7-2026') {
         document: { querySelector: () => ({ content: '../../' }), addEventListener() {}, getElementById: () => null },
         localStorage: { getItem: (key) => storage.get(key) ?? null, setItem: (key, value) => storage.set(key, value) },
     };
-    return vm.runInNewContext(fs.readFileSync(path.join(__dirname, '../js/common.js'), 'utf8') + '\nAppUnB;', context);
+    return vm.runInNewContext(
+        fs.readFileSync(path.join(__dirname, '../public/js/common.js'), 'utf8') + '\nAppUnB;',
+        context,
+    );
 }
 
 test('perfil persiste entre editais e filtros permanecem independentes', () => {
