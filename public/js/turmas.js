@@ -3,15 +3,18 @@
     const busca = document.getElementById('buscaTurmas');
     const departamento = document.getElementById('departamentoTurmas');
     const horario = document.getElementById('horarioTurmas');
+    const lotacao = document.getElementById('lotacaoTurmas');
     const modo = document.getElementById('modoAvancadoTurmas');
     const lista = document.getElementById('listaDisciplinas');
     const estado = document.getElementById('estadoTurmas');
     const contagem = document.getElementById('contagemTurmas');
-    const mais = document.getElementById('maisTurmas');
-    const pageSize = 100;
+    const sentinela = document.getElementById('sentinelaTurmas');
+    const passo = 24;
     let disciplinas = [];
     let unidades = {};
-    let exibidas = pageSize;
+    let gruposFiltrados = [];
+    let gruposExibidos = 0;
+    let observador;
 
     function normalizar(valor) {
         return String(valor ?? '')
@@ -22,109 +25,163 @@
 
     function mostrarEstado(titulo, descricao = '') {
         estado.hidden = false;
-        estado.replaceChildren();
-        const principal = AppUnB.elemento('p', '', titulo);
-        estado.append(principal);
+        estado.replaceChildren(AppUnB.elemento('p', '', titulo));
         if (descricao) estado.append(AppUnB.elemento('p', '', descricao));
         lista.replaceChildren();
+        sentinela.hidden = true;
         contagem.textContent = '';
-        mais.hidden = true;
     }
 
-    function montarTabela(registros) {
-        const tabela = AppUnB.elemento('table', 'table tabela-resultados turmas-tabela');
-        const cabecalho = document.createElement('thead');
-        const linhaCabecalho = document.createElement('tr');
-        for (const nome of ['Disciplina', 'Turma', 'Professor(es)', 'Horário', 'Local', 'Matriculados / vagas']) {
-            const celula = AppUnB.elemento('th', '', nome);
-            celula.scope = 'col';
-            linhaCabecalho.append(celula);
-        }
-        cabecalho.append(linhaCabecalho);
-        const corpo = document.createElement('tbody');
+    function disponibilidade(turma) {
+        if (turma.vagas == null || turma.matriculados == null) return 'indisponivel';
+        return turma.matriculados >= turma.vagas ? 'lotada' : 'vagas';
+    }
 
-        for (const { disciplina, turma } of registros) {
-            const linha = document.createElement('tr');
-            const nome = AppUnB.elemento('td', 'turmas-disciplina');
-            nome.append(AppUnB.elemento('strong', '', disciplina.nome));
-            nome.append(AppUnB.elemento('small', '', disciplina.codigo));
-            const origens = (turma.unidades || []).map((id) => unidades[id]).filter(Boolean);
-            if (origens.length) nome.title = `Departamento: ${origens.join('; ')}`;
-            linha.append(nome);
-            linha.append(AppUnB.elemento('td', '', turma.numero));
-            linha.append(AppUnB.elemento('td', '', (turma.professores || []).join(' · ') || '—'));
-            linha.append(AppUnB.elemento('td', '', (turma.horarios || []).join(' · ') || '—'));
-            linha.append(AppUnB.elemento('td', '', turma.local || '—'));
-            linha.append(AppUnB.elemento('td', '', `${turma.matriculados ?? '—'} / ${turma.vagas ?? '—'}`));
-            corpo.append(linha);
-        }
+    function criarCampoTurma(valor, classe = '') {
+        const campo = AppUnB.elemento('div', `turma-oferta-campo ${classe}`.trim());
+        campo.append(AppUnB.elemento('span', 'turma-oferta-valor', valor));
+        return campo;
+    }
 
-        tabela.append(cabecalho, corpo);
-        lista.replaceChildren(tabela);
+    function criarLinhaTurma(turma) {
+        const linha = AppUnB.elemento('article', 'turma-oferta');
+        const numero = criarCampoTurma(turma.numero, 'turma-oferta-numero');
+        numero.querySelector('.turma-oferta-valor').classList.add('turma-oferta-numero-valor');
+        linha.append(numero);
+        linha.append(
+            criarCampoTurma((turma.professores || []).join(' · ') || 'Não informado', 'turma-oferta-professores'),
+        );
+        linha.append(criarCampoTurma((turma.horarios || []).join(' · ') || 'Não informado', 'turma-oferta-horario'));
+        linha.append(criarCampoTurma(turma.local || 'Não informado', 'turma-oferta-local'));
+
+        const vagas = criarCampoTurma(`${turma.matriculados ?? '—'} / ${turma.vagas ?? '—'}`, 'turma-oferta-vagas');
+        linha.append(vagas);
+        return linha;
+    }
+
+    function criarCabecalhoTurmas() {
+        const cabecalho = AppUnB.elemento('div', 'turmas-ofertas-cabecalho');
+        for (const rotulo of ['Turma', 'Professor(a)', 'Horário', 'Local', 'Vagas (SIGAA)']) {
+            cabecalho.append(AppUnB.elemento('span', '', rotulo));
+        }
+        return cabecalho;
+    }
+
+    function criarGrupo(grupo) {
+        const detalhe = document.createElement('details');
+        detalhe.className = 'turma-materia';
+        detalhe.open = grupo.aberto;
+
+        const resumo = document.createElement('summary');
+        resumo.className = 'turma-materia-resumo';
+        const identificacao = AppUnB.elemento('span', 'turma-materia-identificacao');
+        identificacao.append(AppUnB.elemento('small', 'turma-materia-codigo', grupo.disciplina.codigo));
+        identificacao.append(AppUnB.elemento('strong', '', grupo.disciplina.nome));
+        resumo.append(identificacao);
+        const finalResumo = AppUnB.elemento('span', 'turma-materia-final');
+        finalResumo.append(
+            AppUnB.elemento(
+                'span',
+                'turma-materia-contagem',
+                `${grupo.turmas.length} ${grupo.turmas.length === 1 ? 'turma' : 'turmas'}`,
+            ),
+        );
+        finalResumo.append(AppUnB.elemento('span', 'turma-materia-seta', '⌄'));
+        resumo.append(finalResumo);
+        detalhe.append(resumo);
+
+        const ofertas = AppUnB.elemento('div', 'turma-ofertas-scroll');
+        ofertas.append(criarCabecalhoTurmas());
+        const linhas = AppUnB.elemento('div', 'turma-ofertas');
+        for (const turma of grupo.turmas) linhas.append(criarLinhaTurma(turma));
+        ofertas.append(linhas);
+        detalhe.append(ofertas);
+        return detalhe;
+    }
+
+    function adicionarProximoLote() {
+        const proximos = gruposFiltrados.slice(gruposExibidos, gruposExibidos + passo);
+        if (!proximos.length) {
+            sentinela.hidden = true;
+            observador?.disconnect();
+            return;
+        }
+        const fragmento = document.createDocumentFragment();
+        for (const grupo of proximos) fragmento.append(criarGrupo(grupo));
+        lista.append(fragmento);
+        gruposExibidos += proximos.length;
+        sentinela.hidden = gruposExibidos >= gruposFiltrados.length;
+        if (sentinela.hidden) observador?.disconnect();
+        else observador?.observe(sentinela);
     }
 
     function filtrar() {
         const termo = normalizar(busca.value.trim());
         const unidadeSelecionada = normalizar(departamento.value.trim());
         const codigoHorario = normalizar(horario.value.trim());
-        const resultados = [];
-        const cursos = new Set();
+        const filtroLotacao = lotacao.value;
+        gruposFiltrados = [];
+        let turmasEncontradas = 0;
 
         for (const disciplina of disciplinas) {
+            const informacaoMateria = normalizar(
+                [disciplina.codigo, disciplina.nome, ...(disciplina.nomesAlternativos || [])].join(' '),
+            );
+            const correspondeMateria = !termo || informacaoMateria.includes(termo);
+            const turmas = [];
+            let encontrouProfessor = false;
+
             for (const turma of disciplina.turmas || []) {
                 const nomesUnidades = (turma.unidades || []).map((id) => unidades[id] || id);
                 if (unidadeSelecionada && !nomesUnidades.some((nome) => normalizar(nome).includes(unidadeSelecionada)))
                     continue;
                 if (codigoHorario && !(turma.horarios || []).some((item) => normalizar(item).includes(codigoHorario)))
                     continue;
-                const texto = normalizar(
-                    [
-                        disciplina.codigo,
-                        disciplina.nome,
-                        ...(disciplina.nomesAlternativos || []),
-                        ...(turma.professores || []),
-                        turma.local,
-                        turma.numero,
-                    ]
-                        .filter(Boolean)
-                        .join(' '),
-                );
-                if (termo && !texto.includes(termo)) continue;
-                cursos.add(disciplina.codigo);
-                resultados.push({ disciplina, turma });
+
+                const situacao = disponibilidade(turma);
+                if (filtroLotacao === 'vagas' && situacao !== 'vagas') continue;
+                if (filtroLotacao === 'lotadas' && situacao !== 'lotada') continue;
+
+                const correspondeProfessor = (turma.professores || []).some((nome) => normalizar(nome).includes(termo));
+                const informacaoTurma = normalizar([...(turma.professores || []), turma.local, turma.numero].join(' '));
+                if (termo && !correspondeMateria && !informacaoTurma.includes(termo)) continue;
+                if (correspondeProfessor) encontrouProfessor = true;
+                turmas.push(turma);
             }
+
+            if (!turmas.length) continue;
+            turmasEncontradas += turmas.length;
+            gruposFiltrados.push({
+                disciplina,
+                turmas,
+                aberto: Boolean(termo && encontrouProfessor && !correspondeMateria),
+            });
         }
 
-        const visiveis = resultados.slice(0, exibidas);
-        estado.hidden = resultados.length > 0;
-        if (!resultados.length) {
-            mostrarEstado('Nenhuma turma encontrada.', 'Ajuste a busca ou escolha outro departamento.');
-        } else {
-            montarTabela(visiveis);
-            contagem.textContent = `${resultados.length.toLocaleString('pt-BR')} turmas · ${cursos.size.toLocaleString('pt-BR')} disciplinas`;
-            mais.hidden = resultados.length <= exibidas;
-            mais.textContent = `Mostrar mais (${Math.min(pageSize, resultados.length - exibidas)} turmas)`;
+        gruposExibidos = 0;
+        observador?.disconnect();
+        lista.replaceChildren();
+        estado.hidden = gruposFiltrados.length > 0;
+        sentinela.hidden = gruposFiltrados.length === 0;
+        if (!gruposFiltrados.length) {
+            mostrarEstado('Nenhuma turma encontrada.', 'Ajuste a busca ou escolha outros filtros.');
+            return;
         }
+
+        contagem.textContent = `${turmasEncontradas.toLocaleString('pt-BR')} turmas · ${gruposFiltrados.length.toLocaleString('pt-BR')} disciplinas`;
+        adicionarProximoLote();
     }
 
     async function carregarSemestre(arquivo) {
         mostrarEstado('Carregando turmas…');
-        semestreSelect.disabled = true;
-        busca.disabled = true;
-        departamento.disabled = true;
-        horario.disabled = true;
+        for (const controle of [semestreSelect, busca, departamento, horario, lotacao]) controle.disabled = true;
         try {
             const response = await fetch(new URL(`data/turmas/${arquivo}`, AppUnB.raiz));
             if (!response.ok) throw new Error(`HTTP ${response.status}`);
             const data = await response.json();
             if (!Array.isArray(data.disciplinas)) throw new Error('Formato de dados inválido.');
             disciplinas = data.disciplinas;
-            exibidas = pageSize;
-            semestreSelect.disabled = false;
-            busca.disabled = false;
-            departamento.disabled = false;
-            horario.disabled = false;
-            estado.hidden = true;
+            for (const controle of [semestreSelect, busca, departamento, horario, lotacao]) controle.disabled = false;
             filtrar();
         } catch {
             mostrarEstado('Não foi possível carregar as turmas.', 'Tente atualizar a página em alguns instantes.');
@@ -156,9 +213,7 @@
             const opcoesDepartamento = document.getElementById('listaDepartamentosTurmas');
             opcoesDepartamento.replaceChildren();
             for (const [, nome] of Object.entries(unidades).sort((a, b) => a[1].localeCompare(b[1], 'pt-BR'))) {
-                const option = AppUnB.elemento('option', '', nome);
-                option.value = nome;
-                opcoesDepartamento.append(option);
+                opcoesDepartamento.append(AppUnB.elemento('option', '', nome));
             }
 
             await carregarSemestre(semestres[0].arquivo);
@@ -171,25 +226,29 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
+        observador = new IntersectionObserver(
+            (entradas) => {
+                if (entradas.some((entrada) => entrada.isIntersecting)) adicionarProximoLote();
+            },
+            { rootMargin: '400px 0px' },
+        );
         const detalhesModo = document.getElementById('detalhesModo');
+        const botaoFiltros = document.getElementById('botaoMaisFiltrosTurmas');
+        const painelFiltros = document.getElementById('painelFiltrosTurmas');
+        botaoFiltros.addEventListener('click', () => {
+            const aberto = botaoFiltros.getAttribute('aria-expanded') === 'true';
+            botaoFiltros.setAttribute('aria-expanded', String(!aberto));
+            botaoFiltros.textContent = aberto ? 'Mais filtros' : 'Menos filtros';
+            painelFiltros.hidden = aberto;
+        });
         modo.addEventListener('change', () => {
             detalhesModo.hidden = !modo.checked;
         });
         semestreSelect.addEventListener('change', () => carregarSemestre(semestreSelect.value));
-        for (const controle of [busca, departamento, horario]) {
-            controle.addEventListener('input', () => {
-                exibidas = pageSize;
-                filtrar();
-            });
-            controle.addEventListener('change', () => {
-                exibidas = pageSize;
-                filtrar();
-            });
+        for (const controle of [busca, departamento, horario, lotacao]) {
+            controle.addEventListener('input', filtrar);
+            controle.addEventListener('change', filtrar);
         }
-        mais.addEventListener('click', () => {
-            exibidas += pageSize;
-            filtrar();
-        });
         iniciar();
     });
 })();

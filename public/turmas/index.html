@@ -81,40 +81,57 @@
                         />
                         <datalist id="listaDepartamentosTurmas"></datalist>
                     </div>
-                    <details class="turmas-mais-filtros">
-                        <summary>Mais filtros</summary>
-                        <div class="turmas-filtro-horario">
-                            <label class="form-label" for="horarioTurmas">Código do horário</label
+                    <div class="turmas-filtros-acoes">
+                        <button
+                            class="turmas-mais-filtros"
+                            id="botaoMaisFiltrosTurmas"
+                            type="button"
+                            aria-expanded="false"
+                            aria-controls="painelFiltrosTurmas"
+                        >
+                            Mais filtros
+                        </button>
+                        <label class="turmas-modo"
                             ><input
-                                type="text"
-                                class="form-control"
-                                id="horarioTurmas"
-                                placeholder="Ex.: 24M12"
-                                disabled
-                            />
+                                type="checkbox"
+                                id="modoAvancadoTurmas"
+                                aria-controls="listaDisciplinas detalhesModo"
+                            />Modo avançado</label
+                        >
+                        <div class="turmas-filtros-painel" id="painelFiltrosTurmas" hidden>
+                            <div class="turmas-filtro-horario">
+                                <label class="form-label" for="horarioTurmas">Código do horário</label>
+                                <input
+                                    type="search"
+                                    class="form-control"
+                                    id="horarioTurmas"
+                                    placeholder="Ex.: 24M12"
+                                    disabled
+                                />
+                            </div>
+                            <div class="turmas-filtro-lotacao">
+                                <label class="form-label" for="lotacaoTurmas">Vagas</label>
+                                <select class="form-select" id="lotacaoTurmas" disabled>
+                                    <option value="todas">Todas</option>
+                                    <option value="vagas">Com vagas</option>
+                                    <option value="lotadas">Lotadas</option>
+                                </select>
+                            </div>
                         </div>
-                    </details>
-                    <label class="turmas-modo"
-                        ><input
-                            type="checkbox"
-                            id="modoAvancadoTurmas"
-                            aria-controls="listaDisciplinas detalhesModo"
-                        />Modo avançado</label
-                    >
+                    </div>
                 </div>
                 <p id="detalhesModo" class="texto-apoio" hidden>Os dados avançados serão exibidos quando publicados.</p>
             </section>
-            <section class="turmas-resultados" aria-labelledby="tituloDisciplinas">
-                <h2 id="tituloDisciplinas">Turmas</h2>
+            <section class="turmas-resultados" aria-label="Resultados das turmas">
                 <p id="contagemTurmas" class="turmas-contagem" aria-live="polite"></p>
-                <div id="listaDisciplinas" class="tabela-scroll turmas-tabela-scroll"></div>
-                <button id="maisTurmas" class="turmas-mais-resultados" type="button" hidden>Mostrar mais turmas</button>
+                <div id="listaDisciplinas" class="turmas-materias"></div>
+                <div id="sentinelaTurmas" class="turmas-sentinela" aria-hidden="true" hidden></div>
                 <div class="turmas-vazio" id="estadoTurmas" role="status" hidden>
                     <p>Nenhum semestre publicado ainda.</p>
                     <p>Escolha outro filtro ou tente novamente mais tarde.</p>
                 </div>
             </section>
-            <noscript><p class="aviso">Ative o JavaScript para alternar o modo avançado.</p></noscript>
+            <noscript><p class="aviso">Ative o JavaScript para consultar e filtrar as turmas.</p></noscript>
         </main>
         <footer class="text-center py-4">
             <div class="container">

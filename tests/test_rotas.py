@@ -55,12 +55,13 @@ class RotasTest(unittest.TestCase):
             self.assertTrue(get(caminho)["status"].startswith("200"), caminho)
 
     def test_pagina_404_personalizada(self):
+        esperado = (route.ROOT / "404.html").read_text(encoding="utf-8").encode("utf-8")
         for caminho in ["/pagina-inexistente/", "/intercambio/inexistente/", "/caminho/profundo/inexistente/"]:
             with self.subTest(caminho=caminho):
                 resposta = get(caminho)
                 self.assertEqual(resposta["status"].split()[0], "404")
                 self.assertEqual(resposta["headers"]["X-Robots-Tag"], "noindex")
-                self.assertEqual(resposta["body"], (route.ROOT / "404.html").read_bytes())
+                self.assertEqual(resposta["body"], esperado)
                 self.assertIn(b'href="/css/interface.css"', resposta["body"])
                 self.assertIn(b'href="/"', resposta["body"])
 

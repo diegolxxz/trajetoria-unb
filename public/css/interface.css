@@ -1270,6 +1270,11 @@ html[data-tema='claro'] {
     letter-spacing: -0.035em;
     margin: 0;
 }
+body.pagina-turmas main.pagina-conteudo {
+    width: min(100%, 68rem);
+    max-width: 68rem;
+    margin-inline: auto;
+}
 .interface-unb .turmas-titulo .form-select {
     width: auto;
     max-width: 65%;
@@ -1287,8 +1292,9 @@ html[data-tema='claro'] {
 }
 .turmas-filtro-departamento {
     width: min(100%, 340px);
+    flex: 1 1 240px;
 }
-.turmas-filtro-departamento .form-select {
+.turmas-filtro-departamento .form-control {
     font-size: 0.8125rem;
 }
 .turmas-modo {
@@ -1309,80 +1315,197 @@ html[data-tema='claro'] {
     margin: 0.25rem 0 0.5rem;
     font-size: 0.8125rem;
 }
-.turmas-mais-filtros {
-    min-width: 0;
-}
-.turmas-mais-filtros summary {
-    min-height: 44px;
-    display: flex;
+.turmas-filtros-acoes {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
     align-items: center;
-    gap: 0.4rem;
+    gap: 0.25rem 1rem;
+    flex: 1 0 100%;
+}
+.turmas-mais-filtros {
+    justify-self: start;
+    min-height: 44px;
+    padding: 0;
+    border: 0;
+    background: transparent;
     color: var(--pilot-accent);
     font-size: 0.8125rem;
     cursor: pointer;
-    list-style: none;
 }
-.turmas-mais-filtros summary::-webkit-details-marker {
+.turmas-mais-filtros[aria-expanded='true']::before {
+    content: '− ';
+}
+.turmas-mais-filtros[aria-expanded='false']::before {
+    content: '+ ';
+}
+.turmas-filtros-acoes .turmas-modo {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: end;
+}
+.turmas-filtros-painel {
+    grid-column: 1 / -1;
+    grid-row: 2;
+}
+.turmas-filtros-painel[hidden] {
     display: none;
 }
-.turmas-mais-filtros summary::before {
-    content: '+';
+.turmas-filtros-painel:not([hidden]) {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.5rem 1rem;
+    width: 100%;
+    padding: 0.25rem 0 0.75rem;
 }
-.turmas-mais-filtros[open] summary::before {
-    content: '−';
+.turmas-mais-filtros:focus-visible {
+    outline: 2px solid var(--pilot-accent);
+    outline-offset: 3px;
+    border-radius: 3px;
 }
 .turmas-filtro-horario {
-    max-width: 220px;
-    padding-bottom: 0.5rem;
+    min-width: 0;
+}
+.turmas-filtro-lotacao {
+    min-width: 0;
 }
 .turmas-resultados {
     border-top: 1px solid var(--pilot-border);
     padding-top: 0.75rem;
-}
-.turmas-resultados > h2 {
-    font-size: 0.875rem;
-    font-weight: 600;
-    margin: 0;
 }
 .turmas-contagem {
     margin: 0.25rem 0 0.5rem;
     color: var(--pilot-muted);
     font-size: 0.75rem;
 }
-.turmas-tabela-scroll {
-    margin-top: 0;
+.turmas-materias {
+    display: grid;
+    gap: 0.4rem;
 }
-.turmas-tabela {
-    min-width: 760px;
+.turma-materia {
+    min-width: 0;
+    border-top: 1px solid var(--pilot-border);
 }
-.turmas-tabela th:first-child,
-.turmas-tabela td:first-child {
-    width: 27%;
+.turma-materia:last-child {
+    border-bottom: 1px solid var(--pilot-border);
 }
-.turmas-tabela td {
-    vertical-align: top;
+.turma-materia-resumo {
+    display: flex !important;
+    width: 100% !important;
+    min-height: 52px !important;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.65rem 0 !important;
+    color: var(--pilot-text) !important;
+    list-style: none;
+    cursor: pointer;
 }
-.turmas-disciplina strong,
-.turmas-disciplina small {
-    display: block;
+.turma-materia-resumo::-webkit-details-marker {
+    display: none;
 }
-.turmas-disciplina strong {
+.turma-materia-identificacao {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    min-width: 0;
+    gap: 0.15rem 0.55rem;
+}
+.turma-materia-identificacao strong {
+    grid-column: 1 / -1;
+    overflow-wrap: anywhere;
+    font-size: 0.875rem;
     font-weight: 550;
 }
-.turmas-disciplina small {
-    margin-top: 0.15rem;
+.turma-materia-identificacao small {
+    justify-self: start;
+    padding: 0.1rem 0.45rem;
+    border-radius: 6px;
+    background: color-mix(in srgb, var(--pilot-accent) 16%, transparent);
+    color: var(--pilot-accent);
+    font-weight: 650;
+    font-size: 0.75rem;
+}
+.turma-materia-contagem {
+    flex: 0 0 auto;
+    padding: 0.2rem 0.55rem;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--pilot-accent) 13%, transparent);
+    color: var(--pilot-accent);
+    font-size: 0.75rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+.turma-materia-final {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: 0.5rem;
     color: var(--pilot-muted);
 }
-.turmas-mais-resultados {
-    display: block;
-    width: 100%;
-    min-height: 44px;
-    margin-top: 0.5rem;
-    border: 1px solid var(--pilot-border);
-    border-radius: 8px;
-    background: var(--pilot-surface);
-    color: var(--pilot-accent);
+.turma-materia-seta {
+    display: inline-block;
+    color: var(--pilot-muted);
+    transition: transform 160ms ease;
+}
+.turma-materia[open] .turma-materia-seta {
+    transform: rotate(180deg);
+}
+.turmas-ofertas-scroll {
+    overflow-x: auto;
+    scrollbar-width: thin;
+}
+.turmas-ofertas-cabecalho,
+.turma-ofertas {
+    min-width: 760px;
+}
+.turmas-ofertas-cabecalho,
+.turma-oferta {
+    display: grid;
+    grid-template-columns: minmax(3rem, 0.5fr) minmax(10rem, 2fr) minmax(5rem, 0.8fr) minmax(7rem, 1.2fr) minmax(
+            9rem,
+            1.2fr
+        );
+    gap: 0.5rem 1rem;
+}
+.turmas-ofertas-cabecalho {
+    padding: 0.5rem 0;
+    border-top: 1px solid var(--pilot-border);
+    color: var(--pilot-muted);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.035em;
+    text-transform: uppercase;
+}
+.turma-oferta {
+    align-items: center;
+    padding: 0.6rem 0;
+    border-top: 1px solid var(--pilot-border);
     font-size: 0.8125rem;
+}
+.turma-oferta > div {
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+.turma-oferta-numero-valor,
+.turma-oferta-vagas .turma-oferta-valor,
+.turma-oferta-professores > span:last-child,
+.turma-oferta-campo > span:last-child {
+    display: block;
+}
+.turma-situacao {
+    display: inline-block;
+    margin-top: 0.25rem;
+    font-size: 0.7rem;
+}
+.turma-situacao-vagas {
+    color: var(--pilot-success);
+}
+.turma-situacao-lotada,
+.turma-situacao-indisponivel {
+    color: var(--pilot-muted);
+}
+.turmas-sentinela {
+    height: 1px;
 }
 .turmas-vazio {
     padding: 1rem;
@@ -1406,12 +1529,26 @@ html[data-tema='claro'] {
     .turmas-filtro-departamento {
         width: 100%;
     }
-    .turmas-tabela {
-        min-width: 680px;
+    .turmas-filtros-painel {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
-    .turmas-tabela td,
-    .turmas-tabela th {
-        padding: 0.4rem;
+    .turmas-ofertas-cabecalho,
+    .turma-oferta {
+        min-width: 0;
+        grid-template-columns: minmax(2.5rem, 0.6fr) minmax(0, 1.8fr) repeat(3, minmax(0, 1fr));
+        gap: 0.4rem;
+    }
+    .turmas-ofertas-cabecalho {
+        font-size: 0.625rem;
+    }
+    .turma-oferta {
+        font-size: 0.7rem;
+    }
+}
+@media (pointer: coarse) {
+    .pagina-turmas input,
+    .pagina-turmas select {
+        font-size: 16px;
     }
 }
 @media (max-width: 991px) {
