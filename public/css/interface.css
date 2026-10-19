@@ -1270,6 +1270,17 @@ html[data-tema='claro'] {
     letter-spacing: -0.035em;
     margin: 0;
 }
+.turmas-titulo-grupo {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.5rem 0.75rem;
+}
+.turmas-atualizacao {
+    margin: 0;
+    color: var(--pilot-muted);
+    font-size: 0.75rem;
+}
 body.pagina-turmas main.pagina-conteudo {
     width: min(100%, 68rem);
     max-width: 68rem;
@@ -1450,7 +1461,9 @@ body.pagina-turmas main.pagina-conteudo {
 .turma-materia[open] .turma-materia-seta {
     transform: rotate(180deg);
 }
-.turmas-ofertas-scroll {
+.turma-ofertas-scroll {
+    min-width: 0;
+    max-width: 100%;
     overflow-x: auto;
     scrollbar-width: thin;
 }
@@ -1532,6 +1545,9 @@ body.pagina-turmas main.pagina-conteudo {
     .turmas-filtros-painel {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
+    .turma-ofertas {
+        min-width: 0;
+    }
     .turmas-ofertas-cabecalho,
     .turma-oferta {
         min-width: 0;
@@ -1545,9 +1561,10 @@ body.pagina-turmas main.pagina-conteudo {
         font-size: 0.7rem;
     }
 }
-@media (pointer: coarse) {
-    .pagina-turmas input,
-    .pagina-turmas select {
+@media (pointer: coarse), (max-width: 575px) {
+    .pagina-turmas .form-control,
+    .pagina-turmas .turmas-titulo .form-select,
+    .pagina-turmas .form-select {
         font-size: 16px;
     }
 }

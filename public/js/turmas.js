@@ -8,10 +8,12 @@
     const lista = document.getElementById('listaDisciplinas');
     const estado = document.getElementById('estadoTurmas');
     const contagem = document.getElementById('contagemTurmas');
+    const atualizacao = document.getElementById('atualizacaoTurmas');
     const sentinela = document.getElementById('sentinelaTurmas');
     const passo = 24;
     let disciplinas = [];
     let unidades = {};
+    let semestresPorArquivo = new Map();
     let gruposFiltrados = [];
     let gruposExibidos = 0;
     let observador;
@@ -174,6 +176,21 @@
 
     async function carregarSemestre(arquivo) {
         mostrarEstado('Carregando turmas…');
+        const dataAtualizacao = semestresPorArquivo.get(arquivo)?.atualizadoEm;
+        if (dataAtualizacao) {
+            const data = new Date(dataAtualizacao);
+            atualizacao.textContent = Number.isNaN(data.valueOf())
+                ? ''
+                : `Atualizado em ${new Intl.DateTimeFormat('pt-BR', {
+                      day: '2-digit',
+                      month: '2-digit',
+                      year: '2-digit',
+                      timeZone: 'UTC',
+                  }).format(data)}`;
+            atualizacao.hidden = !atualizacao.textContent;
+        } else {
+            atualizacao.hidden = true;
+        }
         for (const controle of [semestreSelect, busca, departamento, horario, lotacao]) controle.disabled = true;
         try {
             const response = await fetch(new URL(`data/turmas/${arquivo}`, AppUnB.raiz));
@@ -199,6 +216,7 @@
             const [indice, cadastro] = await Promise.all([indiceResponse.json(), unidadesResponse.json()]);
             unidades = cadastro.unidades || {};
             const semestres = indice.semestres || [];
+            semestresPorArquivo = new Map(semestres.map((item) => [item.arquivo, item]));
             if (!semestres.length) {
                 mostrarEstado('Nenhum semestre publicado ainda.');
                 return;
