@@ -4,10 +4,10 @@
     {
       "semestre": "2026.2",
       "arquivo": "2026-2.json",
-      "atualizadoEm": "2026-10-17T20:15:46+00:00",
-      "disciplinas": 3468,
-      "turmas": 6554,
-      "fonte": "https://sigaa.unb.br/sigaa/public/turmas/listar.jsf"
+      "atualizadoEm": "2026-10-20T23:57:05+00:00",
+      "fonte": "https://sigaa.unb.br/sigaa/public/turmas/listar.jsf",
+      "disciplinas": 3467,
+      "turmas": 6551
     }
   ]
 }
