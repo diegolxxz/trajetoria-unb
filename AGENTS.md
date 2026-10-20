@@ -6,4 +6,5 @@
 - Mantenha tabelas compactas, idiomas em linhas separadas e colunas totalmente vazias ocultas conforme os filtros. Estilos comuns ficam em `public/css/interface.css`; editais compartilham `public/js/intercambio.js`.
 - Ao importar ou atualizar editais, leia `docs/dados.md`: fórmulas e referências são específicas de cada seleção. Cruze documentos pela matrícula e registre fontes e estimativas, sem inventar turnos.
 - Ao alterar a coleta de turmas, leia `docs/dados.md`: selecione unidades no JSON antes da busca; mantenha o filtro de nível do SIGAA vazio. Cadastro de unidades é atualizado separadamente da coleta frequente. Preserve variantes de turma e diferencie `null` de zero.
+- Modo avançado de Turmas está retirado até a coleta desses dados existir. Era o checkbox `modoAvancadoTurmas` à direita de “Mais filtros” em `public/turmas/index.html`; `public/js/turmas.js` alternava o aviso `detalhesModo`. Ao retomar, use essa posição e o bloco `avancado` descrito em `docs/dados.md`.
 - Após mudar caminhos, confira servidor, scrapers, imports dos testes, lint e build. Execute as verificações do README e confirme que a publicação contém apenas arquivos públicos.

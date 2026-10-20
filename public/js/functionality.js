@@ -245,9 +245,12 @@ function adicionarDisciplina(periodoEl, dados = null) {
 
     div.innerHTML = `
         <div class="row g-2 align-items-center">
-            <div class="col-lg-4 col-md-4 col-sm-12">
+            <div class="col-lg-4 col-md-4 col-sm-12 ira-nome-campo">
                 <input type="text" class="form-control form-control-sm input-nome"
-                       placeholder="Nome da disciplina (opcional)" aria-label="Nome da disciplina" >
+                       placeholder="Nome ou código da disciplina" aria-label="Nome ou código da disciplina"
+                       title="Sugestões a partir de 3 caracteres. Você também pode escrever livremente."
+                       role="combobox" aria-autocomplete="list" aria-expanded="false"
+                       aria-controls="sugestoesDisciplinas" autocomplete="off" >
             </div>
             <div class="col-lg-2 col-md-2 col-4">
                 <select class="form-select form-select-sm sel-creditos" aria-label="Créditos da disciplina" required>

@@ -4,7 +4,6 @@
     const departamento = document.getElementById('departamentoTurmas');
     const horario = document.getElementById('horarioTurmas');
     const lotacao = document.getElementById('lotacaoTurmas');
-    const modo = document.getElementById('modoAvancadoTurmas');
     const lista = document.getElementById('listaDisciplinas');
     const estado = document.getElementById('estadoTurmas');
     const contagem = document.getElementById('contagemTurmas');
@@ -250,7 +249,6 @@
             },
             { rootMargin: '400px 0px' },
         );
-        const detalhesModo = document.getElementById('detalhesModo');
         const botaoFiltros = document.getElementById('botaoMaisFiltrosTurmas');
         const painelFiltros = document.getElementById('painelFiltrosTurmas');
         botaoFiltros.addEventListener('click', () => {
@@ -258,9 +256,6 @@
             botaoFiltros.setAttribute('aria-expanded', String(!aberto));
             botaoFiltros.textContent = aberto ? 'Mais filtros' : 'Menos filtros';
             painelFiltros.hidden = aberto;
-        });
-        modo.addEventListener('change', () => {
-            detalhesModo.hidden = !modo.checked;
         });
         semestreSelect.addEventListener('change', () => carregarSemestre(semestreSelect.value));
         for (const controle of [busca, departamento, horario, lotacao]) {
