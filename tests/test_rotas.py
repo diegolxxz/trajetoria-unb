@@ -26,6 +26,13 @@ def get(caminho):
 
 
 class RotasTest(unittest.TestCase):
+    def test_grade_pessoal(self):
+        resposta = get("/grade/")
+        self.assertEqual(resposta["status"].split()[0], "200")
+        self.assertIn(b"Montar minha grade", resposta["body"])
+        self.assertIn(b'aria-current="page">Grade', resposta["body"])
+        self.assertTrue(get("/grade")["headers"]["Location"].endswith("/grade/"))
+
     def test_paginas_e_redirecionamentos(self):
         catalogo = json.loads((Path(route.ROOT) / "data/editais/index.json").read_text(encoding="utf-8"))
         for caminho in ["/ira", "/turmas", "/intercambio", *["/intercambio/" + e["slug"] for e in catalogo]]:

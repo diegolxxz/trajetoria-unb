@@ -35,6 +35,8 @@ def index():
 
 @route("/turmas")
 @route("/turmas/")
+@route("/grade")
+@route("/grade/")
 @route("/ira")
 @route("/ira/")
 @route("/intercambio")
@@ -153,7 +155,7 @@ def load_data():
 def main():
     parser = argparse.ArgumentParser(description="Servidor local do Trajetória Unb, com histórico em dados.json.")
     parser.add_argument("--host", default="127.0.0.1", help="Endereço de escuta (padrão: 127.0.0.1).")
-    parser.add_argument("--port", type=int, default=8080, help="Porta HTTP (padrão: 8080).")
+    parser.add_argument("--port", type=int, default=8082, help="Porta HTTP (padrão: 8080).")
     parser.add_argument("--debug", action="store_true", help="Exibir detalhes de erros do servidor.")
     parser.add_argument("--quiet", action="store_true", help="Ocultar registros de requisições.")
     args = parser.parse_args()
@@ -179,7 +181,8 @@ def main():
         f"  Início       {url}/\n"
         f"  Calculadora  {url}/ira/\n"
         f"  Intercâmbio  {url}/intercambio/\n"
-        f"  Turmas       {url}/turmas/\n\n"
+        f"  Turmas       {url}/turmas/\n"
+        f"  Grade        {url}/grade/\n\n"
         f"  Histórico    {DATA_FILE}\n"
         f"  Arquivo      {'encontrado' if DATA_FILE.exists() else 'será criado ao salvar'}\n"
         f"  Debug        {'ativado' if args.debug else 'desativado'}\n\n"

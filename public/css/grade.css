@@ -1,0 +1,388 @@
+.grade-conteudo {
+    max-width: 1320px;
+}
+.grade-titulo,
+.grade-secao-titulo,
+.grade-plano-barra,
+.grade-acoes {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem 0.75rem;
+    flex-wrap: wrap;
+}
+.grade-titulo,
+.grade-secao-titulo {
+    justify-content: space-between;
+}
+.grade-titulo {
+    margin-bottom: 1rem;
+}
+.grade-titulo h1 {
+    margin: 0;
+}
+.grade-titulo p,
+.grade-secao-titulo p {
+    margin: 0.25rem 0 0;
+}
+.grade-titulo select {
+    width: auto;
+}
+.grade-muted {
+    color: var(--pilot-muted);
+    font-size: 0.875rem;
+    line-height: 1.5;
+}
+.grade-conteudo h2 {
+    font-size: 1.125rem;
+    letter-spacing: -0.015em;
+    margin: 0;
+}
+.grade-conteudo h3 {
+    font-size: 0.9375rem;
+    line-height: 1.4;
+    margin: 0.25rem 0;
+}
+.grade-plano-barra {
+    border-block: 1px solid var(--pilot-border);
+    padding-block: 0.75rem;
+    margin-bottom: 1.25rem;
+}
+.grade-plano-escolha {
+    min-width: 9rem;
+    flex: 1 1 9rem;
+    max-width: 18rem;
+}
+.grade-botao {
+    border: 1px solid var(--pilot-border);
+    border-radius: 8px;
+    background: var(--pilot-surface);
+    color: var(--pilot-text);
+    padding: 0.5rem 0.75rem;
+    min-height: 44px;
+    font: inherit;
+    font-size: 0.875rem;
+    touch-action: manipulation;
+}
+.grade-botao:disabled {
+    opacity: 0.5;
+}
+.grade-principal {
+    background: var(--pilot-accent);
+    color: var(--pilot-bg);
+    border-color: var(--pilot-accent);
+    font-weight: 600;
+}
+.grade-remover {
+    color: var(--pilot-muted);
+}
+.grade-conteudo :is(button, summary, input, select, [tabindex]):focus-visible {
+    outline: 2px solid var(--pilot-accent);
+    outline-offset: 3px;
+}
+.grade-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.5rem;
+    align-items: start;
+}
+.grade-layout > *,
+.grade-titulo > *,
+.grade-plano-barra > * {
+    min-width: 0;
+}
+.grade-disciplinas > input {
+    margin-top: 0.75rem;
+}
+.grade-disciplinas {
+    width: 100%;
+    max-width: 56rem;
+    margin-inline: auto;
+}
+.grade-montar-acoes {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 0.75rem;
+    margin-block: 1rem 0.5rem;
+}
+.grade-montar-acoes p {
+    margin: 0;
+}
+#ajudaBuscaGrade {
+    margin: 0.35rem 0;
+}
+.grade-busca-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--pilot-border);
+}
+.grade-busca-item p {
+    margin: 0;
+    overflow-wrap: anywhere;
+    font-size: 0.875rem;
+}
+.grade-busca-item button {
+    flex-shrink: 0;
+}
+.grade-busca-resultados:not(:empty) {
+    border-bottom: 1px solid var(--pilot-border);
+    margin-bottom: 0.5rem;
+}
+.grade-busca-resultados {
+    max-height: 22rem;
+    overflow-y: auto;
+}
+.grade-materia {
+    border-bottom: 1px solid var(--pilot-border);
+    padding: 0.85rem 0;
+}
+.grade-materia-cabecalho {
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    gap: 0.75rem;
+}
+.grade-materia-cabecalho > div {
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+.grade-codigo {
+    font-size: 0.8125rem;
+    color: var(--pilot-accent);
+    font-weight: 600;
+}
+.grade-materia p {
+    margin: 0.25rem 0;
+}
+.grade-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 44px;
+    font-size: 0.875rem;
+}
+.grade-checkbox input {
+    accent-color: var(--pilot-accent);
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+}
+.grade-materia select {
+    width: 100%;
+    text-overflow: ellipsis;
+}
+.grade-turma-resumo {
+    white-space: pre-line;
+    overflow-wrap: anywhere;
+}
+.grade-vazio {
+    color: var(--pilot-muted);
+    padding: 1.25rem 0;
+    line-height: 1.6;
+    font-size: 0.9375rem;
+}
+.grade-conteudo summary {
+    cursor: pointer;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--pilot-accent);
+}
+.grade-conteudo summary::before {
+    content: '+';
+    width: 0.7rem;
+}
+.grade-conteudo details[open] > summary::before {
+    content: '−';
+}
+.grade-arquivos {
+    flex: 1 1 auto;
+}
+.grade-arquivos-conteudo {
+    padding-block: 0.5rem;
+}
+.grade-arquivos-conteudo input {
+    max-width: 24rem;
+    margin: 0.25rem 0 0.5rem;
+}
+.grade-arquivos-conteudo p {
+    margin-bottom: 0;
+}
+.grade-arquivos[open] {
+    flex-basis: 100%;
+}
+.grade-gerador {
+    margin-top: 0.5rem;
+}
+.grade-gerador p {
+    margin: 0.5rem 0;
+}
+.grade-combinacao {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--pilot-border);
+}
+.grade-combinacao p {
+    margin: 0;
+    font-size: 0.875rem;
+}
+.grade-mensagem {
+    border: 1px solid var(--pilot-border);
+    padding: 0.75rem;
+    border-radius: 8px;
+}
+.grade-alertas p {
+    margin: 0.5rem 0;
+    font-size: 0.875rem;
+}
+.grade-conflito {
+    color: #ffb5ac;
+}
+.grade-compatibilidade {
+    color: var(--pilot-success);
+}
+.grade-dia-controle {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    margin: 0.75rem 0;
+    font-size: 0.875rem;
+}
+.grade-dia-controle select {
+    width: auto;
+    max-width: 100%;
+}
+.grade-rolagem {
+    overflow-x: auto;
+    max-width: 100%;
+    border: 1px solid var(--pilot-border);
+    border-radius: 10px;
+    overscroll-behavior-x: contain;
+}
+.grade-quadro {
+    display: grid;
+    grid-template-columns: 62px repeat(6, minmax(80px, 1fr));
+    grid-template-rows: 38px repeat(15, 42px);
+    min-width: 600px;
+    isolation: isolate;
+}
+.grade-quadro.grade-dia {
+    grid-template-columns: 62px minmax(0, 1fr);
+    min-width: 0;
+}
+.grade-celula {
+    border-right: 1px solid var(--pilot-border);
+    border-bottom: 1px solid var(--pilot-border);
+    min-width: 0;
+}
+.grade-dia-titulo,
+.grade-hora {
+    color: var(--pilot-muted);
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.grade-dia-titulo {
+    font-weight: 600;
+    background: var(--pilot-surface);
+}
+.grade-hora {
+    align-self: stretch;
+    flex-direction: column;
+    line-height: 1.5;
+    font-variant-numeric: tabular-nums;
+}
+.grade-evento {
+    z-index: 1;
+    padding: 4px;
+    margin: 2px;
+    min-width: 0;
+    border-radius: 5px;
+    background: var(--grade-evento-bg, #263750);
+    border-left: 3px solid var(--grade-evento-cor, #81b4ff);
+    color: var(--pilot-text);
+    font-size: 0.6875rem;
+    line-height: 1.25;
+    overflow: hidden;
+    overflow-wrap: anywhere;
+}
+.grade-evento strong {
+    display: block;
+    font-size: 0.75rem;
+}
+.grade-evento-conflito {
+    background: #542b2b;
+    border-color: #ffb5ac;
+}
+.grade-exportacoes {
+    border-top: 1px solid var(--pilot-border);
+    margin-top: 0.75rem;
+}
+.grade-exportacoes p {
+    margin: 0.5rem 0 0;
+}
+.grade-datas {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin: 0.75rem 0;
+}
+.grade-datas label,
+.grade-arquivos-conteudo > label {
+    color: var(--pilot-muted);
+    font-size: 0.875rem;
+}
+@media (hover: hover) and (pointer: fine) {
+    .grade-botao:not(:disabled):hover {
+        border-color: var(--pilot-accent);
+    }
+}
+@media (max-width: 991px) {
+    .grade-layout {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 1.5rem;
+    }
+    .grade-titulo h1 {
+        font-size: 1.6rem;
+    }
+    .grade-plano-barra {
+        gap: 0.5rem;
+    }
+    .grade-semana {
+        min-width: 0;
+    }
+}
+@media (max-width: 480px) {
+    .grade-titulo {
+        gap: 0.5rem;
+    }
+    .grade-titulo > div:first-child {
+        flex-basis: 100%;
+    }
+    .grade-titulo select {
+        min-height: 44px;
+    }
+    .grade-conteudo :is(input, select) {
+        font-size: 16px;
+    }
+    .grade-datas {
+        grid-template-columns: minmax(0, 1fr);
+    }
+    .grade-dia-controle {
+        justify-content: space-between;
+    }
+    .grade-arquivos {
+        flex-basis: 100%;
+    }
+}

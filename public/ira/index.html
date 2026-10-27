@@ -38,7 +38,7 @@
         <header class="cabecalho">
             <div class="container topo-site">
                 <a class="marca-site" href="../">Trajetória<span class="badge-unb">Unb</span></a>
-                <div id="ira-mp" class="badge-resultado" aria-live="polite"><span>IRA: 0</span><span>MP: 0</span></div>
+                <div id="ira-mp" class="badge-resultado" aria-live="polite"><span>IRA: —</span><span>MP: —</span></div>
                 <nav aria-label="Navegação principal">
                     <a href="../ira/" aria-current="page"
                         ><span class="nav-ira-completo">Calculadora IRA e MP</span
@@ -46,6 +46,7 @@
                     >
                     <a href="../intercambio/">Intercâmbio</a>
                     <a href="../turmas/">Turmas</a>
+                    <a href="../grade/">Grade</a>
                 </nav>
             </div>
         </header>
@@ -67,6 +68,10 @@
                 </div>
             </div>
             <div id="periodos"></div>
+            <div id="avisoExclusao" class="ira-desfazer" role="status" hidden>
+                <span id="textoExclusao"></span>
+                <button id="desfazerExclusao" type="button" class="btn">Desfazer</button>
+            </div>
             <div class="ira-acoes-finais">
                 <button type="button" class="btn btn-novo-periodo" onclick="criarPeriodo()">+ Novo período</button>
             </div>
@@ -77,9 +82,9 @@
                 Projeto independente, sem vínculo oficial com a Unb. Confira seus dados no SIGAA.
             </div>
         </footer>
-        <script src="../js/calculos.js?v=2"></script>
+        <script src="../js/calculos.js?v=3"></script>
         <script src="../js/common.js"></script>
         <script src="../js/sugestoes-disciplinas.js"></script>
-        <script src="../js/functionality.js?v=4"></script>
+        <script src="../js/functionality.js?v=5"></script>
     </body>
 </html>

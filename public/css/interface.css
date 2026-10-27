@@ -250,9 +250,11 @@ html {
 .interface-unb .periodo:hover {
     box-shadow: none;
 }
-.interface-unb .periodo-header h4 {
+.interface-unb .periodo-header h2 {
     color: var(--pilot-text);
     font-size: 1rem;
+    font-weight: 600;
+    margin: 0;
 }
 .interface-unb .disciplina-row {
     animation: none;
@@ -451,7 +453,7 @@ html {
 .interface-unb .badge-unb {
     background: var(--pilot-text);
     color: var(--pilot-surface);
-    font-size: 0.6rem;
+    font-size: 0.6875rem;
 }
 .interface-unb nav a {
     color: var(--pilot-muted);
@@ -1512,7 +1514,7 @@ body.pagina-turmas main.pagina-conteudo {
     color: var(--pilot-muted);
     font-size: 0.8125rem;
 }
-@media (max-width: 575px) {
+@media (max-width: 768px) {
     .turmas-barra {
         align-items: stretch;
     }
@@ -1528,14 +1530,41 @@ body.pagina-turmas main.pagina-conteudo {
     .turmas-ofertas-cabecalho,
     .turma-oferta {
         min-width: 0;
-        grid-template-columns: minmax(2.5rem, 0.6fr) minmax(0, 1.8fr) repeat(3, minmax(0, 1fr));
-        gap: 0.4rem;
+        grid-template-columns: 2.75rem minmax(0, 1fr) minmax(0, 1fr) 3.5rem;
+        gap: 0.35rem 0.5rem;
     }
     .turmas-ofertas-cabecalho {
-        font-size: 0.625rem;
+        font-size: 0.75rem;
     }
     .turma-oferta {
-        font-size: 0.7rem;
+        align-items: start;
+        font-size: 0.875rem;
+    }
+    .turmas-ofertas-cabecalho > :first-child,
+    .turma-oferta-numero {
+        grid-column: 1;
+        grid-row: 1 / 3;
+    }
+    .turmas-ofertas-cabecalho > :nth-child(2),
+    .turma-oferta-professores {
+        grid-column: 2 / 4;
+        grid-row: 1;
+    }
+    .turmas-ofertas-cabecalho > :nth-child(3),
+    .turma-oferta-horario {
+        grid-column: 2;
+        grid-row: 2;
+    }
+    .turmas-ofertas-cabecalho > :nth-child(4),
+    .turma-oferta-local {
+        grid-column: 3;
+        grid-row: 2;
+    }
+    .turmas-ofertas-cabecalho > :last-child,
+    .turma-oferta-vagas {
+        grid-column: 4;
+        grid-row: 1 / 3;
+        text-align: right;
     }
 }
 @media (pointer: coarse), (max-width: 575px) {
@@ -1711,7 +1740,7 @@ body.pagina-turmas main.pagina-conteudo {
 .pagina-ira .periodo-header {
     margin-bottom: 0.6rem;
 }
-.interface-unb.pagina-ira .periodo-header h4 {
+.interface-unb.pagina-ira .periodo-header h2 {
     font-size: 0.9375rem;
 }
 .pagina-ira .disciplina-row {
@@ -1760,7 +1789,7 @@ body.pagina-turmas main.pagina-conteudo {
     flex-wrap: wrap;
     gap: 0.25rem 0.75rem;
     padding: 0.5rem 0.75rem;
-    border-left: 3px solid var(--pilot-accent);
+    border-left: 1px solid var(--pilot-accent);
     border-radius: 6px;
     background: var(--pilot-field);
     color: var(--pilot-text);
@@ -1774,110 +1803,240 @@ body.pagina-turmas main.pagina-conteudo {
 .pagina-ira .ira-parcial strong {
     font-weight: 650;
 }
-
-/* Página inicial: hierarquia, superfícies sólidas e acesso direto às ferramentas. */
-.pagina-inicial .inicio-hero {
-    padding: clamp(1.75rem, 4vw, 3rem) 0 1.75rem;
-    max-width: 760px;
+.ira-desfazer {
+    position: fixed;
+    bottom: max(1rem, env(safe-area-inset-bottom));
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 30;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    width: min(36rem, calc(100% - 2rem));
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--pilot-border);
+    border-radius: 8px;
+    background: var(--pilot-surface);
+    box-shadow: 0 6px 20px rgb(0 0 0 / 18%);
+    font-size: 0.875rem;
 }
-.pagina-inicial .inicio-contexto {
-    margin: 0 0 0.65rem;
-    font-size: 0.8125rem;
-    font-weight: 600;
-    letter-spacing: 0.015em;
+.ira-desfazer[hidden] {
+    display: none;
+}
+.ira-desfazer #textoExclusao {
+    flex: 1;
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+.ira-desfazer button {
+    flex-shrink: 0;
     color: var(--pilot-accent);
 }
+.interface-unb .ajuda-referencias {
+    grid-column: 1 / -1;
+    font-size: 0.8125rem;
+    color: var(--pilot-muted);
+}
+.interface-unb .ajuda-referencias summary {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 44px;
+    color: var(--pilot-accent);
+    cursor: pointer;
+}
+.interface-unb .ajuda-referencias p {
+    max-width: 70ch;
+    margin: 0 0 0.5rem;
+}
+.interface-unb .acoes-filtros .nota-comparacao {
+    margin: 0;
+    color: var(--pilot-text);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+}
+@media (max-width: 768px) {
+    .interface-unb .tabela-resultados:not(.modo-completo) tr:not(.linha-detalhes) {
+        grid-template-columns: minmax(0, 1fr) auto auto;
+        gap: 0.35rem 0.75rem;
+    }
+    .interface-unb .tabela-resultados:not(.modo-completo) .campo-0 {
+        grid-column: 1;
+        grid-row: 1;
+        align-self: center;
+    }
+    .interface-unb .tabela-resultados:not(.modo-completo) .campo-0::before {
+        display: none;
+    }
+    .interface-unb .tabela-resultados:not(.modo-completo) .campo-4 {
+        grid-column: 2;
+        grid-row: 1;
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+        font-size: 0.9375rem;
+    }
+    .interface-unb .tabela-resultados:not(.modo-completo) .campo-4::before {
+        content: 'Nota';
+        margin: 0;
+    }
+    .interface-unb .tabela-resultados:not(.modo-completo) .campo-detalhes {
+        grid-column: 3;
+        grid-row: 1;
+        justify-self: end;
+    }
+    .interface-unb .tabela-resultados:not(.modo-completo) .campo-1 {
+        grid-row: 2;
+    }
+    .interface-unb .tabela-resultados:not(.modo-completo) .campo-5 {
+        grid-row: 3;
+    }
+    .interface-unb .tabela-resultados:not(.modo-completo) .campo-5::before {
+        display: none;
+    }
+    .interface-unb .tabela-resultados:not(.modo-completo) .campo-2,
+    .interface-unb .tabela-resultados:not(.modo-completo) .campo-3 {
+        grid-row: 4;
+        display: flex;
+        align-items: baseline;
+        gap: 0.3rem;
+    }
+    .interface-unb .tabela-resultados:not(.modo-completo) .campo-3 {
+        grid-column: 2 / 4;
+        justify-self: end;
+    }
+    .interface-unb .tabela-resultados:not(.modo-completo) .campo-2::before,
+    .interface-unb .tabela-resultados:not(.modo-completo) .campo-3::before {
+        margin: 0;
+    }
+}
+
+/* Página inicial: ferramentas diretas e exemplos de uso. */
+.pagina-inicial .inicio-hero {
+    padding: clamp(1.5rem, 3vw, 2.25rem) 0 1.25rem;
+    max-width: 760px;
+}
 .pagina-inicial .inicio-hero h1 {
-    font-size: clamp(2rem, 4.2vw, 3.25rem);
-    line-height: 1.08;
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    line-height: 1.15;
     letter-spacing: -0.035em;
     font-weight: 650;
-    font-optical-sizing: auto;
-    margin: 0 0 1rem;
     text-wrap: balance;
+    margin: 0 0 0.75rem;
 }
 .pagina-inicial .inicio-descricao {
-    max-width: 58ch;
+    max-width: 65ch;
     font-size: 1rem;
     line-height: 1.6;
     color: var(--pilot-muted);
     margin: 0;
 }
-.pagina-inicial .inicio-atalhos {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-    margin-top: 1.25rem;
-}
-.pagina-inicial .botao-inicio {
-    gap: 0.75rem;
-}
 .pagina-inicial .inicio-ferramentas {
-    padding: 1.25rem 0 1.75rem;
+    padding: 0;
     border-top: 1px solid var(--pilot-border);
 }
 .pagina-inicial main h2 {
     font-size: 1.125rem;
     font-weight: 650;
-    letter-spacing: -0.015em;
-    margin: 0 0 1rem;
+    margin: 0;
 }
 .pagina-inicial .inicio-grade {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1rem;
+    display: block;
 }
 .pagina-inicial .inicio-ferramenta {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    padding: 1.25rem;
-    border: 1px solid var(--pilot-border);
-    border-radius: 12px;
-    background: var(--pilot-surface);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(15rem, 0.85fr) 10.5rem;
+    align-items: center;
+    gap: 0.35rem 1.75rem;
     min-width: 0;
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--pilot-border);
 }
-.pagina-inicial .inicio-icone {
-    width: 28px;
-    height: 28px;
-    color: var(--pilot-accent);
-    margin-bottom: 0.75rem;
-}
-.pagina-inicial main h3 {
+.pagina-inicial .inicio-ferramenta h3 {
+    grid-column: 1;
+    grid-row: 1;
     font-size: 1.0625rem;
-    line-height: 1.3;
-    letter-spacing: -0.01em;
     font-weight: 600;
-    margin: 0 0 0.5rem;
+    letter-spacing: -0.01em;
+    margin: 0;
+}
+.pagina-inicial .inicio-ferramenta:last-child {
+    border-bottom: 0;
 }
 .pagina-inicial .inicio-ferramenta > p {
+    grid-column: 1;
+    grid-row: 2;
     font-size: 0.9375rem;
     line-height: 1.5;
-    margin: 0 0 0.75rem;
     color: var(--pilot-muted);
+    margin: 0;
 }
-.pagina-inicial .inicio-ferramenta ul {
-    padding-left: 1.1rem;
-    margin: 0 0 0.75rem;
-    font-size: 0.875rem;
-    line-height: 1.6;
+.inicio-previa {
+    grid-column: 2;
+    grid-row: 1 / 3;
+    min-width: 0;
+    padding-left: 1rem;
+    border-left: 1px solid var(--pilot-border);
     color: var(--pilot-muted);
+    font-size: 0.8125rem;
 }
-.pagina-inicial .inicio-ferramenta li + li {
+.inicio-previa p {
+    margin: 0;
+}
+.inicio-previa .inicio-previa-resultado {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem 1rem;
     margin-top: 0.35rem;
+    color: var(--pilot-text);
+    font-size: 0.875rem;
+    font-variant-numeric: tabular-nums;
 }
-.pagina-inicial .inicio-ferramenta li::marker {
+.inicio-previa-codigo {
+    margin-right: 0.5rem;
     color: var(--pilot-accent);
+    font-weight: 600;
 }
 .pagina-inicial .inicio-link-recurso {
+    grid-column: 3;
+    grid-row: 1 / 3;
+    justify-self: end;
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
     min-height: 44px;
-    margin-top: auto;
     font-size: 0.875rem;
     font-weight: 600;
     text-decoration: none;
+}
+@media (max-width: 991px) {
+    .pagina-inicial .inicio-ferramenta {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    }
+    .pagina-inicial .inicio-link-recurso {
+        grid-column: 1;
+        grid-row: 3;
+        justify-self: start;
+    }
+    .inicio-previa {
+        grid-row: 1 / 4;
+    }
+}
+@media (max-width: 575px) {
+    .pagina-inicial .inicio-ferramenta {
+        grid-template-columns: minmax(0, 1fr);
+    }
+    .inicio-previa {
+        grid-column: 1;
+        grid-row: 3;
+        padding: 0.5rem 0;
+        border: 0;
+    }
+    .pagina-inicial .inicio-link-recurso {
+        grid-row: 4;
+        justify-self: start;
+    }
 }
 .pagina-inicial .inicio-duvidas-nova {
     display: grid;
@@ -1929,21 +2088,8 @@ body.pagina-turmas main.pagina-conteudo {
     .pagina-inicial .inicio-link-recurso:hover {
         text-decoration: underline;
     }
-    .pagina-inicial .botao-inicio:hover {
-        background: var(--pilot-field);
-    }
-    .pagina-inicial .botao-inicio-principal:hover {
-        background: var(--pilot-text);
-    }
 }
 @media (max-width: 991px) {
-    .pagina-inicial .inicio-grade {
-        grid-template-columns: minmax(0, 1fr);
-        gap: 0.75rem;
-    }
-    .pagina-inicial .inicio-ferramenta {
-        padding: 1rem;
-    }
     .pagina-inicial .inicio-duvidas-nova {
         grid-template-columns: minmax(0, 1fr);
         gap: 0.5rem;
@@ -1952,15 +2098,14 @@ body.pagina-turmas main.pagina-conteudo {
         margin-bottom: 0.4rem;
     }
 }
-@media (max-width: 420px) {
-    .pagina-inicial .inicio-atalhos {
-        display: grid;
-        grid-template-columns: minmax(0, 1fr);
-        gap: 0.5rem;
-    }
-}
 
 /* Página de erro: recuperação simples, com os mesmos tokens do site. */
+.turma-materia-carga {
+    color: var(--pilot-muted);
+    font-size: 0.875rem;
+    margin: 0.5rem 0;
+}
+
 .pagina-erro {
     min-height: 100svh;
     display: flex;

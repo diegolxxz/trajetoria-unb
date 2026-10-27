@@ -16,6 +16,7 @@ export default [
     rules: { 'no-unused-vars': ['error', { varsIgnorePattern: '^(adicionarDisciplina|removerDisciplina)$' }] },
   },
   { files: ['public/js/calculos.js'], languageOptions: { globals: { module: 'readonly', CalculosUnB: 'off' } } },
+  { files: ['public/js/grade-calculos.js'], languageOptions: { globals: { module: 'readonly' } } },
   {
     files: ['public/js/common.js'],
     languageOptions: { globals: { AppUnB: 'off' } },

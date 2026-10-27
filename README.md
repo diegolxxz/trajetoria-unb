@@ -11,13 +11,25 @@ Unb.
 - **Intercâmbio:** consulte editais, filtre os resultados e simule sua nota com
   os dados publicados em cada seleção. As regras podem variar entre editais.
 - **Turmas:** procure disciplinas por nome, código, professor ou departamento e
-  confira horários, locais e vagas do semestre disponível.
+  confira horários, locais e vagas do semestre disponível. Ao expandir uma
+  disciplina, veja também suas horas e créditos, quando publicados.
+- **Grade:** escolha turmas, visualize sua semana e encontre combinações sem
+  conflitos. Guarde planos por semestre, desfaça escolhas e exporte os planos
+  em JSON, a grade em imagem ou os horários para seu calendário.
 
 As páginas funcionam em computador e celular. Os dados de editais e turmas são
 organizados por seleção e semestre para facilitar as atualizações. A
 calculadora de IRA pode ser usada sem criar conta. Seu histórico fica neste
 navegador; ao rodar o servidor local, uma cópia também é guardada em
 `local/dados.json`.
+
+A grade usa a mesma oferta da consulta de turmas. Os planos ficam no navegador;
+para transferi-los ou fazer backup, baixe o JSON em “Arquivos e plano”. A
+geração inclui todas as disciplinas marcadas como obrigatórias e permite
+deixar opcionais de fora, com limites para manter a página responsiva. A
+exportação de calendário pede o primeiro e o último dia das aulas e não exclui
+feriados ou recessos. Horas e créditos vêm da carga curricular do SIGAA, quando
+disponível; não são deduzidos dos horários do professor.
 
 ## Rodar no computador
 
@@ -29,8 +41,7 @@ uv sync --frozen
 uv run python server/route.py
 ```
 
-Abra [http://localhost:8080](http://localhost:8080). Para encerrar, use
-`Ctrl+C` no terminal.
+Abra o endereço exibido no terminal. Para encerrar, use `Ctrl+C`.
 
 ## Atualizar os dados
 
@@ -47,6 +58,20 @@ O primeiro comando atualiza o cadastro de unidades e departamentos; o segundo
 seleciona as unidades com oferta de graduação; o terceiro coleta as turmas
 dessas unidades. Na atualização rotineira do mesmo semestre, normalmente basta
 executar o terceiro comando.
+
+Para atualizar a carga curricular usada na grade, execute separadamente:
+
+```sh
+uv run python scripts/scrapers/coletar_componentes.py
+```
+
+Essa consulta muda com menos frequência que a oferta de turmas. Componentes sem
+carga publicada ficam como “não informado”.
+
+Se houver códigos do catálogo de especialização na oferta, complemente com
+`uv run python scripts/scrapers/coletar_componentes.py --nivel L`. O comando
+preserva os componentes já coletados. Detalhes dos planos e exportações estão
+em [docs/grade.md](docs/grade.md).
 
 Para atualizar um edital, rode o extrator correspondente. Por exemplo:
 

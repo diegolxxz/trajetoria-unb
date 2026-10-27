@@ -34,6 +34,8 @@ const CalculosUnB = (() => {
                     periodo: Number(k),
                     ira: pesosIra ? pontosIra / pesosIra : 0,
                     mp: pesosMp ? pontosMp / pesosMp : 0,
+                    temDisciplinas: pesosIra > 0,
+                    temMp: pesosMp > 0,
                 });
             });
         return {
@@ -41,6 +43,7 @@ const CalculosUnB = (() => {
             mp: pesosMp ? pontosMp / pesosMp : 0,
             horas,
             temDisciplinas: pesosIra > 0,
+            temMp: pesosMp > 0,
             parciais,
         };
     }

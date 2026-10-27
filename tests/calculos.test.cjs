@@ -30,15 +30,35 @@ test('IRA ignora linhas incompletas e MP lida com módulos livres sem divisão p
         mp: 0,
         horas: 60,
         temDisciplinas: true,
-        parciais: [{ periodo: 1, ira: 5, mp: 0 }],
+        temMp: false,
+        parciais: [{ periodo: 1, ira: 5, mp: 0, temDisciplinas: true, temMp: false }],
     });
     const misto = calc.historico({ 1: { 1: ['A', 4, 1, false] }, 2: { 1: ['B', 2, 3, false] } });
     assert.equal(misto.ira, 4);
     assert.equal(misto.mp, 26 / 6);
     assert.equal(misto.horas, 90);
     assert.deepEqual(misto.parciais, [
-        { periodo: 1, ira: 5, mp: 5 },
-        { periodo: 2, ira: 4, mp: 26 / 6 },
+        { periodo: 1, ira: 5, mp: 5, temDisciplinas: true, temMp: true },
+        { periodo: 2, ira: 4, mp: 26 / 6, temDisciplinas: true, temMp: true },
+    ]);
+});
+
+test('disponibilidade distingue histórico vazio, linhas incompletas e SR válido', () => {
+    for (const dados of [{}, { 1: { 1: ['', 0, 0, false] } }, { 1: { 1: ['Sem menção', 4, 0, false] } }]) {
+        const resultado = calc.historico(dados);
+        assert.equal(resultado.temDisciplinas, false);
+        assert.equal(resultado.temMp, false);
+        assert.ok(resultado.parciais.every((parcial) => !parcial.temDisciplinas && !parcial.temMp));
+    }
+    const resultado = calc.historico({ 1: {}, 2: { 1: ['SR', 4, 6, false] }, 3: {} });
+    assert.equal(resultado.ira, 0);
+    assert.equal(resultado.mp, 0);
+    assert.equal(resultado.temDisciplinas, true);
+    assert.equal(resultado.temMp, true);
+    assert.deepEqual(resultado.parciais, [
+        { periodo: 1, ira: 0, mp: 0, temDisciplinas: false, temMp: false },
+        { periodo: 2, ira: 0, mp: 0, temDisciplinas: true, temMp: true },
+        { periodo: 3, ira: 0, mp: 0, temDisciplinas: true, temMp: true },
     ]);
 });
 

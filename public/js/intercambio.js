@@ -5,6 +5,32 @@
     const slug = document.body.dataset.edital;
     const chaveFiltros = `calculadora-unb:filtros:${slug}`;
     let dados;
+    let notasDaSimulacao = [];
+
+    function explicarReferencias(curso) {
+        if (curso.variantes.length < 2) return null;
+        const ajuda = el('details', 'ajuda-referencias');
+        ajuda.append(el('summary', '', `Por que há ${curso.variantes.length} referências?`));
+        const semTurno = curso.variantes.some((v) => !v.turno);
+        ajuda.append(
+            el(
+                'p',
+                '',
+                semTurno
+                    ? 'Este curso tem mais de uma referência de média e desvio. A fonte não identifica o turno de todas elas. Compare sua simulação com a referência indicada em cada candidato.'
+                    : 'Cada referência usa a média e o desvio do turno indicado na publicação. Compare sua simulação com os candidatos da mesma referência.',
+            ),
+        );
+        return ajuda;
+    }
+
+    function atualizarComparacao() {
+        mostrarReferenciasCurso($('filtroCurso').value);
+        const saida = $('notaComparacao');
+        const mesmoCurso = $('filtroCurso').value === $('meuCurso').value;
+        saida.hidden = !notasDaSimulacao.length || (!mesmoCurso && dados.formula.tipo !== 'ira-direto');
+        saida.textContent = saida.hidden ? '' : `Sua simulação: ${notasDaSimulacao.join(' · ')}`;
+    }
     function temConteudo(valor) {
         return valor != null && !/^(?:\s*|[-–—]+|n\/a)$/i.test(String(valor).trim());
     }
@@ -54,6 +80,8 @@
         $('erroPerfil').hidden = !invalido;
         $('erroPerfil').textContent = 'Informe um IRA entre 0 e 5 e um IPF entre 0% e 100%.';
         $('notasSimuladas').replaceChildren();
+        notasDaSimulacao = [];
+        atualizarComparacao();
         if (dados.formula.tipo === 'ira-direto') {
             if (incompleto || invalido) return;
             const nota = CalculosUnB.nota(ira, ipf, null, null, dados.formula);
@@ -61,6 +89,8 @@
             card.append(el('h3', '', 'Sua nota final'));
             card.append(el('strong', 'nota-final', formato(nota.final, 5)));
             $('notasSimuladas').append(card);
+            notasDaSimulacao.push(formato(nota.final));
+            atualizarComparacao();
             return;
         }
         if (!curso || incompleto || invalido) return;
@@ -87,7 +117,14 @@
             if (v.estimada) detalhes.append(el('span', '', 'Valores estimados pelo IRA padronizado publicado.'));
             card.append(detalhes);
             $('notasSimuladas').append(card);
+            if (nota)
+                notasDaSimulacao.push(
+                    `${curso.variantes.length > 1 ? `Ref. ${i + 1}: ` : ''}${v.estimada ? '≈ ' : ''}${formato(nota.final)}`,
+                );
         });
+        const ajuda = explicarReferencias(curso);
+        if (ajuda) $('notasSimuladas').append(ajuda);
+        atualizarComparacao();
     }
 
     function filtros() {
@@ -142,11 +179,15 @@
             lista.append(card);
         });
         container.append(lista);
+        if (curso.nome !== $('meuCurso').value || !notasDaSimulacao.length) {
+            const ajuda = explicarReferencias(curso);
+            if (ajuda) container.append(ajuda);
+        }
     }
 
     function renderizarTabela() {
         const filtro = filtros();
-        mostrarReferenciasCurso(filtro.curso);
+        atualizarComparacao();
         const busca = CalculosUnB.normalizar(filtro.busca.trim());
         const linhas = dados.resultados
             .filter((r) => {
@@ -319,6 +360,10 @@
                 return;
             }
             dados = await carregarJson(`data/editais/${slug}.json`);
+            const comparacao = el('p', 'nota-comparacao');
+            comparacao.id = 'notaComparacao';
+            comparacao.hidden = true;
+            document.querySelector('.acoes-filtros').append(comparacao);
             opcoesCurso($('meuCurso'));
             opcoesCurso($('filtroCurso'));
             restaurarPerfil();

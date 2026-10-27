@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="pt-BR" data-tema="escuro">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, viewport-fit=cover, interactive-widget=resizes-content"
+        />
+        <meta name="theme-color" content="#1b1d21" />
+        <script>
+            try {
+                document.documentElement.dataset.tema = localStorage.getItem('calculadora-ira-tema') || 'escuro';
+            } catch {}
+        </script>
+        <meta name="app-root" content="../" />
+        <meta
+            name="description"
+            content="Monte sua grade da Unb, compare turmas e gere combinações sem conflitos. Salve planos no navegador e exporte para calendário ou imagem."
+        />
+        <title>Grade | Trajetória Unb</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../css/style.css" />
+        <link rel="stylesheet" href="../css/intercambio.css" />
+        <link rel="stylesheet" href="../css/interface.css" />
+        <link rel="stylesheet" href="../css/grade.css" />
+        <link rel="canonical" href="https://trajetoriaunb.vercel.app/grade/" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Trajetória Unb" />
+        <meta property="og:title" content="Grade | Trajetória Unb" />
+        <meta
+            property="og:description"
+            content="Escolha turmas, veja sua semana e encontre combinações sem conflitos de horário."
+        />
+        <meta property="og:url" content="https://trajetoriaunb.vercel.app/grade/" />
+        <link rel="icon" href="../favicon.ico" sizes="16x16 32x32 48x48 64x64 128x128 256x256" />
+        <link rel="icon" href="../favicon.svg" type="image/svg+xml" sizes="any" />
+        <link rel="icon" href="../favicon-96x96.png" type="image/png" sizes="96x96" />
+        <link rel="apple-touch-icon" href="../apple-touch-icon.png" sizes="180x180" />
+        <link rel="manifest" href="../site.webmanifest" />
+    </head>
+    <body class="interface-unb pagina-grade">
+        <header class="cabecalho">
+            <div class="container topo-site">
+                <a class="marca-site" href="../">Trajetória<span class="badge-unb">Unb</span></a>
+                <nav aria-label="Navegação principal">
+                    <a href="../ira/"
+                        ><span class="nav-ira-completo">Calculadora IRA e MP</span
+                        ><span class="nav-ira-curto">IRA e MP</span></a
+                    >
+                    <a href="../intercambio/">Intercâmbio</a>
+                    <a href="../turmas/">Turmas</a>
+                    <a href="../grade/" aria-current="page">Grade</a>
+                </nav>
+            </div>
+        </header>
+        <main class="container pagina-conteudo grade-conteudo">
+            <div class="grade-titulo">
+                <div>
+                    <h1>Montar minha grade</h1>
+                    <p id="ofertaGrade" class="grade-muted" role="status">Carregando a oferta de turmas…</p>
+                </div>
+                <div>
+                    <label class="visually-hidden" for="semestreGrade">Semestre da grade</label
+                    ><select id="semestreGrade" class="form-select" disabled>
+                        <option>Carregando…</option>
+                    </select>
+                </div>
+            </div>
+            <p id="avisoPersistencia" class="aviso" role="status" hidden></p>
+            <p id="mensagemGrade" class="grade-mensagem" role="status" hidden></p>
+            <div class="grade-plano-barra">
+                <div class="grade-plano-escolha">
+                    <label class="visually-hidden" for="planoGrade">Plano salvo</label
+                    ><select id="planoGrade" class="form-select"></select>
+                </div>
+                <button id="novoPlanoGrade" class="grade-botao" type="button">Novo plano</button>
+                <button id="desfazerGrade" class="grade-botao" type="button" disabled>Desfazer</button>
+                <button id="refazerGrade" class="grade-botao" type="button" disabled>Refazer</button>
+                <details class="grade-arquivos">
+                    <summary>Arquivos e plano</summary>
+                    <div class="grade-arquivos-conteudo">
+                        <label for="nomePlanoGrade">Nome do plano</label
+                        ><input id="nomePlanoGrade" class="form-control" type="text" maxlength="100" />
+                        <div class="grade-acoes">
+                            <button id="exportarGradeJson" class="grade-botao" type="button">Baixar planos JSON</button
+                            ><button id="importarGradeJson" class="grade-botao" type="button">Importar planos</button
+                            ><button id="excluirPlanoGrade" class="grade-botao grade-remover" type="button">
+                                Excluir plano atual
+                            </button>
+                        </div>
+                        <input
+                            id="arquivoGrade"
+                            class="visually-hidden"
+                            type="file"
+                            accept=".json,application/json"
+                            aria-label="Arquivo JSON com os planos"
+                        />
+                        <p class="grade-muted">
+                            Os planos ficam neste navegador. O JSON permite fazer backup e levar suas escolhas para
+                            outro dispositivo. A importação substitui os planos e pode ser desfeita.
+                        </p>
+                    </div>
+                </details>
+            </div>
+            <div class="grade-layout">
+                <section class="grade-disciplinas" aria-labelledby="tituloDisciplinasGrade">
+                    <div class="grade-secao-titulo">
+                        <h2 id="tituloDisciplinasGrade">Disciplinas do plano</h2>
+                        <span id="totalDesejadasGrade" class="grade-muted"></span>
+                    </div>
+                    <label class="visually-hidden" for="buscaGrade"
+                        >Adicionar disciplina por nome, código ou professor</label
+                    >
+                    <input
+                        id="buscaGrade"
+                        class="form-control"
+                        type="search"
+                        placeholder="Buscar disciplina, código ou professor"
+                        autocomplete="off"
+                        disabled
+                        aria-describedby="ajudaBuscaGrade"
+                    />
+                    <p id="ajudaBuscaGrade" class="grade-muted">
+                        Digite ao menos 3 caracteres para adicionar uma disciplina.
+                    </p>
+                    <div id="resultadosBuscaGrade" class="grade-busca-resultados" aria-live="polite"></div>
+                    <div id="disciplinasGrade"></div>
+                    <p id="planoVazioGrade" class="grade-vazio">
+                        Adicione as disciplinas que pretende cursar. Depois escolha uma turma ou gere combinações.
+                    </p>
+                    <div class="grade-montar-acoes">
+                        <button id="montarGrade" class="grade-botao grade-principal" type="button" disabled>
+                            Montar grade
+                        </button>
+                        <p class="grade-muted">Escolha as turmas e monte a grade para ver sua semana.</p>
+                    </div>
+                    <details class="grade-gerador">
+                        <summary>Encontrar combinações</summary>
+                        <p class="grade-muted">
+                            Inclui todas as obrigatórias. As opcionais podem ficar de fora. São até 20 sugestões, sem
+                            ordem de preferência; turmas sem horário informado ficam fora da busca.
+                        </p>
+                        <p class="grade-muted">
+                            “Obrigatória” e “opcional” são prioridades deste plano, não a classificação curricular da
+                            disciplina.
+                        </p>
+                        <label class="grade-checkbox"
+                            ><input id="somenteVagasGrade" type="checkbox" /> Considerar apenas turmas com vagas</label
+                        >
+                        <div class="grade-acoes">
+                            <button id="gerarGrade" class="grade-botao grade-principal" type="button" disabled>
+                                Gerar combinações</button
+                            ><button id="cancelarGrade" class="grade-botao" type="button" hidden>Cancelar</button>
+                        </div>
+                        <p id="estadoGeradorGrade" class="grade-muted" role="status"></p>
+                        <div id="combinacoesGrade"></div>
+                    </details>
+                </section>
+                <section class="grade-semana" aria-labelledby="tituloSemanaGrade" hidden>
+                    <div class="grade-secao-titulo">
+                        <h2 id="tituloSemanaGrade" tabindex="-1">Sua semana</h2>
+                        <button id="editarGrade" class="grade-botao" type="button">Voltar às escolhas</button>
+                    </div>
+                    <div class="grade-secao-titulo">
+                        <p id="resumoGrade" class="grade-muted"></p>
+                    </div>
+                    <div id="conflitosGrade" class="grade-alertas" aria-live="polite"></div>
+                    <div class="grade-dia-controle">
+                        <label for="diaGrade">Visualização</label
+                        ><select id="diaGrade" class="form-select">
+                            <option value="0">Semana inteira</option>
+                            <option value="2">Segunda-feira</option>
+                            <option value="3">Terça-feira</option>
+                            <option value="4">Quarta-feira</option>
+                            <option value="5">Quinta-feira</option>
+                            <option value="6">Sexta-feira</option>
+                            <option value="7">Sábado</option>
+                        </select>
+                    </div>
+                    <div
+                        id="rolagemGrade"
+                        class="grade-rolagem"
+                        tabindex="0"
+                        role="region"
+                        aria-label="Grade semanal. A semana inteira pode ser deslizada na horizontal."
+                    >
+                        <div id="semanaGrade" class="grade-quadro"></div>
+                    </div>
+                    <details class="grade-exportacoes">
+                        <summary>Exportar a grade</summary>
+                        <div class="grade-acoes">
+                            <button id="exportarGradePng" class="grade-botao" type="button">Baixar imagem PNG</button>
+                        </div>
+                        <div class="grade-datas">
+                            <div>
+                                <label for="inicioGrade">Primeiro dia de aulas</label
+                                ><input id="inicioGrade" class="form-control" type="date" />
+                            </div>
+                            <div>
+                                <label for="fimGrade">Último dia de aulas</label
+                                ><input id="fimGrade" class="form-control" type="date" />
+                            </div>
+                        </div>
+                        <button id="exportarGradeIcs" class="grade-botao" type="button">Baixar calendário .ics</button>
+                        <p class="grade-muted">
+                            O calendário repete os horários entre essas datas, no fuso de Brasília. Não desconta
+                            feriados, recessos ou cancelamentos.
+                        </p>
+                    </details>
+                </section>
+            </div>
+            <noscript><p class="aviso">Ative o JavaScript para montar e salvar sua grade.</p></noscript>
+        </main>
+        <footer class="text-center py-4">
+            <div class="container">
+                Planejamento pessoal, sem vínculo oficial com a Unb. Confira horários, vagas e matrícula no SIGAA.
+            </div>
+        </footer>
+        <script src="../js/common.js"></script>
+        <script src="../js/grade-calculos.js"></script>
+        <script src="../js/grade-arquivos.js"></script>
+        <script src="../js/grade.js"></script>
+    </body>
+</html>

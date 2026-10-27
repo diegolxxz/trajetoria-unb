@@ -30,10 +30,12 @@ const CHAVE_DADOS = 'calculadora-ira-unb';
 let contadorDisciplina = 0;
 let sincronizarArquivo = false;
 let filaSalvamento = Promise.resolve();
+let ultimaExclusao = null;
 
 document.addEventListener('DOMContentLoaded', inicializar);
 
 async function inicializar() {
+    document.getElementById('desfazerExclusao').addEventListener('click', desfazerExclusao);
     const modo = AppUnB.ler('calculadora-unb:visualizacao-ira', 'expandido');
     document.querySelector(
         `[name="visualizacaoIra"][value="${modo === 'compacto' ? 'compacto' : 'expandido'}"]`,
@@ -134,8 +136,8 @@ function calcularIra() {
     document
         .getElementById('ira-mp')
         .replaceChildren(
-            AppUnB.elemento('span', '', `IRA: ${AppUnB.numero(resultado.ira)}`),
-            AppUnB.elemento('span', '', `MP: ${AppUnB.numero(resultado.mp)}`),
+            AppUnB.elemento('span', '', `IRA: ${resultado.temDisciplinas ? AppUnB.numero(resultado.ira) : '—'}`),
+            AppUnB.elemento('span', '', `MP: ${resultado.temMp ? AppUnB.numero(resultado.mp) : '—'}`),
         );
     const periodos = [...document.querySelectorAll('#periodos .periodo')];
     document.querySelectorAll('#periodos .ira-parcial').forEach((elemento) => elemento.remove());
@@ -149,7 +151,11 @@ function calcularIra() {
         cartao.title = `Acumulado até o ${parcial.periodo}º período`;
         cartao.append(
             AppUnB.elemento('span', 'ira-parcial-rotulo', 'Acumulado'),
-            AppUnB.elemento('strong', '', `IRA ${AppUnB.numero(parcial.ira)} · MP ${AppUnB.numero(parcial.mp)}`),
+            AppUnB.elemento(
+                'strong',
+                '',
+                `IRA ${parcial.temDisciplinas ? AppUnB.numero(parcial.ira) : '—'} · MP ${parcial.temMp ? AppUnB.numero(parcial.mp) : '—'}`,
+            ),
         );
         periodo.querySelector('.periodo-rodape').append(cartao);
     });
@@ -165,7 +171,7 @@ function criarPeriodo(salvo = false) {
 
     divPeriodo.innerHTML = `
         <div class="periodo-header">
-            <h4>${numeroPeriodo}º Período</h4>
+            <h2>${numeroPeriodo}º Período</h2>
         </div>
         <div class="periodo-disciplinas"></div>
         <div class="periodo-rodape"><button type="button" class="btn btn-sm btn-outline-primary btn-add-disc"
@@ -187,7 +193,7 @@ function reindexarPeriodos() {
     const periodos = document.querySelectorAll('#periodos .periodo');
     periodos.forEach((periodo, indice) => {
         periodo.dataset.periodo = indice + 1;
-        const titulo = periodo.querySelector('.periodo-header h4');
+        const titulo = periodo.querySelector('.periodo-header h2');
         if (titulo) titulo.textContent = `${indice + 1}º Período`;
     });
 }
@@ -285,16 +291,20 @@ function removerDisciplina(botao) {
     const periodoEl = botao.closest('.periodo');
     const containerDisc = periodoEl.querySelector('.periodo-disciplinas');
     const todosPeridos = document.querySelectorAll('#periodos .periodo');
+    ultimaExclusao = {
+        discRow,
+        periodoEl,
+        proximaDisciplina: discRow.nextElementSibling,
+        proximoPeriodo: periodoEl.nextElementSibling,
+        indiceDisciplina: [...containerDisc.children].indexOf(discRow),
+        indicePeriodo: [...todosPeridos].indexOf(periodoEl),
+        substituta: null,
+    };
 
-    // Não permite remover a única disciplina do único período (apenas limpa os campos)
+    // Mantém uma linha vazia quando a última disciplina é removida.
     if (todosPeridos.length === 1 && containerDisc.children.length === 1) {
-        discRow.querySelector('.input-nome').value = '';
-        discRow.querySelector('.sel-creditos').selectedIndex = 0;
-        discRow.querySelector('.sel-mencao').selectedIndex = 0;
-        discRow.querySelector('.chk-modulo-livre').checked = false;
-        calcularIra();
-        salvarDados();
-        return;
+        adicionarDisciplina(periodoEl, ['', 0, 0, false]);
+        ultimaExclusao.substituta = containerDisc.lastElementChild;
     }
 
     discRow.remove();
@@ -307,4 +317,48 @@ function removerDisciplina(botao) {
 
     calcularIra();
     salvarDados();
+    const nome = discRow.querySelector('.input-nome').value.trim();
+    document.getElementById('textoExclusao').textContent = nome
+        ? `Disciplina “${nome}” removida.`
+        : 'Disciplina removida.';
+    document.getElementById('avisoExclusao').hidden = false;
+    document.getElementById('desfazerExclusao').focus();
+}
+
+function desfazerExclusao() {
+    if (!ultimaExclusao) return;
+    const { discRow, periodoEl, proximaDisciplina, proximoPeriodo, indiceDisciplina, indicePeriodo, substituta } =
+        ultimaExclusao;
+    const periodos = document.getElementById('periodos');
+    if (!periodoEl.isConnected) {
+        periodos.insertBefore(
+            periodoEl,
+            proximoPeriodo?.parentElement === periodos ? proximoPeriodo : periodos.children[indicePeriodo] || null,
+        );
+    }
+    const containerDisc = periodoEl.querySelector('.periodo-disciplinas');
+    containerDisc.insertBefore(
+        discRow,
+        proximaDisciplina?.parentElement === containerDisc
+            ? proximaDisciplina
+            : substituta?.parentElement === containerDisc
+              ? substituta
+              : containerDisc.children[indiceDisciplina] || null,
+    );
+    // Uma linha substituta já editada pertence ao usuário e deve permanecer.
+    if (
+        substituta &&
+        !substituta.querySelector('.input-nome').value &&
+        substituta.querySelector('.sel-creditos').selectedIndex === 0 &&
+        substituta.querySelector('.sel-mencao').selectedIndex === 0 &&
+        !substituta.querySelector('.chk-modulo-livre').checked
+    ) {
+        substituta.remove();
+    }
+    ultimaExclusao = null;
+    reindexarPeriodos();
+    calcularIra();
+    salvarDados();
+    document.getElementById('avisoExclusao').hidden = true;
+    discRow.querySelector('.input-nome').focus();
 }

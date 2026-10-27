@@ -118,3 +118,18 @@ sendo escolhido em `config/coleta.json`, com uma entrada por semestre no índice
 
 O fluxo e o parser foram adaptados do Followw UnB, do mesmo autor. Não é
 necessário instalar o projeto de referência.
+
+### Carga curricular para a grade
+
+`componentes.json` é um cadastro separado da oferta. Contém `fonte`,
+`atualizadoEm` e `componentes`, com os códigos associados a `nome` e
+`cargaHoraria`. O scraper `coletar_componentes.py` consulta a coluna **CH Total**
+do catálogo público do SIGAA, usando os prefixos encontrados no semestre de
+`config/coleta.json`. Pode ser atualizado com menos frequência que as turmas;
+`--codigo MAT0026` permite uma consulta pontual e `--nivel L` complementa
+componentes publicados no catálogo de especialização.
+
+Essa carga não é a carga do professor nem uma estimativa pelos horários. Campos
+sem fonte publicada continuam ausentes. A interface converte horas/aula em
+créditos pela equivalência de 15 horas/aula por crédito. O funcionamento dos
+planos e das exportações está em [grade.md](grade.md).

@@ -12,6 +12,7 @@
     const passo = 24;
     let disciplinas = [];
     let unidades = {};
+    let componentes = {};
     let semestresPorArquivo = new Map();
     let gruposFiltrados = [];
     let gruposExibidos = 0;
@@ -92,6 +93,16 @@
         detalhe.append(resumo);
 
         const ofertas = AppUnB.elemento('div', 'turma-ofertas-scroll');
+        const horas = componentes[grupo.disciplina.codigo]?.cargaHoraria;
+        ofertas.append(
+            AppUnB.elemento(
+                'p',
+                'turma-materia-carga',
+                Number.isFinite(horas)
+                    ? `${AppUnB.numero(horas)} h · ${AppUnB.numero(horas / 15)} créditos`
+                    : 'Carga horária curricular não informada',
+            ),
+        );
         ofertas.append(criarCabecalhoTurmas());
         const linhas = AppUnB.elemento('div', 'turma-ofertas');
         for (const turma of grupo.turmas) linhas.append(criarLinhaTurma(turma));
@@ -207,13 +218,17 @@
     async function iniciar() {
         mostrarEstado('Carregando semestres e departamentos…');
         try {
-            const [indiceResponse, unidadesResponse] = await Promise.all([
+            const [indiceResponse, unidadesResponse, carga] = await Promise.all([
                 fetch(new URL('data/turmas/index.json', AppUnB.raiz)),
                 fetch(new URL('data/turmas/unidades.json', AppUnB.raiz)),
+                fetch(new URL('data/turmas/componentes.json', AppUnB.raiz))
+                    .then((resposta) => (resposta.ok ? resposta.json() : {}))
+                    .catch(() => ({})),
             ]);
             if (!indiceResponse.ok || !unidadesResponse.ok) throw new Error('Catálogo indisponível.');
             const [indice, cadastro] = await Promise.all([indiceResponse.json(), unidadesResponse.json()]);
             unidades = cadastro.unidades || {};
+            componentes = carga.componentes || {};
             const semestres = indice.semestres || [];
             semestresPorArquivo = new Map(semestres.map((item) => [item.arquivo, item]));
             if (!semestres.length) {
@@ -259,8 +274,7 @@
         });
         semestreSelect.addEventListener('change', () => carregarSemestre(semestreSelect.value));
         for (const controle of [busca, departamento, horario, lotacao]) {
-            controle.addEventListener('input', filtrar);
-            controle.addEventListener('change', filtrar);
+            controle.addEventListener(controle.tagName === 'SELECT' ? 'change' : 'input', filtrar);
         }
         iniciar();
     });
