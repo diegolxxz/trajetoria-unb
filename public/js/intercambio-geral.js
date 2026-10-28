@@ -111,12 +111,17 @@
         });
         $('vazioAlocados').hidden = alocados.children.length > 0;
         $('contagemAlocados').textContent = `${alocados.children.length} alocados nos editais carregados`;
-        // Oculta apenas colunas inteiramente ausentes após aplicar os filtros.
-        [1, 3, 4, 5].forEach((indice) => {
-            const linhas = [...alocados.children];
+        ocultarColunasAusentes('referenciasGerais', [3, 4, 5, 6]);
+        ocultarColunasAusentes('alocadosGerais', [1, 3, 4, 5]);
+    }
+    function ocultarColunasAusentes(id, indices) {
+        const tabela = $(id);
+        const linhas = [...tabela.querySelector('tbody').children];
+        // Reavalia após cada filtro, preservando valores numéricos iguais a zero.
+        indices.forEach((indice) => {
             const ocultar =
                 linhas.length > 0 && linhas.every((tr) => tr.children[indice].textContent === 'Indisponível');
-            $('alocadosGerais').querySelector('thead tr').children[indice].hidden = ocultar;
+            tabela.querySelector('thead tr').children[indice].hidden = ocultar;
             linhas.forEach((tr) => {
                 tr.children[indice].hidden = ocultar;
             });

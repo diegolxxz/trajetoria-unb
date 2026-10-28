@@ -176,3 +176,51 @@ test('dados reais de todos os editais preservam alocados e referências sem nota
     assert.equal(r.metodoReferencias, estimado.metodoReferencias);
     assert.deepEqual(r.referencias[0].matriculasBase, curso.variantes[0].matriculasBase);
 });
+
+test('DOM histórico oculta ausências por edital e restaura referências ao alternar filtros', async () => {
+    const { document: d, Event } = await pagina([], (e) => {
+        if (e.slug === 'a') {
+            e.formula.tipo = 'ira-direto';
+            e.cursos = [];
+        }
+        return e;
+    });
+    const selecionar = (id, valor, evento = 'change') => {
+        d.getElementById(id).value = valor;
+        d.getElementById(id).dispatchEvent(new Event(evento));
+    };
+    selecionar('geralIpf', '50', 'input');
+    for (const slug of ['a', 'b', 'a']) {
+        selecionar('editalGeral', slug);
+        const cabecalho = d.querySelector('#referenciasGerais thead tr');
+        const linhas = [...d.querySelectorAll('#referenciasGerais tbody tr')];
+        for (const indice of [3, 4, 5]) {
+            assert.equal(cabecalho.children[indice].hidden, slug === 'a');
+            assert.ok(linhas.every((tr) => tr.children[indice].hidden === (slug === 'a')));
+        }
+        for (const indice of [0, 1, 2, 6, 7]) {
+            assert.equal(cabecalho.children[indice].hidden, false);
+            assert.ok(linhas.every((tr) => !tr.children[indice].hidden));
+        }
+    }
+});
+
+test('DOM histórico mantém zeros visíveis e oculta nota indisponível', async () => {
+    const { document: d, Event } = await pagina([], (e) => {
+        e.cursos[0].variantes = [{ media: 0, desvio: 0 }];
+        return e;
+    });
+    d.getElementById('geralIra').value = '0';
+    d.getElementById('geralIra').dispatchEvent(new Event('input'));
+    const cabecalho = d.querySelector('#referenciasGerais thead tr');
+    for (const tr of d.querySelectorAll('#referenciasGerais tbody tr')) {
+        for (const indice of [3, 4, 5]) {
+            assert.equal(tr.children[indice].textContent, '0');
+            assert.equal(tr.children[indice].hidden, false);
+            assert.equal(cabecalho.children[indice].hidden, false);
+        }
+        assert.equal(tr.children[6].textContent, 'Indisponível');
+        assert.equal(tr.children[6].hidden, true);
+    }
+    assert.equal(cabecalho.children[6].hidden, true);
+});
