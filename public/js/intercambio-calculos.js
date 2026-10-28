@@ -26,6 +26,7 @@ const IntercambioCalculos = (() => {
             return {
                 slug: edital.slug,
                 titulo: edital.titulo,
+                temCurso: referencias.length > 0,
                 mobilidade: edital.mobilidade,
                 fontes: edital.fontes,
                 formula: edital.formula,

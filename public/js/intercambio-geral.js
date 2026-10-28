@@ -55,9 +55,31 @@
         alocados?.replaceChildren();
         const criterios = $('criteriosGerais');
         criterios.replaceChildren();
-        const variasReferencias = selecionados.some((e) => e.referencias.length > 1);
+        const visiveis = selecionados
+            .map((edital) => ({
+                ...edital,
+                referencias: edital.temCurso
+                    ? edital.referencias.filter((r) =>
+                          compararNotas
+                              ? !r.motivo &&
+                                (edital.formula.tipo === 'ira-direto' ||
+                                    (Number.isFinite(r.media) && Number.isFinite(r.desvio) && r.desvio > 0))
+                              : Number.isFinite(r.media),
+                      )
+                    : [],
+            }))
+            .filter((edital) => edital.referencias.length);
+        const vazio = visiveis.length === 0;
+        $('resumoGerais').hidden = vazio;
+        $('fontesCriterios').hidden = vazio;
+        $('avisoEstimativas').hidden = vazio;
+        $('vazioReferencias').hidden = !vazio;
+        $('vazioReferencias').textContent = $('geralCurso').value
+            ? 'Sem dados para este curso nos editais selecionados.'
+            : 'Selecione um curso para consultar os dados dos editais.';
+        const variasReferencias = visiveis.some((e) => e.referencias.length > 1);
         $('referenciasGerais').querySelector('thead tr').children[1].hidden = !variasReferencias;
-        selecionados.forEach((edital) => {
+        visiveis.forEach((edital) => {
             const multiplas = edital.referencias.length > 1;
             edital.referencias.forEach((r) => {
                 const tr = el('tr');
@@ -65,10 +87,10 @@
                 celula(tr, multiplas ? r.turno || `Referência ${r.indice}` : '—');
                 tr.children[1].hidden = !variasReferencias;
                 if (compararNotas) {
-                    celula(tr, r.nota ? `${r.estimada ? '≈ ' : ''}${formato(r.nota.final)}` : 'Indisponível');
+                    celula(tr, r.nota ? formato(r.nota.final) : '—');
                 } else {
-                    celula(tr, `${r.estimada && Number.isFinite(r.media) ? '≈ ' : ''}${formato(r.media)}`);
-                    celula(tr, formato(r.diferenca));
+                    celula(tr, formato(r.media));
+                    celula(tr, Number.isFinite(r.diferenca) ? formato(r.diferenca) : '—');
                 }
                 historico.append(tr);
             });
@@ -109,6 +131,8 @@
                 grupo.append(el('br'), a);
             });
             criterios.append(grupo);
+        });
+        selecionados.forEach((edital) => {
             if (alocados)
                 edital.alocados
                     .filter((r) => !$('cursoAlocados').value || cursoChave(r.curso) === $('cursoAlocados').value)

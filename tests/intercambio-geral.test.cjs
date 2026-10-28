@@ -112,7 +112,7 @@ test('DOM real: comparação sem IPF, entrada persiste, filtros de curso e edita
     const { document: d, Event, storage } = await pagina();
     assert.equal(d.querySelectorAll('#referenciasGerais tbody tr').length, 4);
     assert.match(d.getElementById('criteriosGerais').textContent, /estimativa/);
-    assert.match(d.querySelector('#referenciasGerais').textContent, /Indisponível/);
+    assert.match(d.querySelector('#referenciasGerais').textContent, /—/);
     assert.equal(d.querySelectorAll('#alocadosGerais tbody tr').length, 2);
     d.getElementById('geralIpf').value = '50';
     d.getElementById('geralIpf').dispatchEvent(new Event('input'));
@@ -146,10 +146,10 @@ test('DOM valida intervalos, diferencia vazio de zero e mantém zero publicado',
     ira.value = '0';
     ipf.value = '0';
     ipf.dispatchEvent(new Event('input'));
-    assert.equal(celulaResumo(d, 'Nota simulada').textContent, '≈ -3');
+    assert.equal(celulaResumo(d, 'Nota simulada').textContent, '-3');
     ipf.value = '';
     ipf.dispatchEvent(new Event('input'));
-    assert.equal(celulaResumo(d, 'Nota simulada').textContent, 'Indisponível');
+    assert.equal(celulaResumo(d, 'Nota simulada').textContent, '—');
 });
 test('DOM explicita ausências, oculta colunas numéricas vazias e não transforma ausências em zero', async () => {
     const { document: d } = await pagina([], (e) => {
@@ -202,10 +202,9 @@ test('DOM histórico oculta ausências e restaura média e diferença ao alterna
     for (const slug of ['a', 'b', 'a']) {
         d.getElementById('editalGeral').value = slug;
         d.getElementById('editalGeral').dispatchEvent(new Event('change'));
-        for (const titulo of ['Média do curso', 'Seu IRA − média']) {
-            assert.equal(cabecalho(d, titulo).hidden, slug === 'a');
-            assert.equal(celulaResumo(d, titulo).hidden, slug === 'a');
-        }
+        assert.equal(d.querySelectorAll('#referenciasGerais tbody tr').length, slug === 'a' ? 0 : 2);
+        assert.equal(d.getElementById('resumoGerais').hidden, slug === 'a');
+        assert.equal(d.getElementById('fontesCriterios').hidden, slug === 'a');
     }
 });
 
@@ -221,8 +220,8 @@ test('DOM histórico mantém zeros visíveis e oculta nota indisponível', async
         assert.equal(cabecalho(d, titulo).hidden, false);
     }
     const { document: c } = await pagina([], transformar);
-    assert.equal(celulaResumo(c, 'Nota simulada').textContent, 'Indisponível');
-    assert.equal(cabecalho(c, 'Nota simulada').hidden, true);
+    assert.equal(c.querySelectorAll('#referenciasGerais tbody tr').length, 0);
+    assert.equal(c.getElementById('vazioReferencias').hidden, false);
 });
 
 test('médias é uma página independente sem simulação nem alocados e preserva IPF salvo', async () => {
@@ -377,7 +376,8 @@ test('DOM resumo compacto, referências condicionais e critérios recolhidos por
         assert.equal(d.querySelectorAll('#criteriosGerais a[href="https://example.org/"]').length, 2);
         assert.equal(celulaResumo(d, 'Referência', 0).textContent, '—');
         assert.equal(celulaResumo(d, 'Referência', 1).textContent, 'Referência 1');
-        assert.match(celulaResumo(d, modo === 'medias' ? 'Média do curso' : 'Nota simulada', 1).textContent, /≈/);
+        assert.doesNotMatch(d.querySelector('#referenciasGerais tbody').textContent, /≈/);
+        assert.match(d.getElementById('criteriosGerais').textContent, /Estimada/);
         for (const slug of ['a', 'b', 'a']) {
             d.getElementById('editalGeral').value = slug;
             d.getElementById('editalGeral').dispatchEvent(new Event('change'));
@@ -440,4 +440,111 @@ test('critérios associam matrículas da estimativa à referência correspondent
     const paragrafos = [...primeiro.querySelectorAll('p')].map((p) => p.textContent);
     assert.ok(paragrafos.includes('Referência 1: Matrículas usadas na estimativa: 111, 112'));
     assert.ok(paragrafos.includes('Referência 2: Matrículas usadas na estimativa: 221, 222'));
+});
+
+test('resumo oculta editais sem curso e estado vazio restaura sem afetar alocados', async () => {
+    for (const modo of ['medias', 'comparacao']) {
+        const { document: d, Event } = await pagina(
+            [],
+            (e) => {
+                if (e.slug === 'a') e.cursos = [];
+                return e;
+            },
+            modo,
+            { ipf: 50 },
+        );
+        const mudar = (id, valor) => {
+            d.getElementById(id).value = valor;
+            d.getElementById(id).dispatchEvent(new Event('change'));
+        };
+        assert.equal(d.querySelectorAll('#referenciasGerais tbody tr').length, 2);
+        assert.equal(d.querySelectorAll('#criteriosGerais > section').length, 1);
+        mudar('editalGeral', 'a');
+        assert.equal(d.querySelectorAll('#referenciasGerais tbody tr').length, 0);
+        assert.equal(d.getElementById('resumoGerais').hidden, true);
+        assert.equal(d.getElementById('fontesCriterios').hidden, true);
+        assert.equal(d.getElementById('vazioReferencias').hidden, false);
+        assert.match(d.getElementById('vazioReferencias').textContent, /Sem dados para este curso/);
+        assert.equal(d.getElementById('vazioReferencias').getAttribute('role'), 'status');
+        if (modo === 'comparacao') assert.equal(d.querySelectorAll('#alocadosGerais tbody tr').length, 1);
+        mudar('editalGeral', '');
+        mudar('geralCurso', 'OUTRO');
+        assert.equal(d.getElementById('vazioReferencias').hidden, false);
+        assert.equal(d.querySelectorAll('#criteriosGerais > section').length, 0);
+        if (modo === 'comparacao') assert.equal(d.querySelectorAll('#alocadosGerais tbody tr').length, 2);
+        mudar('geralCurso', '');
+        assert.match(d.getElementById('vazioReferencias').textContent, /Selecione um curso/);
+        mudar('geralCurso', 'CURSO');
+        assert.equal(d.getElementById('resumoGerais').hidden, false);
+        assert.equal(d.getElementById('fontesCriterios').hidden, false);
+        assert.equal(d.getElementById('vazioReferencias').hidden, true);
+        assert.equal(d.querySelectorAll('#referenciasGerais tbody tr').length, 2);
+    }
+});
+
+test('referências indisponíveis não criam coluna fantasma e índices válidos permanecem originais', async () => {
+    const transformar = (e) => {
+        e.cursos[0].variantes = [
+            { media: null, desvio: null },
+            { media: 0, desvio: 1, estimada: true },
+        ];
+        return e;
+    };
+    for (const modo of ['medias', 'comparacao']) {
+        const { document: d } = await pagina([], transformar, modo, { ira: 0, ipf: 0 });
+        assert.equal(d.querySelectorAll('#referenciasGerais tbody tr').length, 2);
+        assert.equal(cabecalho(d, 'Referência').hidden, true);
+        assert.equal(celulaResumo(d, modo === 'medias' ? 'Média do curso' : 'Nota simulada').textContent, '0');
+        assert.doesNotMatch(d.querySelector('#referenciasGerais').textContent, /≈|Indisponível/);
+        assert.match(d.getElementById('criteriosGerais').textContent, /Estimada/);
+    }
+    const { document: d } = await pagina([], (e) => {
+        e.cursos[0].variantes = [{ media: null }, { media: 2, desvio: 1 }, { media: 3, desvio: 1 }];
+        return e;
+    });
+    assert.equal(celulaResumo(d, 'Referência').textContent, 'Referência 2');
+    assert.equal(celulaResumo(d, 'Referência', 1).textContent, 'Referência 3');
+});
+
+test('comparação admite curso direto sem variantes, exclui ausente e mantém dados sem inputs válidos', async () => {
+    const { document: d, Event } = await pagina([], (e) => {
+        e.formula.tipo = 'ira-direto';
+        e.cursos = e.slug === 'a' ? [{ nome: 'CURSO', variantes: [] }] : [];
+        return e;
+    });
+    assert.equal(d.querySelectorAll('#referenciasGerais tbody tr').length, 1);
+    assert.equal(celulaResumo(d, 'Nota simulada').textContent, '—');
+    d.getElementById('geralIpf').value = '0';
+    d.getElementById('geralIpf').dispatchEvent(new Event('input'));
+    assert.equal(celulaResumo(d, 'Nota simulada').textContent, '4');
+    d.getElementById('geralIra').value = '6';
+    d.getElementById('geralIra').dispatchEvent(new Event('input'));
+    assert.equal(d.querySelectorAll('#referenciasGerais tbody tr').length, 1);
+    assert.equal(celulaResumo(d, 'Nota simulada').textContent, '—');
+    const a = await pagina([], (e) => {
+        e.cursos[0].variantes = [
+            { media: 3, desvio: 0 },
+            { media: 4, desvio: 1, motivo: 'Referência ambígua' },
+        ];
+        return e;
+    });
+    assert.equal(a.document.querySelectorAll('#referenciasGerais tbody tr').length, 0);
+    const b = await pagina([], (e) => e, 'medias', { ira: '' });
+    assert.equal(b.document.querySelectorAll('#referenciasGerais tbody tr').length, 4);
+    assert.equal(celulaResumo(b.document, 'Seu IRA − média').textContent, '—');
+});
+
+test('notas dos alocados calculáveis conferem com publicação dentro do arredondamento dos dados', () => {
+    const indice = JSON.parse(fs.readFileSync('public/data/editais/index.json'));
+    let conferidos = 0;
+    for (const entrada of indice) {
+        const e = JSON.parse(fs.readFileSync(`public/data/editais/${entrada.slug}.json`));
+        for (const r of e.resultados.filter((r) => calc.alocado(r.alocacao) && Number.isFinite(r.notaFinal))) {
+            const nota = calc.nota(r.ira, r.ipf, r.media, r.desvio, e.formula);
+            if (!nota) continue;
+            assert.ok(Math.abs(nota.final - r.notaFinal) <= 0.00011, `${e.slug}: ${r.matricula}`);
+            conferidos++;
+        }
+    }
+    assert.equal(conferidos, 463);
 });
