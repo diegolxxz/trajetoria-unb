@@ -29,6 +29,109 @@ const plano = () => ({
 });
 const backup = () => ({ versao: 1, ativo: 'p1', planos: [plano()] });
 
+test('backup e JSON preservam escolhas, filtros e snapshots independentes', () => {
+    const b = backup();
+    Object.assign(b.planos[0].disciplinas[0], {
+        ativa: false,
+        permitidas: ['["CIC1","02","indisponivel"]', '["CIC1","03","outra"]'],
+    });
+    b.planos[0].filtros = { vagas: true, encaixe: false, extras: true };
+    const copia = api.validarBackup(b);
+    assert.deepEqual(copia, b);
+    assert.deepEqual(api.validarBackup(JSON.parse(JSON.stringify(copia))), b);
+    copia.planos[0].disciplinas[0].permitidas.push('outra alternativa');
+    copia.planos[0].filtros.vagas = false;
+    assert.equal(b.planos[0].disciplinas[0].permitidas.length, 2);
+    assert.equal(b.planos[0].filtros.vagas, true);
+    assert.match(api.calendario(b.planos[0]), /Turma 01/);
+});
+
+test('backup aceita permitidas null e preserva vagas zero e matriculados null', () => {
+    const b = backup();
+    Object.assign(b.planos[0].disciplinas[0], { ativa: true, permitidas: null });
+    Object.assign(b.planos[0].selecionadas[0].turma, { vagas: 0, matriculados: null });
+    b.planos[0].filtros = { vagas: false, encaixe: true, extras: false };
+    assert.deepEqual(api.validarBackup(b), b);
+});
+
+test('backup rejeita ativa invalida e permitidas vazias, duplicadas ou fora dos limites', () => {
+    const invalidas = [
+        { ativa: null },
+        { ativa: 0 },
+        { ativa: 'false' },
+        { permitidas: [] },
+        { permitidas: false },
+        { permitidas: '01' },
+        { permitidas: ['01', '01'] },
+        { permitidas: [''] },
+        { permitidas: ['  '] },
+        { permitidas: ['01\0'] },
+        { permitidas: [null] },
+        { permitidas: [0] },
+        { permitidas: ['a'.repeat(4001)] },
+        { permitidas: Array.from({ length: 501 }, (_, i) => 'turma-' + i) },
+    ];
+    for (const campos of invalidas) {
+        const b = backup();
+        Object.assign(b.planos[0].disciplinas[0], campos);
+        assert.throws(() => api.validarBackup(b), Error, JSON.stringify(campos));
+    }
+    const b = backup();
+    b.planos[0].disciplinas[0].permitidas = Array.from({ length: 500 }, (_, i) => 'turma-' + i);
+    b.planos[0].disciplinas[0].permitidas[0] = 'a'.repeat(4000);
+    assert.deepEqual(api.validarBackup(b), b);
+});
+
+test('backup exige os tres filtros booleanos quando filtros estao presentes', () => {
+    for (const filtros of [
+        null,
+        [],
+        true,
+        {},
+        { vagas: true, encaixe: true },
+        { vagas: 1, encaixe: false, extras: true },
+        { vagas: true, encaixe: 'false', extras: true },
+        { vagas: true, encaixe: false, extras: null },
+    ]) {
+        const b = backup();
+        b.planos[0].filtros = filtros;
+        assert.throws(() => api.validarBackup(b), Error, JSON.stringify(filtros));
+    }
+});
+
+test('planos antigos mantem campos opcionais ausentes e snapshots independentes', () => {
+    const b = backup();
+    b.planos[0].disciplinas.push({ codigo: 'MAT1', obrigatoria: false });
+    const copia = api.validarBackup(b);
+    assert.deepEqual(copia, b);
+    assert.equal(copia.versao, 1);
+    assert.equal(Object.hasOwn(copia.planos[0], 'filtros'), false);
+    for (const disciplina of copia.planos[0].disciplinas) {
+        assert.equal(Object.hasOwn(disciplina, 'ativa'), false);
+        assert.equal(Object.hasOwn(disciplina, 'permitidas'), false);
+    }
+});
+
+test('historico restaura escolhas de geracao e filtros apos round-trip de backup', () => {
+    const inicial = api.validarBackup(backup());
+    const b = backup();
+    Object.assign(b.planos[0].disciplinas[0], { ativa: false, permitidas: ['turma indisponivel'] });
+    b.planos[0].filtros = { vagas: true, encaixe: true, extras: false };
+    let h = api.registrar(api.criarHistorico(inicial), api.validarBackup(b));
+    assert.deepEqual(h.atual.planos[0].disciplinas[0], {
+        codigo: 'CIC1',
+        obrigatoria: true,
+        ativa: false,
+        permitidas: ['turma indisponivel'],
+    });
+    h = api.desfazer(h);
+    assert.deepEqual(h.atual, inicial);
+    h = api.refazer(h);
+    assert.deepEqual(api.validarBackup(JSON.parse(JSON.stringify(h.atual))), b);
+    b.planos[0].disciplinas[0].permitidas.push('mutacao externa');
+    assert.deepEqual(h.atual.planos[0].disciplinas[0].permitidas, ['turma indisponivel']);
+});
+
 test('expõe validação, histórico e calendário', () => {
     for (const nome of ['validarBackup', 'criarHistorico', 'registrar', 'desfazer', 'refazer', 'calendario'])
         assert.equal(typeof api[nome], 'function');

@@ -24,7 +24,7 @@ navegador; ao rodar o servidor local, uma cópia também é guardada em
 `local/dados.json`.
 
 A grade usa a mesma oferta da consulta de turmas. Os planos ficam no navegador;
-para transferi-los ou fazer backup, baixe o JSON em “Arquivos e plano”. A
+para transferi-los ou fazer backup, baixe o JSON em “Plano”. A
 geração inclui todas as disciplinas marcadas como obrigatórias e permite
 deixar opcionais de fora, com limites para manter a página responsiva. A
 exportação de calendário pede o primeiro e o último dia das aulas e não exclui

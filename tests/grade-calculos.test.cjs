@@ -186,3 +186,209 @@ test('valida códigos repetidos, quantidade de pedidos e limites antes da busca'
         assert.throws(() => calc.gerarCombinacoes([pedido], opcoes), /limite/i);
     }
 });
+
+test('agrupa variantes pelo horário canônico antes de limitar grades distintas', () => {
+    const variantes = Array.from({ length: 40 }, (_, i) =>
+        turma(String(i), i % 2 ? ['4M1', '2M1'] : ['24M1'], { professores: ['Prof ' + i] }),
+    );
+    const outra = turma('outra', ['3M1']);
+    const resultado = calc.gerarGrades([{ codigo: 'A', obrigatoria: true, turmas: [...variantes, outra] }]);
+    assert.deepEqual(resultado.grupos, [[{ codigo: 'A', turmas: variantes }], [{ codigo: 'A', turmas: [outra] }]]);
+    assert.equal(resultado.truncado, false);
+    assert.equal(resultado.diagnostico, '');
+});
+
+test('preserva atribuições de horário por disciplina mesmo com ocupação total igual', () => {
+    const pedidos = ['A', 'B'].map((codigo) => ({
+        codigo,
+        obrigatoria: true,
+        turmas: [turma('1', ['2M1']), turma('2', ['2M2'])],
+    }));
+    const resultado = calc.gerarGrades(pedidos);
+    assert.equal(resultado.grupos.length, 2);
+    assert.deepEqual(
+        resultado.grupos.map((g) => g.map((p) => p.turmas[0].numero)),
+        [
+            ['1', '2'],
+            ['2', '1'],
+        ],
+    );
+});
+
+test('não enumera o produto de professores e limita retenção com aviso de truncamento', () => {
+    const pedidos = ['A', 'B', 'C'].map((codigo, i) => ({
+        codigo,
+        obrigatoria: true,
+        turmas: Array.from({ length: 400 }, (_, n) => turma(String(n), [String(i + 2) + 'M1'])),
+    }));
+    const resultado = calc.gerarGrades(pedidos);
+    assert.equal(resultado.grupos.length, 1);
+    assert.deepEqual(
+        resultado.grupos[0].map((p) => p.turmas.length),
+        [400, 400, 400],
+    );
+    assert.ok(resultado.explorados < 1300);
+    assert.equal(resultado.truncado, false);
+    const enorme = calc.gerarGrades([
+        { codigo: 'A', obrigatoria: true, turmas: Array(100000).fill(turma('1', ['2M1'])) },
+    ]);
+    assert.equal(enorme.truncado, true);
+    assert.ok(enorme.grupos[0][0].turmas.length <= 500);
+    assert.ok(enorme.explorados <= 501);
+});
+
+test('explica impossibilidade conjunta de três disciplinas sem alegar conflito mínimo', () => {
+    const pedidos = ['A', 'B', 'C'].map((codigo) => ({
+        codigo,
+        obrigatoria: true,
+        turmas: [turma('1', ['2M1']), turma('2', ['2M2'])],
+    }));
+    assert.equal(calc.gerarGrades(pedidos.slice(0, 2)).grupos.length, 2);
+    const resultado = calc.gerarGrades(pedidos);
+    assert.deepEqual(resultado.grupos, []);
+    assert.equal(resultado.truncado, false);
+    assert.match(resultado.diagnostico, /conjunto/i);
+    for (const codigo of ['A', 'B', 'C']) assert.ok(resultado.diagnostico.includes(codigo));
+    assert.doesNotMatch(resultado.diagnostico, /mínim/i);
+});
+
+test('distingue disciplina sem turmas elegíveis de busca interrompida', () => {
+    const pedidos = [{ codigo: 'SEM', obrigatoria: true, turmas: [] }];
+    const vazio = calc.gerarGrades(pedidos);
+    assert.match(vazio.diagnostico, /SEM/);
+    assert.match(vazio.diagnostico, /elegíve/i);
+    const limitado = calc.gerarGrades([{ codigo: 'A', obrigatoria: true, turmas: [turma('1', ['2M1'])] }], {
+        maxNos: 1,
+    });
+    assert.equal(limitado.truncado, true);
+    assert.deepEqual(limitado.grupos, []);
+    assert.equal(limitado.explorados, 1);
+    assert.match(limitado.diagnostico, /limite|inconclusiv/i);
+    assert.doesNotMatch(limitado.diagnostico, /impossív/i);
+});
+
+test('ordena extras encontrados por inclusão e parcial permite omitir obrigatórias explicitamente', () => {
+    const pedidos = [
+        { codigo: 'A', obrigatoria: true, turmas: [turma('1', ['2M1'])] },
+        { codigo: 'B', obrigatoria: false, turmas: [turma('2', ['2M2'])] },
+        { codigo: 'C', obrigatoria: false, turmas: [turma('3', ['2M3'])] },
+    ];
+    const resultado = calc.gerarGrades(pedidos);
+    assert.deepEqual(
+        resultado.grupos.map((g) => g.length),
+        [3],
+    );
+    pedidos[1].turmas = [turma('choque', ['2M1'])];
+    const extrasOmitidos = calc.gerarGrades(pedidos);
+    assert.deepEqual(
+        extrasOmitidos.grupos.map((g) => g.map((p) => p.codigo)),
+        [['A', 'C'], ['A']],
+    );
+    pedidos[1].obrigatoria = true;
+    pedidos[1].turmas = [turma('choque', ['2M1'])];
+    assert.deepEqual(calc.gerarGrades(pedidos).grupos, []);
+    const parcial = calc.gerarGrades(pedidos, { parcial: true });
+    assert.ok(parcial.grupos.some((g) => g.some((p) => p.codigo === 'B') && !g.some((p) => p.codigo === 'A')));
+    assert.ok(parcial.grupos.every((g) => g.length > 0));
+    assert.equal(pedidos[0].obrigatoria, true);
+    assert.deepEqual(calc.gerarGrades([]).grupos, []);
+});
+
+test('limita a vinte grades distintas e contabiliza pré-processamento no orçamento', () => {
+    const turmas = Array.from({ length: 30 }, (_, i) =>
+        turma(String(i), [String(1 + Math.floor(i / 5)) + 'M' + (1 + (i % 5))]),
+    );
+    const resultado = calc.gerarGrades([{ codigo: 'A', obrigatoria: true, turmas }]);
+    assert.equal(resultado.grupos.length, 20);
+    assert.equal(resultado.truncado, true);
+    const curto = calc.gerarGrades(
+        [{ codigo: 'A', obrigatoria: true, turmas: Array(100000).fill(turma('1', ['inválido'])) }],
+        { maxNos: 7 },
+    );
+    assert.equal(curto.explorados, 7);
+    assert.equal(curto.truncado, true);
+    assert.deepEqual(curto.grupos, []);
+});
+
+test('tenta inclusão completa antes que subconjuntos de extras consumam o limite de resultados', () => {
+    const pedidos = [
+        { codigo: 'REQ', obrigatoria: true, turmas: [turma('1', ['2M1']), turma('2', ['2M2'])] },
+        { codigo: 'EXTRA', obrigatoria: false, turmas: [turma('1', ['2M1'])] },
+        ...Array.from({ length: 5 }, (_, i) => ({
+            codigo: 'EXTRA' + i,
+            obrigatoria: false,
+            turmas: [turma('1', [String(i + 3) + 'M1'])],
+        })),
+    ];
+    const resultado = calc.gerarGrades(pedidos);
+    assert.ok(resultado.grupos.some((grupo) => grupo.length === 7));
+    assert.equal(resultado.grupos[0][0].turmas[0].numero, '2');
+    assert.equal(resultado.truncado, false);
+    const limitado = calc.gerarGrades(pedidos, { maxNos: 10 });
+    assert.equal(limitado.explorados, 10);
+    assert.equal(limitado.truncado, true);
+    assert.deepEqual(limitado.grupos, []);
+});
+
+test('compatibilidade força candidata substituindo alternativas e inclui disciplina desabilitada', () => {
+    const a = turma('1', ['2M1']);
+    const b = turma('2', ['2M2']);
+    const pedidos = [
+        { codigo: 'A', obrigatoria: true, turmas: [a, b] },
+        { codigo: 'B', obrigatoria: true, turmas: [a] },
+        { codigo: 'EXTRA', obrigatoria: false, turmas: [a] },
+    ];
+    const candidatos = [
+        { codigo: 'A', turma: a },
+        { codigo: 'A', turma: b },
+        { codigo: 'DESLIGADA', turma: b },
+        { codigo: 'EXTRA', turma: b },
+    ];
+    const resultado = calc.compatibilidades(pedidos, candidatos);
+    assert.deepEqual(
+        resultado.estados.map((e) => e.estado),
+        ['incompativel', 'compativel', 'incompativel', 'incompativel'],
+    );
+    assert.equal(resultado.estados[1].id, calc.idTurma('A', b));
+    assert.equal(resultado.truncado, false);
+    assert.equal(calc.compatibilidades([], [{ codigo: 'SO', turma: a }]).estados[0].estado, 'compativel');
+    assert.equal(
+        calc.compatibilidades([], [{ codigo: 'SO', turma: turma('?', ['a definir']) }]).estados[0].estado,
+        'desconhecido',
+    );
+    const isolada = calc.compatibilidades(pedidos.slice(1, 2), [{ codigo: 'DESLIGADA', turma: b }]);
+    assert.equal(isolada.estados[0].estado, 'compativel');
+    const primeiraSolucao = calc.compatibilidades(pedidos.slice(0, 1), [
+        { codigo: 'NOVA', turma: turma('3', ['3M1']) },
+    ]);
+    assert.equal(primeiraSolucao.estados[0].estado, 'compativel');
+});
+
+test('compatibilidade considera atribuição global, e não só conflitos par a par', () => {
+    const pedidos = ['A', 'B'].map((codigo) => ({
+        codigo,
+        obrigatoria: true,
+        turmas: [turma('1', ['2M1']), turma('2', ['2M2'])],
+    }));
+    const resultado = calc.compatibilidades(pedidos, [{ codigo: 'C', turma: turma('1', ['2M1']) }]);
+    assert.equal(resultado.estados[0].estado, 'incompativel');
+});
+
+test('compatibilidade usa orçamento agregado e mantém desconhecidas as candidatas restantes', () => {
+    const candidatos = Array.from({ length: 10 }, (_, i) => ({ codigo: 'A' + i, turma: turma('1', ['2M1']) }));
+    const resultado = calc.compatibilidades([], candidatos, { maxNos: 5 });
+    assert.equal(resultado.explorados, 5);
+    assert.equal(resultado.truncado, true);
+    assert.deepEqual(
+        resultado.estados.map((e) => e.estado),
+        ['compativel', 'compativel', ...Array(8).fill('desconhecido')],
+    );
+    const enorme = calc.compatibilidades(
+        [{ codigo: 'B', obrigatoria: true, turmas: Array(100000).fill(turma('?', ['a definir'])) }],
+        candidatos,
+        { maxNos: 9 },
+    );
+    assert.equal(enorme.explorados, 9);
+    assert.ok(enorme.estados.every((e) => e.estado === 'desconhecido'));
+    assert.equal(enorme.truncado, true);
+});

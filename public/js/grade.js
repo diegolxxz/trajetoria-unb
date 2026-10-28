@@ -23,6 +23,9 @@
     let historico;
     let geracoes = [];
     let planoVisualizado = '';
+    let editor = null;
+    let workerCompat = null;
+    let compatibilidade = new Map();
     try {
         historico = GradeArquivos.criarHistorico(
             GradeArquivos.validarBackup(AppUnB.ler(chave, { versao: 1, ativo: '', planos: [] })),
@@ -57,14 +60,25 @@
     }
     function registrar(proximo) {
         const validado = GradeArquivos.validarBackup(proximo);
+        const anterior = atual();
         historico = GradeArquivos.registrar(historico, validado);
+        const plano = atual();
+        if (
+            anterior?.id !== plano?.id ||
+            anterior?.semestre !== plano?.semestre ||
+            !plano?.disciplinas.some((d) => d.codigo === editor?.codigo)
+        )
+            editor = null;
         AppUnB.salvar(chave, historico.atual);
         cancelar();
         geracoes = [];
         $('combinacoesGrade').replaceChildren();
         $('estadoGeradorGrade').textContent = '';
+        $('parciaisGrade').hidden = true;
+        compatibilidade.clear();
         renderizar();
         buscar();
+        verificarEncaixes();
     }
     function alterar(fn) {
         const proximo = copiar(historico.atual);
@@ -79,6 +93,9 @@
     async function carregarOferta(semestre) {
         const token = ++carregamento;
         cancelar();
+        workerCompat?.terminate();
+        workerCompat = null;
+        compatibilidade.clear();
         semestreCarregado = '';
         disciplinas = new Map();
         $('buscaGrade').disabled = true;
@@ -108,9 +125,11 @@
             semestreCarregado = semestre;
             $('buscaGrade').disabled = false;
             const data = new Date(item.atualizadoEm);
-            $('ofertaGrade').textContent = `Semestre ${semestre} · Oferta de ${data.toLocaleDateString('pt-BR')}`;
+            $('ofertaGrade').textContent =
+                `Oferta de ${data.toLocaleDateString('pt-BR', { year: '2-digit', month: '2-digit', day: '2-digit' })}`;
             renderizar();
             buscar();
+            verificarEncaixes();
         } catch (erro) {
             if (token === carregamento) {
                 $('ofertaGrade').textContent = erro.message;
@@ -138,6 +157,11 @@
         $('nomePlanoGrade').value = p.nome;
         $('inicioGrade').value = p.inicio;
         $('fimGrade').value = p.fim;
+        $('somenteVagasGrade').checked = p.filtros?.vagas || false;
+        $('encaixeGrade').checked = p.filtros?.encaixe || false;
+        $('ocultarExtrasGrade').checked = p.filtros?.extras || false;
+        const ativos = [p.filtros?.vagas, p.filtros?.encaixe, p.filtros?.extras].filter(Boolean).length;
+        $('resumoFiltrosGrade').textContent = ativos ? `Filtros · ${ativos} ativo(s)` : 'Filtros';
     }
     function buscar() {
         const termo = normalizar($('buscaGrade').value.trim());
@@ -157,7 +181,7 @@
                 alterar((p) => p.disciplinas.push({ codigo: d.codigo, obrigatoria: true }));
                 $('buscaGrade').value = '';
                 resultados.replaceChildren();
-                const campo = document.querySelector(`[data-codigo="${CSS.escape(d.codigo)}"] select`);
+                const campo = document.querySelector(`[data-codigo="${CSS.escape(d.codigo)}"] .grade-escolher`);
                 campo?.focus();
             };
             linha.append(botao);
@@ -179,26 +203,223 @@
             ? `${AppUnB.numero(horas)} h · ${AppUnB.numero(horas / 15)} créditos`
             : 'Carga horária curricular não informada';
     }
+    function elegiveis(codigo, restrita = true) {
+        const pedido = atual()?.disciplinas.find((d) => d.codigo === codigo);
+        return (disciplinas.get(codigo)?.turmas || []).filter((t) => {
+            if (
+                $('somenteVagasGrade').checked &&
+                !(t.vagas != null && t.matriculados != null && t.matriculados < t.vagas)
+            )
+                return false;
+            return (
+                !restrita || pedido?.permitidas == null || pedido.permitidas.includes(GradeCalculos.idTurma(codigo, t))
+            );
+        });
+    }
+    function pedidosGerador() {
+        return (atual()?.disciplinas || [])
+            .filter((d) => d.ativa !== false)
+            .map((d) => ({ ...d, turmas: elegiveis(d.codigo) }));
+    }
+    function visiveis(codigo) {
+        return elegiveis(codigo, false).filter(
+            (t) =>
+                !$('encaixeGrade').checked || compatibilidade.get(GradeCalculos.idTurma(codigo, t)) !== 'incompativel',
+        );
+    }
+    function verificarEncaixes() {
+        workerCompat?.terminate();
+        workerCompat = null;
+        $('estadoEncaixeGrade').textContent = '';
+        if (!$('encaixeGrade').checked || !atual() || semestreCarregado !== atual().semestre) return;
+        if (!('Worker' in window)) {
+            $('estadoEncaixeGrade').textContent =
+                'Verificação indisponível neste navegador; as turmas continuam visíveis.';
+            return;
+        }
+        const candidatos = atual().disciplinas.flatMap((d) =>
+            elegiveis(d.codigo, false).map((turma) => ({ codigo: d.codigo, turma })),
+        );
+        const ativo = new Worker(new URL('js/grade-worker.js', AppUnB.raiz));
+        workerCompat = ativo;
+        $('estadoEncaixeGrade').textContent = 'Verificando encaixes… Turmas ainda não verificadas continuam visíveis.';
+        ativo.onmessage = ({ data }) => {
+            if (workerCompat !== ativo) return;
+            ativo.terminate();
+            workerCompat = null;
+            if (data.erro) {
+                $('estadoEncaixeGrade').textContent =
+                    'Não foi possível verificar os encaixes. As turmas continuam visíveis.';
+                return;
+            }
+            compatibilidade = new Map(data.resultado.estados.map((s) => [s.id, s.estado]));
+            $('estadoEncaixeGrade').textContent =
+                data.resultado.truncado ||
+                candidatos.length > 500 ||
+                data.resultado.estados.some((s) => s.estado === 'desconhecido')
+                    ? 'Verificação parcial. Encaixes não concluídos continuam visíveis.'
+                    : 'Encaixes verificados com as matérias necessárias ativadas.';
+            renderizarDisciplinas(atual());
+        };
+        ativo.onerror = () => {
+            if (workerCompat === ativo) {
+                ativo.terminate();
+                workerCompat = null;
+                $('estadoEncaixeGrade').textContent = 'Não foi possível verificar os encaixes. Tente novamente.';
+            }
+        };
+        ativo.postMessage({ tipo: 'compatibilidade', pedidos: pedidosGerador(), candidatos: candidatos.slice(0, 500) });
+    }
+    function criarEditor(pedido, artigo) {
+        const painel = el('div', 'grade-editor');
+        const titulo = el('p', 'grade-editor-titulo', 'Turmas que o gerador pode usar');
+        const busca = el('input', 'form-control');
+        busca.type = 'search';
+        busca.placeholder = 'Filtrar por professor, turma ou horário';
+        busca.id = 'buscaEditorGrade';
+        busca.value = editor.busca || '';
+        busca.setAttribute('aria-label', `Filtrar turmas de ${pedido.codigo}`);
+        const lista = el('div', 'grade-editor-lista');
+        const contagem = el('p', 'grade-muted');
+        let filtradas = [];
+        function atualizar() {
+            filtradas = visiveis(pedido.codigo).filter((t) =>
+                normalizar(`${t.numero} ${professores(t)} ${t.horarios.join(' ')} ${t.local || ''}`).includes(
+                    normalizar(busca.value),
+                ),
+            );
+            lista.replaceChildren();
+            filtradas.forEach((t) => {
+                const id = GradeCalculos.idTurma(pedido.codigo, t);
+                const rotulo = el('label', 'grade-checkbox grade-candidata');
+                const check = el('input');
+                check.id = `candidataGrade-${pedido.codigo}-${disciplinas.get(pedido.codigo).turmas.indexOf(t)}`;
+                check.type = 'checkbox';
+                check.checked = editor.ids.has(id);
+                check.onchange = () => {
+                    if (check.checked) editor.ids.add(id);
+                    else editor.ids.delete(id);
+                    contagem.textContent = `${filtradas.length} visíveis · ${editor.ids.size} marcadas`;
+                };
+                const pendente =
+                    $('encaixeGrade').checked && !['compativel', 'incompativel'].includes(compatibilidade.get(id));
+                rotulo.append(
+                    check,
+                    el(
+                        'span',
+                        '',
+                        `${t.numero} · ${professores(t) || 'Docente não informado'}\n${t.horarios.join(' · ') || 'Sem horário'} · ${t.local || 'Local a definir'} · ${t.matriculados ?? '—'}/${t.vagas ?? '—'} matriculados${pendente ? ' · Encaixe ainda não verificado' : ''}`,
+                    ),
+                );
+                lista.append(rotulo);
+            });
+            contagem.textContent = `${filtradas.length} visíveis · ${editor.ids.size} marcadas`;
+        }
+        busca.oninput = () => {
+            editor.busca = busca.value;
+            atualizar();
+        };
+        const acoes = el('div', 'grade-acoes');
+        const marcacoes = el('div', 'grade-acoes');
+        function botao(texto, classe, acao, id) {
+            const b = el('button', `grade-botao ${classe}`, texto);
+            b.type = 'button';
+            b.id = `${id}-${pedido.codigo}`;
+            b.onclick = acao;
+            return b;
+        }
+        marcacoes.append(
+            botao(
+                'Marcar visíveis',
+                '',
+                () => {
+                    filtradas.forEach((t) => editor.ids.add(GradeCalculos.idTurma(pedido.codigo, t)));
+                    atualizar();
+                },
+                'marcarVisiveisGrade',
+            ),
+            botao(
+                'Limpar marcações',
+                '',
+                () => {
+                    editor.ids.clear();
+                    atualizar();
+                },
+                'limparMarcacoesGrade',
+            ),
+        );
+        acoes.append(
+            botao(
+                'Aplicar turmas',
+                'grade-aplicar grade-principal',
+                () => {
+                    if (!editor.ids.size) {
+                        mensagem(
+                            'Selecione ao menos uma turma ou desative a matéria no gerador. Sua escolha anterior foi preservada.',
+                        );
+                        return;
+                    }
+                    const ids = [...editor.ids];
+                    editor = null;
+                    alterar((p) => {
+                        p.disciplinas.find((d) => d.codigo === pedido.codigo).permitidas = ids;
+                    });
+                    mensagem('Turmas permitidas atualizadas. A turma da grade salva foi mantida.');
+                    ($(`escolherGrade-${pedido.codigo}`) || $('buscaGrade')).focus({ preventScroll: true });
+                },
+                'aplicarTurmasGrade',
+            ),
+            botao(
+                'Cancelar',
+                '',
+                () => {
+                    editor = null;
+                    renderizarDisciplinas(atual());
+                    mensagem('Edição cancelada. As turmas permitidas foram mantidas.');
+                    ($(`escolherGrade-${pedido.codigo}`) || $('buscaGrade')).focus({ preventScroll: true });
+                },
+                'cancelarTurmasGrade',
+            ),
+        );
+        painel.append(titulo, busca, contagem, marcacoes, lista, acoes);
+        artigo.append(painel);
+        atualizar();
+    }
     function renderizarDisciplinas(p) {
+        const focoEditor = document.activeElement?.closest?.('.grade-materia') ? document.activeElement.id : '';
         const lista = $('disciplinasGrade');
+        const abertas = new Set(
+            [...lista.querySelectorAll('.grade-opcoes:not([hidden])')].map(
+                (d) => d.closest('.grade-materia').dataset.codigo,
+            ),
+        );
         lista.replaceChildren();
         $('totalDesejadasGrade').textContent = `${p.disciplinas.length}/20`;
         $('planoVazioGrade').hidden = !!p.disciplinas.length;
         p.disciplinas.forEach((pedido, indice) => {
             const d = disciplinas.get(pedido.codigo);
             const salva = p.selecionadas.find((s) => s.codigo === pedido.codigo);
+            const disponiveis = visiveis(pedido.codigo);
+            if (
+                ($('ocultarExtrasGrade').checked &&
+                    !pedido.obrigatoria &&
+                    pedido.ativa === false &&
+                    !salva &&
+                    editor?.codigo !== pedido.codigo) ||
+                (!disponiveis.length &&
+                    ($('encaixeGrade').checked || $('somenteVagasGrade').checked) &&
+                    editor?.codigo !== pedido.codigo)
+            )
+                return;
             const artigo = el('article', 'grade-materia');
             artigo.dataset.codigo = pedido.codigo;
             const topo = el('div', 'grade-materia-cabecalho');
             const nome = el('div');
             const codigo = el('span', 'grade-codigo', pedido.codigo);
             codigo.style.color = cores[indice % cores.length];
-            nome.append(
-                codigo,
-                el('h3', '', d?.nome || salva?.nome || pedido.codigo),
-                el('p', 'grade-muted', carga(pedido.codigo)),
-            );
-            const remover = el('button', 'grade-botao grade-remover', 'Remover');
+            nome.append(el('h3', '', d?.nome || salva?.nome || pedido.codigo));
+            const remover = el('button', 'grade-botao grade-remover', 'Remover do plano');
+            remover.id = `removerGrade-${pedido.codigo}`;
             remover.type = 'button';
             remover.setAttribute('aria-label', `Remover ${d?.nome || pedido.codigo} do plano`);
             remover.onclick = () => {
@@ -206,25 +427,47 @@
                     plano.disciplinas = plano.disciplinas.filter((x) => x.codigo !== pedido.codigo);
                     plano.selecionadas = plano.selecionadas.filter((x) => x.codigo !== pedido.codigo);
                 });
+                mensagem(`${pedido.codigo} removida do plano e da grade salva. Use Desfazer em Plano para restaurar.`);
                 $('buscaGrade').focus();
                 buscar();
             };
-            topo.append(nome, remover);
-            const rotulo = el('label', 'grade-checkbox');
-            const check = el('input');
-            check.id = `obrigatoriaGrade${indice}`;
-            check.type = 'checkbox';
-            check.checked = pedido.obrigatoria;
-            check.onchange = () =>
+            topo.append(nome);
+            const usarRotulo = el('label', 'grade-checkbox grade-usar');
+            const usar = el('input');
+            usar.id = `usarGrade${indice}`;
+            usar.type = 'checkbox';
+            usar.checked = pedido.ativa !== false;
+            usar.onchange = () =>
                 alterar((plano) => {
-                    plano.disciplinas.find((x) => x.codigo === pedido.codigo).obrigatoria = check.checked;
+                    plano.disciplinas.find((d) => d.codigo === pedido.codigo).ativa = usar.checked;
                 });
-            rotulo.append(check, document.createTextNode('Obrigatória neste plano'));
-            const label = el('label', 'visually-hidden', `Turma de ${d?.nome || pedido.codigo}`);
+            usar.setAttribute('aria-label', `Usar ${d?.nome || pedido.codigo} no gerador`);
+            usarRotulo.append(usar, el('span', '', 'Usar no gerador'));
+            const rotulo = el('div', 'grade-campo');
+            const prioridade = el('select', 'form-select grade-prioridade');
+            prioridade.id = `obrigatoriaGrade${indice}`;
+            for (const [valor, texto] of [
+                ['obrigatoria', 'Obrigatória'],
+                ['extra', 'Extra'],
+            ]) {
+                const opcao = el('option', '', texto);
+                opcao.value = valor;
+                opcao.selected = pedido.obrigatoria === (valor === 'obrigatoria');
+                prioridade.append(opcao);
+            }
+            prioridade.onchange = () =>
+                alterar((plano) => {
+                    plano.disciplinas.find((x) => x.codigo === pedido.codigo).obrigatoria =
+                        prioridade.value === 'obrigatoria';
+                });
+            const labelPrioridade = el('label', '', 'Prioridade no gerador');
+            labelPrioridade.htmlFor = prioridade.id;
+            rotulo.append(labelPrioridade, prioridade);
+            const label = el('label', '', 'Turma da grade salva');
             label.htmlFor = `turmaGrade${indice}`;
             const select = el('select', 'form-select');
             select.id = label.htmlFor;
-            const primeira = el('option', '', 'Escolher turma');
+            const primeira = el('option', '', 'Nenhuma turma escolhida');
             primeira.value = '';
             select.append(primeira);
             const idSalvo = salva && GradeCalculos.idTurma(pedido.codigo, salva.turma);
@@ -253,7 +496,84 @@
                     const t = d.turmas.find((t) => GradeCalculos.idTurma(d.codigo, t) === select.value);
                     if (t) plano.selecionadas.push({ codigo: d.codigo, nome: d.nome, turma: copiar(t) });
                 });
-            artigo.append(topo, rotulo, label, select);
+            artigo.append(usarRotulo, topo);
+            const quantidade = el(
+                'p',
+                'grade-muted',
+                `${disponiveis.length}/${d?.turmas.length || 0} turmas${pedido.permitidas == null ? '' : ` · ${pedido.permitidas.length} ${pedido.permitidas.length === 1 ? 'permitida' : 'permitidas'}`}${!pedido.obrigatoria ? ' · Extra' : ''}`,
+            );
+            const meta = el('div', 'grade-materia-meta');
+            meta.append(codigo, quantidade, el('span', 'grade-muted', carga(pedido.codigo)));
+            nome.append(meta);
+            const escolher = el('button', 'grade-botao grade-escolher', 'Escolher turmas');
+            escolher.id = `escolherGrade-${pedido.codigo}`;
+            escolher.type = 'button';
+            escolher.onclick = () => {
+                if (editor) {
+                    if (editor.codigo !== pedido.codigo)
+                        mensagem('Aplique ou cancele a edição em andamento antes de escolher turmas de outra matéria.');
+                    $('buscaEditorGrade')?.focus({ preventScroll: true });
+                    return;
+                }
+                mensagem('');
+                editor = { codigo: pedido.codigo, ids: new Set(pedido.permitidas || []) };
+                renderizarDisciplinas(atual());
+                $('buscaEditorGrade')?.focus({ preventScroll: true });
+            };
+            const todas = el('button', 'grade-botao grade-todas', 'Permitir todas no gerador');
+            todas.id = `todasGrade-${pedido.codigo}`;
+            todas.type = 'button';
+            todas.onclick = () => {
+                if (editor?.codigo === pedido.codigo) editor = null;
+                alterar((plano) => {
+                    plano.disciplinas.find((d) => d.codigo === pedido.codigo).permitidas = null;
+                });
+                mensagem('Todas as turmas foram permitidas no gerador. A turma da grade salva foi mantida.');
+            };
+            const opcoes = el('div', 'grade-opcoes');
+            opcoes.id = `painelOpcoesGrade-${pedido.codigo}`;
+            opcoes.hidden = !abertas.has(pedido.codigo);
+            const abrirOpcoes = el('button', 'grade-botao grade-opcoes-botao', 'Opções');
+            abrirOpcoes.id = `opcoesGrade-${pedido.codigo}`;
+            abrirOpcoes.type = 'button';
+            abrirOpcoes.setAttribute('aria-controls', opcoes.id);
+            abrirOpcoes.setAttribute('aria-expanded', String(!opcoes.hidden));
+            opcoes.setAttribute('role', 'region');
+            opcoes.setAttribute('aria-labelledby', abrirOpcoes.id);
+            abrirOpcoes.onclick = () => {
+                opcoes.hidden = !opcoes.hidden;
+                abrirOpcoes.setAttribute('aria-expanded', String(!opcoes.hidden));
+            };
+            const configuracao = el('div', 'grade-opcoes-conteudo');
+            const manual = el('div', 'grade-campo');
+            const ajudaManual = el('p', 'grade-muted', 'Não altera as turmas permitidas no gerador.');
+            ajudaManual.id = `ajudaManualGrade-${pedido.codigo}`;
+            select.setAttribute('aria-describedby', ajudaManual.id);
+            manual.append(label, select, ajudaManual);
+            const ajudaPrioridade = el(
+                'p',
+                'grade-muted',
+                'Quando marcada no gerador: obrigatória entra em toda combinação; extra pode ficar de fora.',
+            );
+            ajudaPrioridade.id = `ajudaPrioridadeGrade-${pedido.codigo}`;
+            prioridade.setAttribute('aria-describedby', ajudaPrioridade.id);
+            rotulo.append(ajudaPrioridade);
+            const acoesOpcoes = el('div', 'grade-acoes');
+            acoesOpcoes.append(todas, remover);
+            configuracao.append(rotulo, manual, acoesOpcoes);
+            opcoes.append(configuracao);
+            const acoes = el('div', 'grade-materia-acoes');
+            acoes.append(escolher, abrirOpcoes);
+            artigo.append(acoes, opcoes);
+            if (pedido.permitidas && !elegiveis(pedido.codigo).length)
+                artigo.append(
+                    el(
+                        'p',
+                        'grade-conflito',
+                        'Nenhuma turma permitida está elegível na oferta atual. A restrição foi preservada.',
+                    ),
+                );
+            if (editor?.codigo === pedido.codigo) criarEditor(pedido, artigo);
             if (salva) {
                 const vigente = d?.turmas.find((t) => GradeCalculos.idTurma(pedido.codigo, t) === idSalvo);
                 const t = vigente || salva.turma;
@@ -261,7 +581,7 @@
                     t.matriculados != null && t.vagas != null
                         ? `${t.matriculados}/${t.vagas} matriculados`
                         : 'Vagas não informadas';
-                artigo.append(
+                manual.append(
                     el(
                         'p',
                         'grade-muted grade-turma-resumo',
@@ -279,6 +599,7 @@
             } else if (!d) artigo.append(el('p', 'grade-muted', 'Disciplina ausente da oferta deste semestre.'));
             lista.append(artigo);
         });
+        if (focoEditor) ($(focoEditor) || $('buscaGrade'))?.focus({ preventScroll: true });
     }
     function conflitos(p) {
         const conflitantes = new Set();
@@ -383,10 +704,12 @@
             const total = horas.reduce((a, b) => a + b, 0);
             $('resumoGrade').textContent += ` · ${AppUnB.numero(total)} h · ${AppUnB.numero(total / 15)} créditos`;
         }
-        $('gerarGrade').disabled = !!worker || !p.disciplinas.length || semestreCarregado !== p.semestre;
+        $('gerarGrade').disabled =
+            !!worker || !p.disciplinas.some((d) => d.ativa !== false) || semestreCarregado !== p.semestre;
         $('exportarGradePng').disabled = !p.selecionadas.length;
         $('exportarGradeIcs').disabled = !p.selecionadas.length;
         $('montarGrade').disabled = !p.selecionadas.length;
+        $('montarGrade').hidden = !p.selecionadas.length;
         if (planoVisualizado !== p.id || !p.selecionadas.length) planoVisualizado = '';
         const visualizando = planoVisualizado === p.id;
         document.querySelector('.grade-disciplinas').hidden = visualizando;
@@ -403,16 +726,9 @@
         link.click();
         setTimeout(() => URL.revokeObjectURL(url), 1000);
     }
-    function gerar() {
+    function gerar(parcial = false) {
         cancelar();
-        const p = atual();
-        const vagas = $('somenteVagasGrade').checked;
-        const pedidos = p.disciplinas.map((d) => ({
-            ...d,
-            turmas: (disciplinas.get(d.codigo)?.turmas || []).filter(
-                (t) => !vagas || (t.vagas != null && t.matriculados != null && t.matriculados < t.vagas),
-            ),
-        }));
+        const pedidos = pedidosGerador();
         if (!('Worker' in window)) {
             mensagem(
                 'Este navegador não suporta a geração automática. Você ainda pode escolher as turmas manualmente.',
@@ -420,41 +736,74 @@
             return;
         }
         worker = new Worker(new URL('js/grade-worker.js', AppUnB.raiz));
+        const ativo = worker;
         $('cancelarGrade').hidden = false;
         $('gerarGrade').disabled = true;
         $('combinacoesGrade').replaceChildren();
         $('estadoGeradorGrade').textContent = 'Procurando combinações…';
         worker.onmessage = ({ data }) => {
+            if (worker !== ativo) return;
             cancelar();
             if (data.erro) {
                 mensagem(data.erro);
                 return;
             }
-            geracoes = data.resultado.combinacoes;
+            geracoes = data.resultado.grupos;
             $('estadoGeradorGrade').textContent =
-                `${geracoes.length} combinação(ões) sem conflitos.${data.resultado.truncado ? ' Limite de busca atingido; podem existir outras combinações.' : ''}${!geracoes.length ? ' Revise as disciplinas obrigatórias, os horários e o filtro de vagas.' : ''}`;
+                `${geracoes.length} grade(s) com horários distintos.${data.resultado.truncado ? ' Busca parcial: podem existir outras grades e turmas equivalentes.' : ''} ${data.resultado.diagnostico || ''}${parcial ? ' Alternativas parciais: confira as matérias omitidas antes de aplicar.' : ''}`;
+            $('parciaisGrade').hidden = parcial || !!geracoes.length || !pedidos.some((d) => d.obrigatoria);
             geracoes.forEach((combinacao, i) => {
                 const linha = el('div', 'grade-combinacao');
-                linha.append(
-                    el('p', '', `${i + 1}. ${combinacao.map((s) => `${s.codigo} (${s.turma.numero})`).join(' · ')}`),
-                );
+                linha.append(el('p', '', `${i + 1}. ${combinacao.map((s) => s.codigo).join(' · ')}`));
+                const escolhas = new Map(combinacao.map((s) => [s.codigo, s.turmas[0]]));
+                const omitidas = pedidos.filter((d) => !escolhas.has(d.codigo));
+                if (omitidas.length)
+                    linha.append(
+                        el('p', 'grade-muted', `Ficaram de fora: ${omitidas.map((d) => d.codigo).join(' · ')}`),
+                    );
+                const detalhes = el('details');
+                detalhes.open = true;
+                detalhes.append(el('summary', '', 'Turmas e professores deste horário'));
+                combinacao.forEach((s, indice) => {
+                    const rotulo = el(
+                        'label',
+                        'grade-muted',
+                        `${s.codigo} · ${s.turmas.length} turma(s) neste horário`,
+                    );
+                    const select = el('select', 'form-select');
+                    select.id = `alternativaGrade${i}-${indice}`;
+                    rotulo.htmlFor = select.id;
+                    s.turmas.forEach((t, n) => {
+                        const opcao = el('option', '', `${t.numero} · ${professores(t)} · ${t.horarios.join(' · ')}`);
+                        opcao.value = String(n);
+                        select.append(opcao);
+                    });
+                    select.onchange = () => escolhas.set(s.codigo, s.turmas[Number(select.value)]);
+                    detalhes.append(rotulo, select);
+                });
+                linha.append(detalhes);
                 const usar = el('button', 'grade-botao', 'Usar');
                 usar.type = 'button';
                 usar.setAttribute('aria-label', `Usar combinação ${i + 1}`);
                 usar.onclick = () =>
                     alterar((plano) => {
-                        plano.selecionadas = combinacao.map((s) => ({ ...s, nome: disciplinas.get(s.codigo).nome }));
+                        plano.selecionadas = combinacao.map((s) => ({
+                            codigo: s.codigo,
+                            turma: escolhas.get(s.codigo),
+                            nome: disciplinas.get(s.codigo).nome,
+                        }));
                     });
                 linha.append(usar);
                 $('combinacoesGrade').append(linha);
             });
         };
         worker.onerror = () => {
+            if (worker !== ativo) return;
             cancelar();
             mensagem('Não foi possível gerar combinações. Tente novamente.');
             $('estadoGeradorGrade').textContent = '';
         };
-        worker.postMessage(pedidos);
+        worker.postMessage({ tipo: 'gerar', pedidos, parcial });
     }
     function imagem() {
         const p = atual();
@@ -530,16 +879,23 @@
         if (p) semana(p, conflitos(p));
     };
     if (matchMedia('(max-width: 767px)').matches) $('diaGrade').value = '2';
-    $('gerarGrade').onclick = gerar;
+    $('gerarGrade').onclick = () => gerar(false);
+    $('parciaisGrade').onclick = () => gerar(true);
     $('cancelarGrade').onclick = () => {
         cancelar();
         $('estadoGeradorGrade').textContent = 'Busca cancelada.';
     };
-    $('somenteVagasGrade').onchange = () => {
-        cancelar();
-        $('combinacoesGrade').replaceChildren();
-        $('estadoGeradorGrade').textContent = '';
-    };
+    for (const id of ['somenteVagasGrade', 'encaixeGrade', 'ocultarExtrasGrade'])
+        $(id).onchange = () => {
+            const filtros = {
+                vagas: $('somenteVagasGrade').checked,
+                encaixe: $('encaixeGrade').checked,
+                extras: $('ocultarExtrasGrade').checked,
+            };
+            alterar((p) => {
+                p.filtros = filtros;
+            });
+        };
     $('novoPlanoGrade').onclick = () => {
         if (historico.atual.planos.length >= 20) {
             mensagem('Você pode guardar até 20 planos. Exporte um backup e exclua um plano para criar outro.');
@@ -593,8 +949,12 @@
             AppUnB.salvar(chave, historico.atual);
             $('combinacoesGrade').replaceChildren();
             $('estadoGeradorGrade').textContent = '';
+            $('parciaisGrade').hidden = true;
+            editor = null;
+            compatibilidade.clear();
             renderizar();
             buscar();
+            verificarEncaixes();
             if (atual() && semestreCarregado !== atual().semestre) carregarOferta(atual().semestre);
         };
     for (const [id, campo] of [
@@ -621,6 +981,7 @@
             if (arquivo.size > 1024 * 1024) throw new Error('Use um arquivo JSON de até 1 MB.');
             const backup = GradeArquivos.validarBackup(JSON.parse(await arquivo.text()));
             if (!backup.planos.length) throw new Error('O arquivo não contém planos.');
+            editor = null;
             registrar(backup);
             await carregarOferta(atual().semestre);
             mensagem('Planos importados. Use Desfazer para voltar aos planos anteriores.');
@@ -645,7 +1006,7 @@
             catalogo = [...dados.semestres].sort((a, b) => b.semestre.localeCompare(a.semestre));
             $('semestreGrade').replaceChildren(
                 ...catalogo.map((s) => {
-                    const opcao = el('option', '', `Semestre ${s.semestre}`);
+                    const opcao = el('option', '', s.semestre);
                     opcao.value = s.semestre;
                     return opcao;
                 }),

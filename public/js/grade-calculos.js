@@ -127,7 +127,172 @@ const GradeCalculos = (() => {
         return { combinacoes, truncado, explorados };
     }
 
-    return { parseHorario, haConflito, idTurma, gerarCombinacoes, periodos };
+    function validarPedidos(pedidos) {
+        if (!Array.isArray(pedidos) || pedidos.length > 20) {
+            throw new Error('Informe até 20 pedidos de disciplinas.');
+        }
+        const codigos = new Set();
+        return pedidos.map((pedido) => {
+            const codigo = normalizar(pedido?.codigo);
+            if (!codigo || codigos.has(codigo)) throw new Error('Cada pedido precisa de um código único.');
+            if (!Array.isArray(pedido.turmas)) throw new Error('Informe as turmas de cada pedido.');
+            codigos.add(codigo);
+            return { ...pedido, codigo, obrigatoria: pedido.obrigatoria !== false };
+        });
+    }
+
+    function limitesBusca(opcoes) {
+        const maxNos = opcoes.maxNos ?? 25000;
+        const maxResultados = opcoes.maxResultados ?? 20;
+        if (![maxNos, maxResultados].every((n) => Number.isSafeInteger(n) && n > 0)) {
+            throw new Error('Os limites devem ser números inteiros positivos.');
+        }
+        return { maxNos: Math.min(maxNos, 25000), maxResultados: Math.min(maxResultados, 20) };
+    }
+
+    function buscarGrades(pedidos, opcoes, orcamento) {
+        const grupos = [];
+        const escolhas = [];
+        const ocupados = new Set();
+        let truncado = false;
+        let horarioDesconhecido = false;
+        function consumir() {
+            if (orcamento.explorados >= orcamento.maxNos) {
+                truncado = true;
+                return false;
+            }
+            orcamento.explorados++;
+            return true;
+        }
+
+        const preparados = pedidos.map((pedido) => {
+            const horarios = new Map();
+            // shortcut: retemos até 500 turmas por disciplina; ampliar só com paginação das variantes.
+            const quantidade = Math.min(pedido.turmas.length, 500);
+            if (pedido.turmas.length > quantidade) truncado = true;
+            for (let i = 0; i < quantidade; i++) {
+                if (!consumir()) break;
+                const turma = pedido.turmas[i];
+                const horario = parseHorario(turma?.horarios);
+                if (!horario.valido) {
+                    horarioDesconhecido = true;
+                    continue;
+                }
+                const chaves = horario.blocos.map((b) => b.dia + b.periodo);
+                const chave = chaves.join(',');
+                if (!horarios.has(chave)) horarios.set(chave, { chaves, turmas: [] });
+                horarios.get(chave).turmas.push(turma);
+            }
+            return { ...pedido, horarios: [...horarios.values()] };
+        });
+
+        let exigirTodas = !opcoes.parcial;
+        function visitar(indice) {
+            if (indice === preparados.length) {
+                if (escolhas.length) grupos.push([...escolhas]);
+                return;
+            }
+            const pedido = preparados[indice];
+            const quantidade =
+                pedido.horarios.length + ((pedido.obrigatoria && !opcoes.parcial) || exigirTodas ? 0 : 1);
+            for (let i = 0; i < quantidade; i++) {
+                if (grupos.length >= opcoes.maxResultados) {
+                    truncado = true;
+                    return;
+                }
+                if (!consumir()) return;
+                if (i === pedido.horarios.length) {
+                    visitar(indice + 1);
+                } else {
+                    const horario = pedido.horarios[i];
+                    if (horario.chaves.some((chave) => ocupados.has(chave))) continue;
+                    horario.chaves.forEach((chave) => ocupados.add(chave));
+                    escolhas.push({ codigo: pedido.codigo, turmas: horario.turmas });
+                    visitar(indice + 1);
+                    escolhas.pop();
+                    horario.chaves.forEach((chave) => ocupados.delete(chave));
+                }
+                if (orcamento.explorados >= orcamento.maxNos || grupos.length >= opcoes.maxResultados) {
+                    // Só há truncamento quando ainda resta uma tentativa neste ramo.
+                    if (i + 1 < quantidade) truncado = true;
+                    if (truncado) return;
+                }
+            }
+        }
+
+        visitar(0);
+        if (!opcoes.parcial && !grupos.length && preparados.some((p) => !p.obrigatoria)) {
+            if (orcamento.explorados >= orcamento.maxNos) {
+                truncado = true;
+            } else {
+                exigirTodas = false;
+                visitar(0);
+            }
+        }
+        grupos.sort((a, b) => b.length - a.length);
+        const semTurmas = pedidos.filter((p) => p.obrigatoria && !p.turmas.length && !opcoes.parcial);
+        let diagnostico = '';
+        if (!grupos.length) {
+            if (semTurmas.length) {
+                diagnostico = 'Sem turmas elegíveis para: ' + semTurmas.map((p) => p.codigo).join(', ') + '.';
+            } else if (truncado) {
+                diagnostico = 'Busca inconclusiva: o limite foi atingido antes de verificar todas as alternativas.';
+            } else if (horarioDesconhecido) {
+                diagnostico = 'Não foi possível verificar todas as alternativas: há turmas sem horário válido.';
+            } else {
+                const obrigatorias = pedidos.filter((p) => p.obrigatoria && !opcoes.parcial).map((p) => p.codigo);
+                diagnostico = obrigatorias.length
+                    ? 'O conjunto de disciplinas obrigatórias não cabe em uma mesma grade: ' +
+                      obrigatorias.join(', ') +
+                      '.'
+                    : 'Nenhuma grade não vazia foi encontrada.';
+            }
+        }
+        return { grupos, truncado, diagnostico, horarioDesconhecido };
+    }
+
+    function gerarGrades(pedidos, opcoes = {}) {
+        const normalizados = validarPedidos(pedidos);
+        const limites = limitesBusca(opcoes);
+        const orcamento = { maxNos: limites.maxNos, explorados: 0 };
+        const { grupos, truncado, diagnostico } = buscarGrades(normalizados, { ...opcoes, ...limites }, orcamento);
+        return { grupos, truncado, explorados: orcamento.explorados, diagnostico };
+    }
+
+    function compatibilidades(pedidos, candidatos, opcoes = {}) {
+        const obrigatorias = validarPedidos(pedidos).filter((p) => p.obrigatoria);
+        const limites = limitesBusca(opcoes);
+        if (!Array.isArray(candidatos) || candidatos.length > 500) {
+            throw new Error('Informe até 500 candidatas por verificação.');
+        }
+        const orcamento = { maxNos: limites.maxNos, explorados: 0 };
+        let truncado = false;
+        const estados = candidatos.map((candidata) => {
+            const codigo = normalizar(candidata?.codigo);
+            if (!codigo || !candidata?.turma || typeof candidata.turma !== 'object') {
+                throw new Error('Cada candidata precisa de código e turma.');
+            }
+            const id = idTurma(codigo, candidata.turma);
+            if (orcamento.explorados >= orcamento.maxNos) {
+                truncado = true;
+                return { codigo, id, estado: 'desconhecido' };
+            }
+            const forcar = obrigatorias.filter((p) => p.codigo !== codigo);
+            forcar.push({ codigo, obrigatoria: true, turmas: [candidata.turma] });
+            const resultado = buscarGrades(forcar, { maxResultados: 1 }, orcamento);
+            let estado = 'desconhecido';
+            if (resultado.grupos.length) {
+                estado = 'compativel';
+            } else if (!resultado.truncado && !resultado.horarioDesconhecido) {
+                estado = 'incompativel';
+            }
+            if (resultado.truncado && !resultado.grupos.length) truncado = true;
+            return { codigo, id, estado };
+        });
+        return { estados, truncado, explorados: orcamento.explorados };
+    }
+
+    return { parseHorario, haConflito, idTurma, gerarCombinacoes, gerarGrades, compatibilidades, periodos };
 })();
 
 if (typeof module !== 'undefined' && module.exports) module.exports = GradeCalculos;

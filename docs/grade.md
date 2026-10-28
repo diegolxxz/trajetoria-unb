@@ -1,8 +1,57 @@
 # Grade pessoal
 
+A lista usa uma apresentação compacta: a caixa de seleção inclui a matéria no
+gerador e “Escolher turmas” abre suas alternativas. Prioridade, remoção e escolha
+manual ficam em “Opções”, que abre um painel em toda a largura sem deslocar seus
+botões. A prioridade e a turma da grade salva aparecem diretamente, sem outra
+abertura. A escolha manual não limita as turmas permitidas no gerador. As
+combinações geradas já mostram suas turmas e professores abertas. “Ocultar extras
+fora do plano” mantém visíveis as extras ativadas no gerador, com turma na grade
+ou ainda em edição.
+Filtros são recolhidos com um contador de opções ativas;
+criação de planos, histórico e arquivos ficam em “Plano”. A geração tem um botão
+direto e “Ver grade” aparece quando existe uma grade escolhida. Essa organização
+não altera as escolhas salvas nem as regras de geração.
+
 A página `/grade/` reutiliza o índice de semestres e a oferta em
 `public/data/turmas/`. Não faz buscas ao SIGAA durante o uso. Uma alteração na
 oferta só aparece após nova coleta e publicação do site.
+
+Cada matéria tem três escolhas independentes: ficar na lista de comparação,
+participar do gerador e ser necessária ou extra. Desmarcar “Usar no gerador” não
+remove a matéria da lista. “Ocultar extras” só muda a exibição. Ao adicionar uma
+matéria, todas as turmas são permitidas; “Escolher turmas” permite marcar apenas
+as desejadas. Aplicar substitui a restrição; cancelar preserva a anterior. Uma
+restrição vazia não pode ser aplicada. “Permitir todas no gerador” remove a
+restrição sem alterar a turma da grade salva.
+
+As marcações ainda não aplicadas sobrevivem a mudanças de filtros, prioridade,
+participação e escolha manual no mesmo plano. Reabrir o editor não as apaga.
+Antes de editar outra matéria, aplique ou cancele o rascunho atual. Aplicar,
+cancelar, permitir todas para essa matéria, remover a matéria, trocar de plano
+ou semestre, usar o histórico ou importar um backup encerram a edição. Os
+rascunhos não entram no arquivo salvo. Ao concluir a edição, o foco retorna ao
+botão da matéria ou à busca, se a matéria deixou de aparecer pelos filtros.
+
+“Com vagas” afeta a consulta e a geração, sem apagar escolhas salvas. “Só as
+turmas que encaixam” testa cada candidata junto às matérias necessárias ativadas.
+As verificações rodam num Worker separado; mudar escolhas cancela a verificação
+antiga. Há um orçamento agregado de 25 mil tentativas, contando a preparação;
+até 500 candidatas são verificadas por atualização. Turmas ainda desconhecidas
+permanecem visíveis e identificadas, em vez de serem consideradas incompatíveis.
+
+O gerador primeiro tenta incluir todas as matérias ativadas; só se não encontrar
+uma solução e ainda tiver orçamento permite omitir extras. Horários iguais da
+mesma matéria são agrupados antes da busca, com suas opções de professor/turma
+dentro do resultado. Há até 20 grades distintas e até 500 variantes retidas por
+matéria; o aviso de busca parcial indica limites atingidos. O botão de alternativas
+parciais só gera prévias mediante pedido, identificando as matérias omitidas.
+
+O formato de backup continua na versão 1 e aceita campos opcionais nas matérias:
+`ativa` (ausente equivale a true) e `permitidas` (ausente ou null equivale a todas;
+uma lista não vazia guarda as identidades estáveis das turmas aceitas). Os filtros
+podem ser guardados no plano em `filtros`. Backups antigos mantêm seus campos e
+suas escolhas manuais, que não passam a ser restrições do gerador automaticamente.
 
 O fluxo começa pelas escolhas: adicione disciplinas e selecione turmas ou use
 uma combinação gerada. “Montar grade” abre a semana de segunda a sábado e as

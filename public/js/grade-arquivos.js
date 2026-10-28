@@ -58,7 +58,20 @@ const GradeArquivos = (() => {
             const codigo = texto(d.codigo, 40);
             if (codigos.has(codigo)) falhar();
             codigos.add(codigo);
-            return { codigo, obrigatoria: d.obrigatoria };
+            const disciplina = { codigo, obrigatoria: d.obrigatoria };
+            if (d.ativa !== undefined) {
+                if (typeof d.ativa !== 'boolean') falhar();
+                disciplina.ativa = d.ativa;
+            }
+            if (d.permitidas !== undefined) {
+                if (d.permitidas === null) disciplina.permitidas = null;
+                else {
+                    const permitidas = lista(d.permitidas, 500).map((id) => texto(id, 4000));
+                    if (!permitidas.length || new Set(permitidas).size !== permitidas.length) falhar();
+                    disciplina.permitidas = permitidas;
+                }
+            }
+            return disciplina;
         });
         const escolhidas = new Set();
         const selecionadas = lista(p.selecionadas, 20).map((s) => {
@@ -69,7 +82,16 @@ const GradeArquivos = (() => {
             return { codigo, nome: texto(s.nome, 500), turma: turma(s.turma) };
         });
         for (const campo of ['inicio', 'fim']) if (p[campo] !== '') data(p[campo]);
-        return { id, nome, semestre: p.semestre, disciplinas, selecionadas, inicio: p.inicio, fim: p.fim };
+        const plano = { id, nome, semestre: p.semestre, disciplinas, selecionadas, inicio: p.inicio, fim: p.fim };
+        if (p.filtros !== undefined) {
+            if (!objeto(p.filtros)) falhar();
+            plano.filtros = {};
+            for (const campo of ['vagas', 'encaixe', 'extras']) {
+                if (typeof p.filtros[campo] !== 'boolean') falhar();
+                plano.filtros[campo] = p.filtros[campo];
+            }
+        }
+        return plano;
     }
     function validarBackup(b) {
         if (!objeto(b) || b.versao !== 1) falhar();

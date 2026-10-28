@@ -73,12 +73,14 @@
                     <label class="visually-hidden" for="planoGrade">Plano salvo</label
                     ><select id="planoGrade" class="form-select"></select>
                 </div>
-                <button id="novoPlanoGrade" class="grade-botao" type="button">Novo plano</button>
-                <button id="desfazerGrade" class="grade-botao" type="button" disabled>Desfazer</button>
-                <button id="refazerGrade" class="grade-botao" type="button" disabled>Refazer</button>
                 <details class="grade-arquivos">
-                    <summary>Arquivos e plano</summary>
+                    <summary>Plano</summary>
                     <div class="grade-arquivos-conteudo">
+                        <div class="grade-acoes">
+                            <button id="novoPlanoGrade" class="grade-botao" type="button">Novo plano</button>
+                            <button id="desfazerGrade" class="grade-botao" type="button" disabled>Desfazer</button>
+                            <button id="refazerGrade" class="grade-botao" type="button" disabled>Refazer</button>
+                        </div>
                         <label for="nomePlanoGrade">Nome do plano</label
                         ><input id="nomePlanoGrade" class="form-control" type="text" maxlength="100" />
                         <div class="grade-acoes">
@@ -120,41 +122,59 @@
                         disabled
                         aria-describedby="ajudaBuscaGrade"
                     />
-                    <p id="ajudaBuscaGrade" class="grade-muted">
+                    <p id="ajudaBuscaGrade" class="visually-hidden">
                         Digite ao menos 3 caracteres para adicionar uma disciplina.
                     </p>
                     <div id="resultadosBuscaGrade" class="grade-busca-resultados" aria-live="polite"></div>
+                    <details class="grade-filtros-painel">
+                        <summary id="resumoFiltrosGrade">Filtros</summary>
+                        <div class="grade-filtros">
+                            <label class="grade-checkbox"
+                                ><input id="encaixeGrade" type="checkbox" /> Só as turmas que encaixam</label
+                            >
+                            <label class="grade-checkbox"
+                                ><input id="somenteVagasGrade" type="checkbox" /> Com vagas</label
+                            >
+                            <label class="grade-checkbox"
+                                ><input id="ocultarExtrasGrade" type="checkbox" aria-describedby="ajudaExtrasGrade" />
+                                Ocultar extras fora do plano</label
+                            >
+                        </div>
+                        <p id="ajudaExtrasGrade" class="grade-muted">
+                            Continuam visíveis as extras marcadas no gerador, com turma salva ou em edição.
+                        </p>
+                    </details>
+                    <p id="estadoEncaixeGrade" class="grade-muted" role="status"></p>
                     <div id="disciplinasGrade"></div>
                     <p id="planoVazioGrade" class="grade-vazio">
                         Adicione as disciplinas que pretende cursar. Depois escolha uma turma ou gere combinações.
                     </p>
                     <div class="grade-montar-acoes">
-                        <button id="montarGrade" class="grade-botao grade-principal" type="button" disabled>
-                            Montar grade
+                        <button id="gerarGrade" class="grade-botao grade-principal" type="button" disabled>
+                            Gerar combinações
                         </button>
-                        <p class="grade-muted">Escolha as turmas e monte a grade para ver sua semana.</p>
+                        <button id="cancelarGrade" class="grade-botao" type="button" hidden>Cancelar</button>
+                        <button id="montarGrade" class="grade-botao" type="button" disabled>Ver grade</button>
                     </div>
-                    <details class="grade-gerador">
-                        <summary>Encontrar combinações</summary>
-                        <p class="grade-muted">
-                            Inclui todas as obrigatórias. As opcionais podem ficar de fora. São até 20 sugestões, sem
-                            ordem de preferência; turmas sem horário informado ficam fora da busca.
-                        </p>
-                        <p class="grade-muted">
-                            “Obrigatória” e “opcional” são prioridades deste plano, não a classificação curricular da
-                            disciplina.
-                        </p>
-                        <label class="grade-checkbox"
-                            ><input id="somenteVagasGrade" type="checkbox" /> Considerar apenas turmas com vagas</label
-                        >
-                        <div class="grade-acoes">
-                            <button id="gerarGrade" class="grade-botao grade-principal" type="button" disabled>
-                                Gerar combinações</button
-                            ><button id="cancelarGrade" class="grade-botao" type="button" hidden>Cancelar</button>
-                        </div>
+                    <section class="grade-gerador" aria-label="Combinações de turmas">
+                        <details class="grade-ajuda">
+                            <summary>Como funciona?</summary>
+                            <p class="grade-muted">
+                                Inclui todas as obrigatórias marcadas no gerador. As extras podem ficar de fora. São até
+                                20 sugestões, sem ordem de preferência; turmas sem horário informado ficam fora da
+                                busca.
+                            </p>
+                            <p class="grade-muted">
+                                “Obrigatória” e “extra” são prioridades deste plano, não a classificação curricular da
+                                disciplina.
+                            </p>
+                        </details>
                         <p id="estadoGeradorGrade" class="grade-muted" role="status"></p>
+                        <button id="parciaisGrade" class="grade-botao" type="button" hidden>
+                            Ver alternativas parciais
+                        </button>
                         <div id="combinacoesGrade"></div>
-                    </details>
+                    </section>
                 </section>
                 <section class="grade-semana" aria-labelledby="tituloSemanaGrade" hidden>
                     <div class="grade-secao-titulo">
