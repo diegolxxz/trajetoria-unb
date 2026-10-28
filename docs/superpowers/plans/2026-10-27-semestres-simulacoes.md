@@ -44,4 +44,3 @@
 - [ ] Acrescente testes RED para change com vazio/null literal/inexistente e itens inválidos no catálogo; sem fetch inválido e planos válidos mantidos/seleção restaurada. Teste índice com 2027.1 e alternância válida.
 - [ ] Valide itens: semestre ano quatro dígitos .1/.2, arquivo simples .json sem traversal, campos não nulos. Filtre inválidos e confirme pertinência antes de carregar/trocar. Grade continua restaurando backup histórico indisponível, mas não cria plano inválido; Turmas restaura seleção válida anterior. Catálogo vazio deixa seleção desabilitada.
 - [ ] Testes focados, suíte JS, lint/formato e bun run build:verified; testes Python conforme README/ambiente. Commit apenas tarefa e relatório de evidências; falhas preexistentes devem ser identificadas.
-

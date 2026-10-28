@@ -12,4 +12,3 @@ Autorizado na conversa em 27/10/2026, incluindo implementação com subagentes e
 Abordagem: reaproveitar cálculos/estilos e adicionar módulo puro para agregação e interface no catálogo. Alternativas: duplicar calculadoras ou combinar notas entre fórmulas diferentes; descartadas por manutenção e comparabilidade.
 Ruling: usuário não localizou seletor inválido; verificar ambos Turmas e Grade. Nomes internos período permanecem para compatibilidade.
 Não inclui coleta ou deploy. Worktree separado preserva alterações não commitadas da Grade no checkout original.
-
