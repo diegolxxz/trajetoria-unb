@@ -230,6 +230,7 @@ test('DOM histórico mantém zeros visíveis e oculta nota indisponível', async
 test('médias é uma página independente sem simulação nem alocados e preserva IPF salvo', async () => {
     const { document: d, Event, storage } = await pagina([], (e) => e, 'medias');
     assert.equal(d.querySelectorAll('#referenciasGerais tbody tr').length, 4);
+    assert.equal(d.querySelector('[role="region"]').getAttribute('aria-label'), 'Referências históricas dos cursos');
     assert.equal(d.getElementById('geralIpf'), null);
     assert.equal(d.getElementById('alocadosGerais'), null);
     assert.doesNotMatch(d.querySelector('#referenciasGerais').textContent, /Nota simulada|IPF|Fórmula:/);
