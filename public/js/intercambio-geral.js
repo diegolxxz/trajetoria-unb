@@ -2,6 +2,7 @@
 (() => {
     const $ = (id) => document.getElementById(id);
     const el = AppUnB.elemento;
+    const cursoChave = IntercambioCalculos.cursoChave;
     const compararNotas = Boolean($('geralIpf'));
     let editais = [];
     const formato = (valor) => (Number.isFinite(valor) ? AppUnB.numero(valor) : 'Indisponível');
@@ -23,9 +24,9 @@
             ['geralIra', 'ira'],
             ['geralIpf', 'ipf'],
         ])
-            if ($(id)) $(id).value = perfil[campo] ?? '';
+            if ($(id)) $(id).value = campo === 'curso' ? cursoChave(perfil.curso) : (perfil[campo] ?? '');
         $('avisoCursoGeral').hidden =
-            !perfil.curso || [...$('geralCurso').options].some((o) => o.value === perfil.curso);
+            !perfil.curso || [...$('geralCurso').options].some((o) => o.value === cursoChave(perfil.curso));
         $('avisoCursoGeral').textContent =
             `O curso salvo (${perfil.curso}) não aparece nos editais carregados. Escolha um curso para comparar suas referências.`;
     }
@@ -49,57 +50,65 @@
         const alocados = $('alocadosGerais')?.querySelector('tbody');
         historico.replaceChildren();
         alocados?.replaceChildren();
+        const criterios = $('criteriosGerais');
+        criterios.replaceChildren();
+        const variasReferencias = selecionados.some((e) => e.referencias.length > 1);
+        $('referenciasGerais').querySelector('thead tr').children[1].hidden = !variasReferencias;
         selecionados.forEach((edital) => {
+            const multiplas = edital.referencias.length > 1;
             edital.referencias.forEach((r) => {
                 const tr = el('tr');
                 celula(tr, link(edital));
-                celula(tr, edital.mobilidade);
-                celula(tr, `Referência ${r.indice}${r.turno ? ` · ${r.turno}` : ''}`);
-                celula(tr, formato(r.media));
-                celula(tr, formato(r.desvio));
-                celula(tr, formato(r.diferenca));
-                if (compararNotas)
+                celula(tr, multiplas ? r.turno || `Referência ${r.indice}` : '—');
+                tr.children[1].hidden = !variasReferencias;
+                if (compararNotas) {
                     celula(tr, r.nota ? `${r.estimada ? '≈ ' : ''}${formato(r.nota.final)}` : 'Indisponível');
-                const detalhes = el('div');
-                if (compararNotas)
-                    detalhes.append(
-                        el(
-                            'p',
-                            '',
-                            `Fórmula: ${edital.formula.tipo === 'ira-direto' ? 'IRA' : '((IRA − média) / desvio)'} × ${formato(edital.formula.pesoIra)} + (IPF / 100) × ${formato(edital.formula.pesoIpf)}`,
-                        ),
-                    );
-                detalhes.append(
-                    el(
-                        'span',
-                        '',
-                        r.motivo ||
-                            (r.estimada
-                                ? 'Estimada a partir do escore publicado.'
-                                : Number.isFinite(r.media)
-                                  ? 'Referência publicada do curso.'
-                                  : edital.formula.tipo === 'ira-direto'
-                                    ? 'Fórmula direta: dispensa média e desvio.'
-                                    : 'Curso sem referência nesta publicação.'),
-                    ),
-                );
-                if (edital.metodoReferencias) detalhes.append(el('p', '', edital.metodoReferencias));
-                if (r.matriculasBase?.length)
-                    detalhes.append(el('p', '', `Matrículas usadas na estimativa: ${r.matriculasBase.join(', ')}`));
-                if (r.metodo) detalhes.append(el('p', '', String(r.metodo)));
-                Object.entries(edital.fontes || {}).forEach(([nome, url]) => {
-                    const a = el('a', '', `Fonte: ${nome}`);
-                    a.href = url;
-                    detalhes.append(el('br'), a);
-                });
-                celula(tr, detalhes);
+                } else {
+                    celula(tr, `${r.estimada && Number.isFinite(r.media) ? '≈ ' : ''}${formato(r.media)}`);
+                    celula(tr, formato(r.diferenca));
+                }
                 historico.append(tr);
             });
+            const grupo = el('section');
+            const titulo = el('h3');
+            titulo.append(link(edital));
+            grupo.append(titulo);
+            if (compararNotas)
+                grupo.append(
+                    el(
+                        'p',
+                        '',
+                        `Fórmula: ${edital.formula.tipo === 'ira-direto' ? 'IRA' : '((IRA − média) / desvio)'} × ${formato(edital.formula.pesoIra)} + (IPF / 100) × ${formato(edital.formula.pesoIpf)}`,
+                    ),
+                );
+            if (edital.metodoReferencias) grupo.append(el('p', '', edital.metodoReferencias));
+            const metodos = new Set();
+            edital.referencias.forEach((r) => {
+                const nome = multiplas ? `${r.turno || `Referência ${r.indice}`}: ` : '';
+                const origem =
+                    r.motivo ||
+                    (r.estimada
+                        ? 'Estimada a partir do escore publicado.'
+                        : Number.isFinite(r.media)
+                          ? 'Referência publicada do curso.'
+                          : edital.formula.tipo === 'ira-direto'
+                            ? 'Fórmula direta: dispensa média e desvio.'
+                            : 'Curso sem referência nesta publicação.');
+                grupo.append(el('p', '', `${nome}${origem} Média: ${formato(r.media)}; desvio: ${formato(r.desvio)}.`));
+                if (r.matriculasBase?.length)
+                    metodos.add(`Matrículas usadas na estimativa: ${r.matriculasBase.join(', ')}`);
+                if (r.metodo) metodos.add(String(r.metodo));
+            });
+            metodos.forEach((metodo) => grupo.append(el('p', '', metodo)));
+            Object.entries(edital.fontes || {}).forEach(([nome, url]) => {
+                const a = el('a', '', `Fonte: ${nome}`);
+                a.href = url;
+                grupo.append(el('br'), a);
+            });
+            criterios.append(grupo);
             if (alocados)
                 edital.alocados
-                    .filter(
-                        (r) => !$('cursoAlocados').value || CalculosUnB.cursoBase(r.curso) === $('cursoAlocados').value,
-                    )
+                    .filter((r) => !$('cursoAlocados').value || cursoChave(r.curso) === $('cursoAlocados').value)
                     .forEach((r) => {
                         const tr = el('tr');
                         celula(tr, link(edital));
@@ -120,7 +129,7 @@
             $('contagemAlocados').textContent = `${alocados.children.length} alocados nos editais carregados`;
             ocultarColunasAusentes('alocadosGerais', [1, 3, 4, 5]);
         }
-        ocultarColunasAusentes('referenciasGerais', compararNotas ? [3, 4, 5, 6] : [3, 4, 5]);
+        ocultarColunasAusentes('referenciasGerais', compararNotas ? [2] : [2, 3]);
     }
     function ocultarColunasAusentes(id, indices) {
         const tabela = $(id);
@@ -155,11 +164,13 @@
             const cursos = [
                 ...new Set(
                     editais.flatMap((e) => [
-                        ...e.cursos.map((c) => c.nome),
-                        ...e.resultados.map((r) => CalculosUnB.cursoBase(r.curso)),
+                        ...e.cursos.map((c) => cursoChave(c.nome)),
+                        ...e.resultados.map((r) => cursoChave(r.curso)),
                     ]),
                 ),
-            ].sort((a, b) => a.localeCompare(b, 'pt-BR'));
+            ]
+                .filter(Boolean)
+                .sort((a, b) => a.localeCompare(b, 'pt-BR'));
             for (const id of ['geralCurso', 'cursoAlocados'])
                 cursos.forEach((c) => {
                     const o = el('option', '', c);
