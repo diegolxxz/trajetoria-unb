@@ -14,6 +14,12 @@
     const professores = (t) => t.professores.map((p) => (typeof p === 'string' ? p : p.nome)).join(' · ');
     const hora = (m) => `${String(Math.floor(m / 60)).padStart(2, '0')}:${String(m % 60).padStart(2, '0')}`;
     const copiar = (v) => JSON.parse(JSON.stringify(v));
+    const itemValido = (item) =>
+        item &&
+        typeof item.semestre === 'string' &&
+        /^\d{4}\.[12]$/.test(item.semestre) &&
+        typeof item.arquivo === 'string' &&
+        /^[A-Za-z0-9_-]+\.json$/.test(item.arquivo);
     let catalogo = [];
     let disciplinas = new Map();
     let componentes = {};
@@ -927,6 +933,10 @@
     $('semestreGrade').onchange = () => {
         const semestre = $('semestreGrade').value;
         const existente = historico.atual.planos.find((p) => p.semestre === semestre);
+        if (!existente && !catalogo.some((item) => item.semestre === semestre)) {
+            renderizar();
+            return;
+        }
         if (existente) registrar({ ...historico.atual, ativo: existente.id });
         else {
             if (historico.atual.planos.length >= 20) {
@@ -1003,7 +1013,9 @@
     async function iniciar() {
         try {
             const dados = await json('data/turmas/index.json');
-            catalogo = [...dados.semestres].sort((a, b) => b.semestre.localeCompare(a.semestre));
+            catalogo = (Array.isArray(dados.semestres) ? dados.semestres : [])
+                .filter(itemValido)
+                .sort((a, b) => b.semestre.localeCompare(a.semestre));
             $('semestreGrade').replaceChildren(
                 ...catalogo.map((s) => {
                     const opcao = el('option', '', s.semestre);

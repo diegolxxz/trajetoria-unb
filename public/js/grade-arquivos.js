@@ -51,7 +51,7 @@ const GradeArquivos = (() => {
         if (!objeto(p)) falhar();
         const id = texto(p.id, 100);
         const nome = texto(p.nome);
-        if (typeof p.semestre !== 'string' || !/^20\d{2}\.[12]$/.test(p.semestre)) falhar();
+        if (typeof p.semestre !== 'string' || !/^\d{4}\.[12]$/.test(p.semestre)) falhar();
         const codigos = new Set();
         const disciplinas = lista(p.disciplinas, 20).map((d) => {
             if (!objeto(d) || typeof d.obrigatoria !== 'boolean') falhar();

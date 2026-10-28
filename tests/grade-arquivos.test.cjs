@@ -263,3 +263,10 @@ test('calendário rejeita datas impossíveis, inversas, longas e horários incom
     b.fim = '2028-03-01';
     assert.doesNotThrow(() => api.calendario(b));
 });
+
+test('backup roundtrips a four-digit future semester without a century ceiling', () => {
+    const origem = backup();
+    origem.planos[0].semestre = '2100.1';
+    const exportado = JSON.stringify(api.validarBackup(origem));
+    assert.deepEqual(api.validarBackup(JSON.parse(exportado)), origem);
+});
