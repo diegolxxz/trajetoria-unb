@@ -77,19 +77,24 @@ const AppUnB = (() => {
         return Number(valor).toLocaleString('pt-BR', { maximumFractionDigits: Math.min(4, casas) });
     }
     const numerosDosInputs = new WeakMap();
+    function casasNumero(input) {
+        return (input.getAttribute('step') || '0.0001').split('.')[1]?.length ?? 0;
+    }
     function preencherNumero(input, valor) {
         const bruto = valor == null ? '' : String(valor);
         const n = bruto.trim() === '' ? NaN : Number(bruto);
+        const casas = casasNumero(input);
+        const escala = 10 ** casas;
         let exibido = bruto;
         if (Number.isFinite(n)) {
             // Arredonda valores fora do intervalo para fora, sem torná-los válidos na borda.
             const limitado =
                 n < Number(input.getAttribute('min'))
-                    ? Math.floor(n * 10000) / 10000
+                    ? Math.floor(n * escala) / escala
                     : n > Number(input.getAttribute('max'))
-                      ? Math.ceil(n * 10000) / 10000
+                      ? Math.ceil(n * escala) / escala
                       : n;
-            exibido = String(Number(limitado.toFixed(4)));
+            exibido = String(Number(limitado.toFixed(casas)));
         }
         input.value = exibido;
         // O valor original só é substituído quando este campo recebe uma edição.
@@ -101,7 +106,8 @@ const AppUnB = (() => {
     }
     function editarNumero(input) {
         // Não reatribui valores curtos: preserva o cursor e o separador decimal em edição.
-        if (/[eE]|\.\d{5}/.test(input.value)) preencherNumero(input, input.value);
+        const decimais = input.value.split('.')[1]?.length ?? 0;
+        if (/[eE]/.test(input.value) || decimais > casasNumero(input)) preencherNumero(input, input.value);
         numerosDosInputs.set(input, { bruto: input.value, exibido: input.value });
         return input.value;
     }
