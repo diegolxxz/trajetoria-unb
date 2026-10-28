@@ -134,3 +134,18 @@ test('migra valores manuais e automáticos do painel antigo sem perder zero', ()
     storage.set('calculadora-unb:perfil-intercambio:v1', '{quebrado');
     assert.equal(app(storage).perfil().ira, '5');
 });
+
+test('MP usa créditos sem peso temporal, inclui SR e exclui módulo livre', () => {
+    const resultado = calc.historico({
+        1: { 1: ['A', 4, 1, false] },
+        2: { 1: ['SR', 2, 6, false], 2: ['ML', 8, 2, true] },
+    });
+    assert.equal(resultado.mp, (4 * 5 + 2 * 0) / 6);
+});
+
+test('somente MM, MS e SS completos somam horas aprovadas', () => {
+    const disciplinas = Object.fromEntries([1, 2, 3, 4, 5, 6].map((mencao) => [mencao, ['', 2, mencao, false]]));
+    disciplinas[7] = ['Sem créditos', 0, 1, false];
+    disciplinas[8] = ['Sem menção', 2, 0, false];
+    assert.equal(calc.historico({ 1: disciplinas }).horas, 90);
+});

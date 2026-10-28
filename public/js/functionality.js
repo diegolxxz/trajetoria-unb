@@ -47,6 +47,16 @@ async function inicializar() {
             AppUnB.salvar('calculadora-unb:visualizacao-ira', input.value);
         }),
     );
+    const modoIra = AppUnB.ler('calculadora-unb:modo-ira', 'completo') === 'ira' ? 'ira' : 'completo';
+    document.querySelector(`[name="modoIra"][value="${modoIra}"]`).checked = true;
+    aplicarModoIra(modoIra);
+    document.querySelectorAll('[name="modoIra"]').forEach((input) =>
+        input.addEventListener('change', () => {
+            aplicarModoIra(input.value);
+            AppUnB.salvar('calculadora-unb:modo-ira', input.value);
+            calcularIra();
+        }),
+    );
     const dadosNavegador = AppUnB.ler(CHAVE_DADOS, {});
     let dadosArquivo = null;
     if (document.querySelector('meta[name="sincronizar-arquivo"]')?.content === 'true') {
@@ -131,13 +141,25 @@ function salvarDados() {
         });
 }
 
+function aplicarModoIra(modo) {
+    const somente = modo === 'ira';
+    document.body.classList.toggle('ira-somente', somente);
+    document.querySelector('h1').textContent = somente ? 'Calculadora IRA' : 'Calculadora IRA e MP';
+    document.querySelector('.nav-ira-completo').textContent = somente ? 'Calculadora IRA' : 'Calculadora IRA e MP';
+    document.querySelector('.nav-ira-curto').textContent = somente ? 'IRA' : 'IRA e MP';
+}
+
 function calcularIra() {
     const resultado = CalculosUnB.historico(coletarDados());
+    const somente = document.body.classList.contains('ira-somente');
+    document.getElementById('horasAprovadas').textContent = `Horas aprovadas: ${AppUnB.numero(resultado.horas)}h`;
     document
         .getElementById('ira-mp')
         .replaceChildren(
             AppUnB.elemento('span', '', `IRA: ${resultado.temDisciplinas ? AppUnB.numero(resultado.ira) : '—'}`),
-            AppUnB.elemento('span', '', `MP: ${resultado.temMp ? AppUnB.numero(resultado.mp) : '—'}`),
+            ...(somente
+                ? []
+                : [AppUnB.elemento('span', '', `MP: ${resultado.temMp ? AppUnB.numero(resultado.mp) : '—'}`)]),
         );
     const periodos = [...document.querySelectorAll('#periodos .periodo')];
     document.querySelectorAll('#periodos .ira-parcial').forEach((elemento) => elemento.remove());
@@ -147,14 +169,14 @@ function calcularIra() {
         const cartao = document.createElement('div');
         cartao.className = 'ira-parcial';
         cartao.setAttribute('aria-live', 'polite');
-        cartao.setAttribute('aria-label', `Acumulado até o ${parcial.periodo}º período`);
-        cartao.title = `Acumulado até o ${parcial.periodo}º período`;
+        cartao.setAttribute('aria-label', `Acumulado até o ${parcial.periodo}º semestre`);
+        cartao.title = `Acumulado até o ${parcial.periodo}º semestre`;
         cartao.append(
             AppUnB.elemento('span', 'ira-parcial-rotulo', 'Acumulado'),
             AppUnB.elemento(
                 'strong',
                 '',
-                `IRA ${parcial.temDisciplinas ? AppUnB.numero(parcial.ira) : '—'} · MP ${parcial.temMp ? AppUnB.numero(parcial.mp) : '—'}`,
+                `IRA ${parcial.temDisciplinas ? AppUnB.numero(parcial.ira) : '—'}${somente ? '' : ` · MP ${parcial.temMp ? AppUnB.numero(parcial.mp) : '—'}`}`,
             ),
         );
         periodo.querySelector('.periodo-rodape').append(cartao);
@@ -171,7 +193,7 @@ function criarPeriodo(salvo = false) {
 
     divPeriodo.innerHTML = `
         <div class="periodo-header">
-            <h2>${numeroPeriodo}º Período</h2>
+            <h2>${numeroPeriodo}º Semestre</h2>
         </div>
         <div class="periodo-disciplinas"></div>
         <div class="periodo-rodape"><button type="button" class="btn btn-sm btn-outline-primary btn-add-disc"
@@ -194,7 +216,7 @@ function reindexarPeriodos() {
     periodos.forEach((periodo, indice) => {
         periodo.dataset.periodo = indice + 1;
         const titulo = periodo.querySelector('.periodo-header h2');
-        if (titulo) titulo.textContent = `${indice + 1}º Período`;
+        if (titulo) titulo.textContent = `${indice + 1}º Semestre`;
     });
 }
 
@@ -268,7 +290,7 @@ function adicionarDisciplina(periodoEl, dados = null) {
                     ${gerarOpcoesHtml(OPCOES_MENCOES, indiceMenc)}
                 </select>
             </div>
-            <div class="col-lg-3 col-md-3 col-3 d-flex align-items-center">
+            <div class="col-lg-3 col-md-3 col-3 d-flex align-items-center ira-modulo-livre">
                 <div class="form-check m-0">
                     <input class="form-check-input chk-modulo-livre" type="checkbox" id="ml-${id}" ${moduloLivre ? 'checked' : ''}>
                     <label class="form-check-label small" style="color: var(--text-secondary);" for="ml-${id}" title="Não contabiliza na MP">Mód. Livre</label>

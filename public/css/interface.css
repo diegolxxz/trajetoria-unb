@@ -2197,3 +2197,9 @@ body.pagina-turmas main.pagina-conteudo {
         align-items: flex-start;
     }
 }
+
+/* A preferência de índices vale também para a visualização resumida. */
+.pagina-ira.ira-somente .ira-modulo-livre,
+.pagina-ira.ira-somente .ira-ajuda-mp {
+    display: none !important;
+}
