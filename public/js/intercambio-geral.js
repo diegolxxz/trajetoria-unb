@@ -24,15 +24,18 @@
             ['geralIra', 'ira'],
             ['geralIpf', 'ipf'],
         ])
-            if ($(id)) $(id).value = campo === 'curso' ? cursoChave(perfil.curso) : (perfil[campo] ?? '');
+            if ($(id)) {
+                if (campo === 'curso') $(id).value = cursoChave(perfil.curso);
+                else AppUnB.preencherNumero($(id), perfil[campo]);
+            }
         $('avisoCursoGeral').hidden =
             !perfil.curso || [...$('geralCurso').options].some((o) => o.value === cursoChave(perfil.curso));
         $('avisoCursoGeral').textContent =
             `O curso salvo (${perfil.curso}) não aparece nos editais carregados. Escolha um curso para comparar suas referências.`;
     }
     function renderizar() {
-        const ira = $('geralIra').value;
-        const ipf = $('geralIpf')?.value ?? '';
+        const ira = AppUnB.valorNumero($('geralIra'));
+        const ipf = $('geralIpf') ? AppUnB.valorNumero($('geralIpf')) : '';
         for (const [id, valor, maximo] of [
             ['geralIra', ira, 5],
             ['geralIpf', ipf, 100],
@@ -189,7 +192,7 @@
                 ['geralIpf', 'ipf'],
             ])
                 $(id)?.addEventListener(id === 'geralCurso' ? 'change' : 'input', () => {
-                    AppUnB.salvarPerfil({ [campo]: $(id).value });
+                    AppUnB.salvarPerfil({ [campo]: campo === 'curso' ? $(id).value : AppUnB.editarNumero($(id)) });
                     if (campo === 'curso') $('avisoCursoGeral').hidden = true;
                     renderizar();
                 });

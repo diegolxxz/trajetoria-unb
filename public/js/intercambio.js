@@ -51,8 +51,8 @@
 
     function restaurarPerfil() {
         const perfil = AppUnB.perfil();
-        $('meuIra').value = perfil.ira ?? '';
-        $('meuIpf').value = perfil.ipf ?? '';
+        AppUnB.preencherNumero($('meuIra'), perfil.ira);
+        AppUnB.preencherNumero($('meuIpf'), perfil.ipf);
         $('meuCurso').value = perfil.curso || '';
         const indisponivel = perfil.curso && !dados.cursos.some((c) => c.nome === perfil.curso);
         $('avisoCurso').hidden = !indisponivel;
@@ -63,9 +63,11 @@
 
     function simular() {
         const curso = dados.cursos.find((c) => c.nome === $('meuCurso').value);
-        const ira = $('meuIra').valueAsNumber;
-        const ipf = $('meuIpf').valueAsNumber;
-        const incompleto = $('meuIra').value === '' || $('meuIpf').value === '';
+        const iraTexto = AppUnB.valorNumero($('meuIra'));
+        const ipfTexto = AppUnB.valorNumero($('meuIpf'));
+        const ira = Number(iraTexto);
+        const ipf = Number(ipfTexto);
+        const incompleto = iraTexto === '' || ipfTexto === '';
         const invalido =
             !incompleto &&
             (!Number.isFinite(ira) || ira < 0 || ira > 5 || !Number.isFinite(ipf) || ipf < 0 || ipf > 100);
@@ -387,11 +389,11 @@
                 .querySelectorAll('[name="visualizacao"]')
                 .forEach((input) => input.addEventListener('change', mudarFiltros));
             $('meuIra').addEventListener('input', () => {
-                AppUnB.salvarPerfil({ ira: $('meuIra').value });
+                AppUnB.salvarPerfil({ ira: AppUnB.editarNumero($('meuIra')) });
                 simular();
             });
             $('meuIpf').addEventListener('input', () => {
-                AppUnB.salvarPerfil({ ipf: $('meuIpf').value });
+                AppUnB.salvarPerfil({ ipf: AppUnB.editarNumero($('meuIpf')) });
                 simular();
             });
             $('meuCurso').addEventListener('change', () => {

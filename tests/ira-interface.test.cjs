@@ -107,3 +107,12 @@ test('horas aprovadas atualizam ao editar, remover e desfazer', async () => {
     app.run('desfazerExclusao()');
     assert.equal(horas(), 'Horas aprovadas: 30h');
 });
+
+test('IRA e MP acumulados exibem até quatro casas sem alterar histórico', async () => {
+    const dados = { 1: { 1: ['A', 4, 1, false] }, 2: { 1: ['B', 2, 3, false] } };
+    const a = await interfaceIra(dados);
+    assert.match(a.document.getElementById('ira-mp').textContent, /MP: 4,3333/);
+    for (const el of a.document.querySelectorAll('#ira-mp, .ira-parcial'))
+        assert.doesNotMatch(el.textContent, /\d,\d{5}/);
+    assert.equal(a.storage.get('calculadora-ira-unb')[2][1][2], 3);
+});

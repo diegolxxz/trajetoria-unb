@@ -76,6 +76,35 @@ const AppUnB = (() => {
     function numero(valor, casas = 4) {
         return Number(valor).toLocaleString('pt-BR', { maximumFractionDigits: Math.min(4, casas) });
     }
+    const numerosDosInputs = new WeakMap();
+    function preencherNumero(input, valor) {
+        const bruto = valor == null ? '' : String(valor);
+        const n = bruto.trim() === '' ? NaN : Number(bruto);
+        let exibido = bruto;
+        if (Number.isFinite(n)) {
+            // Arredonda valores fora do intervalo para fora, sem torná-los válidos na borda.
+            const limitado =
+                n < Number(input.getAttribute('min'))
+                    ? Math.floor(n * 10000) / 10000
+                    : n > Number(input.getAttribute('max'))
+                      ? Math.ceil(n * 10000) / 10000
+                      : n;
+            exibido = String(Number(limitado.toFixed(4)));
+        }
+        input.value = exibido;
+        // O valor original só é substituído quando este campo recebe uma edição.
+        numerosDosInputs.set(input, { bruto, exibido: input.value });
+    }
+    function valorNumero(input) {
+        const salvo = numerosDosInputs.get(input);
+        return salvo?.exibido === input.value ? salvo.bruto : input.value;
+    }
+    function editarNumero(input) {
+        // Não reatribui valores curtos: preserva o cursor e o separador decimal em edição.
+        if (/[eE]|\.\d{5}/.test(input.value)) preencherNumero(input, input.value);
+        numerosDosInputs.set(input, { bruto: input.value, exibido: input.value });
+        return input.value;
+    }
     function idiomas(valor) {
         const linhas = [];
         String(valor ?? '')
@@ -100,5 +129,18 @@ const AppUnB = (() => {
         tema();
         document.getElementById('btnTema')?.addEventListener('click', alternarTema);
     });
-    return { raiz, ler, salvar, perfil, salvarPerfil, chavePerfil, numero, idiomas, elemento };
+    return {
+        raiz,
+        ler,
+        salvar,
+        perfil,
+        salvarPerfil,
+        chavePerfil,
+        numero,
+        preencherNumero,
+        valorNumero,
+        editarNumero,
+        idiomas,
+        elemento,
+    };
 })();
