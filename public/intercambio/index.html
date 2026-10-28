@@ -61,14 +61,24 @@
                 </p>
                 <div class="filtros-gerais">
                     <label
-                        >Seu curso<select id="geralCurso">
+                        >Seu curso<select id="geralCurso" class="form-select">
                             <option value="">Selecione um curso</option>
                         </select></label
                     >
-                    <label>Seu IRA<input id="geralIra" type="number" min="0" max="5" step="any" /></label>
-                    <label>Seu IPF (%)<input id="geralIpf" type="number" min="0" max="100" step="any" /></label>
                     <label
-                        >Editais<select id="editalGeral">
+                        >Seu IRA<input id="geralIra" class="form-control" type="number" min="0" max="5" step="any"
+                    /></label>
+                    <label
+                        >Seu IPF (%)<input
+                            id="geralIpf"
+                            class="form-control"
+                            type="number"
+                            min="0"
+                            max="100"
+                            step="any"
+                    /></label>
+                    <label
+                        >Editais<select id="editalGeral" class="form-select">
                             <option value="">Todos os editais</option>
                         </select></label
                     >
@@ -108,7 +118,7 @@
                 </div>
                 <h2>Alocados nos editais carregados</h2>
                 <label
-                    >Curso dos alocados<select id="cursoAlocados">
+                    >Curso dos alocados<select id="cursoAlocados" class="form-select">
                         <option value="">Todos os cursos</option>
                     </select></label
                 >

@@ -2206,25 +2206,33 @@ body.pagina-turmas main.pagina-conteudo {
 
 /* Comparação no catálogo de intercâmbio. */
 .interface-unb .comparacao-geral {
+    min-width: 0;
+    max-width: 100%;
     margin-block: 2rem;
 }
 .interface-unb .filtros-gerais {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
     gap: 1rem;
     margin-block: 1rem;
 }
 .interface-unb .comparacao-geral label {
     display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    min-width: 0;
     gap: 0.35rem;
     max-width: 100%;
 }
 .interface-unb .comparacao-geral select,
 .interface-unb .comparacao-geral input {
+    width: 100%;
+    min-width: 0;
     max-width: 100%;
     min-height: 2.75rem;
 }
 .interface-unb .tabela-geral-rolagem {
+    min-width: 0;
+    max-width: 100%;
     overflow-x: auto;
     margin-block: 1rem 2rem;
 }
