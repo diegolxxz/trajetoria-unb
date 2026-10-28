@@ -96,7 +96,7 @@
                             : 'Curso sem referência nesta publicação.');
                 grupo.append(el('p', '', `${nome}${origem} Média: ${formato(r.media)}; desvio: ${formato(r.desvio)}.`));
                 if (r.matriculasBase?.length)
-                    metodos.add(`Matrículas usadas na estimativa: ${r.matriculasBase.join(', ')}`);
+                    metodos.add(`${nome}Matrículas usadas na estimativa: ${r.matriculasBase.join(', ')}`);
                 if (r.metodo) metodos.add(String(r.metodo));
             });
             metodos.forEach((metodo) => grupo.append(el('p', '', metodo)));

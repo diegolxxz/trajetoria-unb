@@ -425,3 +425,19 @@ test('DOM referência preserva turno publicado, colapsa espaços e mantém crit�
     assert.match(d.getElementById('criteriosGerais').textContent, /Matrículas usadas na estimativa: 123/);
     assert.equal(d.querySelectorAll('#criteriosGerais > section').length, 2);
 });
+
+test('critérios associam matrículas da estimativa à referência correspondente', async () => {
+    const { document: d } = await pagina(
+        [],
+        (e) => {
+            e.cursos[0].variantes[0].matriculasBase = ['111', '112'];
+            e.cursos[0].variantes[1].matriculasBase = ['221', '222'];
+            return e;
+        },
+        'medias',
+    );
+    const primeiro = d.querySelector('#criteriosGerais > section');
+    const paragrafos = [...primeiro.querySelectorAll('p')].map((p) => p.textContent);
+    assert.ok(paragrafos.includes('Referência 1: Matrículas usadas na estimativa: 111, 112'));
+    assert.ok(paragrafos.includes('Referência 2: Matrículas usadas na estimativa: 221, 222'));
+});
