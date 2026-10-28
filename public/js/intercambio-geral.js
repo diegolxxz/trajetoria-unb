@@ -2,11 +2,12 @@
 (() => {
     const $ = (id) => document.getElementById(id);
     const el = AppUnB.elemento;
+    const compararNotas = Boolean($('geralIpf'));
     let editais = [];
     const formato = (valor) => (Number.isFinite(valor) ? AppUnB.numero(valor) : 'Indisponível');
     function link(edital) {
         const a = el('a', '', edital.titulo);
-        a.href = `${edital.slug}/`;
+        a.href = new URL(`intercambio/${edital.slug}/`, AppUnB.raiz).href;
         return a;
     }
     function celula(linha, valor) {
@@ -22,7 +23,7 @@
             ['geralIra', 'ira'],
             ['geralIpf', 'ipf'],
         ])
-            $(id).value = perfil[campo] ?? '';
+            if ($(id)) $(id).value = perfil[campo] ?? '';
         $('avisoCursoGeral').hidden =
             !perfil.curso || [...$('geralCurso').options].some((o) => o.value === perfil.curso);
         $('avisoCursoGeral').textContent =
@@ -30,24 +31,24 @@
     }
     function renderizar() {
         const ira = $('geralIra').value;
-        const ipf = $('geralIpf').value;
+        const ipf = $('geralIpf')?.value ?? '';
         for (const [id, valor, maximo] of [
             ['geralIra', ira, 5],
             ['geralIpf', ipf, 100],
         ])
-            $(id).setAttribute(
+            $(id)?.setAttribute(
                 'aria-invalid',
                 String(valor !== '' && IntercambioCalculos.numero(valor, maximo) === null),
             );
         $('erroPerfilGeral').hidden = ![$('geralIra'), $('geralIpf')].some(
-            (input) => input.getAttribute('aria-invalid') === 'true',
+            (input) => input?.getAttribute('aria-invalid') === 'true',
         );
         const comparacao = IntercambioCalculos.comparar(editais, { curso: $('geralCurso').value, ira, ipf });
         const selecionados = comparacao.filter((e) => !$('editalGeral').value || e.slug === $('editalGeral').value);
         const historico = $('referenciasGerais').querySelector('tbody');
-        const alocados = $('alocadosGerais').querySelector('tbody');
+        const alocados = $('alocadosGerais')?.querySelector('tbody');
         historico.replaceChildren();
-        alocados.replaceChildren();
+        alocados?.replaceChildren();
         selecionados.forEach((edital) => {
             edital.referencias.forEach((r) => {
                 const tr = el('tr');
@@ -57,15 +58,17 @@
                 celula(tr, formato(r.media));
                 celula(tr, formato(r.desvio));
                 celula(tr, formato(r.diferenca));
-                celula(tr, r.nota ? `${r.estimada ? '≈ ' : ''}${formato(r.nota.final)}` : 'Indisponível');
+                if (compararNotas)
+                    celula(tr, r.nota ? `${r.estimada ? '≈ ' : ''}${formato(r.nota.final)}` : 'Indisponível');
                 const detalhes = el('div');
-                detalhes.append(
-                    el(
-                        'p',
-                        '',
-                        `Fórmula: ${edital.formula.tipo === 'ira-direto' ? 'IRA' : '((IRA − média) / desvio)'} × ${formato(edital.formula.pesoIra)} + (IPF / 100) × ${formato(edital.formula.pesoIpf)}`,
-                    ),
-                );
+                if (compararNotas)
+                    detalhes.append(
+                        el(
+                            'p',
+                            '',
+                            `Fórmula: ${edital.formula.tipo === 'ira-direto' ? 'IRA' : '((IRA − média) / desvio)'} × ${formato(edital.formula.pesoIra)} + (IPF / 100) × ${formato(edital.formula.pesoIpf)}`,
+                        ),
+                    );
                 detalhes.append(
                     el(
                         'span',
@@ -92,27 +95,32 @@
                 celula(tr, detalhes);
                 historico.append(tr);
             });
-            edital.alocados
-                .filter((r) => !$('cursoAlocados').value || CalculosUnB.cursoBase(r.curso) === $('cursoAlocados').value)
-                .forEach((r) => {
-                    const tr = el('tr');
-                    celula(tr, link(edital));
-                    for (const valor of [
-                        r.matricula,
-                        r.curso,
-                        formato(r.ira),
-                        formato(r.ipf),
-                        formato(r.notaFinal),
-                        r.alocacao,
-                    ])
-                        celula(tr, valor);
-                    alocados.append(tr);
-                });
+            if (alocados)
+                edital.alocados
+                    .filter(
+                        (r) => !$('cursoAlocados').value || CalculosUnB.cursoBase(r.curso) === $('cursoAlocados').value,
+                    )
+                    .forEach((r) => {
+                        const tr = el('tr');
+                        celula(tr, link(edital));
+                        for (const valor of [
+                            r.matricula,
+                            r.curso,
+                            formato(r.ira),
+                            formato(r.ipf),
+                            formato(r.notaFinal),
+                            r.alocacao,
+                        ])
+                            celula(tr, valor);
+                        alocados.append(tr);
+                    });
         });
-        $('vazioAlocados').hidden = alocados.children.length > 0;
-        $('contagemAlocados').textContent = `${alocados.children.length} alocados nos editais carregados`;
-        ocultarColunasAusentes('referenciasGerais', [3, 4, 5, 6]);
-        ocultarColunasAusentes('alocadosGerais', [1, 3, 4, 5]);
+        if (alocados) {
+            $('vazioAlocados').hidden = alocados.children.length > 0;
+            $('contagemAlocados').textContent = `${alocados.children.length} alocados nos editais carregados`;
+            ocultarColunasAusentes('alocadosGerais', [1, 3, 4, 5]);
+        }
+        ocultarColunasAusentes('referenciasGerais', compararNotas ? [3, 4, 5, 6] : [3, 4, 5]);
     }
     function ocultarColunasAusentes(id, indices) {
         const tabela = $(id);
@@ -144,14 +152,6 @@
                 $('erroCarregamento').textContent =
                     `Não foi possível carregar: ${falhas.map((e) => e.titulo).join(', ')}. Os demais editais continuam disponíveis.`;
             }
-            $('listaEditais').replaceChildren(
-                ...indice.map((e) => {
-                    const a = link(e);
-                    a.className = 'card-edital';
-                    a.append(el('span', 'texto-apoio', ` · Mobilidade: ${e.mobilidade}`));
-                    return a;
-                }),
-            );
             const cursos = [
                 ...new Set(
                     editais.flatMap((e) => [
@@ -164,7 +164,7 @@
                 cursos.forEach((c) => {
                     const o = el('option', '', c);
                     o.value = c;
-                    $(id).append(o);
+                    $(id)?.append(o);
                 });
             editais.forEach((e) => {
                 const o = el('option', '', e.titulo);
@@ -177,12 +177,12 @@
                 ['geralIra', 'ira'],
                 ['geralIpf', 'ipf'],
             ])
-                $(id).addEventListener(id === 'geralCurso' ? 'change' : 'input', () => {
+                $(id)?.addEventListener(id === 'geralCurso' ? 'change' : 'input', () => {
                     AppUnB.salvarPerfil({ [campo]: $(id).value });
                     if (campo === 'curso') $('avisoCursoGeral').hidden = true;
                     renderizar();
                 });
-            for (const id of ['editalGeral', 'cursoAlocados']) $(id).addEventListener('change', renderizar);
+            for (const id of ['editalGeral', 'cursoAlocados']) $(id)?.addEventListener('change', renderizar);
             window.addEventListener('storage', (event) => {
                 if (event.key === AppUnB.chavePerfil) {
                     restaurarPerfil();

@@ -35,7 +35,7 @@ class RotasTest(unittest.TestCase):
 
     def test_paginas_e_redirecionamentos(self):
         catalogo = json.loads((Path(route.ROOT) / "data/editais/index.json").read_text(encoding="utf-8"))
-        for caminho in ["/ira", "/turmas", "/intercambio", *["/intercambio/" + e["slug"] for e in catalogo]]:
+        for caminho in ["/ira", "/turmas", "/intercambio", "/intercambio/medias", "/intercambio/comparacao", *["/intercambio/" + e["slug"] for e in catalogo]]:
             redirecionamento = get(caminho)
             self.assertIn(redirecionamento["status"].split()[0], ("302", "303"))
             self.assertTrue(redirecionamento["headers"]["Location"].endswith(caminho + "/"))

@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="pt-BR" data-tema="escuro">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, viewport-fit=cover, interactive-widget=resizes-content"
+        />
+        <meta name="theme-color" content="#1b1d21" />
+        <script>
+            try {
+                document.documentElement.dataset.tema = localStorage.getItem('calculadora-ira-tema') || 'escuro';
+            } catch {}
+        </script>
+        <meta name="app-root" content="../../" />
+        <meta name="description" content="Editais e simulações de intercâmbio da Unb — Trajetória Unb." />
+        <title>Comparar editais | Trajetória Unb</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../css/style.css" />
+        <link rel="stylesheet" href="../../css/intercambio.css" />
+        <link rel="stylesheet" href="../../css/interface.css" />
+        <link rel="canonical" href="https://trajetoriaunb.vercel.app/intercambio/comparacao/" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Trajetória Unb" />
+        <meta property="og:title" content="Comparar editais | Trajetória Unb" />
+        <meta property="og:description" content="Editais e simulações de intercâmbio da Unb — Trajetória Unb." />
+        <meta property="og:url" content="https://trajetoriaunb.vercel.app/intercambio/comparacao/" />
+        <link rel="icon" href="../../favicon.ico" sizes="16x16 32x32 48x48 64x64 128x128 256x256" />
+        <link rel="icon" href="../../favicon.svg" type="image/svg+xml" sizes="any" />
+        <link rel="icon" href="../../favicon-96x96.png" type="image/png" sizes="96x96" />
+        <link rel="apple-touch-icon" href="../../apple-touch-icon.png" sizes="180x180" />
+        <link rel="manifest" href="../../site.webmanifest" />
+    </head>
+    <body class="interface-unb pagina-editais">
+        <header class="cabecalho">
+            <div class="container topo-site">
+                <a class="marca-site" href="../../">Trajetória<span class="badge-unb">Unb</span></a>
+                <nav aria-label="Navegação principal">
+                    <a href="../../ira/"
+                        ><span class="nav-ira-completo">Calculadora IRA e MP</span
+                        ><span class="nav-ira-curto">IRA e MP</span></a
+                    >
+                    <a href="../../intercambio/" aria-current="page">Intercâmbio</a>
+                    <a href="../../turmas/">Turmas</a>
+                    <a href="../../grade/">Grade</a>
+                </nav>
+            </div>
+        </header>
+        <main class="container pagina-conteudo">
+            <p id="avisoPersistencia" class="aviso" role="status" hidden></p>
+            <div class="intro-pagina">
+                <h1>Comparar editais</h1>
+                <p>Simule sua nota e consulte os alocados de cada seleção.</p>
+            </div>
+            <nav class="navegacao-intercambio" aria-label="Navegação do intercâmbio">
+                <a href="../">Editais</a>
+                <a href="../medias/">Médias dos cursos</a>
+                <a href="../comparacao/" aria-current="page">Comparar editais</a>
+            </nav>
+            <p id="erroCarregamento" class="aviso" role="alert" hidden></p>
+            <section id="comparacaoGeral" class="comparacao-geral" aria-labelledby="tituloComparacao" hidden>
+                <h2 id="tituloComparacao">Seu curso nas seleções anteriores</h2>
+                <p>
+                    As médias e os desvios são referências do curso em cada seleção, não médias dos candidatos. Seu IRA
+                    pode ser comparado sem informar IPF.
+                </p>
+                <div class="filtros-gerais">
+                    <label
+                        >Seu curso<select id="geralCurso" class="form-select">
+                            <option value="">Selecione um curso</option>
+                        </select></label
+                    >
+                    <label
+                        >Seu IRA<input id="geralIra" class="form-control" type="number" min="0" max="5" step="any"
+                    /></label>
+                    <label
+                        >Seu IPF (%)<input
+                            id="geralIpf"
+                            class="form-control"
+                            type="number"
+                            min="0"
+                            max="100"
+                            step="any"
+                    /></label>
+                    <label
+                        >Editais<select id="editalGeral" class="form-select">
+                            <option value="">Todos os editais</option>
+                        </select></label
+                    >
+                </div>
+                <p id="avisoCursoGeral" class="aviso" role="status" hidden></p>
+                <p id="erroPerfilGeral" class="aviso" role="alert" hidden>
+                    Informe IRA entre 0 e 5 e IPF entre 0% e 100%.
+                </p>
+                <p>
+                    Notas simuladas seguem a fórmula de cada edital e referência. Valores estimados estão sinalizados.
+                    Notas de editais diferentes não formam um ranking e não garantem aprovação.
+                </p>
+                <div
+                    class="tabela-geral-rolagem"
+                    tabindex="0"
+                    role="region"
+                    aria-label="Referências históricas e simulações"
+                >
+                    <table id="referenciasGerais">
+                        <caption>
+                            Referências do curso e nota simulada por seleção
+                        </caption>
+                        <thead>
+                            <tr>
+                                <th scope="col">Edital</th>
+                                <th scope="col">Mobilidade</th>
+                                <th scope="col">Referência</th>
+                                <th scope="col">IRA médio do curso</th>
+                                <th scope="col">Desvio</th>
+                                <th scope="col">Seu IRA − média</th>
+                                <th scope="col">Nota simulada</th>
+                                <th scope="col">Origem e disponibilidade</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <h2>Alocados nos editais carregados</h2>
+                <label
+                    >Curso dos alocados<select id="cursoAlocados" class="form-select">
+                        <option value="">Todos os cursos</option>
+                    </select></label
+                >
+                <p id="contagemAlocados" role="status"></p>
+                <p>Notas originais publicadas, agrupadas por edital e mantidas na ordem da publicação.</p>
+                <div class="tabela-geral-rolagem" tabindex="0" role="region" aria-label="Alocados por edital">
+                    <table id="alocadosGerais">
+                        <caption>
+                            Resultados de alocação publicados
+                        </caption>
+                        <thead>
+                            <tr>
+                                <th scope="col">Edital</th>
+                                <th scope="col">Matrícula</th>
+                                <th scope="col">Curso</th>
+                                <th scope="col">IRA</th>
+                                <th scope="col">IPF (%)</th>
+                                <th scope="col">Nota original</th>
+                                <th scope="col">Alocação</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <p id="vazioAlocados" hidden>Nenhum alocado para os filtros selecionados.</p>
+            </section>
+        </main>
+        <footer class="text-center py-4">
+            <div class="container">
+                Projeto independente, sem vínculo oficial com a Unb. Confira seus dados no SIGAA e as regras do edital
+                na INT.
+            </div>
+        </footer>
+        <script src="../../js/calculos.js"></script>
+        <script src="../../js/common.js"></script>
+        <script src="../../js/intercambio-calculos.js"></script>
+        <script src="../../js/intercambio-geral.js"></script>
+    </body>
+</html>

@@ -59,8 +59,10 @@ test('zeros válidos, vazios e inválidos ausentes; alocados identificados sem r
     assert.equal(r.alocados.length, 1);
     assert.equal(r.alocados[0].matricula, '123');
 });
-async function pagina(falhas = [], transformar = (e) => e) {
-    const { document, Event, HTMLSelectElement } = parseHTML(fs.readFileSync('public/intercambio/index.html', 'utf8'));
+async function pagina(falhas = [], transformar = (e) => e, modo = 'comparacao') {
+    const { document, Event, HTMLSelectElement } = parseHTML(
+        fs.readFileSync(`public/intercambio/${modo}/index.html`, 'utf8'),
+    );
     Object.defineProperty(HTMLSelectElement.prototype, 'value', {
         configurable: true,
         get() {
@@ -79,7 +81,7 @@ async function pagina(falhas = [], transformar = (e) => e) {
     const context = vm.createContext({
         document,
         URL,
-        location: { href: 'https://example.org/intercambio/' },
+        location: { href: `https://example.org/intercambio/${modo}/` },
         localStorage: { getItem: (k) => storage.get(k), setItem: (k, v) => storage.set(k, v) },
         window: { addEventListener() {} },
         console,
@@ -223,4 +225,91 @@ test('DOM histórico mantém zeros visíveis e oculta nota indisponível', async
         assert.equal(tr.children[6].hidden, true);
     }
     assert.equal(cabecalho.children[6].hidden, true);
+});
+
+test('médias é uma página independente sem simulação nem alocados e preserva IPF salvo', async () => {
+    const { document: d, Event, storage } = await pagina([], (e) => e, 'medias');
+    assert.equal(d.querySelectorAll('#referenciasGerais tbody tr').length, 4);
+    assert.equal(d.getElementById('geralIpf'), null);
+    assert.equal(d.getElementById('alocadosGerais'), null);
+    assert.doesNotMatch(d.querySelector('#referenciasGerais').textContent, /Nota simulada|IPF|Fórmula:/);
+    assert.equal(d.querySelector('#referenciasGerais tbody tr').children.length, 7);
+    assert.equal(d.querySelector('#referenciasGerais tbody a').href, 'https://example.org/intercambio/a/');
+    assert.equal(
+        d.querySelector('#referenciasGerais tbody a[href="https://example.org/"]').textContent,
+        'Fonte: edital',
+    );
+    const chave = 'calculadora-unb:perfil-intercambio:v1';
+    storage.set(chave, JSON.stringify({ curso: 'CURSO', ira: 4, ipf: 37 }));
+    d.getElementById('geralIra').value = '3';
+    d.getElementById('geralIra').dispatchEvent(new Event('input'));
+    assert.equal(JSON.parse(storage.get(chave)).ipf, 37);
+    assert.doesNotMatch(d.querySelector('#referenciasGerais').textContent, /NaN/);
+    d.getElementById('editalGeral').value = 'a';
+    d.getElementById('editalGeral').dispatchEvent(new Event('change'));
+    assert.equal(d.querySelectorAll('#referenciasGerais tbody tr').length, 2);
+});
+
+test('hub mantém cinco cartões e carrega somente catálogo pelo script original', async () => {
+    const { document: d, Event } = parseHTML(fs.readFileSync('public/intercambio/index.html', 'utf8'));
+    assert.equal(d.querySelectorAll('.card-edital').length, 5);
+    assert.equal(d.getElementById('comparacaoGeral'), null);
+    assert.equal(d.getElementById('geralCurso'), null);
+    const chamadas = [];
+    const context = vm.createContext({
+        document: d,
+        URL,
+        location: { href: 'https://example.org/intercambio/' },
+        localStorage: {
+            getItem() {
+                return null;
+            },
+        },
+        window: { addEventListener() {} },
+        console,
+        CalculosUnB: calc,
+        fetch: async (url) => {
+            chamadas.push(String(url));
+            return { ok: true, json: async () => JSON.parse(fs.readFileSync('public/data/editais/index.json')) };
+        },
+    });
+    for (const f of ['common', 'intercambio']) vm.runInContext(fs.readFileSync(`public/js/${f}.js`, 'utf8'), context);
+    d.dispatchEvent(new Event('DOMContentLoaded'));
+    await new Promise((resolve) => setImmediate(resolve));
+    assert.deepEqual(chamadas, ['https://example.org/data/editais/index.json']);
+    assert.equal(d.querySelectorAll('.card-edital .edital-identificacao h2').length, 5);
+    assert.equal(d.querySelectorAll('script[src="../js/intercambio.js"]').length, 1);
+});
+
+test('médias mantém fontes após falha parcial e valida IRA sem depender de IPF', async () => {
+    const { document: d, Event } = await pagina(['b'], (e) => e, 'medias');
+    assert.equal(d.querySelectorAll('#referenciasGerais tbody tr').length, 2);
+    assert.equal(d.getElementById('erroCarregamento').hidden, false);
+    const ira = d.getElementById('geralIra');
+    ira.value = '6';
+    ira.dispatchEvent(new Event('input'));
+    assert.equal(ira.getAttribute('aria-invalid'), 'true');
+    assert.equal(d.getElementById('erroPerfilGeral').hidden, false);
+    assert.equal(
+        d.querySelector('#referenciasGerais tbody a[href="https://example.org/"]').textContent,
+        'Fonte: edital',
+    );
+});
+
+test('navegação interna marca a página atual e resolve os três destinos', () => {
+    for (const modo of ['', 'medias/', 'comparacao/']) {
+        const { document: d } = parseHTML(fs.readFileSync(`public/intercambio/${modo}index.html`, 'utf8'));
+        const links = [...d.querySelectorAll('.navegacao-intercambio a')];
+        assert.equal(links.length, 3);
+        assert.deepEqual(
+            links.map((a) => new URL(a.getAttribute('href'), `https://example.org/intercambio/${modo}`).pathname),
+            ['/intercambio/', '/intercambio/medias/', '/intercambio/comparacao/'],
+        );
+        assert.equal(links.filter((a) => a.getAttribute('aria-current') === 'page').length, 1);
+        const ativo = links.find((a) => a.getAttribute('aria-current') === 'page');
+        assert.equal(
+            new URL(ativo.getAttribute('href'), `https://example.org/intercambio/${modo}`).pathname,
+            `/intercambio/${modo}`,
+        );
+    }
 });

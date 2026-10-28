@@ -2245,3 +2245,15 @@ body.pagina-turmas main.pagina-conteudo {
     padding: 0.5rem;
     vertical-align: top;
 }
+
+.navegacao-intercambio {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-block: 1rem 1.5rem;
+}
+.navegacao-intercambio [aria-current='page'] {
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 0.3em;
+}
