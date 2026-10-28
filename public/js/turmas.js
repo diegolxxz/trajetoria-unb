@@ -14,6 +14,14 @@
     let unidades = {};
     let componentes = {};
     let semestresPorArquivo = new Map();
+    let arquivoSelecionado = '';
+    const itemValido = (item) =>
+        item &&
+        typeof item.semestre === 'string' &&
+        /^\d{4}\.[12]$/.test(item.semestre) &&
+        typeof item.arquivo === 'string' &&
+        /^[A-Za-z0-9_-]+\.json$/.test(item.arquivo);
+
     let gruposFiltrados = [];
     let gruposExibidos = 0;
     let observador;
@@ -185,6 +193,12 @@
     }
 
     async function carregarSemestre(arquivo) {
+        if (!semestresPorArquivo.has(arquivo)) {
+            semestreSelect.value = arquivoSelecionado;
+            return;
+        }
+        arquivoSelecionado = arquivo;
+        semestreSelect.value = arquivo;
         mostrarEstado('Carregando turmas…');
         const dataAtualizacao = semestresPorArquivo.get(arquivo)?.atualizadoEm;
         if (dataAtualizacao) {
@@ -229,14 +243,15 @@
             const [indice, cadastro] = await Promise.all([indiceResponse.json(), unidadesResponse.json()]);
             unidades = cadastro.unidades || {};
             componentes = carga.componentes || {};
-            const semestres = indice.semestres || [];
+            const semestres = (Array.isArray(indice.semestres) ? indice.semestres : []).filter(itemValido);
+            semestreSelect.replaceChildren();
+            semestreSelect.disabled = !semestres.length;
             semestresPorArquivo = new Map(semestres.map((item) => [item.arquivo, item]));
             if (!semestres.length) {
                 mostrarEstado('Nenhum semestre publicado ainda.');
                 return;
             }
 
-            semestreSelect.replaceChildren();
             for (const item of semestres) {
                 const option = AppUnB.elemento('option', '', `Semestre ${item.semestre}`);
                 option.value = item.arquivo;

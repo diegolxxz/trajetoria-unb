@@ -23,10 +23,22 @@ const disciplina = {
     ],
 };
 
-async function interfaceGrade(backup) {
+async function interfaceGrade(backup, semestres = [{ semestre: '2026.2', arquivo: '2026-2.json' }]) {
+    const requisicoes = [];
     const { document, HTMLElement, Event } = parseHTML(
         fs.readFileSync(path.join(publicRoot, 'grade/index.html'), 'utf8'),
     );
+    // Linkedom exposes select.value without a setter; emulate browser selection.
+    for (const select of document.querySelectorAll('select')) {
+        let value;
+        Object.defineProperty(select, 'value', {
+            configurable: true,
+            get: () => value ?? select.options[0]?.value ?? '',
+            set: (next) => {
+                value = next;
+            },
+        });
+    }
     // Linkedom não implementa foco; o teste verifica os controles, não a navegação por teclado.
     HTMLElement.prototype.focus = function () {};
     const storage = new Map();
@@ -42,19 +54,18 @@ async function interfaceGrade(backup) {
         matchMedia: () => ({ matches: false }),
         CSS: { escape: (s) => s },
         localStorage: { getItem: (key) => storage.get(key) ?? null, setItem: (key, value) => storage.set(key, value) },
-        fetch: async (url) => ({
-            ok: true,
-            json: async () =>
-                url.pathname.endsWith('index.json')
-                    ? {
-                          semestres: [
-                              { semestre: '2026.2', arquivo: '2026-2.json', atualizadoEm: '2026-10-20T00:00:00Z' },
-                          ],
-                      }
-                    : url.pathname.endsWith('componentes.json')
-                      ? { componentes: {} }
-                      : { disciplinas: [disciplina] },
-        }),
+        fetch: async (url) => {
+            requisicoes.push(url.pathname);
+            return {
+                ok: true,
+                json: async () =>
+                    url.pathname.endsWith('index.json')
+                        ? { semestres }
+                        : url.pathname.endsWith('componentes.json')
+                          ? { componentes: {} }
+                          : { disciplinas: [disciplina] },
+            };
+        },
     });
     for (const file of ['common.js', 'grade-calculos.js', 'grade-arquivos.js', 'grade.js']) {
         vm.runInContext(fs.readFileSync(path.join(publicRoot, 'js', file), 'utf8'), context, { filename: file });
@@ -66,7 +77,7 @@ async function interfaceGrade(backup) {
         input.dispatchEvent(new Event('input'));
         return document.querySelector('.grade-busca-item button');
     };
-    return { document, buscar, storage };
+    return { document, buscar, storage, requisicoes };
 }
 
 test('a busca reflete o plano atual ao criar, desfazer e refazer um plano', async () => {
@@ -122,4 +133,70 @@ test('montagem fica indisponível até escolher uma turma', async () => {
     assert.equal(document.getElementById('montarGrade')?.disabled, true);
     buscar().onclick();
     assert.equal(document.getElementById('montarGrade').disabled, true);
+});
+
+test('Grade validates catalog and changes without losing plans', async () => {
+    const { document, buscar, storage, requisicoes } = await interfaceGrade(undefined, [
+        null,
+        {},
+        { semestre: null, arquivo: null },
+        { semestre: '2026.3', arquivo: 'bad.json' },
+        { semestre: '2026.1', arquivo: '../bad.json' },
+        { semestre: '2026.1', arquivo: '/bad.json' },
+        { semestre: '2026.1', arquivo: 'bad.json?x' },
+        { semestre: '2026.2', arquivo: '2026-2.json' },
+        { semestre: '2027.1', arquivo: '2027-1.json' },
+    ]);
+    const select = document.getElementById('semestreGrade');
+    assert.deepEqual(
+        [...select.options].map((o) => o.value),
+        ['2027.1', '2026.2'],
+    );
+    buscar().onclick();
+    const antes = storage.get('trajetoria-unb:grade:v1');
+    const total = requisicoes.length;
+    for (const valor of ['', 'null', '2099.1']) {
+        select.value = valor;
+        select.onchange();
+        assert.equal(select.value, '2027.1');
+        assert.equal(storage.get('trajetoria-unb:grade:v1'), antes);
+        assert.equal(requisicoes.length, total);
+    }
+    for (const valor of ['2026.2', '2027.1']) {
+        select.value = valor;
+        select.onchange();
+        await new Promise((resolve) => setImmediate(resolve));
+    }
+    assert.equal(JSON.parse(storage.get('trajetoria-unb:grade:v1')).planos.length, 2);
+    assert.equal(buscar().disabled, true);
+});
+
+test('Grade preserves unavailable historical backup with empty catalog', async () => {
+    const plano = {
+        id: 'p1',
+        nome: 'History',
+        semestre: '2020.1',
+        disciplinas: [],
+        selecionadas: [],
+        inicio: '',
+        fim: '',
+    };
+    const backup = { versao: 1, ativo: plano.id, planos: [plano] };
+    const { document, storage, requisicoes } = await interfaceGrade(backup, []);
+    const select = document.getElementById('semestreGrade');
+    assert.equal(select.disabled, true);
+    assert.equal(select.value, '2020.1');
+    assert.match(document.getElementById('ofertaGrade').textContent, /sem oferta/);
+    select.value = 'null';
+    select.onchange();
+    assert.equal(select.value, '2020.1');
+    assert.deepEqual(JSON.parse(storage.get('trajetoria-unb:grade:v1')), backup);
+    assert.equal(requisicoes.length, 2);
+});
+
+test('Grade creates and saves a published semester beyond 2099', async () => {
+    const { buscar, storage } = await interfaceGrade(undefined, [{ semestre: '2100.1', arquivo: '2100-1.json' }]);
+    buscar().onclick();
+    const backup = JSON.parse(storage.get('trajetoria-unb:grade:v1'));
+    assert.equal(backup.planos[0].semestre, '2100.1');
 });
