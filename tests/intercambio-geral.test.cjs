@@ -548,3 +548,30 @@ test('notas dos alocados calculáveis conferem com publicação dentro do arredo
     }
     assert.equal(conferidos, 463);
 });
+
+test('comparação oculta caption visual e nota redundante, sinalizando só fórmula direta antiga', async () => {
+    const { document: d } = await pagina([], (e) => {
+        if (e.slug === 'a') {
+            e.formula.tipo = 'ira-direto';
+            e.cursos[0].variantes = [];
+        }
+        return e;
+    });
+    assert.equal(d.querySelector('#referenciasGerais caption').classList.contains('visually-hidden'), true);
+    assert.equal(Boolean(d.getElementById('avisoEstimativas')), false);
+    const notas = [...d.querySelectorAll('#referenciasGerais tbody .formula-antiga')];
+    assert.equal(notas.length, 1);
+    assert.equal(notas[0].textContent, 'Fórmula antiga');
+    assert.match(notas[0].getAttribute('title'), /IRA diretamente/);
+    const antigo = JSON.parse(fs.readFileSync('public/data/editais/index.json')).find((e) =>
+        e.titulo.includes('3/2024'),
+    );
+    const { document: paginaAntiga } = parseHTML(
+        fs.readFileSync(`public/intercambio/${antigo.slug}/index.html`, 'utf8'),
+    );
+    assert.match(
+        paginaAntiga.querySelector('#conteudoEdital').textContent,
+        /Fórmula diferente da atual: usa o IRA diretamente\./,
+    );
+    assert.equal(paginaAntiga.querySelectorAll('.formula-destaque').length, 0);
+});

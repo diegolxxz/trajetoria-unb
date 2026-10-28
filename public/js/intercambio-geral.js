@@ -72,7 +72,7 @@
         const vazio = visiveis.length === 0;
         $('resumoGerais').hidden = vazio;
         $('fontesCriterios').hidden = vazio;
-        $('avisoEstimativas').hidden = vazio;
+        if ($('avisoEstimativas')) $('avisoEstimativas').hidden = vazio;
         $('vazioReferencias').hidden = !vazio;
         $('vazioReferencias').textContent = $('geralCurso').value
             ? 'Sem dados para este curso nos editais selecionados.'
@@ -83,7 +83,14 @@
             const multiplas = edital.referencias.length > 1;
             edital.referencias.forEach((r) => {
                 const tr = el('tr');
-                celula(tr, link(edital));
+                const identificacao = el('span');
+                identificacao.append(link(edital));
+                if (compararNotas && edital.formula.tipo === 'ira-direto') {
+                    const aviso = el('small', 'formula-antiga', 'Fórmula antiga');
+                    aviso.title = 'Fórmula diferente da atual: usa o IRA diretamente.';
+                    identificacao.append(el('br'), aviso);
+                }
+                celula(tr, identificacao);
                 celula(tr, multiplas ? r.turno || `Referência ${r.indice}` : '—');
                 tr.children[1].hidden = !variasReferencias;
                 if (compararNotas) {

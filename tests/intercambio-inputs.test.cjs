@@ -289,3 +289,74 @@ test('IPF com duas casas não reatribui valor nem cursor; terceira casa normaliz
     assert.equal(reaberto.ira.value, '4.1235');
     assert.equal(JSON.parse(reaberto.storage.get(chave)).ira, '4.123456789');
 });
+
+test('setas somam incrementos exatos fora da grade sem alterar precisão ou outro campo', async () => {
+    for (const modo of ['individual', 'comparacao', 'medias']) {
+        const a = await pagina(modo, { curso: 'DIREITO', ira: '4.1234', ipf: '73.12' });
+        const clicar = (input, direcao) =>
+            input
+                .closest('.ajuste-numero')
+                .querySelector(direcao > 0 ? '.aumentar-numero' : '.diminuir-numero')
+                .dispatchEvent(new a.Event('click'));
+        assert.ok(a.ira.closest('.ajuste-numero'));
+        assert.equal(Boolean(a.ira.closest('.ajuste-numero').querySelector('button').closest('label')), false);
+        clicar(a.ira, 1);
+        assert.equal(a.ira.value, '4.2234');
+        assert.equal(JSON.parse(a.storage.get(chave)).ipf, '73.12');
+        clicar(a.ira, -1);
+        assert.equal(a.ira.value, '4.1234');
+        if (a.ipf) {
+            clicar(a.ipf, 1);
+            assert.equal(a.ipf.value, '74.12');
+            const evento = new a.Event('keydown');
+            Object.defineProperty(evento, 'key', { value: 'ArrowDown' });
+            a.ipf.dispatchEvent(evento);
+            assert.equal(a.ipf.value, '73.12');
+        }
+        const evento = new a.Event('keydown');
+        Object.defineProperty(evento, 'key', { value: 'ArrowUp' });
+        a.ira.dispatchEvent(evento);
+        assert.equal(a.ira.value, '4.2234');
+        const salvo = JSON.parse(a.storage.get(chave));
+        const b = await pagina(modo, salvo);
+        assert.equal(b.ira.value, '4.2234');
+        if (b.ipf) assert.equal(b.ipf.value, '73.12');
+    }
+});
+
+test('setas respeitam limites, não preenchem vazio e editam apenas campo acionado', async () => {
+    const a = await pagina('comparacao');
+    const clicar = (input, classe) =>
+        input.closest('.ajuste-numero').querySelector(classe).dispatchEvent(new a.Event('click'));
+    assert.ok(a.ira.closest('.ajuste-numero'));
+    clicar(a.ira, '.aumentar-numero');
+    assert.equal(a.ira.value, '4.2235');
+    assert.equal(JSON.parse(a.storage.get(chave)).ipf, '73.0987654');
+    for (const [input, maximo] of [
+        [a.ira, '5'],
+        [a.ipf, '100'],
+    ]) {
+        a.editar(input, maximo);
+        clicar(input, '.aumentar-numero');
+        assert.equal(input.value, maximo);
+        a.editar(input, '0');
+        clicar(input, '.diminuir-numero');
+        assert.equal(input.value, '0');
+        a.editar(input, '');
+        const antes = a.storage.get(chave);
+        clicar(input, '.aumentar-numero');
+        clicar(input, '.diminuir-numero');
+        assert.equal(input.value, '');
+        assert.equal(a.storage.get(chave), antes);
+    }
+});
+
+test('sete páginas separam incremento de seta da precisão e mantêm campos válidos fora da grade', () => {
+    for (const caminho of [...indice.map((e) => e.slug), 'comparacao', 'medias']) {
+        const { document: d } = parseHTML(fs.readFileSync(`public/intercambio/${caminho}/index.html`, 'utf8'));
+        for (const input of d.querySelectorAll('#meuIra,#meuIpf,#geralIra,#geralIpf')) {
+            assert.equal(input.getAttribute('data-incremento'), /Ipf/.test(input.id) ? '1' : '0.1');
+            assert.equal(input.getAttribute('step'), /Ipf/.test(input.id) ? '0.01' : '0.0001');
+        }
+    }
+});

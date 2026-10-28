@@ -111,6 +111,52 @@ const AppUnB = (() => {
         numerosDosInputs.set(input, { bruto: input.value, exibido: input.value });
         return input.value;
     }
+    function controlesNumero(input) {
+        const passo = Number(input.dataset.incremento);
+        const ajustar = (direcao) => {
+            if (input.value === '') return;
+            const atual = Number(input.value);
+            const minimo = Number(input.getAttribute('min'));
+            const maximo = Number(input.getAttribute('max'));
+            if (!Number.isFinite(atual) || atual < minimo || atual > maximo) return;
+            const novo = Number(
+                Math.min(maximo, Math.max(minimo, atual + direcao * passo)).toFixed(casasNumero(input)),
+            );
+            if (novo === atual) return;
+            input.value = String(novo);
+            input.dispatchEvent(new document.defaultView.Event('input', { bubbles: true }));
+        };
+        const grupo = elemento('span', 'ajuste-numero');
+        const rotulo = input.closest('label');
+        if (rotulo) {
+            const campo = elemento('span', 'campo-numero');
+            rotulo.replaceWith(campo);
+            rotulo.setAttribute('for', input.id);
+            campo.append(rotulo, grupo);
+        } else input.replaceWith(grupo);
+        grupo.append(input);
+        const botoes = elemento('span', 'setas-numero');
+        for (const [direcao, classe, texto] of [
+            [1, 'aumentar-numero', '↑'],
+            [-1, 'diminuir-numero', '↓'],
+        ]) {
+            const botao = elemento('button', classe, texto);
+            botao.type = 'button';
+            botao.setAttribute('aria-controls', input.id);
+            botao.setAttribute(
+                'aria-label',
+                `${direcao > 0 ? 'Aumentar' : 'Diminuir'} ${/Ipf/.test(input.id) ? 'IPF em 1 ponto percentual' : 'IRA em 0,1'}`,
+            );
+            botao.addEventListener('click', () => ajustar(direcao));
+            botoes.append(botao);
+        }
+        grupo.append(botoes);
+        input.addEventListener('keydown', (evento) => {
+            if (evento.key !== 'ArrowUp' && evento.key !== 'ArrowDown') return;
+            evento.preventDefault();
+            ajustar(evento.key === 'ArrowUp' ? 1 : -1);
+        });
+    }
     function idiomas(valor) {
         const linhas = [];
         String(valor ?? '')
@@ -133,6 +179,7 @@ const AppUnB = (() => {
     }
     document.addEventListener('DOMContentLoaded', () => {
         tema();
+        document.querySelectorAll('input[data-incremento]').forEach(controlesNumero);
         document.getElementById('btnTema')?.addEventListener('click', alternarTema);
     });
     return {

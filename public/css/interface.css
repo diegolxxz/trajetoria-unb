@@ -2257,3 +2257,40 @@ body.pagina-turmas main.pagina-conteudo {
     text-decoration: underline;
     text-underline-offset: 0.3em;
 }
+
+.ajuste-numero {
+    display: flex;
+    gap: 0.25rem;
+}
+.ajuste-numero input {
+    min-width: 0;
+    appearance: textfield;
+}
+.ajuste-numero input::-webkit-inner-spin-button,
+.ajuste-numero input::-webkit-outer-spin-button {
+    appearance: none;
+    margin: 0;
+}
+.setas-numero {
+    display: flex;
+    flex-direction: column;
+}
+.setas-numero button {
+    min-width: 32px;
+    min-height: 24px;
+    padding: 0 0.35rem;
+    border: 1px solid var(--pilot-border);
+    border-radius: 4px;
+    background: var(--pilot-surface);
+    color: var(--pilot-text);
+    line-height: 1;
+}
+.formula-antiga {
+    color: var(--pilot-muted);
+}
+
+.campo-numero {
+    display: grid;
+    gap: 0.35rem;
+    min-width: 0;
+}
