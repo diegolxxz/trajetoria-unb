@@ -54,7 +54,7 @@
                 <nav aria-label="Navegação principal">
                     <a href="ira/"
                         ><span class="nav-ira-completo">Calculadora IRA e MP</span
-                        ><span class="nav-ira-curto">IRA e MP</span></a
+                        ><span class="nav-ira-curto">IRA</span></a
                     >
                     <a href="intercambio/">Intercâmbio</a>
                     <a href="turmas/">Turmas</a>
@@ -64,59 +64,119 @@
         </header>
         <main class="container">
             <section class="inicio-hero" aria-labelledby="tituloInicio">
-                <h1 id="tituloInicio">Sua trajetória na Unb.</h1>
+                <p class="inicio-contexto">Para sua graduação na Unb</p>
+                <h1 id="tituloInicio">Sua graduação em um só lugar.</h1>
                 <p class="inicio-descricao">
-                    Calcule suas médias, compare resultados de intercâmbio, encontre turmas e monte sua grade do
-                    semestre.
+                    Acompanhe suas médias por semestre, simule sua nota no intercâmbio, consulte turmas e monte sua
+                    grade de horários.
                 </p>
+                <div class="inicio-atalhos">
+                    <a class="botao-inicio botao-inicio-principal" href="ira/"
+                        >Calcular IRA e MP <span aria-hidden="true">→</span></a
+                    ><a class="botao-inicio" href="intercambio/">Consultar editais <span aria-hidden="true">→</span></a
+                    ><a class="botao-inicio" href="turmas/">Consultar turmas <span aria-hidden="true">→</span></a>
+                    <a class="botao-inicio" href="grade/">Montar grade <span aria-hidden="true">→</span></a>
+                </div>
             </section>
             <section class="inicio-ferramentas" aria-labelledby="tituloRecursos">
-                <h2 id="tituloRecursos" class="visually-hidden">Ferramentas para sua graduação</h2>
+                <h2 id="tituloRecursos">Escolha o que você quer fazer</h2>
                 <div class="inicio-grade">
                     <article class="inicio-ferramenta">
+                        <svg
+                            class="inicio-icone"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true"
+                        >
+                            <rect x="5" y="2.5" width="14" height="19" rx="3" />
+                            <path d="M8.5 6.5h7M9 11h.01M15 11h.01M9 15h.01M15 15h.01M9 18h.01M15 18h.01" />
+                        </svg>
                         <h3>Calculadora de IRA e MP</h3>
                         <p>Veja como suas menções mudam as médias ao longo da graduação.</p>
-                        <div class="inicio-previa" role="group" aria-label="Exemplo ilustrativo de cálculo">
-                            <p>Exemplo: 6 créditos com MS + 4 créditos com SS</p>
-                            <p class="inicio-previa-resultado">
-                                IRA <strong>4,4</strong> <span>MP <strong>4,4</strong></span>
-                            </p>
-                        </div>
+                        <ul>
+                            <li>Organize disciplinas por semestre, com créditos, horas e módulo livre.</li>
+                            <li>Acompanhe o IRA e a MP acumulados ao final de cada semestre.</li>
+                            <li>Alterne entre a visualização detalhada e a resumida.</li>
+                        </ul>
                         <a class="inicio-link-recurso" href="ira/"
                             >Abrir calculadora <span aria-hidden="true">→</span></a
                         >
                     </article>
                     <article class="inicio-ferramenta">
+                        <svg
+                            class="inicio-icone"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true"
+                        >
+                            <circle cx="12" cy="12" r="9" />
+                            <ellipse cx="12" cy="12" rx="4" ry="9" />
+                            <path d="M3 12h18M5 6.5h14M5 17.5h14" />
+                        </svg>
                         <h3>Editais de intercâmbio</h3>
                         <p>Simule sua nota e conheça os resultados de cada seleção.</p>
-                        <div class="inicio-previa" role="group" aria-label="Como consultar um edital">
-                            <p>Seu IRA + IPF + curso</p>
-                            <p class="inicio-previa-resultado">Sua nota <span>Notas e destinos publicados</span></p>
-                        </div>
+                        <ul>
+                            <li>Compare médias do seu curso e simule notas com seu IRA e IPF.</li>
+                            <li>Filtre candidatos por curso, alocação, destino ou idioma.</li>
+                            <li>Consulte notas, preferências e idiomas em tabelas resumidas ou detalhadas.</li>
+                        </ul>
                         <a class="inicio-link-recurso" href="intercambio/"
                             >Explorar editais <span aria-hidden="true">→</span></a
                         >
                     </article>
                     <article class="inicio-ferramenta">
+                        <svg
+                            class="inicio-icone"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true"
+                        >
+                            <rect x="3" y="5" width="18" height="16" rx="3" />
+                            <path d="M7 3v4M17 3v4M3 11h18M7 15h3M14 15h3M7 18h3" />
+                        </svg>
                         <h3>Consulta de turmas</h3>
                         <p>Encontre disciplinas e compare a oferta de cada semestre.</p>
-                        <div class="inicio-previa" role="group" aria-label="Exemplo de disciplina do catálogo">
-                            <p><span class="inicio-previa-codigo">MAT0026</span> Cálculo 2</p>
-                            <p class="inicio-previa-resultado">Professores <span>Horários e vagas</span></p>
-                        </div>
+                        <ul>
+                            <li>Busque por disciplina, código, professor ou local.</li>
+                            <li>Consulte turmas, horários, vagas e alunos matriculados.</li>
+                            <li>Consulte a carga horária e encontre turmas para montar sua grade.</li>
+                        </ul>
                         <a class="inicio-link-recurso" href="turmas/"
                             >Consultar turmas <span aria-hidden="true">→</span></a
                         >
                     </article>
                     <article class="inicio-ferramenta">
+                        <svg
+                            class="inicio-icone"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true"
+                        >
+                            <rect x="3" y="5" width="18" height="16" rx="3" />
+                            <path d="M7 3v4M17 3v4M3 11h18M9 11v10M15 11v10M3 16h18" />
+                        </svg>
                         <h3>Montador de grade</h3>
-                        <p>Escolha turmas e encontre combinações que cabem na sua semana.</p>
-                        <div class="inicio-previa" role="group" aria-label="Recursos da grade pessoal">
-                            <p>Disciplinas obrigatórias e opcionais no plano</p>
-                            <p class="inicio-previa-resultado">
-                                Horários sem conflito <span>Planos salvos e calendário</span>
-                            </p>
-                        </div>
+                        <p>Encontre combinações de turmas que cabem na sua semana.</p>
+                        <ul>
+                            <li>Escolha disciplinas e compare horários sem conflito.</li>
+                            <li>Salve seus planos e exporte a grade para o calendário.</li>
+                        </ul>
                         <a class="inicio-link-recurso" href="grade/"
                             >Montar minha grade <span aria-hidden="true">→</span></a
                         >
@@ -128,7 +188,7 @@
                     <details>
                         <summary>Qual é a diferença entre IRA e MP?</summary>
                         <p>
-                            A MP considera os créditos e as menções das disciplinas. No IRA, os períodos também recebem
+                            A MP considera os créditos e as menções das disciplinas. No IRA, os semestres também recebem
                             pesos. Disciplinas marcadas como módulo livre entram no IRA, mas não na MP. Os valores
                             exibidos têm até quatro casas decimais; os cálculos mantêm a precisão original.
                         </p>

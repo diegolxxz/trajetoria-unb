@@ -35,6 +35,8 @@ def index():
 
 @route("/turmas")
 @route("/turmas/")
+@route("/gerador-grade")
+@route("/gerador-grade/")
 @route("/grade")
 @route("/grade/")
 @route("/ira")

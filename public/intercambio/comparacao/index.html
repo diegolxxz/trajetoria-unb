@@ -38,7 +38,7 @@
                 <nav aria-label="Navegação principal">
                     <a href="../../ira/"
                         ><span class="nav-ira-completo">Calculadora IRA e MP</span
-                        ><span class="nav-ira-curto">IRA e MP</span></a
+                        ><span class="nav-ira-curto">IRA</span></a
                     >
                     <a href="../../intercambio/" aria-current="page">Intercâmbio</a>
                     <a href="../../turmas/">Turmas</a>
@@ -49,108 +49,41 @@
         <main class="container pagina-conteudo">
             <p id="avisoPersistencia" class="aviso" role="status" hidden></p>
             <div class="intro-pagina">
-                <h1>Comparar editais</h1>
-                <p>Simule sua nota e consulte os alocados de cada seleção.</p>
+                <h1 id="tituloComparacao">Intercâmbio</h1>
             </div>
             <nav class="navegacao-intercambio" aria-label="Navegação do intercâmbio">
                 <a href="../">Editais</a>
-                <a href="../medias/">Médias dos cursos</a>
+                <a href="../medias/">Médias</a>
                 <a href="../comparacao/" aria-current="page">Comparar editais</a>
             </nav>
             <p id="erroCarregamento" class="aviso" role="alert" hidden></p>
             <section id="comparacaoGeral" class="comparacao-geral" aria-labelledby="tituloComparacao" hidden>
-                <h2 id="tituloComparacao">Seu curso nas seleções anteriores</h2>
-                <p>
-                    As médias e os desvios são referências do curso em cada seleção, não médias dos candidatos. Seu IRA
-                    pode ser comparado sem informar IPF.
-                </p>
-                <div class="filtros-gerais">
-                    <label
-                        >Seu curso<select id="geralCurso" class="form-select">
-                            <option value="">Selecione um curso</option>
-                        </select></label
-                    >
-                    <label
-                        >Seu IRA<input
-                            id="geralIra"
-                            class="form-control"
-                            type="number"
-                            min="0"
-                            max="5"
-                            step="0.0001"
-                            data-incremento="0.1"
-                    /></label>
-                    <label
-                        >Seu IPF (%)<input
-                            id="geralIpf"
-                            class="form-control"
-                            type="number"
-                            min="0"
-                            max="100"
-                            step="0.01"
-                            data-incremento="1"
-                    /></label>
-                    <label
-                        >Editais<select id="editalGeral" class="form-select">
-                            <option value="">Todos os editais</option>
-                        </select></label
-                    >
-                </div>
-                <p id="avisoCursoGeral" class="aviso" role="status" hidden></p>
-                <p id="erroPerfilGeral" class="aviso" role="alert" hidden>
-                    Informe IRA entre 0 e 5 e IPF entre 0% e 100%.
-                </p>
-                <p>
-                    Notas simuladas seguem a fórmula de cada edital e referência. Valores estimados estão sinalizados.
-                    Notas de editais diferentes não formam um ranking e não garantem aprovação.
-                </p>
-                <div
-                    id="resumoGerais"
-                    class="tabela-geral-rolagem"
-                    tabindex="0"
-                    role="region"
-                    aria-label="Referências históricas e simulações"
-                >
-                    <table id="referenciasGerais">
-                        <caption class="visually-hidden">
-                            Referências do curso e nota simulada por seleção
-                        </caption>
-                        <thead>
-                            <tr>
-                                <th scope="col">Edital</th>
-                                <th scope="col">Referência</th>
-                                <th scope="col">Nota simulada</th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
-                </div>
-                <p id="vazioReferencias" role="status" hidden></p>
-                <details id="fontesCriterios">
-                    <summary>Fontes e critérios</summary>
-                    <div id="criteriosGerais"></div>
-                </details>
-                <h2>Alocados nos editais carregados</h2>
-                <label
-                    >Curso dos alocados<select id="cursoAlocados" class="form-select">
+                <div class="filtros-gerais filtros-alocados">
+                    <select id="cursoAlocados" class="form-select" aria-label="Curso dos alocados">
                         <option value="">Todos os cursos</option>
-                    </select></label
-                >
+                    </select>
+                    <select id="editalGeral" class="form-select" aria-label="Edital">
+                        <option value="">Todos os editais</option>
+                    </select>
+                </div>
+                <input
+                    id="buscaAlocacao"
+                    class="form-control"
+                    type="search"
+                    placeholder="Buscar por alocação"
+                    aria-label="Buscar por alocação"
+                    enterkeyhint="search"
+                />
                 <p id="contagemAlocados" role="status"></p>
-                <p>Notas originais publicadas, agrupadas por edital e mantidas na ordem da publicação.</p>
                 <div class="tabela-geral-rolagem" tabindex="0" role="region" aria-label="Alocados por edital">
-                    <table id="alocadosGerais">
-                        <caption>
-                            Resultados de alocação publicados
-                        </caption>
+                    <table id="alocadosGerais" aria-labelledby="tituloComparacao">
                         <thead>
                             <tr>
                                 <th scope="col">Edital</th>
-                                <th scope="col">Matrícula</th>
                                 <th scope="col">Curso</th>
                                 <th scope="col">IRA</th>
                                 <th scope="col">IPF (%)</th>
-                                <th scope="col">Nota original</th>
+                                <th scope="col" class="nota-intercambio">Nota final</th>
                                 <th scope="col">Alocação</th>
                             </tr>
                         </thead>

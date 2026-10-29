@@ -23,10 +23,12 @@ calculadora de IRA pode ser usada sem criar conta. Seu histórico fica neste
 navegador; ao rodar o servidor local, uma cópia também é guardada em
 `local/dados.json`.
 
-A grade usa a mesma oferta da consulta de turmas. Os planos ficam no navegador;
-para transferi-los ou fazer backup, baixe o JSON em “Plano”. A
-geração inclui todas as disciplinas marcadas como obrigatórias e permite
-deixar opcionais de fora, com limites para manter a página responsiva. A
+A grade usa a mesma oferta da consulta de turmas. Você pode escolher as turmas
+uma a uma e acompanhar a semana abaixo ou pedir ao gerador combinações sem
+conflito. As grades ficam no navegador; os botões Importar e Exportar permitem
+transferi-las em JSON. Desfazer e Refazer também funcionam por atalhos de teclado.
+O gerador inclui as disciplinas obrigatórias ativadas e pode deixar extras de
+fora, com limites para manter a página responsiva. A
 exportação de calendário pede o primeiro e o último dia das aulas e não exclui
 feriados ou recessos. Horas e créditos vêm da carga curricular do SIGAA, quando
 disponível; não são deduzidos dos horários do professor.

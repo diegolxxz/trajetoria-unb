@@ -146,7 +146,7 @@ function aplicarModoIra(modo) {
     document.body.classList.toggle('ira-somente', somente);
     document.querySelector('h1').textContent = somente ? 'Calculadora IRA' : 'Calculadora IRA e MP';
     document.querySelector('.nav-ira-completo').textContent = somente ? 'Calculadora IRA' : 'Calculadora IRA e MP';
-    document.querySelector('.nav-ira-curto').textContent = somente ? 'IRA' : 'IRA e MP';
+    document.querySelector('.nav-ira-curto').textContent = 'IRA';
 }
 
 function calcularIra() {

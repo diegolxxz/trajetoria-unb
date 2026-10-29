@@ -45,7 +45,7 @@
                 <nav aria-label="Navegação principal">
                     <a href="../ira/"
                         ><span class="nav-ira-completo">Calculadora IRA e MP</span
-                        ><span class="nav-ira-curto">IRA e MP</span></a
+                        ><span class="nav-ira-curto">IRA</span></a
                     >
                     <a href="../intercambio/">Intercâmbio</a>
                     <a href="../turmas/">Turmas</a>
@@ -57,7 +57,7 @@
             <div class="grade-titulo">
                 <div>
                     <h1>Montar minha grade</h1>
-                    <p id="ofertaGrade" class="grade-muted" role="status">Carregando a oferta de turmas…</p>
+                    <p id="ofertaGrade" class="grade-muted" role="status" hidden></p>
                 </div>
                 <div>
                     <label class="visually-hidden" for="semestreGrade">Semestre da grade</label
@@ -66,50 +66,167 @@
                     </select>
                 </div>
             </div>
+            <div class="grade-modos" role="group" aria-label="Forma de montagem da grade">
+                <button id="modoManualGrade" class="grade-botao" type="button" aria-pressed="true">
+                    <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.75"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                    >
+                        <path d="M4 3v16l4-4 3 7 3-1-3-7h7L4 3Z" />
+                    </svg>
+                    <span>Escolher turmas</span>
+                </button>
+                <button id="modoGeradorGrade" class="grade-botao" type="button" aria-pressed="false">
+                    <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.75"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                    >
+                        <rect x="3" y="4" width="18" height="16" rx="2" />
+                        <path d="M3 10h18M9 10v10m6-10v10M3 15h18" />
+                    </svg>
+                    <span>Gerar combinações</span>
+                </button>
+            </div>
             <p id="avisoPersistencia" class="aviso" role="status" hidden></p>
             <p id="mensagemGrade" class="grade-mensagem" role="status" hidden></p>
             <div class="grade-plano-barra">
                 <div class="grade-plano-escolha">
                     <label class="visually-hidden" for="planoGrade">Plano salvo</label
-                    ><select id="planoGrade" class="form-select"></select>
+                    ><select id="planoGrade" class="form-select" aria-label="Grade salva ou criar nova grade"></select>
                 </div>
-                <details class="grade-arquivos">
-                    <summary>Plano</summary>
-                    <div class="grade-arquivos-conteudo">
-                        <div class="grade-acoes">
-                            <button id="novoPlanoGrade" class="grade-botao" type="button">Novo plano</button>
-                            <button id="desfazerGrade" class="grade-botao" type="button" disabled>Desfazer</button>
-                            <button id="refazerGrade" class="grade-botao" type="button" disabled>Refazer</button>
-                        </div>
-                        <label for="nomePlanoGrade">Nome do plano</label
-                        ><input id="nomePlanoGrade" class="form-control" type="text" maxlength="100" />
-                        <div class="grade-acoes">
-                            <button id="exportarGradeJson" class="grade-botao" type="button">Baixar planos JSON</button
-                            ><button id="importarGradeJson" class="grade-botao" type="button">Importar planos</button
-                            ><button id="excluirPlanoGrade" class="grade-botao grade-remover" type="button">
-                                Excluir plano atual
-                            </button>
-                        </div>
-                        <input
-                            id="arquivoGrade"
-                            class="visually-hidden"
-                            type="file"
-                            accept=".json,application/json"
-                            aria-label="Arquivo JSON com os planos"
-                        />
-                        <p class="grade-muted">
-                            Os planos ficam neste navegador. O JSON permite fazer backup e levar suas escolhas para
-                            outro dispositivo. A importação substitui os planos e pode ser desfeita.
-                        </p>
-                    </div>
-                </details>
+                <button
+                    id="desfazerGrade"
+                    class="grade-botao grade-historico"
+                    type="button"
+                    title="Desfazer (Ctrl+Z)"
+                    aria-label="Desfazer alteração na grade"
+                    aria-keyshortcuts="Control+z Meta+z"
+                    disabled
+                >
+                    <svg
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.75"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                    >
+                        <path d="m9 4-5 5 5 5M4 9h10a6 6 0 0 1 0 12" /></svg
+                    ><span>Desfazer</span>
+                </button>
+                <button
+                    id="refazerGrade"
+                    class="grade-botao grade-historico"
+                    type="button"
+                    title="Refazer (Ctrl+Shift+Z ou Ctrl+Y)"
+                    aria-label="Refazer alteração na grade"
+                    aria-keyshortcuts="Control+Shift+z Meta+Shift+z Control+y Meta+y"
+                    disabled
+                >
+                    <svg
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.75"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                    >
+                        <path d="m15 4 5 5-5 5M20 9H10a6 6 0 0 0 0 12" /></svg
+                    ><span>Refazer</span>
+                </button>
+                <button
+                    id="importarGradeJson"
+                    class="grade-botao grade-arquivo-botao"
+                    type="button"
+                    title="Importar grades de um arquivo JSON"
+                    aria-label="Importar grades de um arquivo JSON"
+                >
+                    <svg
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.75"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                    >
+                        <path d="M12 3v12m-4-4 4 4 4-4M4 16v5h16v-5" /></svg
+                    ><span>Importar</span>
+                </button>
+                <button
+                    id="exportarGradeJson"
+                    class="grade-botao grade-arquivo-botao"
+                    type="button"
+                    title="Exportar todas as grades em JSON"
+                    aria-label="Exportar todas as grades em JSON"
+                >
+                    <svg
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.75"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                    >
+                        <path d="M12 15V3m-4 4 4-4 4 4M4 16v5h16v-5" /></svg
+                    ><span>Exportar</span>
+                </button>
+                <button
+                    id="excluirPlanoGrade"
+                    class="grade-botao grade-remover grade-icone"
+                    type="button"
+                    aria-label="Excluir grade atual"
+                    title="Excluir grade atual"
+                >
+                    <svg
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.75"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                    >
+                        <path d="M3 6h18M9 6V3h6v3M5 6l1 15h12l1-15M10 10v7m4-7v7" />
+                    </svg>
+                </button>
+                <input
+                    id="arquivoGrade"
+                    class="visually-hidden"
+                    type="file"
+                    accept=".json,application/json"
+                    aria-label="Arquivo JSON com as grades"
+                />
             </div>
             <div class="grade-layout">
-                <section class="grade-disciplinas" aria-labelledby="tituloDisciplinasGrade">
-                    <div class="grade-secao-titulo">
-                        <h2 id="tituloDisciplinasGrade">Disciplinas do plano</h2>
-                        <span id="totalDesejadasGrade" class="grade-muted"></span>
-                    </div>
+                <section class="grade-disciplinas" aria-label="Disciplinas e turmas da grade">
                     <label class="visually-hidden" for="buscaGrade"
                         >Adicionar disciplina por nome, código ou professor</label
                     >
@@ -117,7 +234,7 @@
                         id="buscaGrade"
                         class="form-control"
                         type="search"
-                        placeholder="Buscar disciplina, código ou professor"
+                        placeholder="Adicionar disciplina"
                         autocomplete="off"
                         disabled
                         aria-describedby="ajudaBuscaGrade"
@@ -126,37 +243,37 @@
                         Digite ao menos 3 caracteres para adicionar uma disciplina.
                     </p>
                     <div id="resultadosBuscaGrade" class="grade-busca-resultados" aria-live="polite"></div>
-                    <details class="grade-filtros-painel">
-                        <summary id="resumoFiltrosGrade">Filtros</summary>
+                    <div class="grade-filtros-painel" role="group" aria-label="Filtrar turmas">
                         <div class="grade-filtros">
                             <label class="grade-checkbox"
-                                ><input id="encaixeGrade" type="checkbox" /> Só as turmas que encaixam</label
+                                ><input id="encaixeGrade" type="checkbox" />
+                                <span id="rotuloEncaixeGrade">Ocultar conflitos de horário</span></label
                             >
                             <label class="grade-checkbox"
-                                ><input id="somenteVagasGrade" type="checkbox" /> Com vagas</label
+                                ><input id="somenteVagasGrade" type="checkbox" /> Apenas turmas com vagas</label
                             >
                             <label class="grade-checkbox"
-                                ><input id="ocultarExtrasGrade" type="checkbox" aria-describedby="ajudaExtrasGrade" />
-                                Ocultar extras fora do plano</label
+                                ><input
+                                    id="ocultarExtrasGrade"
+                                    type="checkbox"
+                                    aria-label="Ocultar disciplinas extras que não participam das combinações e não têm turma escolhida"
+                                />
+                                Ocultar extras não usadas</label
                             >
                         </div>
-                        <p id="ajudaExtrasGrade" class="grade-muted">
-                            Continuam visíveis as extras marcadas no gerador, com turma salva ou em edição.
-                        </p>
-                    </details>
+                    </div>
                     <p id="estadoEncaixeGrade" class="grade-muted" role="status"></p>
                     <div id="disciplinasGrade"></div>
                     <p id="planoVazioGrade" class="grade-vazio">
                         Adicione as disciplinas que pretende cursar. Depois escolha uma turma ou gere combinações.
                     </p>
-                    <div class="grade-montar-acoes">
-                        <button id="gerarGrade" class="grade-botao grade-principal" type="button" disabled>
-                            Gerar combinações
-                        </button>
-                        <button id="cancelarGrade" class="grade-botao" type="button" hidden>Cancelar</button>
-                        <button id="montarGrade" class="grade-botao" type="button" disabled>Ver grade</button>
-                    </div>
-                    <section class="grade-gerador" aria-label="Combinações de turmas">
+                    <section id="painelGeradorGrade" class="grade-gerador" aria-label="Combinações de turmas" hidden>
+                        <div class="grade-montar-acoes">
+                            <button id="gerarGrade" class="grade-botao grade-principal" type="button" disabled>
+                                Encontrar grades possíveis
+                            </button>
+                            <button id="cancelarGrade" class="grade-botao" type="button" hidden>Cancelar</button>
+                        </div>
                         <details class="grade-ajuda">
                             <summary>Como funciona?</summary>
                             <p class="grade-muted">
@@ -179,7 +296,6 @@
                 <section class="grade-semana" aria-labelledby="tituloSemanaGrade" hidden>
                     <div class="grade-secao-titulo">
                         <h2 id="tituloSemanaGrade" tabindex="-1">Sua semana</h2>
-                        <button id="editarGrade" class="grade-botao" type="button">Voltar às escolhas</button>
                     </div>
                     <div class="grade-secao-titulo">
                         <p id="resumoGrade" class="grade-muted"></p>
@@ -206,27 +322,7 @@
                     >
                         <div id="semanaGrade" class="grade-quadro"></div>
                     </div>
-                    <details class="grade-exportacoes">
-                        <summary>Exportar a grade</summary>
-                        <div class="grade-acoes">
-                            <button id="exportarGradePng" class="grade-botao" type="button">Baixar imagem PNG</button>
-                        </div>
-                        <div class="grade-datas">
-                            <div>
-                                <label for="inicioGrade">Primeiro dia de aulas</label
-                                ><input id="inicioGrade" class="form-control" type="date" />
-                            </div>
-                            <div>
-                                <label for="fimGrade">Último dia de aulas</label
-                                ><input id="fimGrade" class="form-control" type="date" />
-                            </div>
-                        </div>
-                        <button id="exportarGradeIcs" class="grade-botao" type="button">Baixar calendário .ics</button>
-                        <p class="grade-muted">
-                            O calendário repete os horários entre essas datas, no fuso de Brasília. Não desconta
-                            feriados, recessos ou cancelamentos.
-                        </p>
-                    </details>
+                    <button id="exportarGradePng" class="grade-botao" type="button">Baixar imagem PNG</button>
                 </section>
             </div>
             <noscript><p class="aviso">Ative o JavaScript para montar e salvar sua grade.</p></noscript>

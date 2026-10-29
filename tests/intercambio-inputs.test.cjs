@@ -89,13 +89,13 @@ async function pagina(
 }
 
 test('perfil exibe IRA com quatro e IPF com duas casas e conserva valores exatos ao carregar ou alterar outro campo', async () => {
-    for (const modo of ['individual', 'comparacao', 'medias']) {
+    for (const modo of ['individual', 'medias']) {
         const a = await pagina(modo);
         assert.equal(a.ira.value, '4.1235');
         if (a.ipf) assert.equal(a.ipf.value, '73.1');
         assert.equal(a.app.valorNumero(a.ira), '4.123456789');
         assert.equal(JSON.parse(a.storage.get(chave)).ira, '4.123456789');
-        if (modo !== 'medias') assert.ok(a.notas.some(([ira, ipf]) => ira === 4.123456789 && ipf === 73.0987654));
+        assert.ok(a.notas.some(([ira, ipf]) => ira === 4.123456789 && ipf === 73.0987654));
         const curso = a.d.getElementById(modo === 'individual' ? 'meuCurso' : 'geralCurso');
         curso.dispatchEvent(new a.Event('change'));
         assert.equal(JSON.parse(a.storage.get(chave)).ira, '4.123456789');
@@ -108,7 +108,7 @@ test('perfil exibe IRA com quatro e IPF com duas casas e conserva valores exatos
 });
 
 test('digitação e colagem limitam casas, salvam somente campo editado e invalidam cache anterior', async () => {
-    for (const modo of ['individual', 'comparacao', 'medias']) {
+    for (const modo of ['individual', 'medias']) {
         const a = await pagina(modo);
         a.editar(a.ira, '4.234567', 'insertFromPaste');
         assert.equal(a.ira.value, '4.2346');
@@ -125,7 +125,7 @@ test('digitação e colagem limitam casas, salvam somente campo editado e invali
 });
 
 test('IPF aceita frações e cem, limita precisão manual e rejeita valores acima de cem', async () => {
-    for (const modo of ['individual', 'comparacao']) {
+    for (const modo of ['individual', 'medias']) {
         const a = await pagina(modo);
         for (const valor of ['73.09', '75.5', '100', '0']) {
             a.editar(a.ipf, valor);
@@ -146,7 +146,7 @@ test('IPF aceita frações e cem, limita precisão manual e rejeita valores acim
 });
 
 test('IRA fora do intervalo não arredonda para válido; notação científica restaurada conserva precisão', async () => {
-    const a = await pagina('comparacao', { curso: 'DIREITO', ira: '4.123456789e0', ipf: '7.30987654e1' });
+    const a = await pagina('medias', { curso: 'DIREITO', ira: '4.123456789e0', ipf: '7.30987654e1' });
     assert.equal(a.ira.value, '4.1235');
     assert.equal(a.ipf.value, '73.1');
     assert.equal(a.app.valorNumero(a.ira), '4.123456789e0');
@@ -174,10 +174,11 @@ test('perfil automático legado mantém IRA e IPF calculados exatos sem gravar v
 });
 
 test('inputs usam quatro casas para IRA e duas para IPF até cem', () => {
-    for (const caminho of [...indice.map((e) => e.slug), 'comparacao', 'medias']) {
+    for (const caminho of [...indice.map((e) => e.slug), 'medias']) {
         const { document: d } = parseHTML(fs.readFileSync(`public/intercambio/${caminho}/index.html`, 'utf8'));
         for (const input of d.querySelectorAll('#meuIra, #meuIpf, #geralIra, #geralIpf')) {
-            assert.equal(input.getAttribute('step'), /Ipf/.test(input.id) ? '0.01' : '0.0001');
+            assert.equal(input.getAttribute('step'), /Ipf/.test(input.id) ? '1' : '0.1');
+            assert.equal(input.getAttribute('data-casas'), /Ipf/.test(input.id) ? '2' : '4');
             assert.equal(input.getAttribute('max'), /Ipf/.test(input.id) ? '100' : '5');
         }
     }
@@ -204,7 +205,7 @@ test('cinco editais preservam precisão bruta até edição e invalidam perfil r
             slug,
         );
     }
-    const b = await pagina('comparacao', { curso: 'DIREITO', ira: '5.00001', ipf: '100.00001' });
+    const b = await pagina('medias', { curso: 'DIREITO', ira: '5.00001', ipf: '100.00001' });
     assert.equal(b.ira.getAttribute('aria-invalid'), 'true');
     assert.equal(b.ipf.getAttribute('aria-invalid'), 'true');
     assert.equal(b.app.valorNumero(b.ira), '5.00001');
@@ -213,7 +214,7 @@ test('cinco editais preservam precisão bruta até edição e invalidam perfil r
 });
 
 test('edição dentro de quatro casas preserva valor nativo e cursor durante a digitação', async () => {
-    const a = await pagina('comparacao');
+    const a = await pagina('medias');
     let escritas = 0;
     const input = { value: '4.23', getAttribute: (nome) => ({ min: '0', max: '5', step: '0.0001' })[nome] };
     let atual = input.value;
@@ -233,8 +234,8 @@ test('reabrir e navegar entre páginas conserva apresentação curta e perfil br
     const perfil = { curso: 'DIREITO', ira: 4.123456789, ipf: '73.09999999999999' };
     const storage = new Map([[chave, JSON.stringify(perfil)]]);
     for (let abertura = 0; abertura < 3; abertura++) {
-        for (const destino of [...indice.map((e) => e.slug), 'comparacao', 'medias']) {
-            const modo = ['comparacao', 'medias'].includes(destino) ? destino : 'individual';
+        for (const destino of [...indice.map((e) => e.slug), 'medias']) {
+            const modo = ['medias'].includes(destino) ? destino : 'individual';
             const a = await pagina(modo, undefined, undefined, destino, storage);
             assert.equal(a.ira.value, '4.1235');
             if (a.ipf) assert.equal(a.ipf.value, '73.1');
@@ -253,7 +254,7 @@ test('perfil automático legado reabre com IPF de duas casas sem persistir arred
         intercambio: { cursoSelecionado: 'DIREITO' },
     };
     const storage = new Map([['calculadora-ira-unb', JSON.stringify(legado)]]);
-    for (const modo of ['individual', 'comparacao', 'medias', 'individual', 'comparacao']) {
+    for (const modo of ['individual', 'medias', 'individual', 'medias']) {
         const a = await pagina(modo, undefined, undefined, 'edital-int-n-7-2026', storage);
         assert.equal(a.ira.value, '4');
         if (a.ipf) {
@@ -265,7 +266,7 @@ test('perfil automático legado reabre com IPF de duas casas sem persistir arred
 });
 
 test('IPF com duas casas não reatribui valor nem cursor; terceira casa normaliza e salva', async () => {
-    const a = await pagina('comparacao');
+    const a = await pagina('medias');
     let escritas = 0,
         atual = '73.09';
     const input = { getAttribute: (nome) => ({ min: '0', max: '100', step: '0.01' })[nome] };
@@ -290,73 +291,105 @@ test('IPF com duas casas não reatribui valor nem cursor; terceira casa normaliz
     assert.equal(JSON.parse(reaberto.storage.get(chave)).ira, '4.123456789');
 });
 
-test('setas somam incrementos exatos fora da grade sem alterar precisão ou outro campo', async () => {
-    for (const modo of ['individual', 'comparacao', 'medias']) {
-        const a = await pagina(modo, { curso: 'DIREITO', ira: '4.1234', ipf: '73.12' });
-        const clicar = (input, direcao) =>
-            input
-                .closest('.ajuste-numero')
-                .querySelector(direcao > 0 ? '.aumentar-numero' : '.diminuir-numero')
-                .dispatchEvent(new a.Event('click'));
-        assert.ok(a.ira.closest('.ajuste-numero'));
-        assert.equal(Boolean(a.ira.closest('.ajuste-numero').querySelector('button').closest('label')), false);
-        clicar(a.ira, 1);
-        assert.equal(a.ira.value, '4.2234');
-        assert.equal(JSON.parse(a.storage.get(chave)).ipf, '73.12');
-        clicar(a.ira, -1);
-        assert.equal(a.ira.value, '4.1234');
-        if (a.ipf) {
-            clicar(a.ipf, 1);
-            assert.equal(a.ipf.value, '74.12');
-            const evento = new a.Event('keydown');
-            Object.defineProperty(evento, 'key', { value: 'ArrowDown' });
-            a.ipf.dispatchEvent(evento);
-            assert.equal(a.ipf.value, '73.12');
+test('campos nativos preservam labels e não criam botões ou interceptadores de teclado', async () => {
+    for (const modo of ['individual', 'medias']) {
+        const a = await pagina(modo);
+        for (const input of [a.ira, a.ipf]) {
+            assert.equal(input.getAttribute('type'), 'number');
+            assert.ok(input.closest('label') || a.d.querySelector(`label[for="${input.id}"]`));
         }
-        const evento = new a.Event('keydown');
-        Object.defineProperty(evento, 'key', { value: 'ArrowUp' });
-        a.ira.dispatchEvent(evento);
-        assert.equal(a.ira.value, '4.2234');
-        const salvo = JSON.parse(a.storage.get(chave));
-        const b = await pagina(modo, salvo);
-        assert.equal(b.ira.value, '4.2234');
-        if (b.ipf) assert.equal(b.ipf.value, '73.12');
+        assert.equal(a.d.querySelector('.ajuste-numero, .setas-numero, .campo-numero'), null);
+        assert.doesNotMatch(fs.readFileSync('public/js/common.js', 'utf8'), /ArrowUp|ArrowDown|controlesNumero/);
+        assert.doesNotMatch(
+            fs.readFileSync('public/css/interface.css', 'utf8'),
+            /webkit-inner-spin-button|appearance: textfield/,
+        );
     }
 });
 
-test('setas respeitam limites, não preenchem vazio e editam apenas campo acionado', async () => {
-    const a = await pagina('comparacao');
-    const clicar = (input, classe) =>
-        input.closest('.ajuste-numero').querySelector(classe).dispatchEvent(new a.Event('click'));
-    assert.ok(a.ira.closest('.ajuste-numero'));
-    clicar(a.ira, '.aumentar-numero');
-    assert.equal(a.ira.value, '4.2235');
-    assert.equal(JSON.parse(a.storage.get(chave)).ipf, '73.0987654');
-    for (const [input, maximo] of [
-        [a.ira, '5'],
-        [a.ipf, '100'],
-    ]) {
-        a.editar(input, maximo);
-        clicar(input, '.aumentar-numero');
-        assert.equal(input.value, maximo);
-        a.editar(input, '0');
-        clicar(input, '.diminuir-numero');
-        assert.equal(input.value, '0');
-        a.editar(input, '');
-        const antes = a.storage.get(chave);
-        clicar(input, '.aumentar-numero');
-        clicar(input, '.diminuir-numero');
-        assert.equal(input.value, '');
-        assert.equal(a.storage.get(chave), antes);
-    }
-});
-
-test('sete páginas separam incremento de seta da precisão e mantêm campos válidos fora da grade', () => {
-    for (const caminho of [...indice.map((e) => e.slug), 'comparacao', 'medias']) {
+test('passo nativo de 0,1 e 1 é independente da precisão de quatro e duas casas', () => {
+    for (const caminho of [...indice.map((e) => e.slug), 'medias']) {
         const { document: d } = parseHTML(fs.readFileSync(`public/intercambio/${caminho}/index.html`, 'utf8'));
         for (const input of d.querySelectorAll('#meuIra,#meuIpf,#geralIra,#geralIpf')) {
-            assert.equal(input.getAttribute('data-incremento'), /Ipf/.test(input.id) ? '1' : '0.1');
-            assert.equal(input.getAttribute('step'), /Ipf/.test(input.id) ? '0.01' : '0.0001');
+            assert.equal(input.getAttribute('step'), /Ipf/.test(input.id) ? '1' : '0.1');
+            assert.equal(input.getAttribute('data-casas'), /Ipf/.test(input.id) ? '2' : '4');
+            assert.equal(input.getAttribute('data-incremento'), null);
         }
+    }
+});
+
+test('cinco editais ocultam matrícula só no resumo e removem referência duplicada do curso simulado', async () => {
+    for (const { slug } of indice) {
+        const a = await pagina(
+            'individual',
+            { curso: 'ENGENHARIA DE SOFTWARE', ira: '4.4201', ipf: '35.74' },
+            undefined,
+            slug,
+        );
+        const d = a.d;
+        assert.equal(d.getElementById('erroCarregamento').hidden, true, slug);
+        const tabela = d.querySelector('.tabela-resultados');
+        assert.equal(tabela.querySelector('th.coluna-0'), null, slug);
+        assert.equal(tabela.querySelector('td.campo-0'), null, slug);
+        assert.ok(tabela.querySelector('th.coluna-4').textContent.includes('Nota final'));
+        assert.equal(d.getElementById('notaComparacao'), null);
+        assert.equal(d.getElementById('referenciasCurso').hidden, true, slug);
+        assert.equal(d.getElementById('referenciasCurso').children.length, 0, slug);
+        const curso = d.getElementById('filtroCurso');
+        curso.value = [...curso.options].find((o) => o.value && o.value !== 'ENGENHARIA DE SOFTWARE').value;
+        curso.dispatchEvent(new a.Event('change'));
+        const direto = JSON.parse(fs.readFileSync(`public/data/editais/${slug}.json`)).formula.tipo === 'ira-direto';
+        assert.equal(d.getElementById('referenciasCurso').hidden, direto, slug);
+        if (!direto) assert.match(d.getElementById('referenciasCurso').textContent, /IRA médio e desvio/);
+        curso.value = 'ENGENHARIA DE SOFTWARE';
+        curso.dispatchEvent(new a.Event('change'));
+        assert.equal(d.getElementById('referenciasCurso').hidden, true, slug);
+        for (const modo of ['completo', 'compacto', 'completo']) {
+            d.querySelectorAll('[name="visualizacao"]').forEach((el) => {
+                el.toggleAttribute('checked', el.value === modo);
+            });
+            d.querySelector(`[name="visualizacao"][value="${modo}"]`).dispatchEvent(new a.Event('change'));
+            assert.equal(Boolean(tabela.querySelector('th.coluna-0')), modo === 'completo', slug);
+            assert.equal(Boolean(tabela.querySelector('td.campo-0')), modo === 'completo', slug);
+            const colunas = tabela.querySelectorAll('thead th').length;
+            for (const tr of tabela.querySelectorAll('tbody tr:not(.linha-detalhes)'))
+                assert.equal(tr.children.length, colunas, slug);
+        }
+    }
+});
+
+test('seletores dos editais salvam novo curso e oferecem usar curso salvo nos outros campos', async () => {
+    for (const { slug } of indice) {
+        const a = await pagina('individual', { curso: 'DIREITO', ira: '4.123456', ipf: '73.123456' }, undefined, slug);
+        const sim = a.d.getElementById('meuCurso'),
+            filtro = a.d.getElementById('filtroCurso');
+        const botaoSim = sim.closest('.seletor-curso').querySelector('button'),
+            botaoFiltro = a.d.getElementById('usarMeuCurso');
+        assert.equal(botaoSim.hidden, true);
+        assert.equal(botaoFiltro.hidden, true);
+        filtro.value = 'ENGENHARIA DE SOFTWARE';
+        filtro.dispatchEvent(new a.Event('change'));
+        let salvo = JSON.parse(a.storage.get(chave));
+        assert.equal(salvo.curso, 'ENGENHARIA DE SOFTWARE');
+        assert.equal(salvo.ira, '4.123456');
+        assert.equal(salvo.ipf, '73.123456');
+        assert.equal(botaoFiltro.hidden, true);
+        assert.equal(botaoSim.hidden, false);
+        botaoSim.dispatchEvent(new a.Event('click'));
+        assert.equal(sim.value, 'ENGENHARIA DE SOFTWARE');
+        assert.equal(botaoSim.hidden, true);
+        sim.value = 'DIREITO';
+        sim.dispatchEvent(new a.Event('change'));
+        salvo = JSON.parse(a.storage.get(chave));
+        assert.equal(salvo.curso, 'DIREITO');
+        assert.equal(botaoSim.hidden, true);
+        assert.equal(botaoFiltro.hidden, false);
+        botaoFiltro.dispatchEvent(new a.Event('click'));
+        assert.equal(filtro.value, 'DIREITO');
+        assert.equal(botaoFiltro.hidden, true);
+        a.d.getElementById('limparFiltros').dispatchEvent(new a.Event('click'));
+        assert.equal(filtro.value, '');
+        assert.equal(botaoFiltro.hidden, false);
+        assert.equal(JSON.parse(a.storage.get(chave)).curso, 'DIREITO');
     }
 });

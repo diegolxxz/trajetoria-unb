@@ -1,17 +1,41 @@
 # Grade pessoal
 
-A lista usa uma apresentação compacta: a caixa de seleção inclui a matéria no
-gerador e “Escolher turmas” abre suas alternativas. Prioridade, remoção e escolha
-manual ficam em “Opções”, que abre um painel em toda a largura sem deslocar seus
-botões. A prioridade e a turma da grade salva aparecem diretamente, sem outra
-abertura. A escolha manual não limita as turmas permitidas no gerador. As
-combinações geradas já mostram suas turmas e professores abertas. “Ocultar extras
-fora do plano” mantém visíveis as extras ativadas no gerador, com turma na grade
-ou ainda em edição.
-Filtros são recolhidos com um contador de opções ativas;
-criação de planos, histórico e arquivos ficam em “Plano”. A geração tem um botão
-direto e “Ver grade” aparece quando existe uma grade escolhida. Essa organização
-não altera as escolhas salvas nem as regras de geração.
+“Disciplinas da grade” é a lista comum às duas formas de montagem. Disciplina
+é a matéria; turma é uma das opções de professor e horário daquela matéria.
+A busca serve para adicionar disciplinas, escolhendo Obrigatória ou Extra antes
+de adicionar. Em “Escolher turmas”, todas ficam abertas em tabelas com professor,
+horário e local; + verde escolhe a turma e − vermelho retira a escolha. A carga
+em créditos não aparece nessa lista. Obrigatórias vêm antes das extras, e o botão
+de prioridade no cabeçalho permite mudar a classificação depois. A coluna de
+vagas mostra matriculados/total e some por disciplina quando todas
+as turmas exibidas têm zero matriculados e total de vagas conhecido e positivo.
+Cada disciplina tem contorno próprio e código junto ao nome. O seletor de semestre
+fica no topo, sem repetir o semestre no nome dos planos. Os controles de
+inclusão, prioridade e restrições também ficam dentro da disciplina nas
+combinações, mantendo os cabeçalhos recolhidos simples.
+
+“Escolher turmas” abre por padrão e permite
+adicionar uma disciplina, comparar professores/horários e escolher uma turma.
+A semana de segunda a sábado aparece abaixo após a primeira escolha e acompanha
+as alterações, sem sair da lista. Trocar ou retirar uma turma atualiza a semana.
+“Gerar combinações” mostra participação, o botão Obrigatória/Extra e o editor de
+turmas permitidas. As combinações já aparecem expandidas; usar uma delas atualiza
+a mesma grade salva. Alternar o modo não muda os dados nem ocupa o histórico.
+As duas formas aparecem no topo, separadas dos filtros. Os filtros ficam sempre
+visíveis junto à busca: “Ocultar conflitos de horário”, “Apenas turmas com vagas”
+e “Ocultar extras não usadas”. A lista não exibe os antigos textos de orientação.
+
+O seletor contém “Criar nova grade”. Novas grades recebem um nome local como
+“Grade · 28/10 14:35”, com sufixo se necessário; nomes de backups antigos são
+preservados. Semestre é mostrado junto ao nome no seletor. Desfazer, Refazer,
+Importar, Exportar e Excluir ficam visíveis na barra. O JSON contém todas as
+grades; imagem e calendário continuam nas exportações da semana atual.
+Ctrl/Cmd+Z desfaz, Ctrl/Cmd+Shift+Z ou Ctrl/Cmd+Y refaz. Os atalhos não interferem
+na edição de inputs, selects, textareas ou conteúdo editável. Limites de 20
+disciplinas e 20 planos continuam valendo, sem contador permanente na interface.
+
+“Ocultar extras fora do plano” mantém as extras ativadas no gerador, com turma
+na grade ou ainda em edição. Filtros ficam recolhidos com contador de opções ativas.
 
 A página `/grade/` reutiliza o índice de semestres e a oferta em
 `public/data/turmas/`. Não faz buscas ao SIGAA durante o uso. Uma alteração na
@@ -26,16 +50,24 @@ restrição vazia não pode ser aplicada. “Permitir todas no gerador” remove
 restrição sem alterar a turma da grade salva.
 
 As marcações ainda não aplicadas sobrevivem a mudanças de filtros, prioridade,
-participação e escolha manual no mesmo plano. Reabrir o editor não as apaga.
+participação e escolha manual no mesmo plano, inclusive ao alternar modos.
+Reabrir o editor não as apaga. Recolher a seta também mantém as marcações, sem
+aplicar mudanças automaticamente.
 Antes de editar outra matéria, aplique ou cancele o rascunho atual. Aplicar,
 cancelar, permitir todas para essa matéria, remover a matéria, trocar de plano
 ou semestre, usar o histórico ou importar um backup encerram a edição. Os
 rascunhos não entram no arquivo salvo. Ao concluir a edição, o foco retorna ao
 botão da matéria ou à busca, se a matéria deixou de aparecer pelos filtros.
 
-“Com vagas” afeta a consulta e a geração, sem apagar escolhas salvas. “Só as
-turmas que encaixam” testa cada candidata junto às matérias necessárias ativadas.
-As verificações rodam num Worker separado; mudar escolhas cancela a verificação
+“Com vagas” afeta a consulta e a geração, sem apagar escolhas salvas. No modo
+manual, “Ocultar conflitos de horário” compara a candidata com as turmas já escolhidas
+das outras matérias, incluindo extras e matérias desativadas no gerador. Ignora
+a própria matéria para permitir trocas. Horários incompletos continuam disponíveis
+com aviso; restrições do gerador não limitam as alternativas manuais. Uma escolha
+salva continua acessível mesmo se seus filtros não mostrarem nenhuma alternativa.
+
+No gerador, o mesmo filtro testa cada candidata junto às matérias necessárias
+ativadas. Essas verificações rodam num Worker separado; mudar escolhas cancela a verificação
 antiga. Há um orçamento agregado de 25 mil tentativas, contando a preparação;
 até 500 candidatas são verificadas por atualização. Turmas ainda desconhecidas
 permanecem visíveis e identificadas, em vez de serem consideradas incompatíveis.
@@ -53,10 +85,10 @@ uma lista não vazia guarda as identidades estáveis das turmas aceitas). Os fil
 podem ser guardados no plano em `filtros`. Backups antigos mantêm seus campos e
 suas escolhas manuais, que não passam a ser restrições do gerador automaticamente.
 
-O fluxo começa pelas escolhas: adicione disciplinas e selecione turmas ou use
-uma combinação gerada. “Montar grade” abre a semana de segunda a sábado e as
-exportações. “Voltar às escolhas” permite editar o mesmo plano sem perder os
-dados. A semana não aparece automaticamente ao abrir a página ou trocar de plano.
+Adicionar disciplinas sem escolher turmas mantém a semana recolhida. Ao abrir
+uma grade já salva, a semana aparece com suas escolhas. Trocar planos e usar o
+histórico também atualiza a prévia. Nenhum modo exige uma etapa separada para
+montar ou voltar à edição.
 
 - `grade-calculos.js`: interpreta os códigos SIGAA, identifica variantes de
   turma, detecta conflitos e gera combinações. Não depende do DOM.

@@ -47,7 +47,7 @@
                 <nav aria-label="Navegação principal">
                     <a href="../../ira/"
                         ><span class="nav-ira-completo">Calculadora IRA e MP</span
-                        ><span class="nav-ira-curto">IRA e MP</span></a
+                        ><span class="nav-ira-curto">IRA</span></a
                     >
                     <a href="../../intercambio/" aria-current="page">Intercâmbio</a>
                     <a href="../../turmas/">Turmas</a>
@@ -86,8 +86,8 @@
                                 type="number"
                                 min="0"
                                 max="5"
-                                step="0.0001"
-                                data-incremento="0.1"
+                                step="0.1"
+                                data-casas="4"
                                 inputmode="decimal"
                                 aria-describedby="erroPerfil"
                                 placeholder="Ex.: 4,2"
@@ -101,8 +101,8 @@
                                 type="number"
                                 min="0"
                                 max="100"
-                                step="0.01"
-                                data-incremento="1"
+                                step="1"
+                                data-casas="2"
                                 inputmode="decimal"
                                 aria-describedby="erroPerfil"
                                 placeholder="Ex.: 55"
@@ -178,10 +178,7 @@
                     </div>
                     <div id="referenciasCurso" class="referencias-curso" aria-live="polite" hidden></div>
                     <div class="tabela-scroll" role="region" aria-label="Tabela de resultados" tabindex="0">
-                        <table class="tabela-resultados">
-                            <caption class="visually-hidden">
-                                Candidatos e alocação definitiva do Edital INT nº 1/2026
-                            </caption>
+                        <table class="tabela-resultados" aria-labelledby="tituloResultados">
                             <thead>
                                 <tr>
                                     <th scope="col">Matrícula</th>

@@ -5,7 +5,6 @@
     const slug = document.body.dataset.edital;
     const chaveFiltros = `calculadora-unb:filtros:${slug}`;
     let dados;
-    let notasDaSimulacao = [];
 
     function explicarReferencias(curso) {
         if (curso.variantes.length < 2) return null;
@@ -24,13 +23,6 @@
         return ajuda;
     }
 
-    function atualizarComparacao() {
-        mostrarReferenciasCurso($('filtroCurso').value);
-        const saida = $('notaComparacao');
-        const mesmoCurso = $('filtroCurso').value === $('meuCurso').value;
-        saida.hidden = !notasDaSimulacao.length || (!mesmoCurso && dados.formula.tipo !== 'ira-direto');
-        saida.textContent = saida.hidden ? '' : `Sua simulação: ${notasDaSimulacao.join(' · ')}`;
-    }
     function temConteudo(valor) {
         return valor != null && !/^(?:\s*|[-–—]+|n\/a)$/i.test(String(valor).trim());
     }
@@ -53,8 +45,9 @@
         const perfil = AppUnB.perfil();
         AppUnB.preencherNumero($('meuIra'), perfil.ira);
         AppUnB.preencherNumero($('meuIpf'), perfil.ipf);
-        $('meuCurso').value = perfil.curso || '';
-        const indisponivel = perfil.curso && !dados.cursos.some((c) => c.nome === perfil.curso);
+        AppUnB.preencherCurso($('meuCurso'), perfil.curso);
+        AppUnB.atualizarCursos();
+        const indisponivel = perfil.curso && !$('meuCurso').value;
         $('avisoCurso').hidden = !indisponivel;
         $('avisoCurso').textContent = indisponivel
             ? `O curso salvo (${perfil.curso}) não aparece nesta publicação. Selecione outro curso para simular; nenhuma média de outro edital será usada.`
@@ -82,8 +75,7 @@
         $('erroPerfil').hidden = !invalido;
         $('erroPerfil').textContent = 'Informe um IRA entre 0 e 5 e um IPF entre 0% e 100%.';
         $('notasSimuladas').replaceChildren();
-        notasDaSimulacao = [];
-        atualizarComparacao();
+        mostrarReferenciasCurso($('filtroCurso').value);
         if (dados.formula.tipo === 'ira-direto') {
             if (incompleto || invalido) return;
             const nota = CalculosUnB.nota(ira, ipf, null, null, dados.formula);
@@ -91,8 +83,7 @@
             card.append(el('h3', '', 'Sua nota final'));
             card.append(el('strong', 'nota-final', formato(nota.final, 5)));
             $('notasSimuladas').append(card);
-            notasDaSimulacao.push(formato(nota.final));
-            atualizarComparacao();
+            mostrarReferenciasCurso($('filtroCurso').value);
             return;
         }
         if (!curso || incompleto || invalido) return;
@@ -119,14 +110,10 @@
             if (v.estimada) detalhes.append(el('span', '', 'Valores estimados pelo IRA padronizado publicado.'));
             card.append(detalhes);
             $('notasSimuladas').append(card);
-            if (nota)
-                notasDaSimulacao.push(
-                    `${curso.variantes.length > 1 ? `Ref. ${i + 1}: ` : ''}${v.estimada ? '≈ ' : ''}${formato(nota.final)}`,
-                );
         });
         const ajuda = explicarReferencias(curso);
         if (ajuda) $('notasSimuladas').append(ajuda);
-        atualizarComparacao();
+        mostrarReferenciasCurso($('filtroCurso').value);
     }
 
     function filtros() {
@@ -152,7 +139,7 @@
         const container = $('referenciasCurso');
         const curso = dados.cursos.find((c) => c.nome === nome);
         container.replaceChildren();
-        if (dados.formula.tipo === 'ira-direto') {
+        if (dados.formula.tipo === 'ira-direto' || nome === $('meuCurso').value) {
             container.hidden = true;
             return;
         }
@@ -181,15 +168,13 @@
             lista.append(card);
         });
         container.append(lista);
-        if (curso.nome !== $('meuCurso').value || !notasDaSimulacao.length) {
-            const ajuda = explicarReferencias(curso);
-            if (ajuda) container.append(ajuda);
-        }
+        const ajuda = explicarReferencias(curso);
+        if (ajuda) container.append(ajuda);
     }
 
     function renderizarTabela() {
         const filtro = filtros();
-        atualizarComparacao();
+        mostrarReferenciasCurso($('filtroCurso').value);
         const busca = CalculosUnB.normalizar(filtro.busca.trim());
         const linhas = dados.resultados
             .filter((r) => {
@@ -222,6 +207,7 @@
         const baseVisivel = campos.map((c) =>
             (linhas.length ? linhas : dados.resultados).some((r) => temConteudo(r[c])),
         );
+        baseVisivel[0] = completo && baseVisivel[0];
         const tabela = document.querySelector('.tabela-resultados');
         tabela.classList.toggle('modo-completo', completo);
         const cabecalho = el('tr');
@@ -362,10 +348,6 @@
                 return;
             }
             dados = await carregarJson(`data/editais/${slug}.json`);
-            const comparacao = el('p', 'nota-comparacao');
-            comparacao.id = 'notaComparacao';
-            comparacao.hidden = true;
-            document.querySelector('.acoes-filtros').append(comparacao);
             opcoesCurso($('meuCurso'));
             opcoesCurso($('filtroCurso'));
             restaurarPerfil();
@@ -385,6 +367,8 @@
             document.querySelector(
                 `[name="visualizacao"][value="${salvo.visualizacao === 'completo' ? 'completo' : 'compacto'}"]`,
             ).checked = true;
+            AppUnB.iniciarCurso($('meuCurso'));
+            AppUnB.iniciarCurso($('filtroCurso'), true, $('usarMeuCurso'));
             document
                 .querySelectorAll('[name="visualizacao"]')
                 .forEach((input) => input.addEventListener('change', mudarFiltros));
@@ -397,16 +381,12 @@
                 simular();
             });
             $('meuCurso').addEventListener('change', () => {
-                AppUnB.salvarPerfil({ curso: $('meuCurso').value });
                 $('avisoCurso').hidden = true;
                 simular();
             });
-            $('usarMeuCurso').addEventListener('click', () => {
-                $('filtroCurso').value = $('meuCurso').value;
-                mudarFiltros();
-            });
             $('limparFiltros').addEventListener('click', () => {
                 $('filtroCurso').value = '';
+                AppUnB.atualizarCursos();
                 $('filtroAlocacao').value = 'todos';
                 $('buscaResultado').value = '';
                 $('ordemResultado').value = 'notaFinal';
