@@ -471,13 +471,18 @@ test('alocados ocultam colunas ausentes e mantêm zeros publicados', async () =>
     assert.equal(tr.children[5].hidden, false);
 });
 
-test('home retoma atalhos e cartões, inclui Grade e não anuncia modo avançado de turmas', () => {
+test('home apresenta as ferramentas com acesso direto e mantém conteúdo sem depender de áudio ou WebGL', () => {
     const { document: d } = parseHTML(fs.readFileSync('public/index.html', 'utf8'));
-    assert.equal(d.querySelectorAll('.inicio-ferramenta').length, 4);
-    for (const destino of ['/ira/', '/intercambio/', '/turmas/', '/grade/'])
-        assert.ok(d.querySelector(`.inicio-atalhos a[href="${destino}"]`));
-    assert.equal(d.querySelector('.inicio-previa'), null);
-    assert.doesNotMatch(d.querySelector('main').textContent, /modo avançado|por período/);
+    const hero = d.querySelector('.jornada-hero');
+    for (const destino of ['/ira/', '/intercambio/', '/turmas/', '/grade/', '/glossario/']) {
+        assert.ok(hero.querySelector(`a[href="${destino}"]`));
+        assert.ok(d.querySelector(`main a[href="${destino}"]`));
+    }
+    assert.ok(d.querySelector('main h1').textContent.includes('Sua trajetória.'));
+    assert.ok(d.querySelector('button#movimentoInicio'));
+    assert.equal(d.querySelector('audio, video'), null);
+    assert.match(d.querySelector('.jornada-glossario').textContent, /em preparação/);
+    assert.doesNotMatch(d.querySelector('main').textContent, /modo avançado/);
 });
 
 test('3/2024 calcula sem média do curso pela fórmula direta com os valores do exemplo', () => {

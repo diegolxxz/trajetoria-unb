@@ -1,0 +1,320 @@
+/* A rolagem transforma uma trajetória abstrata em novas possibilidades. */
+.interface-unb.pagina-inicial {
+    --jornada-acento: var(--pilot-accent);
+}
+.interface-unb.pagina-inicial main.jornada {
+    max-width: none;
+}
+.jornada {
+    isolation: isolate;
+}
+.jornada-experiencia {
+    position: relative;
+}
+.jornada-visual {
+    position: sticky;
+    top: 0;
+    height: 100svh;
+    margin-bottom: -100svh;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: -1;
+}
+.jornada-visual canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+}
+.webgl-pronto .jornada-visual canvas {
+    opacity: 1;
+}
+.jornada-orbita {
+    position: absolute;
+    width: min(42vw, 38rem);
+    aspect-ratio: 1;
+    right: 6vw;
+    top: 14%;
+    border: 1px solid var(--pilot-border);
+    border-radius: 50%;
+    transform: rotate(-30deg) scaleX(0.65);
+}
+.webgl-pronto .jornada-orbita {
+    display: none;
+}
+.jornada-cena {
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    padding: 5rem max(4vw, 20px);
+    scroll-margin-top: 1rem;
+}
+.jornada-hero {
+    min-height: calc(100svh - 61px);
+    padding-block: 3rem 6.5rem;
+}
+.jornada-texto {
+    max-width: 37rem;
+}
+.interface-unb.pagina-inicial .jornada h1,
+.interface-unb.pagina-inicial .jornada h2 {
+    font-weight: 550;
+    letter-spacing: -0.04em;
+    line-height: 1.04;
+    text-wrap: balance;
+}
+.interface-unb.pagina-inicial .jornada h1 {
+    font-size: clamp(2.75rem, 5.6vw, 5.5rem);
+    margin: 0 0 1.5rem;
+}
+.interface-unb.pagina-inicial .jornada h2 {
+    font-size: clamp(2.5rem, 5.1vw, 5rem);
+    margin: 0 0 1.5rem;
+}
+.jornada em {
+    font-style: normal;
+    color: var(--jornada-acento);
+}
+.jornada-texto > p {
+    max-width: 40ch;
+    font-size: clamp(1rem, 1.3vw, 1.1875rem);
+    line-height: 1.65;
+    color: var(--pilot-muted);
+    margin: 0 0 1.75rem;
+}
+.jornada-botao {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    min-height: 48px;
+    padding: 0.8rem 1.1rem;
+    border: 1px solid var(--pilot-border);
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    background: var(--pilot-surface);
+    touch-action: manipulation;
+    transition:
+        background 140ms ease-out,
+        transform 140ms ease-out;
+}
+.interface-unb .jornada-botao-principal {
+    color: var(--pilot-bg);
+    background: var(--pilot-text);
+    border-color: var(--pilot-text);
+}
+.jornada-botao:active {
+    transform: scale(0.98);
+}
+.jornada-botao svg,
+.jornada-link svg {
+    flex-shrink: 0;
+}
+.jornada-atalhos {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 1.5rem;
+    margin-top: 1rem;
+}
+.jornada-atalhos a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.875rem;
+    text-decoration: none;
+}
+.jornada-base {
+    position: absolute;
+    bottom: 1.5rem;
+    left: max(4vw, 20px);
+    right: max(4vw, 20px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    border-top: 1px solid var(--pilot-border);
+    padding-top: 0.5rem;
+}
+.jornada-base a {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    min-height: 44px;
+    font-size: 0.8125rem;
+    color: var(--pilot-muted);
+    text-decoration: none;
+}
+.jornada-base button {
+    font: inherit;
+    font-size: 0.8125rem;
+    color: var(--pilot-muted);
+    min-height: 44px;
+    border: 0;
+    padding: 0.5rem 0;
+    background: transparent;
+    cursor: pointer;
+}
+.jornada-beneficios {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2rem;
+    font-size: 0.9375rem;
+}
+.jornada-beneficios li {
+    margin-block: 0.6rem;
+    padding-block: 0.1rem;
+}
+.jornada-acoes {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.25rem;
+}
+.jornada-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    min-height: 48px;
+    font-size: 0.9375rem;
+    text-decoration: none;
+}
+.jornada-legenda {
+    position: absolute;
+    bottom: 2rem;
+    right: 4vw;
+    max-width: 28ch;
+    color: var(--pilot-muted);
+    font-size: 0.8125rem;
+}
+.jornada-glossario,
+.jornada-duvidas,
+.jornada-final {
+    margin-inline: max(4vw, 20px);
+    padding-block: clamp(3rem, 7vw, 6rem);
+    border-top: 1px solid var(--pilot-border);
+}
+.jornada-glossario {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: center;
+}
+.jornada-glossario p {
+    max-width: 45ch;
+    font-size: 1.0625rem;
+    color: var(--pilot-muted);
+    line-height: 1.7;
+}
+.jornada-duvidas {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+.interface-unb.pagina-inicial .jornada-duvidas > h2 {
+    font-size: 2rem;
+}
+.jornada-duvidas details {
+    border-bottom: 1px solid var(--pilot-border);
+    padding-block: 0.65rem;
+}
+.jornada-duvidas summary {
+    cursor: pointer;
+    min-height: 44px;
+    align-content: center;
+    font-size: 1rem;
+    font-weight: 500;
+}
+.jornada-duvidas details p {
+    font-size: 0.9375rem;
+    color: var(--pilot-muted);
+    line-height: 1.7;
+    max-width: 65ch;
+    margin-top: 0.75rem;
+}
+.jornada-final {
+    text-align: center;
+}
+.jornada-final .jornada-acoes {
+    justify-content: center;
+}
+@media (hover: hover) and (pointer: fine) {
+    .jornada-botao:hover {
+        background: var(--pilot-field);
+    }
+    .interface-unb .jornada-botao-principal:hover {
+        background: var(--jornada-acento);
+        border-color: var(--jornada-acento);
+        color: var(--pilot-bg);
+    }
+    .jornada-link:hover,
+    .jornada-atalhos a:hover,
+    .jornada-base a:hover,
+    .jornada-base button:hover {
+        text-decoration: underline;
+    }
+}
+@media (max-width: 991px) {
+    .jornada-texto {
+        max-width: 31rem;
+    }
+    .jornada-cena {
+        padding-inline: 24px;
+    }
+}
+@media (max-width: 600px) {
+    .jornada-cena {
+        min-height: 90svh;
+        padding: 6rem 20px 4rem;
+        align-items: center;
+    }
+    .jornada-hero {
+        min-height: calc(100svh - 109px);
+        padding-top: 3rem;
+        padding-bottom: 7rem;
+    }
+    .jornada-texto {
+        max-width: 100%;
+    }
+    .jornada-texto > p {
+        max-width: 34ch;
+    }
+    .jornada-base {
+        left: 20px;
+        right: 20px;
+        gap: 0.5rem;
+        bottom: 1rem;
+    }
+    .jornada-base a {
+        gap: 0.4rem;
+    }
+    .jornada-base button {
+        font-size: 0.75rem;
+    }
+    .jornada-legenda {
+        display: none;
+    }
+    .jornada-glossario,
+    .jornada-duvidas {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    .jornada-atalhos {
+        column-gap: 1rem;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .jornada-cena {
+        min-height: auto;
+        padding-block: 3.5rem;
+    }
+    .jornada-hero {
+        min-height: calc(100svh - 109px);
+        padding-bottom: 7rem;
+    }
+    .jornada-visual {
+        opacity: 0.4;
+    }
+}
