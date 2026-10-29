@@ -37,7 +37,16 @@ disciplinas e 20 planos continuam valendo, sem contador permanente na interface.
 “Ocultar extras não usadas” considera a forma de montagem atual: na escolha
 manual, mantém extras com turma salva; no gerador, mantém também as incluídas
 nas combinações ou ainda em edição. Não apaga disciplinas nem suas restrições.
-Os filtros ficam visíveis e usam duas colunas em telas estreitas.
+Os filtros ficam visíveis; no celular usam os rótulos curtos “Sem conflitos”,
+“Com vagas” e “Ocultar extras”, na mesma linha.
+
+No celular, cada linha de turma reúne professor, horário, local e ocupação;
+não exige arrastar a tabela na horizontal. No computador, permanecem as colunas
+separadas. Desfazer e Refazer continuam visíveis junto ao seletor de plano.
+O menu de três pontos reúne Importar, Exportar e Excluir grade em telas estreitas;
+Escape ou um toque fora fecha o menu. Ao haver turmas escolhidas, os atalhos
+inferiores levam à lista de disciplinas e à semana. Eles somem durante a busca
+para não disputar espaço com o teclado. Os planos e o formato do backup são os mesmos.
 
 As páginas `/grade/` e `/gerador-grade/` reutilizam o índice de semestres e a oferta em
 `public/data/turmas/`. Não faz buscas ao SIGAA durante o uso. Uma alteração na

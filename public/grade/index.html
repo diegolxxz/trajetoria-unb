@@ -155,68 +155,84 @@
                     ><span>Refazer</span>
                 </button>
                 <button
-                    id="importarGradeJson"
-                    class="grade-botao grade-arquivo-botao"
+                    class="grade-botao grade-plano-menu"
                     type="button"
-                    title="Importar grades de um arquivo JSON"
-                    aria-label="Importar grades de um arquivo JSON"
+                    popovertarget="ferramentasPlanoGrade"
+                    aria-label="Opções do plano: importar, exportar ou excluir"
+                    title="Opções do plano"
                 >
-                    <svg
-                        width="18"
-                        height="18"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.75"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        aria-hidden="true"
-                    >
-                        <path d="M12 3v12m-4-4 4 4 4-4M4 16v5h16v-5" /></svg
-                    ><span>Importar</span>
-                </button>
-                <button
-                    id="exportarGradeJson"
-                    class="grade-botao grade-arquivo-botao"
-                    type="button"
-                    title="Exportar todas as grades em JSON"
-                    aria-label="Exportar todas as grades em JSON"
-                >
-                    <svg
-                        width="18"
-                        height="18"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.75"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        aria-hidden="true"
-                    >
-                        <path d="M12 15V3m-4 4 4-4 4 4M4 16v5h16v-5" /></svg
-                    ><span>Exportar</span>
-                </button>
-                <button
-                    id="excluirPlanoGrade"
-                    class="grade-botao grade-remover grade-icone"
-                    type="button"
-                    aria-label="Excluir grade atual"
-                    title="Excluir grade atual"
-                >
-                    <svg
-                        width="18"
-                        height="18"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.75"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        aria-hidden="true"
-                    >
-                        <path d="M3 6h18M9 6V3h6v3M5 6l1 15h12l1-15M10 10v7m4-7v7" />
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <circle cx="5" cy="12" r="1.8" />
+                        <circle cx="12" cy="12" r="1.8" />
+                        <circle cx="19" cy="12" r="1.8" />
                     </svg>
                 </button>
+                <div id="ferramentasPlanoGrade" class="grade-ferramentas">
+                    <p class="grade-ferramentas-titulo">Opções do plano</p>
+                    <button
+                        id="importarGradeJson"
+                        class="grade-botao grade-arquivo-botao"
+                        type="button"
+                        title="Importar grades de um arquivo JSON"
+                        aria-label="Importar grades de um arquivo JSON"
+                    >
+                        <svg
+                            width="18"
+                            height="18"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.75"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true"
+                        >
+                            <path d="M12 3v12m-4-4 4 4 4-4M4 16v5h16v-5" /></svg
+                        ><span>Importar</span>
+                    </button>
+                    <button
+                        id="exportarGradeJson"
+                        class="grade-botao grade-arquivo-botao"
+                        type="button"
+                        title="Exportar todas as grades em JSON"
+                        aria-label="Exportar todas as grades em JSON"
+                    >
+                        <svg
+                            width="18"
+                            height="18"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.75"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true"
+                        >
+                            <path d="M12 15V3m-4 4 4-4 4 4M4 16v5h16v-5" /></svg
+                        ><span>Exportar</span>
+                    </button>
+                    <button
+                        id="excluirPlanoGrade"
+                        class="grade-botao grade-remover grade-icone"
+                        type="button"
+                        aria-label="Excluir grade atual"
+                        title="Excluir grade atual"
+                    >
+                        <svg
+                            width="18"
+                            height="18"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.75"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true"
+                        >
+                            <path d="M3 6h18M9 6V3h6v3M5 6l1 15h12l1-15M10 10v7m4-7v7" /></svg
+                        ><span class="grade-excluir-rotulo">Excluir grade</span>
+                    </button>
+                </div>
                 <input
                     id="arquivoGrade"
                     class="visually-hidden"
@@ -236,6 +252,7 @@
                         type="search"
                         placeholder="Adicionar disciplina"
                         autocomplete="off"
+                        enterkeyhint="search"
                         disabled
                         aria-describedby="ajudaBuscaGrade"
                     />
@@ -246,19 +263,27 @@
                     <div class="grade-filtros-painel" role="group" aria-label="Filtrar turmas">
                         <div class="grade-filtros">
                             <label class="grade-checkbox"
-                                ><input id="encaixeGrade" type="checkbox" />
-                                <span id="rotuloEncaixeGrade">Ocultar conflitos de horário</span></label
+                                ><input id="encaixeGrade" type="checkbox" aria-label="Ocultar conflitos de horário" />
+                                <span id="rotuloEncaixeGrade" class="grade-filtro-longo"
+                                    >Ocultar conflitos de horário</span
+                                ><span class="grade-filtro-curto" aria-hidden="true">Sem conflitos</span></label
                             >
                             <label class="grade-checkbox"
-                                ><input id="somenteVagasGrade" type="checkbox" /> Apenas turmas com vagas</label
+                                ><input
+                                    id="somenteVagasGrade"
+                                    type="checkbox"
+                                    aria-label="Apenas turmas com vagas"
+                                /><span class="grade-filtro-longo">Apenas turmas com vagas</span
+                                ><span class="grade-filtro-curto" aria-hidden="true">Com vagas</span></label
                             >
                             <label class="grade-checkbox"
                                 ><input
                                     id="ocultarExtrasGrade"
                                     type="checkbox"
-                                    aria-label="Ocultar disciplinas extras que não participam das combinações e não têm turma escolhida"
+                                    aria-label="Ocultar disciplinas extras não usadas nesta forma de montagem"
                                 />
-                                Ocultar extras não usadas</label
+                                <span class="grade-filtro-longo">Ocultar extras não usadas</span
+                                ><span class="grade-filtro-curto" aria-hidden="true">Ocultar extras</span></label
                             >
                         </div>
                     </div>
@@ -293,7 +318,7 @@
                         <div id="combinacoesGrade"></div>
                     </section>
                 </section>
-                <section class="grade-semana" aria-labelledby="tituloSemanaGrade" hidden>
+                <section id="semanaMontadaGrade" class="grade-semana" aria-labelledby="tituloSemanaGrade" hidden>
                     <div class="grade-secao-titulo">
                         <h2 id="tituloSemanaGrade" tabindex="-1">Sua semana</h2>
                     </div>
@@ -326,6 +351,10 @@
                 </section>
             </div>
             <noscript><p class="aviso">Ative o JavaScript para montar e salvar sua grade.</p></noscript>
+            <nav id="atalhosMoveisGrade" class="grade-atalhos-moveis" aria-label="Nesta grade" hidden>
+                <a href="#disciplinasGrade">Disciplinas</a
+                ><a href="#semanaMontadaGrade">Minha semana <span id="totalSemanaGrade">0</span></a>
+            </nav>
         </main>
         <footer class="text-center py-4">
             <div class="container">

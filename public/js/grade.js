@@ -369,7 +369,7 @@
                 };
                 const pendente =
                     $('encaixeGrade').checked && !['compativel', 'incompativel'].includes(compatibilidade.get(id));
-                const celula = el('td');
+                const celula = el('td', 'grade-turma-acao');
                 const label = el('label', 'grade-checkbox grade-checkbox-tabela');
                 check.className = 'visually-hidden';
                 check.setAttribute('aria-label', `Permitir turma ${t.numero} de ${pedido.codigo}`);
@@ -377,13 +377,7 @@
                 marca.setAttribute('aria-hidden', 'true');
                 label.append(check, marca);
                 celula.append(label);
-                rotulo.append(
-                    el('td', '', t.numero),
-                    el('td', '', professores(t) || 'Docente não informado'),
-                    el('td', '', t.horarios.join(' · ') || 'Não informado'),
-                    el('td', '', t.local || 'A definir'),
-                );
-                if (vagasVisiveis) rotulo.append(el('td', 'grade-vagas', `${t.matriculados ?? '—'}/${t.vagas ?? '—'}`));
+                rotulo.append(...celulasTurma(t, vagasVisiveis));
                 if (pendente) rotulo.title = 'Encaixe ainda não verificado';
                 rotulo.append(celula);
                 lista.append(rotulo);
@@ -518,6 +512,26 @@
         dialog.showModal();
         cancelar.focus();
     }
+    function celulasTurma(t, mostrarVagas) {
+        const horario = t.horarios.join(' · ') || 'Horário não informado';
+        const local = t.local || 'Local a definir';
+        const ocupacao = `${t.matriculados ?? '—'}/${t.vagas ?? '—'}`;
+        const docente = el('td', 'grade-turma-docente');
+        docente.append(el('span', 'grade-turma-professor', professores(t) || 'Docente não informado'));
+        const contexto = el('div', 'grade-turma-contexto');
+        contexto.append(el('span', 'grade-turma-horario', horario));
+        if (mostrarVagas) contexto.append(el('span', 'grade-turma-ocupacao', `${ocupacao} matriculados`));
+        contexto.append(el('span', 'grade-turma-local', local));
+        docente.append(contexto);
+        const celulas = [
+            el('td', 'grade-turma-numero', t.numero),
+            docente,
+            el('td', 'grade-turma-coluna', horario),
+            el('td', 'grade-turma-coluna', local),
+        ];
+        if (mostrarVagas) celulas.push(el('td', 'grade-vagas grade-turma-coluna', ocupacao));
+        return celulas;
+    }
     function turmasManuais(pedido, artigo) {
         const painel = el('div', 'grade-manual-turmas');
         const tabela = el('table', 'grade-turmas-tabela');
@@ -550,11 +564,7 @@
                 !!salva &&
                 GradeCalculos.idTurma(pedido.codigo, salva.turma) === GradeCalculos.idTurma(pedido.codigo, t);
             const linha = el('tr', escolhida ? 'grade-turma-escolhida' : '');
-            const numero = el('td', '', t.numero);
-            const docente = el('td', '', professores(t) || 'Docente não informado');
-            const horario = el('td', '', t.horarios.join(' · ') || 'Não informado');
-            const local = el('td', '', t.local || 'A definir');
-            const acao = el('td');
+            const acao = el('td', 'grade-turma-acao');
             const botao = el(
                 'button',
                 `grade-botao grade-selecionar-turma${escolhida ? ' grade-retirar-turma' : ''}`,
@@ -572,9 +582,7 @@
                 document.getElementById(botao.id)?.focus({ preventScroll: true });
             };
             acao.append(botao);
-            linha.append(numero, docente, horario, local);
-            if (mostrarVagas) linha.append(el('td', 'grade-vagas', `${t.matriculados ?? '—'}/${t.vagas ?? '—'}`));
-            linha.append(acao);
+            linha.append(...celulasTurma(t, mostrarVagas), acao);
             corpo.append(linha);
         }
         tabela.append(legenda, head, corpo);
@@ -853,7 +861,7 @@
             quadro.append(titulo);
         });
         const periodosVisiveis = periodosDaGrade(p);
-        quadro.style.gridTemplateRows = `38px repeat(${periodosVisiveis.length}, 42px)`;
+        quadro.style.gridTemplateRows = `38px repeat(${periodosVisiveis.length}, var(--grade-linha, 42px))`;
         periodosVisiveis.forEach((p, i) => {
             const rotulo = el('div', 'grade-hora grade-celula');
             rotulo.append(el('span', '', hora(p.inicio)), el('span', '', p.periodo));
@@ -911,6 +919,8 @@
                 ? 'Adicione sua primeira disciplina para escolher uma turma.'
                 : 'Adicione as disciplinas que quer cursar. Depois escolha quais turmas podem entrar nas combinações.';
         document.querySelector('.grade-semana').hidden = !p.selecionadas.length;
+        if ($('atalhosMoveisGrade')) $('atalhosMoveisGrade').hidden = !p.selecionadas.length;
+        if ($('totalSemanaGrade')) $('totalSemanaGrade').textContent = p.selecionadas.length;
         if (p.selecionadas.length) semana(p, conflitos(p));
         else $('semanaGrade').replaceChildren();
         if (foco && $(foco) && document.activeElement?.id !== foco) $(foco).focus({ preventScroll: true });
@@ -1088,6 +1098,20 @@
         if (p) semana(p, conflitos(p));
     };
     if (matchMedia('(max-width: 767px)').matches) $('diaGrade').value = '2';
+    const telaCompacta = matchMedia('(max-width: 640px)');
+    function adaptarFerramentas() {
+        const ferramentas = $('ferramentasPlanoGrade');
+        if (!ferramentas) return;
+        if (ferramentas.hidePopover && ferramentas.matches(':popover-open')) ferramentas.hidePopover();
+        ferramentas.toggleAttribute('popover', telaCompacta.matches);
+    }
+    adaptarFerramentas();
+    telaCompacta.addEventListener?.('change', adaptarFerramentas);
+    $('ferramentasPlanoGrade')?.addEventListener('click', (event) => {
+        const ferramentas = $('ferramentasPlanoGrade');
+        if (event.target.closest('button') && ferramentas.hidePopover && ferramentas.matches(':popover-open'))
+            ferramentas.hidePopover();
+    });
     $('gerarGrade').onclick = () => gerar(false);
     $('parciaisGrade').onclick = () => gerar(true);
     $('cancelarGrade').onclick = () => {

@@ -718,6 +718,21 @@ test('turmas manuais ficam abertas e o botão de adicionar vira retirar', async 
     assert.equal(document.querySelector('.grade-selecionar-turma').textContent, '+');
 });
 
+test('cada turma oferece professor, horário, local e ocupação juntos na apresentação móvel', async () => {
+    for (const modo of ['manual', 'gerador']) {
+        const { document, buscar } = await interfaceGrade(undefined, undefined, [disciplina], undefined, modo);
+        buscar().onclick();
+        if (modo === 'gerador') document.querySelector('.grade-escolher').onclick();
+        const docente = document.querySelector('.grade-turma-docente');
+        assert.ok(docente);
+        assert.match(docente.textContent, /ANA/);
+        const contexto = docente.querySelector('.grade-turma-contexto');
+        assert.match(contexto.textContent, /24M12/);
+        assert.match(contexto.textContent, /ICC/);
+        assert.match(contexto.textContent, /10\/30 matriculados/);
+    }
+});
+
 test('vagas aparecem por disciplina e somem quando todos os matriculados publicados são zero', async () => {
     for (const matriculados of [0, 10, null]) {
         const oferta = [{ ...disciplina, turmas: [{ ...disciplina.turmas[0], matriculados }] }];
