@@ -84,3 +84,8 @@ uv run python scripts/scrapers/extrair_edital_7_2026.py
 Cada edital tem fontes e regras próprias. Antes de atualizar ou incluir um,
 consulte [docs/dados.md](docs/dados.md), que registra essas particularidades e o
 formato dos dados.
+
+## Glossário
+
+A página `/glossario/` aguarda os termos. O formato dos dados e os campos de
+localização estão em [docs/glossario.md](docs/glossario.md).

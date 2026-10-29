@@ -16,6 +16,11 @@ export default [
     rules: { 'no-unused-vars': ['error', { varsIgnorePattern: '^(adicionarDisciplina|removerDisciplina)$' }] },
   },
   { files: ['public/js/calculos.js'], languageOptions: { globals: { module: 'readonly', CalculosUnB: 'off' } } },
+  {
+    files: ['public/js/glossario-busca.js'],
+    languageOptions: { globals: { module: 'readonly', GlossarioUnB: 'off' } },
+  },
+  { files: ['public/js/glossario.js'], languageOptions: { globals: { GlossarioUnB: 'readonly' } } },
   { files: ['public/js/grade-calculos.js'], languageOptions: { globals: { module: 'readonly' } } },
   {
     files: ['public/js/common.js'],

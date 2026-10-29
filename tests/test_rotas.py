@@ -38,6 +38,7 @@ class RotasTest(unittest.TestCase):
         for caminho in [
             "/ira",
             "/turmas",
+            "/glossario",
             "/grade",
             "/gerador-grade",
             "/intercambio",
@@ -59,6 +60,7 @@ class RotasTest(unittest.TestCase):
     def test_recursos_das_paginas(self):
         for caminho in [
             "/js/common.js",
+            "/data/glossario/termos.json",
             "/js/calculos.js",
             "/js/functionality.js",
             "/js/intercambio.js",

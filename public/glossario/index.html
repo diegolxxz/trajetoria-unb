@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="pt-BR" data-tema="escuro">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, viewport-fit=cover, interactive-widget=resizes-content"
+        />
+        <meta name="theme-color" content="#1b1d21" />
+        <script>
+            try {
+                document.documentElement.dataset.tema = localStorage.getItem('calculadora-ira-tema') || 'escuro';
+            } catch {}
+        </script>
+        <meta name="app-root" content="/" />
+        <meta
+            name="description"
+            content="Pesquise siglas e termos usados na Unb e consulte a localização dos lugares."
+        />
+        <title>Glossário | Trajetória Unb</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="/css/style.css" />
+        <link rel="stylesheet" href="/css/intercambio.css" />
+        <link rel="stylesheet" href="/css/interface.css" />
+        <link rel="canonical" href="https://trajetoriaunb.vercel.app/glossario/" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Trajetória Unb" />
+        <meta property="og:title" content="Glossário | Trajetória Unb" />
+        <meta
+            property="og:description"
+            content="Pesquise siglas e termos usados na Unb e consulte a localização dos lugares."
+        />
+        <meta property="og:url" content="https://trajetoriaunb.vercel.app/glossario/" />
+        <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48 64x64 128x128 256x256" />
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" sizes="any" />
+        <link rel="icon" href="/favicon-96x96.png" type="image/png" sizes="96x96" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
+        <link rel="manifest" href="/site.webmanifest" />
+    </head>
+    <body class="interface-unb pagina-glossario">
+        <header class="cabecalho">
+            <div class="container topo-site">
+                <a class="marca-site" href="/">Trajetória<span class="badge-unb">Unb</span></a>
+                <nav aria-label="Navegação principal">
+                    <a href="/ira/"
+                        ><span class="nav-ira-completo">Calculadora IRA e MP</span
+                        ><span class="nav-ira-curto">IRA</span></a
+                    >
+                    <a href="/intercambio/">Intercâmbio</a>
+                    <a href="/turmas/">Turmas</a>
+                    <a href="/grade/">Grade</a>
+                    <a href="/glossario/" aria-current="page">Glossário</a>
+                </nav>
+            </div>
+        </header>
+        <main class="container pagina-conteudo glossario-conteudo">
+            <div class="intro-pagina">
+                <h1>Glossário</h1>
+                <p>Siglas, expressões e lugares da Unb.</p>
+            </div>
+            <section class="glossario-consulta" aria-label="Busca no glossário">
+                <label class="visually-hidden" for="buscaGlossario">Buscar sigla ou termo</label>
+                <input
+                    id="buscaGlossario"
+                    class="form-control"
+                    type="search"
+                    placeholder="Buscar sigla ou termo"
+                    maxlength="160"
+                    enterkeyhint="search"
+                    autocomplete="off"
+                    autocapitalize="none"
+                    spellcheck="false"
+                    aria-describedby="ajudaGlossario"
+                    disabled
+                />
+                <p id="ajudaGlossario" class="texto-apoio">
+                    Busque pela sigla, pelo nome ou por uma variação conhecida.
+                </p>
+                <div class="glossario-barra">
+                    <p id="contagemGlossario" role="status" aria-live="polite"></p>
+                    <label class="glossario-filtro"
+                        ><input id="locaisGlossario" type="checkbox" disabled />Com localização</label
+                    >
+                </div>
+            </section>
+            <div id="estadoGlossario" class="glossario-estado" role="status"><h2>Carregando glossário…</h2></div>
+            <button id="recarregarGlossario" class="botao-inicio" type="button" hidden>Tentar novamente</button>
+            <div id="listaGlossario" class="glossario-lista"></div>
+            <noscript><p class="aviso">Ative o JavaScript para pesquisar os termos.</p></noscript>
+        </main>
+        <footer class="text-center py-4">
+            <div class="container">Projeto independente, sem vínculo oficial com a Unb.</div>
+        </footer>
+        <script src="/js/common.js"></script>
+        <script src="/js/glossario-busca.js"></script>
+        <script src="/js/glossario.js"></script>
+    </body>
+</html>

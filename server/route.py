@@ -33,6 +33,8 @@ def index():
     return static_file("index.html", root=str(ROOT))
 
 
+@route("/glossario")
+@route("/glossario/")
 @route("/turmas")
 @route("/turmas/")
 @route("/gerador-grade")
@@ -112,6 +114,11 @@ def serve_edital(filename):
     resp = static_file(filename, root=str(ROOT / "data" / "editais"))
     resp.set_header("Cache-Control", "no-cache")
     return resp
+
+
+@route("/data/glossario/<filename>")
+def serve_glossario(filename):
+    return static_file(filename, root=str(ROOT / "data" / "glossario"))
 
 
 @route("/save", method="POST")

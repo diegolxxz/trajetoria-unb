@@ -2356,3 +2356,124 @@ body.pagina-turmas main.pagina-conteudo {
         grid-row: 3;
     }
 }
+
+/* Glossário: leitura compacta e busca em primeiro plano. */
+.glossario-conteudo {
+    max-width: 72rem;
+}
+.glossario-consulta {
+    margin-block: 1rem 0.5rem;
+}
+.glossario-consulta #ajudaGlossario {
+    margin-block: 0.4rem 0;
+    font-size: 0.8125rem;
+}
+.glossario-barra {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.25rem 0.75rem;
+}
+.glossario-barra > p {
+    margin: 0;
+    font-size: 0.8125rem;
+    color: var(--pilot-muted);
+}
+.glossario-filtro {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 44px;
+    font-size: 0.8125rem;
+    cursor: pointer;
+}
+.glossario-filtro input {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--pilot-accent);
+}
+.glossario-estado {
+    margin-block: 0.75rem 1rem;
+    padding-block: 1rem;
+    border-block: 1px solid var(--pilot-border);
+}
+.glossario-estado h2 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0 0 0.35rem;
+}
+.glossario-estado p {
+    font-size: 0.875rem;
+    color: var(--pilot-muted);
+    margin: 0;
+}
+.glossario-termo {
+    padding-block: 1rem;
+    border-top: 1px solid var(--pilot-border);
+    overflow-wrap: anywhere;
+}
+.glossario-termo h2 {
+    font-size: 1.0625rem;
+    font-weight: 650;
+    margin: 0 0 0.4rem;
+}
+.glossario-termo p {
+    max-width: 72ch;
+    margin-block: 0.4rem;
+}
+.glossario-definicao {
+    white-space: pre-line;
+    font-size: 0.9375rem;
+}
+.glossario-categoria,
+.glossario-aliases {
+    font-size: 0.8125rem;
+    color: var(--pilot-muted);
+}
+.glossario-local {
+    margin-top: 0.75rem;
+    font-size: 0.875rem;
+}
+.glossario-mapas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1.25rem;
+}
+.glossario-mapas a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    touch-action: manipulation;
+}
+.glossario-mapas a:active {
+    opacity: 0.65;
+}
+.glossario-filtro:has(input:disabled) {
+    cursor: default;
+    color: var(--pilot-muted);
+}
+@media (max-width: 768px) {
+    .interface-unb .filtros-medias {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.75rem;
+    }
+    .interface-unb .filtros-medias > :first-child,
+    .interface-unb .filtros-medias > label:last-child {
+        grid-column: 1 / -1;
+    }
+}
+@media (pointer: coarse) {
+    .pagina-glossario input {
+        font-size: 16px;
+    }
+}
+@media (max-width: 420px) {
+    .interface-unb .cabecalho nav a {
+        padding-inline: 0.35rem;
+        font-size: 0.8125rem;
+    }
+    .interface-unb .cabecalho .topo-site nav {
+        gap: 0.1rem;
+    }
+}

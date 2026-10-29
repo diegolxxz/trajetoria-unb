@@ -29,10 +29,12 @@ for (const directory of [
   'turmas',
   'grade',
   'gerador-grade',
+  'glossario',
   'css',
   'js',
   'data/editais',
   'data/turmas',
+  'data/glossario',
 ])
   await collect(directory);
 for (const entry of await readdir(root, { withFileTypes: true })) {
