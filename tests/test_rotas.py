@@ -35,7 +35,16 @@ class RotasTest(unittest.TestCase):
 
     def test_paginas_e_redirecionamentos(self):
         catalogo = json.loads((Path(route.ROOT) / "data/editais/index.json").read_text(encoding="utf-8"))
-        for caminho in ["/ira", "/turmas", "/intercambio", "/intercambio/medias", "/intercambio/comparacao", *["/intercambio/" + e["slug"] for e in catalogo]]:
+        for caminho in [
+            "/ira",
+            "/turmas",
+            "/grade",
+            "/gerador-grade",
+            "/intercambio",
+            "/intercambio/medias",
+            "/intercambio/comparacao",
+            *["/intercambio/" + e["slug"] for e in catalogo],
+        ]:
             redirecionamento = get(caminho)
             self.assertIn(redirecionamento["status"].split()[0], ("302", "303"))
             self.assertTrue(redirecionamento["headers"]["Location"].endswith(caminho + "/"))
@@ -69,7 +78,8 @@ class RotasTest(unittest.TestCase):
                 self.assertEqual(resposta["status"].split()[0], "404")
                 self.assertEqual(resposta["headers"]["X-Robots-Tag"], "noindex")
                 self.assertEqual(resposta["body"], esperado)
-                self.assertIn(b'href="/css/interface.css"', resposta["body"])
+                self.assertIn(b'href="/css/404.css"', resposta["body"])
+                self.assertIn(b'src="/js/404.js"', resposta["body"])
                 self.assertIn(b'href="/"', resposta["body"])
 
     def test_favicons(self):

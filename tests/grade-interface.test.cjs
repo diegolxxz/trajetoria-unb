@@ -361,6 +361,70 @@ test('ocultar extras preserva as ativadas e as que já possuem turma na grade', 
     assert.equal(salva.document.querySelectorAll('.grade-materia').length, 1);
 });
 
+test('na escolha manual ocultar extras considera a turma salva, não a participação no gerador', async () => {
+    const plano = {
+        id: 'manual-extras',
+        nome: 'Extras',
+        semestre: '2026.2',
+        inicio: '',
+        fim: '',
+        disciplinas: [{ codigo: disciplina.codigo, obrigatoria: false }],
+        selecionadas: [],
+    };
+    const { document, storage } = await interfaceGrade(
+        { versao: 1, ativo: plano.id, planos: [plano] },
+        undefined,
+        [disciplina],
+        undefined,
+        'manual',
+    );
+    const filtro = document.getElementById('ocultarExtrasGrade');
+    filtro.checked = true;
+    filtro.onchange();
+    assert.equal(document.querySelectorAll('.grade-materia').length, 0);
+    assert.equal(JSON.parse(storage.get('trajetoria-unb:grade:v1')).planos[0].disciplinas.length, 1);
+    filtro.checked = false;
+    filtro.onchange();
+    document.querySelector('.grade-selecionar-turma').onclick();
+    filtro.checked = true;
+    filtro.onchange();
+    assert.equal(document.querySelectorAll('.grade-materia').length, 1);
+    document.querySelector('.grade-retirar-turma').onclick();
+    assert.equal(document.querySelectorAll('.grade-materia').length, 0);
+});
+
+test('remover disciplina exige confirmação e cancelar preserva escolhas e histórico', async () => {
+    for (const modo of ['manual', 'gerador']) {
+        const { document, buscar, storage } = await interfaceGrade(undefined, undefined, [disciplina], undefined, modo);
+        const criar = document.createElement.bind(document);
+        document.createElement = (tag) => {
+            const node = criar(tag);
+            if (tag === 'dialog') {
+                node.showModal = () => node.setAttribute('open', '');
+                node.close = () => {
+                    node.removeAttribute('open');
+                    node.dispatchEvent(new document.defaultView.Event('close'));
+                };
+            }
+            return node;
+        };
+        buscar().onclick();
+        const antes = storage.get('trajetoria-unb:grade:v1');
+        document.getElementById('removerGrade-MAT0026').onclick();
+        assert.ok(document.querySelector('dialog[open]'));
+        assert.equal(storage.get('trajetoria-unb:grade:v1'), antes);
+        document.querySelector('dialog button').onclick();
+        assert.equal(document.querySelector('dialog'), null);
+        assert.equal(storage.get('trajetoria-unb:grade:v1'), antes);
+        document.getElementById('removerGrade-MAT0026').onclick();
+        document.querySelector('dialog .grade-principal').onclick();
+        assert.equal(document.querySelector('dialog'), null);
+        assert.equal(JSON.parse(storage.get('trajetoria-unb:grade:v1')).planos[0].disciplinas.length, 0);
+        document.getElementById('desfazerGrade').onclick();
+        assert.equal(document.querySelectorAll('.grade-materia').length, 1);
+    }
+});
+
 test('turmas e professores das combinações já aparecem expandidos', async () => {
     const trabalhos = [];
     class Worker {
@@ -663,6 +727,44 @@ test('vagas aparecem por disciplina e somem quando todos os matriculados publica
         assert.equal(tabela.textContent.includes('Vagas'), matriculados !== 0);
         if (matriculados === 10) assert.match(tabela.textContent, /10\/30/);
         if (matriculados === null) assert.match(tabela.textContent, /—\/30/);
+    }
+});
+
+test('PNG omite a noite vazia e inclui somente os períodos noturnos escolhidos', async () => {
+    for (const horarios of [['2T23'], ['2N3']]) {
+        const plano = {
+            id: 'png',
+            nome: 'Teste',
+            semestre: '2026.2',
+            inicio: '',
+            fim: '',
+            disciplinas: [{ codigo: disciplina.codigo, obrigatoria: true }],
+            selecionadas: [
+                { codigo: disciplina.codigo, nome: disciplina.nome, turma: { ...disciplina.turmas[0], horarios } },
+            ],
+        };
+        const { document } = await interfaceGrade({ versao: 1, ativo: plano.id, planos: [plano] });
+        const textos = [];
+        const criar = document.createElement.bind(document);
+        document.createElement = (tag) => {
+            const node = criar(tag);
+            if (tag === 'canvas') {
+                node.getContext = () => ({
+                    fillText: (t) => textos.push(t),
+                    fillRect() {},
+                    beginPath() {},
+                    moveTo() {},
+                    lineTo() {},
+                    stroke() {},
+                });
+                node.toBlob = () => {};
+            }
+            return node;
+        };
+        document.getElementById('exportarGradePng').onclick();
+        assert.equal(textos.includes('20:50'), horarios[0] === '2N3');
+        assert.equal(textos.includes('19:00'), false);
+        assert.equal(textos.includes('18:00'), false);
     }
 });
 

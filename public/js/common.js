@@ -1,7 +1,7 @@
 const AppUnB = (() => {
     const chavePerfil = 'calculadora-unb:perfil-intercambio:v1';
     const botoesCurso = [];
-    const raiz = new URL(document.querySelector('meta[name="app-root"]').content, location.href);
+    const raiz = new URL('/', location.href);
     function ler(chave, fallback = null) {
         try {
             return JSON.parse(localStorage.getItem(chave)) ?? fallback;

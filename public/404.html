@@ -2,11 +2,9 @@
 <html lang="pt-BR" data-tema="escuro">
     <head>
         <meta charset="UTF-8" />
-        <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1.0, viewport-fit=cover, interactive-widget=resizes-content"
-        />
-        <meta name="theme-color" content="#1b1d21" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+        <meta name="theme-color" content="#111215" />
+        <meta name="app-root" content="/" />
         <script>
             try {
                 document.documentElement.dataset.tema = localStorage.getItem('calculadora-ira-tema') || 'escuro';
@@ -15,45 +13,66 @@
         <meta name="robots" content="noindex, follow" />
         <meta
             name="description"
-            content="Página não encontrada. Volte ao início ou acesse as ferramentas do Trajetória Unb."
+            content="Página não encontrada. Retome sua trajetória: calcule seu IRA, consulte turmas ou monte sua grade na Unb."
         />
         <title>Página não encontrada | Trajetória Unb</title>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="/css/style.css" />
-        <link rel="stylesheet" href="/css/intercambio.css" />
-        <link rel="stylesheet" href="/css/interface.css" />
+        <link rel="stylesheet" href="/css/404.css" />
         <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48 64x64 128x128 256x256" />
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" sizes="any" />
         <link rel="icon" href="/favicon-96x96.png" type="image/png" sizes="96x96" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
         <link rel="manifest" href="/site.webmanifest" />
+        <script src="/js/404.js" defer></script>
     </head>
-    <body class="interface-unb pagina-erro">
-        <header class="cabecalho">
-            <div class="container topo-site">
-                <a class="marca-site" href="/">Trajetória<span class="badge-unb">Unb</span></a>
-                <nav aria-label="Navegação principal">
-                    <a href="/ira/"
-                        ><span class="nav-ira-completo">Calculadora IRA e MP</span
-                        ><span class="nav-ira-curto">IRA</span></a
-                    >
-                    <a href="/intercambio/">Intercâmbio</a>
-                    <a href="/turmas/">Turmas</a>
-                    <a href="grade/">Grade</a>
-                </nav>
-            </div>
+    <body class="erro-experiencia">
+        <header class="erro-topo">
+            <a class="erro-marca" href="/" aria-label="Trajetória Unb, início">Trajetória<span>Unb</span></a>
         </header>
-        <main class="erro-pagina" id="conteudo">
-            <span class="erro-codigo">Erro 404</span>
-            <h1>Não encontramos esta página.</h1>
-            <p>O endereço pode ter mudado ou estar incompleto. Escolha um caminho para continuar.</p>
-            <a class="erro-inicio" href="/">Voltar ao início <span aria-hidden="true">→</span></a>
-            <nav class="erro-caminhos" aria-label="Acessar ferramentas">
-                <a href="/ira/">Calcular IRA e MP <span aria-hidden="true">↗</span></a>
-                <a href="/intercambio/">Consultar editais <span aria-hidden="true">↗</span></a>
-                <a href="/turmas/">Consultar turmas <span aria-hidden="true">↗</span></a>
+        <main id="conteudo">
+            <div class="erro-cena" id="cena404" aria-hidden="true">
+                <div class="cena-fallback">404</div>
+                <svg class="cena-trajeto" viewBox="0 0 1200 500" fill="none" preserveAspectRatio="none">
+                    <path
+                        d="M-40 370C160 370 145 105 340 105S455 410 700 410 925 130 1240 130"
+                        stroke="currentColor"
+                        stroke-dasharray="3 8"
+                    />
+                    <circle cx="340" cy="105" r="5" fill="currentColor" />
+                    <circle cx="700" cy="410" r="5" fill="currentColor" />
+                </svg>
+                <canvas id="particulas404"></canvas>
+                <div class="cena-ficha cena-ficha-grade">
+                    <span class="ficha-legenda">Sua próxima aula</span>
+                    <strong>Cálculo 1</strong>
+                    <span class="ficha-horario">SEG <span>08:00 — 09:50</span></span>
+                    <span class="ficha-semana"
+                        ><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i
+                    ></span>
+                </div>
+                <div class="cena-ficha cena-ficha-trajetoria">
+                    <span class="ficha-legenda">Um semestre de cada vez</span>
+                    <span class="ficha-creditos"><strong>24</strong> créditos no caminho</span>
+                    <span class="ficha-percurso"><i></i><i></i><i></i><i></i><i></i></span>
+                </div>
+                <span class="cena-nota">Todo percurso tem seus desvios.</span>
+            </div>
+            <section class="erro-conteudo" aria-labelledby="titulo404">
+                <div>
+                    <p class="erro-contexto">Erro 404 <span aria-hidden="true">/</span> Página não encontrada</p>
+                    <h1 id="titulo404">Um desvio na trajetória.</h1>
+                    <p class="erro-descricao">
+                        Este endereço não existe ou mudou. Seu próximo passo continua por aqui.
+                    </p>
+                </div>
+                <a class="erro-inicio" href="/">Voltar ao início <span aria-hidden="true">↗</span></a>
+            </section>
+            <nav class="erro-caminhos" aria-label="Retomar pelas ferramentas">
+                <span>Escolha outro caminho</span>
+                <a href="/ira/">IRA e MP <span aria-hidden="true">↗</span></a>
+                <a href="/intercambio/">Intercâmbio <span aria-hidden="true">↗</span></a>
+                <a href="/turmas/">Turmas <span aria-hidden="true">↗</span></a>
+                <a href="/grade/">Minha grade <span aria-hidden="true">↗</span></a>
             </nav>
         </main>
-        <footer class="erro-rodape">Projeto independente, sem vínculo oficial com a Unb.</footer>
     </body>
 </html>

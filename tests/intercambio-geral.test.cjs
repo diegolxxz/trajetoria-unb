@@ -161,7 +161,7 @@ test('hub mantém cinco cartões e carrega somente catálogo pelo script origina
     await new Promise((resolve) => setImmediate(resolve));
     assert.deepEqual(chamadas, ['https://example.org/data/editais/index.json']);
     assert.equal(d.querySelectorAll('.card-edital .edital-identificacao h2').length, 5);
-    assert.equal(d.querySelectorAll('script[src="../js/intercambio.js"]').length, 1);
+    assert.equal(d.querySelectorAll('script[src="/js/intercambio.js"]').length, 1);
 });
 
 test('navegação interna marca a página atual e resolve os três destinos', () => {
@@ -280,6 +280,10 @@ test('catálogo e cartões estáticos começam pelo edital mais recente', () => 
 test('todas as páginas exibem apenas IRA no item compacto do menu', () => {
     for (const arquivo of fs.readdirSync('public', { recursive: true }).filter((f) => f.endsWith('.html'))) {
         const { document: d } = parseHTML(fs.readFileSync(`public/${arquivo}`, 'utf8'));
+        if (arquivo === '404.html') {
+            assert.equal(d.querySelector('.erro-caminhos a[href="/ira/"]').textContent.trim(), 'IRA e MP ↗');
+            continue;
+        }
         assert.equal(d.querySelector('.nav-ira-curto').textContent, 'IRA', arquivo);
     }
     assert.doesNotMatch(
@@ -470,7 +474,7 @@ test('alocados ocultam colunas ausentes e mantêm zeros publicados', async () =>
 test('home retoma atalhos e cartões, inclui Grade e não anuncia modo avançado de turmas', () => {
     const { document: d } = parseHTML(fs.readFileSync('public/index.html', 'utf8'));
     assert.equal(d.querySelectorAll('.inicio-ferramenta').length, 4);
-    for (const destino of ['ira/', 'intercambio/', 'turmas/', 'grade/'])
+    for (const destino of ['/ira/', '/intercambio/', '/turmas/', '/grade/'])
         assert.ok(d.querySelector(`.inicio-atalhos a[href="${destino}"]`));
     assert.equal(d.querySelector('.inicio-previa'), null);
     assert.doesNotMatch(d.querySelector('main').textContent, /modo avançado|por período/);

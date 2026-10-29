@@ -23,7 +23,17 @@ async function collect(directory) {
     else files.add(file);
   }
 }
-for (const directory of ['ira', 'intercambio', 'turmas', 'grade', 'css', 'js', 'data/editais', 'data/turmas'])
+for (const directory of [
+  'ira',
+  'intercambio',
+  'turmas',
+  'grade',
+  'gerador-grade',
+  'css',
+  'js',
+  'data/editais',
+  'data/turmas',
+])
   await collect(directory);
 for (const entry of await readdir(root, { withFileTypes: true })) {
   if (entry.isFile()) files.add(entry.name);

@@ -12,16 +12,16 @@
                 document.documentElement.dataset.tema = localStorage.getItem('calculadora-ira-tema') || 'escuro';
             } catch {}
         </script>
-        <meta name="app-root" content="./" />
+        <meta name="app-root" content="/" />
         <meta
             name="description"
             content="Calcule IRA e MP, simule notas de intercâmbio, consulte turmas e monte sua grade semanal na Unb."
         />
         <title>Trajetória Unb | IRA, intercâmbio, turmas e grade</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="css/style.css" />
-        <link rel="stylesheet" href="css/intercambio.css" />
-        <link rel="stylesheet" href="css/interface.css" />
+        <link rel="stylesheet" href="/css/style.css" />
+        <link rel="stylesheet" href="/css/intercambio.css" />
+        <link rel="stylesheet" href="/css/interface.css" />
         <link rel="canonical" href="https://trajetoriaunb.vercel.app/" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Trajetória Unb" />
@@ -31,11 +31,11 @@
             content="Calcule IRA e MP, simule notas de intercâmbio, consulte turmas e monte sua grade semanal na Unb."
         />
         <meta property="og:url" content="https://trajetoriaunb.vercel.app/" />
-        <link rel="icon" href="favicon.ico" sizes="16x16 32x32 48x48 64x64 128x128 256x256" />
-        <link rel="icon" href="favicon.svg" type="image/svg+xml" sizes="any" />
-        <link rel="icon" href="favicon-96x96.png" type="image/png" sizes="96x96" />
-        <link rel="apple-touch-icon" href="apple-touch-icon.png" sizes="180x180" />
-        <link rel="manifest" href="site.webmanifest" />
+        <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48 64x64 128x128 256x256" />
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" sizes="any" />
+        <link rel="icon" href="/favicon-96x96.png" type="image/png" sizes="96x96" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
+        <link rel="manifest" href="/site.webmanifest" />
         <script type="application/ld+json">
             {
                 "@context": "https://schema.org",
@@ -50,15 +50,15 @@
     <body class="interface-unb pagina-inicial">
         <header class="cabecalho">
             <div class="container topo-site">
-                <a class="marca-site" href="./">Trajetória<span class="badge-unb">Unb</span></a>
+                <a class="marca-site" href="/">Trajetória<span class="badge-unb">Unb</span></a>
                 <nav aria-label="Navegação principal">
-                    <a href="ira/"
+                    <a href="/ira/"
                         ><span class="nav-ira-completo">Calculadora IRA e MP</span
                         ><span class="nav-ira-curto">IRA</span></a
                     >
-                    <a href="intercambio/">Intercâmbio</a>
-                    <a href="turmas/">Turmas</a>
-                    <a href="grade/">Grade</a>
+                    <a href="/intercambio/">Intercâmbio</a>
+                    <a href="/turmas/">Turmas</a>
+                    <a href="/grade/">Grade</a>
                 </nav>
             </div>
         </header>
@@ -71,11 +71,11 @@
                     grade de horários.
                 </p>
                 <div class="inicio-atalhos">
-                    <a class="botao-inicio botao-inicio-principal" href="ira/"
+                    <a class="botao-inicio botao-inicio-principal" href="/ira/"
                         >Calcular IRA e MP <span aria-hidden="true">→</span></a
-                    ><a class="botao-inicio" href="intercambio/">Consultar editais <span aria-hidden="true">→</span></a
-                    ><a class="botao-inicio" href="turmas/">Consultar turmas <span aria-hidden="true">→</span></a>
-                    <a class="botao-inicio" href="grade/">Montar grade <span aria-hidden="true">→</span></a>
+                    ><a class="botao-inicio" href="/intercambio/">Consultar editais <span aria-hidden="true">→</span></a
+                    ><a class="botao-inicio" href="/turmas/">Consultar turmas <span aria-hidden="true">→</span></a>
+                    <a class="botao-inicio" href="/grade/">Montar grade <span aria-hidden="true">→</span></a>
                 </div>
             </section>
             <section class="inicio-ferramentas" aria-labelledby="tituloRecursos">
@@ -102,7 +102,7 @@
                             <li>Acompanhe o IRA e a MP acumulados ao final de cada semestre.</li>
                             <li>Alterne entre a visualização detalhada e a resumida.</li>
                         </ul>
-                        <a class="inicio-link-recurso" href="ira/"
+                        <a class="inicio-link-recurso" href="/ira/"
                             >Abrir calculadora <span aria-hidden="true">→</span></a
                         >
                     </article>
@@ -128,7 +128,7 @@
                             <li>Filtre candidatos por curso, alocação, destino ou idioma.</li>
                             <li>Consulte notas, preferências e idiomas em tabelas resumidas ou detalhadas.</li>
                         </ul>
-                        <a class="inicio-link-recurso" href="intercambio/"
+                        <a class="inicio-link-recurso" href="/intercambio/"
                             >Explorar editais <span aria-hidden="true">→</span></a
                         >
                     </article>
@@ -153,7 +153,7 @@
                             <li>Consulte turmas, horários, vagas e alunos matriculados.</li>
                             <li>Consulte a carga horária e encontre turmas para montar sua grade.</li>
                         </ul>
-                        <a class="inicio-link-recurso" href="turmas/"
+                        <a class="inicio-link-recurso" href="/turmas/"
                             >Consultar turmas <span aria-hidden="true">→</span></a
                         >
                     </article>
@@ -177,7 +177,7 @@
                             <li>Escolha disciplinas e compare horários sem conflito.</li>
                             <li>Salve seus planos e exporte a grade para o calendário.</li>
                         </ul>
-                        <a class="inicio-link-recurso" href="grade/"
+                        <a class="inicio-link-recurso" href="/grade/"
                             >Montar minha grade <span aria-hidden="true">→</span></a
                         >
                     </article>
@@ -248,7 +248,7 @@
                 </p>
             </div>
         </footer>
-        <script src="js/calculos.js"></script>
-        <script src="js/common.js"></script>
+        <script src="/js/calculos.js"></script>
+        <script src="/js/common.js"></script>
     </body>
 </html>

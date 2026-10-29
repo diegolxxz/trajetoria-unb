@@ -1,6 +1,6 @@
 # Grade pessoal
 
-“Disciplinas da grade” é a lista comum às duas formas de montagem. Disciplina
+A lista de disciplinas é comum às duas formas de montagem. Disciplina
 é a matéria; turma é uma das opções de professor e horário daquela matéria.
 A busca serve para adicionar disciplinas, escolhendo Obrigatória ou Extra antes
 de adicionar. Em “Escolher turmas”, todas ficam abertas em tabelas com professor,
@@ -27,17 +27,19 @@ e “Ocultar extras não usadas”. A lista não exibe os antigos textos de orie
 
 O seletor contém “Criar nova grade”. Novas grades recebem um nome local como
 “Grade · 28/10 14:35”, com sufixo se necessário; nomes de backups antigos são
-preservados. Semestre é mostrado junto ao nome no seletor. Desfazer, Refazer,
+preservados. O semestre fica no seletor do topo. Desfazer, Refazer,
 Importar, Exportar e Excluir ficam visíveis na barra. O JSON contém todas as
-grades; imagem e calendário continuam nas exportações da semana atual.
+grades; o botão “Baixar imagem PNG” fica junto à semana atual.
 Ctrl/Cmd+Z desfaz, Ctrl/Cmd+Shift+Z ou Ctrl/Cmd+Y refaz. Os atalhos não interferem
 na edição de inputs, selects, textareas ou conteúdo editável. Limites de 20
 disciplinas e 20 planos continuam valendo, sem contador permanente na interface.
 
-“Ocultar extras fora do plano” mantém as extras ativadas no gerador, com turma
-na grade ou ainda em edição. Filtros ficam recolhidos com contador de opções ativas.
+“Ocultar extras não usadas” considera a forma de montagem atual: na escolha
+manual, mantém extras com turma salva; no gerador, mantém também as incluídas
+nas combinações ou ainda em edição. Não apaga disciplinas nem suas restrições.
+Os filtros ficam visíveis e usam duas colunas em telas estreitas.
 
-A página `/grade/` reutiliza o índice de semestres e a oferta em
+As páginas `/grade/` e `/gerador-grade/` reutilizam o índice de semestres e a oferta em
 `public/data/turmas/`. Não faz buscas ao SIGAA durante o uso. Uma alteração na
 oferta só aparece após nova coleta e publicação do site.
 
@@ -45,12 +47,12 @@ Cada matéria tem três escolhas independentes: ficar na lista de comparação,
 participar do gerador e ser necessária ou extra. Desmarcar “Usar no gerador” não
 remove a matéria da lista. “Ocultar extras” só muda a exibição. Ao adicionar uma
 matéria, todas as turmas são permitidas; “Escolher turmas” permite marcar apenas
-as desejadas. Aplicar substitui a restrição; cancelar preserva a anterior. Uma
+as desejadas em uma tabela com os mesmos campos da escolha manual. Aplicar substitui a restrição; cancelar preserva a anterior. Uma
 restrição vazia não pode ser aplicada. “Permitir todas no gerador” remove a
 restrição sem alterar a turma da grade salva.
 
 As marcações ainda não aplicadas sobrevivem a mudanças de filtros, prioridade,
-participação e escolha manual no mesmo plano, inclusive ao alternar modos.
+participação e escolha manual no mesmo plano enquanto a página estiver aberta.
 Reabrir o editor não as apaga. Recolher a seta também mantém as marcações, sem
 aplicar mudanças automaticamente.
 Antes de editar outra matéria, aplique ou cancele o rascunho atual. Aplicar,
@@ -65,6 +67,13 @@ das outras matérias, incluindo extras e matérias desativadas no gerador. Ignor
 a própria matéria para permitir trocas. Horários incompletos continuam disponíveis
 com aviso; restrições do gerador não limitam as alternativas manuais. Uma escolha
 salva continua acessível mesmo se seus filtros não mostrarem nenhuma alternativa.
+
+Escolher uma turma com conflito abre uma confirmação com os nomes das disciplinas.
+Confirmar substitui as escolhas conflitantes; cancelar, pressionar Escape ou clicar
+fora mantém a grade anterior. A semana e o PNG exibem até T5 por padrão. T6 e
+cada período noturno aparecem somente quando ocupados por uma turma selecionada.
+Remover uma disciplina também exige confirmação; cancelar não altera o plano
+nem o histórico. Após confirmar, Desfazer restaura a disciplina e suas escolhas.
 
 No gerador, o mesmo filtro testa cada candidata junto às matérias necessárias
 ativadas. Essas verificações rodam num Worker separado; mudar escolhas cancela a verificação

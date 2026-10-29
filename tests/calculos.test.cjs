@@ -89,8 +89,8 @@ function app(storage, slug = 'edital-int-n-7-2026') {
     const context = {
         CalculosUnB: calc,
         URL,
-        location: { href: `https://exemplo.test/projeto/intercambio/${slug}/` },
-        document: { querySelector: () => ({ content: '../../' }), addEventListener() {}, getElementById: () => null },
+        location: { href: `https://exemplo.test/intercambio/${slug}/` },
+        document: { querySelector: () => ({ content: '/' }), addEventListener() {}, getElementById: () => null },
         localStorage: { getItem: (key) => storage.get(key) ?? null, setItem: (key, value) => storage.set(key, value) },
     };
     return vm.runInNewContext(
@@ -109,7 +109,7 @@ test('perfil persiste entre editais e filtros permanecem independentes', () => {
     assert.equal(b.perfil().ipf, '55');
     assert.equal(b.perfil().curso, 'DIREITO');
     assert.equal(b.ler('calculadora-unb:filtros:outro-edital-apenas-no-teste'), null);
-    assert.equal(b.raiz.href, 'https://exemplo.test/projeto/');
+    assert.equal(b.raiz.href, 'https://exemplo.test/');
 });
 
 test('migra valores manuais e automáticos do painel antigo sem perder zero', () => {
