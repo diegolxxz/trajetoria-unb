@@ -479,7 +479,7 @@ test('home apresenta as ferramentas com acesso direto e mantém conteúdo sem de
         assert.ok(d.querySelector(`main a[href="${destino}"]`));
     }
     assert.ok(d.querySelector('main h1').textContent.includes('Sua trajetória.'));
-    assert.ok(d.querySelector('button#movimentoInicio'));
+    assert.equal(d.querySelector('button#movimentoInicio'), null);
     assert.equal(d.querySelector('audio, video'), null);
     assert.match(d.querySelector('.jornada-glossario').textContent, /em preparação/);
     assert.doesNotMatch(d.querySelector('main').textContent, /modo avançado/);

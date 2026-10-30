@@ -1,15 +1,26 @@
 (() => {
     const canvas = document.getElementById('canvasTrajetoria');
     const cenas = [...document.querySelectorAll('[data-cena]')];
-    const botao = document.getElementById('movimentoInicio');
+    const experiencia = document.querySelector('.jornada-experiencia');
+    const visual = document.querySelector('.jornada-visual');
+    const palco = document.querySelector('.jornada-palco');
+    const controles = document.querySelector('.jornada-controles');
+    const capitulos = [...document.querySelectorAll('[data-destino]')];
+    const status = document.getElementById('capituloAtual');
+    const orbita = document.querySelector('.jornada-orbita');
+    const mousePermitido = matchMedia('(hover: hover) and (pointer: fine)');
     if (!canvas || !cenas.length) return;
     const preferencia = matchMedia('(prefers-reduced-motion: reduce)');
     let reduzido = preferencia.matches;
-    let manual = false;
+    const mouse = { x: 0, y: 0, alvoX: 0, alvoY: 0 };
     let frame = 0;
+    let ultimoQuadro = 0;
     let atual = 0;
     let alvo = 0;
-    let centros = [];
+    let fixo = false;
+    let inicio = 0;
+    let passo = 1;
+    let ativo = -2;
     let renderer = null;
     const clamp = (n, a = 0, b = 1) => Math.min(b, Math.max(a, n));
     // A malha é gerada localmente. Nenhum modelo, imagem ou dado do visitante é carregado.
@@ -27,6 +38,8 @@
             uniform float uAspect;
             uniform float uRatio;
             uniform float uMobile;
+            uniform vec2 uPointer;
+            uniform float uPortal;
             varying float vLuz;
             const float PI = 3.14159265359;
             vec3 forma(float cena, vec2 uv) {
@@ -47,16 +60,23 @@
             }
             void main() {
                 float trecho = floor(uStage);
-                float t = smoothstep(0.0,1.0,fract(uStage));
+                float t = fract(uStage);
                 vec3 p = mix(forma(trecho,aCoord),forma(min(trecho+1.0,3.0),aCoord),t);
-                float giro = .3 + uStage*.42;
+                float portalMix = smoothstep(0.0,.4,uPortal);
+                vec3 anel = vec3((.82+.1*cos(aCoord.y*2.0*PI))*cos(aCoord.x*2.0*PI),(.82+.1*cos(aCoord.y*2.0*PI))*sin(aCoord.x*2.0*PI),.1*sin(aCoord.y*2.0*PI));
+                p = mix(p,anel,portalMix);
+                float giro = (.3 + uStage*.42 + uPointer.x*.35)*(1.0-portalMix);
+                float inclinacao = uPointer.y*.22;
+                p.yz = mat2(cos(inclinacao),-sin(inclinacao),sin(inclinacao),cos(inclinacao))*p.yz;
+                float influencia = exp(-3.0*length(aCoord-vec2(.5)-uPointer*.2));
+                p.z += influencia * .16 * (abs(uPointer.x)+abs(uPointer.y));
                 p.xz = mat2(cos(giro),-sin(giro),sin(giro),cos(giro))*p.xz;
                 p.xy = mat2(cos(-.2),-sin(-.2),sin(-.2),cos(-.2))*p.xy;
                 float perspectiva = 2.9/(3.2-p.z);
-                vec2 xy = p.xy*perspectiva*.76;
+                vec2 xy = p.xy*perspectiva*.76*exp(log(19.0)*smoothstep(0.0,1.0,uPortal));
                 xy.x /= uAspect;
-                xy.x += mix(.49,.4,uMobile);
-                xy.y += mix(.05,.32,uMobile);
+                xy.x += mix(.49,.4,uMobile)*(1.0-portalMix);
+                xy.y += mix(.05,.32,uMobile)*(1.0-portalMix);
                 gl_Position = vec4(xy,0.0,1.0);
                 gl_PointSize = (1.2 + (p.z+1.1)*1.0)*uRatio;
                 vLuz = clamp(.4+(p.z+1.0)*.3,.25,1.0);
@@ -105,7 +125,7 @@
         gl.enableVertexAttribArray(atributo);
         gl.vertexAttribPointer(atributo, 2, gl.FLOAT, false, 0, 0);
         const uniforms = Object.fromEntries(
-            ['uStage', 'uAspect', 'uRatio', 'uMobile', 'uColor', 'uOpacity'].map((n) => [
+            ['uStage', 'uAspect', 'uRatio', 'uMobile', 'uColor', 'uOpacity', 'uPointer', 'uPortal'].map((n) => [
                 n,
                 gl.getUniformLocation(programa, n),
             ]),
@@ -113,7 +133,7 @@
         gl.enable(gl.BLEND);
         gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
         document.body.classList.add('webgl-pronto');
-        return (progresso) => {
+        return (progresso, pointer, portal, opacidade) => {
             const rect = canvas.getBoundingClientRect();
             const mobile = rect.width < 601;
             const ratio = Math.min(devicePixelRatio || 1, mobile ? 1.25 : 1.5);
@@ -128,49 +148,126 @@
             gl.clearColor(0, 0, 0, 0);
             gl.clear(gl.COLOR_BUFFER_BIT);
             gl.uniform1f(uniforms.uStage, progresso);
+            gl.uniform1f(uniforms.uPortal, portal);
+            gl.uniform2f(uniforms.uPointer, pointer.x, pointer.y);
             gl.uniform1f(uniforms.uAspect, rect.width / Math.max(1, rect.height));
             gl.uniform1f(uniforms.uRatio, ratio);
             gl.uniform1f(uniforms.uMobile, mobile ? 1 : 0);
             gl.uniform3f(uniforms.uColor, claro ? 0.1 : 0.5, claro ? 0.35 : 0.71, claro ? 0.72 : 1);
-            gl.uniform1f(uniforms.uOpacity, mobile ? 0.25 : 0.9);
+            gl.uniform1f(uniforms.uOpacity, (mobile ? 0.25 : 0.9) * opacidade);
             gl.drawArrays(gl.POINTS, 0, pontos.length / 2);
         };
     }
-    function renderizar() {
+    function mostrarPaineis(estado) {
+        cenas.forEach((cena, i) => {
+            const painel = estado.paineis[i];
+            cena.style.setProperty('--painel-opacidade', String(painel.opacidade));
+            cena.style.setProperty('--painel-recorte', `${(1 - painel.entrada) * 18}%`);
+            cena.toggleAttribute('data-painel-visivel', painel.opacidade > 0.005);
+            cena.toggleAttribute('data-painel-ativo', estado.ativo === i);
+            if (estado.ativo !== i && cena.contains(document.activeElement))
+                capitulos[i].focus({ preventScroll: true });
+            cena.inert = estado.ativo !== i;
+            cena.setAttribute('aria-hidden', String(estado.ativo !== i));
+        });
+        controles.style.setProperty('--progresso-narrativa', String(estado.progresso));
+        if (ativo !== estado.ativo) {
+            ativo = estado.ativo;
+            capitulos.forEach((botao, i) => {
+                if (i === ativo) botao.setAttribute('aria-current', 'step');
+                else botao.removeAttribute('aria-current');
+            });
+            status.textContent =
+                ativo < 0
+                    ? estado.portal > 0
+                        ? 'Passagem pelo portal'
+                        : 'Transição entre capítulos'
+                    : `Capítulo: ${capitulos[ativo].textContent}`;
+        }
+    }
+    function restaurarFluxo() {
+        controles.hidden = true;
+        ativo = -2;
+        cenas.forEach((cena) => {
+            cena.inert = false;
+            cena.removeAttribute('aria-hidden');
+            cena.removeAttribute('data-painel-ativo');
+            cena.removeAttribute('data-painel-visivel');
+            cena.style.removeProperty('--painel-opacidade');
+            cena.style.removeProperty('--painel-recorte');
+        });
+        visual.style.opacity = '';
+        orbita.style.transform = '';
+    }
+    function renderizar(tempo) {
         frame = 0;
         if (document.hidden) return;
-        atual = reduzido ? 0 : atual + (alvo - atual) * 0.16;
-        if (document.querySelector('.jornada-experiencia').getBoundingClientRect().bottom > 0) renderer?.(atual);
-        for (const cena of cenas) {
-            const r = cena.getBoundingClientRect();
-            const deslocamento = clamp((r.top + r.height / 2 - innerHeight / 2) / innerHeight, -1, 1);
-            const texto = cena.querySelector('.jornada-texto');
-            texto.style.transform = reduzido ? '' : `translateY(${deslocamento * 22}px)`;
+        const delta = ultimoQuadro ? Math.min(64, Math.max(0, tempo - ultimoQuadro)) : 1000 / 60;
+        ultimoQuadro = tempo;
+        const seguir = 1 - Math.exp(-delta / 140);
+        const seguirMouse = 1 - Math.exp(-delta / 100);
+        atual = reduzido || !fixo ? 0 : atual + (alvo - atual) * seguir;
+        mouse.x = reduzido ? 0 : mouse.x + (mouse.alvoX - mouse.x) * seguirMouse;
+        mouse.y = reduzido ? 0 : mouse.y + (mouse.alvoY - mouse.y) * seguirMouse;
+        const estado = LandingTimeline.estado(atual);
+        const area = experiencia.getBoundingClientRect();
+        if (fixo) {
+            mostrarPaineis(estado);
+            orbita.style.transform = `translate(-50%,-50%) scale(${Math.exp(Math.log(19) * (estado.portal * estado.portal * (3 - 2 * estado.portal)))})`;
+            visual.style.opacity = String(1 - Math.max(0, (estado.progresso - 0.93) / 0.07));
         }
-        if (!reduzido && Math.abs(alvo - atual) > 0.001) frame = requestAnimationFrame(renderizar);
+        if (area.bottom > 0 && area.top < innerHeight)
+            renderer?.(estado.etapa, mouse, estado.portal, fixo ? estado.opacidade : 1);
+        const movendo =
+            Math.abs(alvo - atual) > 0.001 ||
+            Math.abs(mouse.alvoX - mouse.x) > 0.001 ||
+            Math.abs(mouse.alvoY - mouse.y) > 0.001;
+        if (!reduzido && area.bottom > 0 && movendo) frame = requestAnimationFrame(renderizar);
     }
     function agendar() {
-        if (!frame && !document.hidden) frame = requestAnimationFrame(renderizar);
+        if (!frame && !document.hidden) {
+            ultimoQuadro = 0;
+            frame = requestAnimationFrame(renderizar);
+        }
     }
     function rolar() {
-        const y = scrollY;
-        alvo = 0;
-        for (let i = 0; i < centros.length - 1; i++)
-            if (y >= centros[i]) alvo = i + clamp((y - centros[i]) / Math.max(1, centros[i + 1] - centros[i]));
+        alvo = fixo ? clamp((scrollY - inicio) / passo, 0, LandingTimeline.duracao) : 0;
         agendar();
     }
     function medir() {
-        centros = cenas.map((c) => {
-            const r = c.getBoundingClientRect();
-            return scrollY + r.top + r.height / 2 - innerHeight / 2;
-        });
+        const eraFixo = fixo;
+        const anterior = ativo;
+        const alturaCabecalho = document.querySelector('.cabecalho').getBoundingClientRect().height;
+        experiencia.style.setProperty('--altura-cabecalho', `${alturaCabecalho}px`);
+        document.body.classList.toggle('jornada-fixa', !reduzido);
+        let altura = palco.getBoundingClientRect().height;
+        fixo =
+            !reduzido &&
+            cenas.every((cena) => {
+                const css = getComputedStyle(cena);
+                return (
+                    cena.querySelector('.jornada-texto').scrollHeight +
+                        parseFloat(css.paddingTop) +
+                        parseFloat(css.paddingBottom) <=
+                    altura
+                );
+            });
+        document.body.classList.toggle('jornada-fixa', fixo);
+        controles.hidden = !fixo;
+        if (fixo) {
+            altura = palco.getBoundingClientRect().height;
+            passo = Math.max(340, altura * 0.85);
+            experiencia.style.setProperty('--distancia-narrativa', `${altura + passo * LandingTimeline.duracao}px`);
+            inicio = experiencia.getBoundingClientRect().top + scrollY - alturaCabecalho;
+        } else {
+            restaurarFluxo();
+            if (eraFixo && anterior >= 0) cenas[anterior].scrollIntoView({ block: 'start', behavior: 'instant' });
+        }
         rolar();
     }
-    function atualizarBotao() {
-        botao.hidden = false;
-        botao.textContent = 'Reduzir movimento';
-        botao.setAttribute('aria-pressed', String(reduzido));
-        agendar();
+    function navegar(destino, suave = true) {
+        if (!fixo) return;
+        window.scrollTo({ top: inicio + destino * passo, behavior: suave ? 'smooth' : 'instant' });
     }
     try {
         renderer = criarRenderer();
@@ -190,16 +287,32 @@
             renderer = null;
         }
     });
-    botao.addEventListener('click', () => {
-        manual = true;
-        reduzido = !reduzido;
-        atualizarBotao();
-    });
     preferencia.addEventListener('change', (event) => {
-        if (!manual) {
-            reduzido = event.matches;
-            atualizarBotao();
-        }
+        reduzido = event.matches;
+        mouse.alvoX = 0;
+        mouse.alvoY = 0;
+        medir();
+    });
+    capitulos.forEach((botao) => botao.addEventListener('click', () => navegar(Number(botao.dataset.destino))));
+    document.querySelector('.jornada-base a').addEventListener('click', (event) => {
+        if (!fixo) return;
+        event.preventDefault();
+        navegar(LandingTimeline.destinos[1]);
+    });
+    addEventListener(
+        'pointermove',
+        (event) => {
+            if (reduzido || !mousePermitido.matches || experiencia.getBoundingClientRect().bottom <= 0) return;
+            mouse.alvoX = clamp((event.clientX / innerWidth) * 2 - 1, -1, 1);
+            mouse.alvoY = clamp(1 - (event.clientY / innerHeight) * 2, -1, 1);
+            agendar();
+        },
+        { passive: true },
+    );
+    document.documentElement.addEventListener('pointerleave', () => {
+        mouse.alvoX = 0;
+        mouse.alvoY = 0;
+        agendar();
     });
     addEventListener('scroll', rolar, { passive: true });
     addEventListener('resize', medir, { passive: true });
@@ -210,7 +323,13 @@
             frame = 0;
         } else medir();
     });
-    document.fonts?.ready.then(medir);
-    atualizarBotao();
+    const resolverAncora = () => {
+        if (fixo && location.hash === '#planejar') navegar(LandingTimeline.destinos[1], false);
+    };
+    addEventListener('hashchange', resolverAncora);
+    document.fonts?.ready.then(() => {
+        medir();
+        resolverAncora();
+    });
     medir();
 })();

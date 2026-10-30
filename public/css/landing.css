@@ -12,10 +12,9 @@
     position: relative;
 }
 .jornada-visual {
-    position: sticky;
-    top: 0;
+    position: absolute;
+    inset: 0 0 auto;
     height: 100svh;
-    margin-bottom: -100svh;
     overflow: hidden;
     pointer-events: none;
     z-index: -1;
@@ -44,10 +43,10 @@
 }
 .jornada-cena {
     position: relative;
-    min-height: 100svh;
+    min-height: 78svh;
     display: flex;
     align-items: center;
-    padding: 5rem max(4vw, 20px);
+    padding: 4rem max(4vw, 20px);
     scroll-margin-top: 1rem;
 }
 .jornada-hero {
@@ -87,9 +86,9 @@
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    gap: 1rem;
-    min-height: 48px;
-    padding: 0.8rem 1.1rem;
+    gap: 0.65rem;
+    min-height: 44px;
+    padding: 0.65rem 0.9rem;
     border: 1px solid var(--pilot-border);
     border-radius: 8px;
     text-decoration: none;
@@ -101,29 +100,23 @@
         background 140ms ease-out,
         transform 140ms ease-out;
 }
-.interface-unb .jornada-botao-principal {
-    color: var(--pilot-bg);
-    background: var(--pilot-text);
-    border-color: var(--pilot-text);
-}
 .jornada-botao:active {
     transform: scale(0.98);
 }
-.jornada-botao svg,
-.jornada-link svg {
+.jornada-botao svg {
     flex-shrink: 0;
 }
 .jornada-atalhos {
     display: flex;
     flex-wrap: wrap;
-    column-gap: 1.5rem;
-    margin-top: 1rem;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
 }
 .jornada-atalhos a {
     min-height: 44px;
     display: inline-flex;
     align-items: center;
-    font-size: 0.875rem;
+    font-size: 0.9375rem;
     text-decoration: none;
 }
 .jornada-base {
@@ -147,16 +140,6 @@
     color: var(--pilot-muted);
     text-decoration: none;
 }
-.jornada-base button {
-    font: inherit;
-    font-size: 0.8125rem;
-    color: var(--pilot-muted);
-    min-height: 44px;
-    border: 0;
-    padding: 0.5rem 0;
-    background: transparent;
-    cursor: pointer;
-}
 .jornada-beneficios {
     list-style: none;
     padding: 0;
@@ -173,14 +156,6 @@
     flex-wrap: wrap;
     gap: 0.5rem 1.25rem;
 }
-.jornada-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.75rem;
-    min-height: 48px;
-    font-size: 0.9375rem;
-    text-decoration: none;
-}
 .jornada-legenda {
     position: absolute;
     bottom: 2rem;
@@ -193,7 +168,7 @@
 .jornada-duvidas,
 .jornada-final {
     margin-inline: max(4vw, 20px);
-    padding-block: clamp(3rem, 7vw, 6rem);
+    padding-block: clamp(2rem, 5vw, 4rem);
     border-top: 1px solid var(--pilot-border);
 }
 .jornada-glossario {
@@ -244,15 +219,8 @@
     .jornada-botao:hover {
         background: var(--pilot-field);
     }
-    .interface-unb .jornada-botao-principal:hover {
-        background: var(--jornada-acento);
-        border-color: var(--jornada-acento);
-        color: var(--pilot-bg);
-    }
-    .jornada-link:hover,
     .jornada-atalhos a:hover,
-    .jornada-base a:hover,
-    .jornada-base button:hover {
+    .jornada-base a:hover {
         text-decoration: underline;
     }
 }
@@ -266,8 +234,8 @@
 }
 @media (max-width: 600px) {
     .jornada-cena {
-        min-height: 90svh;
-        padding: 6rem 20px 4rem;
+        min-height: 0;
+        padding: 2.5rem 20px;
         align-items: center;
     }
     .jornada-hero {
@@ -289,9 +257,6 @@
     }
     .jornada-base a {
         gap: 0.4rem;
-    }
-    .jornada-base button {
-        font-size: 0.75rem;
     }
     .jornada-legenda {
         display: none;
@@ -316,5 +281,192 @@
     }
     .jornada-visual {
         opacity: 0.4;
+    }
+}
+
+@media (max-width: 600px) {
+    .interface-unb.pagina-inicial .jornada-cena:not(.jornada-hero) h2 {
+        font-size: clamp(2rem, 8vw, 2.75rem);
+        margin-bottom: 1rem;
+    }
+    .jornada-cena:not(.jornada-hero) .jornada-texto > p {
+        margin-bottom: 1rem;
+    }
+    .jornada-beneficios {
+        margin-bottom: 1.25rem;
+        font-size: 0.875rem;
+    }
+    .jornada-beneficios li {
+        margin-block: 0.4rem;
+    }
+    .jornada-glossario p {
+        font-size: 1rem;
+    }
+    .jornada-atalhos .jornada-botao {
+        gap: 0.4rem;
+        padding-inline: 0.65rem;
+    }
+    .jornada-atalhos svg {
+        width: 16px;
+    }
+}
+
+/* Só o palco fica preso. A rolagem nativa funciona como trilha da apresentação. */
+.jornada-fixa .jornada-experiencia {
+    height: var(--distancia-narrativa);
+}
+.jornada-fixa .jornada-palco {
+    position: sticky;
+    top: var(--altura-cabecalho);
+    height: calc(100svh - var(--altura-cabecalho));
+    overflow: clip;
+    isolation: isolate;
+}
+.jornada-fixa .jornada-visual {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+    z-index: -1;
+}
+.jornada-fixa .jornada-cena {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+    min-height: 0;
+    padding-block: 2rem 6rem;
+    opacity: var(--painel-opacidade, 0);
+    visibility: hidden;
+    pointer-events: none;
+}
+.jornada-fixa .jornada-cena[data-painel-visivel] {
+    visibility: visible;
+}
+.jornada-fixa .jornada-cena[data-painel-ativo] {
+    pointer-events: auto;
+}
+.jornada-fixa .jornada-texto {
+    transform: none;
+}
+.jornada-fixa .jornada-cena h2 {
+    clip-path: inset(var(--painel-recorte, 0%) 0 0 0);
+}
+.jornada-fixa .jornada-cena:focus-within {
+    opacity: 1;
+}
+.jornada-fixa .jornada-cena:focus-within h2 {
+    clip-path: none;
+}
+.jornada-fixa .jornada-base,
+.jornada-fixa .jornada-legenda {
+    display: none;
+}
+.jornada-controles {
+    position: absolute;
+    inset: auto max(4vw, 20px) 0;
+    padding-block: 0.35rem 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.2rem 1rem;
+}
+.jornada-capitulos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+}
+.jornada-capitulos button {
+    background: transparent;
+    color: var(--pilot-muted);
+    border: 1px solid transparent;
+    border-radius: 8px;
+    min-height: 44px;
+    padding: 0.5rem 0.75rem;
+    font: inherit;
+    font-size: 0.8125rem;
+    cursor: pointer;
+    touch-action: manipulation;
+}
+.jornada-capitulos button[aria-current='step'] {
+    color: var(--pilot-accent);
+    border-color: var(--pilot-border);
+    background: var(--pilot-surface);
+}
+.jornada-capitulos button:active {
+    background: var(--pilot-field);
+}
+.jornada-pular {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    font-size: 0.8125rem;
+}
+.jornada-progresso {
+    width: 100%;
+    height: 1px;
+    background: var(--pilot-border);
+}
+.jornada-progresso span {
+    display: block;
+    height: 100%;
+    background: var(--pilot-accent);
+    transform: scaleX(var(--progresso-narrativa, 0));
+    transform-origin: left;
+}
+@media (hover: hover) and (pointer: fine) {
+    .jornada-capitulos button:hover {
+        color: var(--pilot-text);
+        border-color: var(--pilot-border);
+    }
+}
+@media (max-width: 600px) {
+    .jornada-fixa .jornada-cena {
+        padding: 1.25rem 20px 6.5rem;
+    }
+    .jornada-controles {
+        inset-inline: 20px;
+    }
+    .jornada-capitulos {
+        width: 100%;
+        justify-content: space-between;
+        gap: 0.1rem;
+    }
+    .jornada-capitulos button {
+        padding-inline: 0.5rem;
+    }
+    .jornada-pular {
+        min-height: 44px;
+        margin-left: auto;
+        font-size: 0.75rem;
+    }
+    .jornada-fixa .jornada-hero h1 {
+        font-size: clamp(2.5rem, 11.25vw, 2.75rem);
+    }
+}
+
+.jornada-fixa .jornada-orbita {
+    left: 50%;
+    right: auto;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.interface-unb.jornada-fixa .cabecalho {
+    position: sticky;
+    top: 0;
+}
+
+@media (max-width: 600px) and (max-height: 720px) {
+    .interface-unb.jornada-fixa .jornada-hero h1 {
+        font-size: 2.25rem;
+        margin-bottom: 1rem;
+    }
+    .jornada-fixa .jornada-hero .jornada-texto > p {
+        line-height: 1.45;
+        margin-bottom: 1rem;
+    }
+    .jornada-fixa .jornada-atalhos {
+        margin-top: 0.5rem;
+        gap: 0.35rem;
     }
 }

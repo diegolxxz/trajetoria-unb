@@ -15,6 +15,11 @@ export default [
     files: ['public/js/functionality.js'],
     rules: { 'no-unused-vars': ['error', { varsIgnorePattern: '^(adicionarDisciplina|removerDisciplina)$' }] },
   },
+  {
+    files: ['public/js/landing-timeline.js'],
+    languageOptions: { globals: { module: 'readonly', LandingTimeline: 'off' } },
+  },
+  { files: ['public/js/landing.js'], languageOptions: { globals: { LandingTimeline: 'readonly' } } },
   { files: ['public/js/calculos.js'], languageOptions: { globals: { module: 'readonly', CalculosUnB: 'off' } } },
   {
     files: ['public/js/glossario-busca.js'],

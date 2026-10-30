@@ -1,35 +1,56 @@
-# Landing com narrativa de rolagem
+# Apresentação da página inicial
 
-A página inicial usa o cabeçalho, as cores e os links existentes. Apresenta o
-planejamento da semana, médias e intercâmbio em uma sequência vertical, seguida
-do glossário em preparação e das perguntas frequentes.
+A abertura e os acessos às ferramentas usam a identidade do Trajetória Unb.
+Na apresentação animada, a roda do mouse ou o gesto de rolar avançam uma linha
+do tempo: o palco permanece fixo, a câmera atravessa um portal e os capítulos
+Grade, IRA/MP e Intercâmbio aparecem no mesmo espaço. Os blocos não sobem pela
+tela. Ao terminar, Glossário, perguntas e rodapé seguem no fluxo normal.
 
-## Referência e evidência
+## Referência observada
 
 Referência: https://emotion-agency.com/, observada em 29/10/2026 com REA 6.7.0.
-A primeira captura ficou na tela de entrada; a segunda selecionou explicitamente
-“Enter without audio” antes de rolar duas vezes com PageDown.
+A captura selecionou “Enter without audio” e avançou dez vezes com PageDown.
+Evidência: `ev_c9065017a6b103b5f26411d56ce653630e90e0423943e871c420c10b63d2b00d`.
+Capturas locais ficam em `.playwright-mcp/`, fora da publicação.
 
-Evidência REA: `ev_7e4d56dfcb4b5cde03a4af922f59435d3b11ef6db8937bcf89b3291c78d10fb4`.
-As capturas locais de investigação ficam em `.playwright-mcp/`, fora da publicação.
+Observado: cenário 3D contínuo, câmera e partículas mudando com o avanço,
+títulos trocados na cena e navegação no topo estável. A captura não identifica
+a biblioteca ou os shaders usados. O portal e os capítulos do Trajetória são
+uma implementação original do comportamento solicitado, sem modelos, imagens,
+textos ou código copiados. Nenhum áudio é carregado.
 
-Observado: cena 3D persistente com partículas, títulos grandes, composição que
-muda durante a rolagem e escolha inicial de áudio. Não foi identificada por esta
-captura a biblioteca exata ou o código dos shaders. A implementação daqui é
-original; não reutiliza código, imagens, modelos, marcas ou áudio da referência.
+## Implementação
 
-## Escolhas
+- `landing-timeline.js`: função pura com as janelas de entrada, leitura, saída
+  e portal; o mesmo progresso produz o mesmo estado ao avançar ou voltar.
+- `landing.js`: WebGL de partículas gerado localmente, interpolação do progresso,
+  interação com ponteiros precisos e seleção do capítulo acessível.
+- `landing.css`: palco sticky com painéis absolutos e revelação por recorte e
+  opacidade. O movimento vertical do documento só conduz o progresso.
 
-A peça central é uma malha de partículas gerada em WebGL puro. A rolagem a
-transforma de um laço em uma grade, uma hélice e um globo. Sem dependência de
-Three.js, GSAP ou APIs externas. O conteúdo HTML e os links funcionam sem WebGL
-ou JavaScript. Não há bloqueio de entrada, áudio ou rolagem artificial.
+A animação usa rolagem nativa: não captura wheel ou touchmove, não bloqueia o
+body e não depende de GSAP, Three.js ou serviço externo. O percurso começa
+na altura do cabeçalho e termina com os painéis e a figura apagados, antes
+de o palco sair da tela. Capítulos podem ser acessados por botões; existe
+um link para pular a apresentação.
 
-O renderizador limita densidade e resolução no celular e desenha somente quando
-há mudança. Suspende quadros em abas ocultas. `prefers-reduced-motion` e o botão
-“Reduzir movimento” mantêm uma forma estática. A falha ou perda do contexto
-WebGL deixa uma órbita CSS simples de alternativa. O botão atua na animação
-espacial; as ferramentas e seus dados não são alterados.
+Somente o capítulo ativo recebe foco e participa da árvore acessível. Os
+outros ficam inertes enquanto sobrepostos. Com movimento reduzido, JavaScript
+desativado ou viewport baixo demais para o conteúdo, as seções ficam visíveis
+no fluxo de documento normal. Sem WebGL, uma órbita CSS oferece a passagem
+visual; a narrativa não depende de renderização 3D. Os textos continuam no HTML
+para leitura e indexação.
 
-A conferência automatizada de responsividade não substitui conferir toque,
-rolagem e consumo de bateria em um celular físico.
+A resolução e a quantidade de partículas são limitadas no celular. A
+interpolação para em repouso e quadros são suspensos em abas ocultas. Testes de
+emulação não substituem verificar toque e fluidez em celular físico.
+
+## Ritmo e suavização
+
+O percurso animado ocupa 7,2 unidades, cada uma com 85% da altura do palco:
+cerca de 82% mais rolagem que a versão de 4,8 unidades a 70%. Entradas e saídas
+têm aproximadamente o dobro do intervalo na linha do tempo, mantendo pausas
+para leitura. A interpolação usa o tempo entre quadros (140 ms de seguimento),
+para manter comportamento próximo em telas de 60 e 120 Hz. O morphing aplica
+uma única curva de suavização; a câmera do portal amplia de forma exponencial
+contínua, substituindo a aceleração concentrada no final.
