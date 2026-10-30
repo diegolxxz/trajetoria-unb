@@ -30,6 +30,8 @@ for (const directory of [
   'grade',
   'gerador-grade',
   'glossario',
+  'privacidade',
+  'termos',
   'css',
   'js',
   'data/editais',

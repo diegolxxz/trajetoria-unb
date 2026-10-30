@@ -1,0 +1,66 @@
+.rodape-legal {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0 1.25rem;
+    margin: 0.5rem 1rem 0;
+}
+.rodape-legal a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    color: inherit;
+    font-size: 0.8125rem;
+    text-underline-offset: 0.2em;
+    touch-action: manipulation;
+}
+.rodape-legal a:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 3px;
+}
+.interface-unb .texto-legal {
+    max-width: 48rem;
+    line-height: 1.7;
+    overflow-wrap: break-word;
+}
+.texto-legal h1 {
+    margin: 0;
+    font-size: 1.875rem;
+}
+.texto-legal h2 {
+    margin: 2rem 0 0.5rem;
+    font-size: 1.1875rem;
+    letter-spacing: -0.015em;
+}
+.texto-legal p,
+.texto-legal ul {
+    margin: 0.75rem 0;
+}
+.texto-legal li + li {
+    margin-top: 0.4rem;
+}
+.texto-legal a {
+    text-underline-offset: 0.2em;
+}
+.documento-data {
+    color: var(--pilot-muted);
+    font-size: 0.8125rem;
+}
+.documento-navegacao {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 1.25rem;
+    padding-block: 0.5rem;
+    border-block: 1px solid var(--pilot-border);
+}
+.documento-navegacao a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    font-size: 0.875rem;
+}
+@media (max-width: 640px) {
+    .texto-legal h1 {
+        font-size: 1.5rem;
+    }
+}

@@ -26,6 +26,19 @@ def get(caminho):
 
 
 class RotasTest(unittest.TestCase):
+    def test_paginas_legais_e_links_no_rodape(self):
+        for caminho, titulo in [("/privacidade/", "Política de Privacidade"), ("/termos/", "Termos de Uso")]:
+            with self.subTest(caminho=caminho):
+                resposta = get(caminho)
+                self.assertEqual(resposta["status"].split()[0], "200")
+                self.assertIn(titulo.encode("utf-8"), resposta["body"])
+                self.assertTrue(get(caminho.rstrip("/"))["headers"]["Location"].endswith(caminho))
+        for caminho in ["/", "/ira/", "/grade/", "/intercambio/", "/pagina-inexistente/"]:
+            with self.subTest(rodape=caminho):
+                html = get(caminho)["body"]
+                self.assertIn(b'href="/privacidade/"', html)
+                self.assertIn(b'href="/termos/"', html)
+
     def test_grade_pessoal(self):
         resposta = get("/grade/")
         self.assertEqual(resposta["status"].split()[0], "200")

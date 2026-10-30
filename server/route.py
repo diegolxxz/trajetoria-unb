@@ -33,6 +33,10 @@ def index():
     return static_file("index.html", root=str(ROOT))
 
 
+@route("/privacidade")
+@route("/privacidade/")
+@route("/termos")
+@route("/termos/")
 @route("/glossario")
 @route("/glossario/")
 @route("/turmas")
