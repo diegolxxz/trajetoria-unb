@@ -99,11 +99,10 @@ const GlossarioUnB = (() => {
             ['Waze', waze.href],
         ];
     }
-    function pesquisar(termos, consulta, apenasLocais = false) {
+    function pesquisar(termos, consulta) {
         const q = normalizar(consulta).slice(0, 160);
         const tokens = q.split(' ').filter(Boolean).slice(0, 16);
         return termos
-            .filter((item) => !apenasLocais || mapas(item).length)
             .map((item) => {
                 let pontos = 0;
                 let aproximado = false;

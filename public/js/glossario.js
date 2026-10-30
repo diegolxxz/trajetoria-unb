@@ -1,6 +1,5 @@
 (() => {
     const busca = document.getElementById('buscaGlossario');
-    const locais = document.getElementById('locaisGlossario');
     const lista = document.getElementById('listaGlossario');
     const estado = document.getElementById('estadoGlossario');
     const contagem = document.getElementById('contagemGlossario');
@@ -19,12 +18,11 @@
             mensagem('O glossário está em preparação', 'Os termos e suas definições serão adicionados em breve.');
             return;
         }
-        const resultados = GlossarioUnB.pesquisar(termos, busca.value, locais.checked);
+        const resultados = GlossarioUnB.pesquisar(termos, busca.value);
         const aproximados = resultados.filter((r) => r.aproximado).length;
         contagem.textContent = `${resultados.length} ${resultados.length === 1 ? 'termo' : 'termos'}${aproximados ? ' · Inclui grafias semelhantes' : ''}`;
         estado.hidden = resultados.length > 0;
-        if (!resultados.length)
-            mensagem('Nenhum termo encontrado', 'Tente outra palavra ou desmarque o filtro de localização.');
+        if (!resultados.length) mensagem('Nenhum termo encontrado', 'Tente outra palavra ou verifique a grafia.');
         const fragmento = document.createDocumentFragment();
         for (const { item } of resultados) {
             const artigo = AppUnB.elemento('article', 'glossario-termo');
@@ -38,10 +36,12 @@
                 );
             const mapas = GlossarioUnB.mapas(item);
             if (mapas.length) {
-                const local = AppUnB.elemento('div', 'glossario-local');
-                local.append(AppUnB.elemento('p', '', item.localizacao.nome || 'Localização'));
+                const local = AppUnB.elemento('details', 'glossario-local');
+                local.append(AppUnB.elemento('summary', '', 'Ver localização'));
+                const conteudo = AppUnB.elemento('div', 'glossario-local-conteudo');
+                conteudo.append(AppUnB.elemento('p', '', item.localizacao.nome || 'Localização'));
                 if (item.localizacao.endereco)
-                    local.append(AppUnB.elemento('p', 'texto-apoio', item.localizacao.endereco));
+                    conteudo.append(AppUnB.elemento('p', 'texto-apoio', item.localizacao.endereco));
                 const links = AppUnB.elemento('div', 'glossario-mapas');
                 for (const [nome, url] of mapas) {
                     const link = AppUnB.elemento('a', '', nome);
@@ -54,7 +54,8 @@
                     );
                     links.append(link);
                 }
-                local.append(links);
+                conteudo.append(links);
+                local.append(conteudo);
                 artigo.append(local);
             }
             fragmento.append(artigo);
@@ -64,14 +65,12 @@
     async function carregar() {
         recarregar.hidden = true;
         busca.disabled = true;
-        locais.disabled = true;
         mensagem('Carregando glossário…');
         try {
             const resposta = await fetch(new URL('data/glossario/termos.json', AppUnB.raiz));
             if (!resposta.ok) throw new Error('Glossário indisponível.');
             termos = GlossarioUnB.preparar(await resposta.json());
             busca.disabled = !termos.length;
-            locais.disabled = !termos.length;
             renderizar();
         } catch {
             lista.replaceChildren();
@@ -84,7 +83,6 @@
         clearTimeout(timer);
         timer = setTimeout(renderizar, 120);
     });
-    locais.addEventListener('change', renderizar);
     recarregar.addEventListener('click', carregar);
     carregar();
 })();

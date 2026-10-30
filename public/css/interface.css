@@ -1255,14 +1255,16 @@ html[data-tema='claro'] {
 .nav-ira-curto {
     display: none;
 }
-.turmas-titulo {
+.turmas-titulo,
+.glossario-titulo {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 0.75rem;
     margin: 0.5rem 0 0.75rem;
 }
-.turmas-titulo h1 {
+.turmas-titulo h1,
+.glossario-titulo h1 {
     font-size: clamp(1.65rem, 3vw, 2rem);
     font-weight: 650;
     letter-spacing: -0.035em;
@@ -1279,7 +1281,8 @@ html[data-tema='claro'] {
     color: var(--pilot-muted);
     font-size: 0.75rem;
 }
-body.pagina-turmas main.pagina-conteudo {
+body.pagina-turmas main.pagina-conteudo,
+body.pagina-glossario main.pagina-conteudo {
     width: min(100%, 68rem);
     max-width: 68rem;
     margin-inline: auto;
@@ -2358,40 +2361,19 @@ body.pagina-turmas main.pagina-conteudo {
 }
 
 /* Glossário: leitura compacta e busca em primeiro plano. */
-.glossario-conteudo {
-    max-width: 72rem;
+.glossario-titulo {
+    min-height: 44px;
 }
 .glossario-consulta {
-    margin-block: 1rem 0.5rem;
+    margin-bottom: 0.75rem;
 }
-.glossario-consulta #ajudaGlossario {
-    margin-block: 0.4rem 0;
-    font-size: 0.8125rem;
-}
-.glossario-barra {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 0.25rem 0.75rem;
-}
-.glossario-barra > p {
-    margin: 0;
+.glossario-contagem {
+    margin: 0.5rem 0 0;
     font-size: 0.8125rem;
     color: var(--pilot-muted);
 }
-.glossario-filtro {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    min-height: 44px;
-    font-size: 0.8125rem;
-    cursor: pointer;
-}
-.glossario-filtro input {
-    width: 18px;
-    height: 18px;
-    accent-color: var(--pilot-accent);
+.glossario-contagem:empty {
+    margin: 0;
 }
 .glossario-estado {
     margin-block: 0.75rem 1rem;
@@ -2432,8 +2414,27 @@ body.pagina-turmas main.pagina-conteudo {
     color: var(--pilot-muted);
 }
 .glossario-local {
-    margin-top: 0.75rem;
+    margin-top: 0.25rem;
     font-size: 0.875rem;
+}
+.glossario-local summary {
+    width: fit-content;
+    max-width: 100%;
+    min-height: 44px;
+    padding-block: 0.65rem;
+    color: var(--pilot-accent);
+    font-size: 0.8125rem;
+    list-style-position: inside;
+    cursor: pointer;
+    touch-action: manipulation;
+}
+.glossario-local summary:focus-visible {
+    outline: 2px solid var(--pilot-accent);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+.glossario-local-conteudo {
+    padding-bottom: 0.25rem;
 }
 .glossario-mapas {
     display: flex;
@@ -2448,10 +2449,6 @@ body.pagina-turmas main.pagina-conteudo {
 }
 .glossario-mapas a:active {
     opacity: 0.65;
-}
-.glossario-filtro:has(input:disabled) {
-    cursor: default;
-    color: var(--pilot-muted);
 }
 @media (max-width: 768px) {
     .interface-unb .filtros-medias {

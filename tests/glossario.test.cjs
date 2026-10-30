@@ -25,9 +25,11 @@ test('tolera omissão e troca de letras e sinaliza aproximação', () => {
     assert.equal(pesquisar(termos, 'credito inexistente').length, 0);
     assert.equal(pesquisar(termos, 'BX').length, 0);
 });
-test('filtra localização e mantém consultas vazias ordenadas', () => {
-    assert.equal(pesquisar(termos, '', true).length, 1);
-    assert.equal(pesquisar(termos, '').length, 2);
+test('consulta vazia inclui termos com e sem localização em ordem alfabética', () => {
+    assert.deepEqual(
+        pesquisar(termos, '').map((r) => r.item.id),
+        ['biblioteca', 'credito'],
+    );
 });
 test('links usam coordenadas verificadas e parâmetros codificados', () => {
     const links = mapas(termos[0]).map(([, url]) => new URL(url));

@@ -55,9 +55,8 @@
             </div>
         </header>
         <main class="container pagina-conteudo glossario-conteudo">
-            <div class="intro-pagina">
+            <div class="glossario-titulo">
                 <h1>Glossário</h1>
-                <p>Siglas, expressões e lugares da Unb.</p>
             </div>
             <section class="glossario-consulta" aria-label="Busca no glossário">
                 <label class="visually-hidden" for="buscaGlossario">Buscar sigla ou termo</label>
@@ -71,18 +70,10 @@
                     autocomplete="off"
                     autocapitalize="none"
                     spellcheck="false"
-                    aria-describedby="ajudaGlossario"
+                    aria-describedby="estadoGlossario"
                     disabled
                 />
-                <p id="ajudaGlossario" class="texto-apoio">
-                    Busque pela sigla, pelo nome ou por uma variação conhecida.
-                </p>
-                <div class="glossario-barra">
-                    <p id="contagemGlossario" role="status" aria-live="polite"></p>
-                    <label class="glossario-filtro"
-                        ><input id="locaisGlossario" type="checkbox" disabled />Com localização</label
-                    >
-                </div>
+                <p id="contagemGlossario" class="glossario-contagem" role="status" aria-live="polite"></p>
             </section>
             <div id="estadoGlossario" class="glossario-estado" role="status"><h2>Carregando glossário…</h2></div>
             <button id="recarregarGlossario" class="botao-inicio" type="button" hidden>Tentar novamente</button>

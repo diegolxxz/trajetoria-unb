@@ -24,7 +24,9 @@ são números decimais e devem ser fornecidas juntas. Também é possível infor
 apenas o endereço completo. Sem coordenadas ou endereço, os links não aparecem.
 Não são necessários URLs de mapa, chave de API ou geolocalização do visitante.
 
-A interface oferece Google Maps, Apple Maps e Waze. Links com endereço dependem
+Somente termos com coordenadas ou endereço exibem “Ver localização”. O bloco
+começa recolhido e pode ser expandido para consultar o local e abrir Google
+Maps, Apple Maps ou Waze. Não há filtro de localização na busca. Links com endereço dependem
 da busca do provedor; com coordenadas, o ponto é explícito. O Waze inicia uma
 rota quando há coordenadas; com endereço, abre a busca. Não há mapa incorporado.
 
