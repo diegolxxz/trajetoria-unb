@@ -414,6 +414,7 @@ html {
     --pilot-text: #f0f1f4;
     --pilot-muted: #adb2bd;
     --pilot-accent: #81b4ff;
+    --pilot-warm: #ff8a5b;
     --pilot-success: #87d6a6;
     background: var(--pilot-bg);
     color: var(--pilot-text);
@@ -428,6 +429,7 @@ html {
     --pilot-text: #202126;
     --pilot-muted: #606570;
     --pilot-accent: #075bc7;
+    --pilot-warm: #b94e25;
     --pilot-success: #197047;
 }
 .interface-unb .container {
