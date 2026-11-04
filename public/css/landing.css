@@ -1,6 +1,6 @@
 /* A rolagem transforma uma trajetória abstrata em novas possibilidades. */
 .interface-unb.pagina-inicial {
-    --jornada-acento: var(--pilot-accent);
+    --jornada-acento: var(--pilot-warm);
 }
 .interface-unb.pagina-inicial main.jornada {
     max-width: none;
