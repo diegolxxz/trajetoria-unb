@@ -91,7 +91,7 @@ const AppUnB = (() => {
         } catch {}
         document.documentElement.dataset.tema = valor;
         const metaTema = document.querySelector('meta[name="theme-color"]');
-        if (metaTema) metaTema.content = valor === 'escuro' ? '#1b1d21' : '#ffffff';
+        if (metaTema) metaTema.content = valor === 'escuro' ? '#182337' : '#ffffff';
         iconeTema();
     }
     function iconeTema() {
