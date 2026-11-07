@@ -2364,6 +2364,11 @@ body.pagina-glossario main.pagina-conteudo {
 .glossario-titulo {
     min-height: 44px;
 }
+.glossario-apresentacao {
+    margin: 0 0 1rem;
+    color: var(--pilot-muted);
+    font-size: 0.875rem;
+}
 .glossario-consulta {
     margin-bottom: 0.75rem;
 }

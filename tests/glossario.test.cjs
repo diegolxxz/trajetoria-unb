@@ -1,6 +1,7 @@
 const { test } = require('node:test');
 const assert = require('node:assert/strict');
 const { preparar, pesquisar, mapas } = require('../public/js/glossario-busca.js');
+const catalogo = require('../public/data/glossario/termos.json');
 const termos = preparar({
     versao: 1,
     termos: [
@@ -45,4 +46,11 @@ test('rejeita IDs repetidos e coordenadas inválidas', () => {
     assert.throws(() =>
         preparar({ versao: 1, termos: [{ ...termos[0], localizacao: { latitude: 100, longitude: 0 } }] }),
     );
+});
+test('catálogo publicado carrega os 215 verbetes sem inventar localizações', () => {
+    const publicados = preparar(catalogo);
+    assert.equal(publicados.length, 215);
+    assert.equal(pesquisar(publicados, 'SIGAA')[0].item.sigla, 'SIGAA');
+    assert.equal(pesquisar(publicados, 'Biblioteca Central')[0].item.sigla, 'BCE');
+    assert.ok(publicados.every((item) => mapas(item).length === 0));
 });

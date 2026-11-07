@@ -1,8 +1,9 @@
 # Glossário
 
-A página `/glossario/` usa `public/data/glossario/termos.json`. O arquivo começa
-vazio; nenhuma definição de exemplo é publicada. Edite somente os dados para
-adicionar termos. Busca, definições e links de localização funcionam no frontend.
+A página `/glossario/` usa `public/data/glossario/termos.json`, com 215 verbetes
+organizados em seis categorias. Edite esse arquivo para adicionar ou corrigir
+termos. Busca e definições funcionam no frontend. Descrições com informação ainda
+não verificada mantêm essa ressalva; nenhum endereço ou coordenada foi presumido.
 
 ## Formato
 

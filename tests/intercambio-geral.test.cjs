@@ -481,7 +481,7 @@ test('home apresenta as ferramentas com acesso direto e mantém conteúdo sem de
     assert.ok(d.querySelector('main h1').textContent.includes('Sua trajetória.'));
     assert.equal(d.querySelector('button#movimentoInicio'), null);
     assert.equal(d.querySelector('audio, video'), null);
-    assert.match(d.querySelector('.jornada-glossario').textContent, /em preparação/);
+    assert.match(d.querySelector('.jornada-glossario').textContent, /siglas e termos/);
     assert.doesNotMatch(d.querySelector('main').textContent, /modo avançado/);
 });
 

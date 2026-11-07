@@ -1,4 +1,1510 @@
 {
   "versao": 1,
-  "termos": []
+  "termos": [
+    {
+      "id": "baes",
+      "termo": "Bloco Eudoro de Sousa",
+      "sigla": "BAES",
+      "descricao": "Espaço ou instalação com este nome; endereço e coordenadas ainda serão verificados.",
+      "categoria": "Espaços e localização"
+    },
+    {
+      "id": "bce",
+      "termo": "Biblioteca Central",
+      "sigla": "BCE",
+      "descricao": "Biblioteca Central da UnB, com acervo, espaços de estudo e serviços de informação.",
+      "categoria": "Espaços e localização"
+    },
+    {
+      "id": "bib",
+      "termo": "Salas da Biblioteca Central",
+      "sigla": "BIB",
+      "descricao": "Prefixo usado em identificações de salas da BCE; uso atual a confirmar.",
+      "categoria": "Espaços e localização"
+    },
+    {
+      "id": "bibliodex",
+      "termo": "Biblioteca Digital de Extensão",
+      "sigla": "BibliodEX",
+      "descricao": "Acervo digital de materiais de extensão da UnB; funcionamento atual a confirmar.",
+      "categoria": "Espaços e localização"
+    },
+    {
+      "id": "bsa-n",
+      "termo": "Blocos de Sala de Aula Norte",
+      "sigla": "BSA N",
+      "descricao": "Bloco de Salas de Aula Norte, no campus Darcy Ribeiro. Também pode aparecer como: BSAN.",
+      "categoria": "Espaços e localização"
+    },
+    {
+      "id": "bsa-s",
+      "termo": "Bloco de Salas de Aula Sul",
+      "sigla": "BSA S",
+      "descricao": "Bloco de Salas de Aula Sul, no campus Darcy Ribeiro. Também pode aparecer como: BSA, BSAS.",
+      "categoria": "Espaços e localização"
+    },
+    {
+      "id": "caep",
+      "termo": "Centro de Atendimento e Estudos Psicológicos",
+      "sigla": "CAEP",
+      "descricao": "Espaço de atendimento e formação ligado à Psicologia.",
+      "categoria": "Espaços e localização"
+    },
+    {
+      "id": "cal",
+      "termo": "Casa da Cultura da América Latina",
+      "sigla": "CAL",
+      "descricao": "Espaço ou instalação com este nome; endereço e coordenadas ainda serão verificados.",
+      "categoria": "Espaços e localização"
+    },
+    {
+      "id": "cbiotech",
+      "termo": "Centro de Biotecnologia Molecular",
+      "sigla": "CBIOTECH",
+      "descricao": "Centro dedicado a atividades de biotecnologia molecular.",
+      "categoria": "Espaços e localização"
+    },
+    {
+      "id": "ccab",
+      "termo": "Centro Comunitário Athos Bulcão",
+      "sigla": "CCAB",
+      "descricao": "Espaço ou instalação com este nome; endereço e coordenadas ainda serão verificados.",
+      "categoria": "Espaços e localização"
+    },
+    {
+      "id": "cei",
+      "termo": "Centro de Educação Infantil",
+      "sigla": "CEI",
+      "descricao": "Unidade de educação infantil ligada à UnB. Também aparece como CEI-UnB.",
+      "categoria": "Espaços e localização"
+    },
+    {
+      "id": "ceu",
+      "termo": "Casa do Estudante Universitário",
+      "sigla": "CEU",
+      "descricao": "Moradia estudantil da UnB.",
+      "categoria": "Espaços e localização"
+    },
+    {
+      "id": "co",
+      "termo": "Centro Olímpico",
+      "sigla": "CO",
+      "descricao": "Centro Olímpico, complexo usado para esporte e atividades acadêmicas.",
+      "categoria": "Espaços e localização"
+    },
+    {
+      "id": "cofe",
+      "termo": "Clínica Odontológica e Farmácia Escola",
+      "sigla": "COFE",
+      "descricao": "Espaço de formação e atendimento nas áreas de odontologia e farmácia.",
+      "categoria": "Espaços e localização"
+    },
+    {
+      "id": "fal",
+      "termo": "Fazenda Água Limpa",
+      "sigla": "FAL",
+      "descricao": "Espaço ou instalação com este nome; endereço e coordenadas ainda serão verificados.",
+      "categoria": "Espaços e localização"
+    },
+    {
+      "id": "hub",
+      "termo": "Hospital Universitário de Brasília",
+      "sigla": "HUB",
+      "descricao": "Espaço ou instalação com este nome; endereço e coordenadas ainda serão verificados.",
+      "categoria": "Espaços e localização"
+    },
+    {
+      "id": "hvet",
+      "termo": "Hospital-escola Veterinário",
+      "sigla": "HVET",
+      "descricao": "Espaço ou instalação com este nome; endereço e coordenadas ainda serão verificados.",
+      "categoria": "Espaços e localização"
+    },
+    {
+      "id": "icc",
+      "termo": "Instituto Central de Ciências",
+      "sigla": "ICC",
+      "descricao": "Instituto Central de Ciências, prédio conhecido como Minhocão.",
+      "categoria": "Espaços e localização"
+    },
+    {
+      "id": "ler",
+      "termo": "Espaço LER da BCE",
+      "sigla": "LER",
+      "descricao": "Espaço da Biblioteca Central; finalidade atual a confirmar.",
+      "categoria": "Espaços e localização"
+    },
+    {
+      "id": "mesp",
+      "termo": "Módulo de Serviços e Equipamentos Esportivos",
+      "sigla": "MESP",
+      "descricao": "Espaço de serviços e práticas esportivas mencionado nos mapas dos campi.",
+      "categoria": "Espaços e localização"
+    },
+    {
+      "id": "oca-i",
+      "termo": "Pavilhão OCA I",
+      "sigla": "OCA I",
+      "descricao": "Espaço ou instalação com este nome; endereço e coordenadas ainda serão verificados.",
+      "categoria": "Espaços e localização"
+    },
+    {
+      "id": "oca-ii",
+      "termo": "Pavilhão OCA II",
+      "sigla": "OCA II",
+      "descricao": "Espaço ou instalação com este nome; endereço e coordenadas ainda serão verificados.",
+      "categoria": "Espaços e localização"
+    },
+    {
+      "id": "pat",
+      "termo": "Pavilhão Anísio Teixeira",
+      "sigla": "PAT",
+      "descricao": "Pavilhão de salas de aula próximo ao ICC Norte.",
+      "categoria": "Espaços e localização"
+    },
+    {
+      "id": "pjc",
+      "termo": "Pavilhão João Calmon",
+      "sigla": "PJC",
+      "descricao": "Pavilhão de salas de aula.",
+      "categoria": "Espaços e localização"
+    },
+    {
+      "id": "pmu-i",
+      "termo": "Pavilhão Multiuso I",
+      "sigla": "PMU I",
+      "descricao": "Espaço ou instalação com este nome; endereço e coordenadas ainda serão verificados.",
+      "categoria": "Espaços e localização"
+    },
+    {
+      "id": "pmu-ii",
+      "termo": "Pavilhão Multiuso II",
+      "sigla": "PMU II",
+      "descricao": "Espaço ou instalação com este nome; endereço e coordenadas ainda serão verificados.",
+      "categoria": "Espaços e localização"
+    },
+    {
+      "id": "pop",
+      "termo": "Espaço POP da BCE",
+      "sigla": "POP",
+      "descricao": "Espaço da Biblioteca Central; finalidade atual a confirmar.",
+      "categoria": "Espaços e localização"
+    },
+    {
+      "id": "ru",
+      "termo": "Restaurante Universitário",
+      "sigla": "RU",
+      "descricao": "Restaurante Universitário, serviço de refeições da UnB.",
+      "categoria": "Espaços e localização"
+    },
+    {
+      "id": "sg",
+      "termo": "Pavilhão / Pavilhões de Serviços Gerais",
+      "sigla": "SG",
+      "descricao": "Espaço ou instalação com este nome; endereço e coordenadas ainda serão verificados.",
+      "categoria": "Espaços e localização"
+    },
+    {
+      "id": "uac",
+      "termo": "Unidade Acadêmica de Ceilândia",
+      "sigla": "UAC",
+      "descricao": "Edificação de atividades acadêmicas no campus Ceilândia.",
+      "categoria": "Espaços e localização"
+    },
+    {
+      "id": "ued",
+      "termo": "Unidade de Ensino e Docência",
+      "sigla": "UED",
+      "descricao": "Edificação de aulas e atividades docentes em campus da UnB.",
+      "categoria": "Espaços e localização"
+    },
+    {
+      "id": "cds",
+      "termo": "Centro de Desenvolvimento Sustentável",
+      "sigla": "CDS",
+      "descricao": "Unidade acadêmica dedicada a estudos e pesquisa em sustentabilidade.",
+      "categoria": "Faculdades, institutos e departamentos"
+    },
+    {
+      "id": "ceftru",
+      "termo": "Centro Interdisciplinar de Estudos em Transportes",
+      "sigla": "CEFTRU",
+      "descricao": "Centro de estudos e pesquisa em transportes.",
+      "categoria": "Faculdades, institutos e departamentos"
+    },
+    {
+      "id": "ceninfra",
+      "termo": "Centro Nacional de Pesquisa em Infraestrutura de Transporte",
+      "sigla": "CENINFRA",
+      "descricao": "Centro de pesquisa em infraestrutura de transportes.",
+      "categoria": "Faculdades, institutos e departamentos"
+    },
+    {
+      "id": "cic",
+      "termo": "Departamento de Ciência da Computação",
+      "sigla": "CIC",
+      "descricao": "Unidade acadêmica ou entidade ligada à área indicada pelo nome; vigência a confirmar.",
+      "categoria": "Faculdades, institutos e departamentos"
+    },
+    {
+      "id": "ciem",
+      "termo": "Centro Integrado de Ensino Médio",
+      "sigla": "CIEM",
+      "descricao": "Unidade de ensino médio citada em fontes históricas; vigência a confirmar.",
+      "categoria": "Faculdades, institutos e departamentos"
+    },
+    {
+      "id": "cifmc",
+      "termo": "Centro Internacional de Física da Matéria Condensada",
+      "sigla": "CIFMC",
+      "descricao": "Centro de pesquisa em física da matéria condensada; atividade atual a confirmar.",
+      "categoria": "Faculdades, institutos e departamentos"
+    },
+    {
+      "id": "cip",
+      "termo": "Centros Integrados de Pesquisa",
+      "sigla": "CIP",
+      "descricao": "Denominação de centros de pesquisa da UnB; escopo específico a confirmar.",
+      "categoria": "Faculdades, institutos e departamentos"
+    },
+    {
+      "id": "citi",
+      "termo": "Centro Integrado de Tecnologia e Inovação",
+      "sigla": "CITI",
+      "descricao": "Centro voltado a tecnologia e inovação; denominação atual a confirmar.",
+      "categoria": "Faculdades, institutos e departamentos"
+    },
+    {
+      "id": "cpab",
+      "termo": "Centro de Pesquisa e Aplicação de Bambu e Fibras Naturais",
+      "sigla": "CPAB",
+      "descricao": "Centro de pesquisa em materiais de origem vegetal.",
+      "categoria": "Faculdades, institutos e departamentos"
+    },
+    {
+      "id": "cpce",
+      "termo": "Centro de Produção Cultural e Educativa",
+      "sigla": "CPCE",
+      "descricao": "Unidade ligada à produção de conteúdos culturais e educativos.",
+      "categoria": "Faculdades, institutos e departamentos"
+    },
+    {
+      "id": "dataunb",
+      "termo": "Centro de Pesquisa e Opinião Pública",
+      "sigla": "DATAUnB",
+      "descricao": "Centro de pesquisa da UnB com atuação em estudos de opinião pública.",
+      "categoria": "Faculdades, institutos e departamentos"
+    },
+    {
+      "id": "efl",
+      "termo": "Departamento de Engenharia Florestal",
+      "sigla": "EFL",
+      "descricao": "Unidade acadêmica ou entidade ligada à área indicada pelo nome; vigência a confirmar.",
+      "categoria": "Faculdades, institutos e departamentos"
+    },
+    {
+      "id": "ene",
+      "termo": "Departamento de Engenharia Elétrica",
+      "sigla": "ENE",
+      "descricao": "Unidade acadêmica ou entidade ligada à área indicada pelo nome; vigência a confirmar.",
+      "categoria": "Faculdades, institutos e departamentos"
+    },
+    {
+      "id": "fac",
+      "termo": "Faculdade de Comunicação",
+      "sigla": "FAC",
+      "descricao": "Unidade acadêmica dedicada ao ensino, pesquisa e extensão nas áreas de comunicação.",
+      "categoria": "Faculdades, institutos e departamentos"
+    },
+    {
+      "id": "face",
+      "termo": "Faculdade de Economia, Administração, Contabilidade e Gestão de Políticas Públicas",
+      "sigla": "FACE",
+      "descricao": "Unidade acadêmica que reúne cursos dessas áreas.",
+      "categoria": "Faculdades, institutos e departamentos"
+    },
+    {
+      "id": "fau",
+      "termo": "Faculdade de Arquitetura e Urbanismo",
+      "sigla": "FAU",
+      "descricao": "Unidade acadêmica dedicada ao ensino, pesquisa e extensão em arquitetura e urbanismo.",
+      "categoria": "Faculdades, institutos e departamentos"
+    },
+    {
+      "id": "fav",
+      "termo": "Faculdade de Agronomia e Medicina Veterinária",
+      "sigla": "FAV",
+      "descricao": "Unidade acadêmica dedicada ao ensino, pesquisa e extensão nas áreas de agronomia e medicina veterinária.",
+      "categoria": "Faculdades, institutos e departamentos"
+    },
+    {
+      "id": "fci",
+      "termo": "Faculdade de Ciências da Informação",
+      "sigla": "FCI",
+      "descricao": "Unidade acadêmica voltada ao ensino e pesquisa nas áreas de ciência da informação, biblioteconomia e áreas relacionadas.",
+      "categoria": "Faculdades, institutos e departamentos"
+    },
+    {
+      "id": "fcte",
+      "termo": "Faculdade de Ciências e Tecnologias em Engenharia",
+      "sigla": "FCTE",
+      "descricao": "Unidade acadêmica do campus Gama, antes chamada Faculdade do Gama (FGA).",
+      "categoria": "Faculdades, institutos e departamentos"
+    },
+    {
+      "id": "fcts",
+      "termo": "Faculdade de Ciências e Tecnologias em Saúde",
+      "sigla": "FCTS",
+      "descricao": "Unidade acadêmica do campus Ceilândia, antes chamada Faculdade de Ceilândia (FCE).",
+      "categoria": "Faculdades, institutos e departamentos"
+    },
+    {
+      "id": "fd",
+      "termo": "Faculdade de Direito",
+      "sigla": "FD",
+      "descricao": "Unidade acadêmica responsável pelo ensino, pesquisa e extensão na área do Direito.",
+      "categoria": "Faculdades, institutos e departamentos"
+    },
+    {
+      "id": "fe",
+      "termo": "Faculdade de Educação",
+      "sigla": "FE",
+      "descricao": "Unidade acadêmica dedicada ao ensino, pesquisa e extensão na área da educação.",
+      "categoria": "Faculdades, institutos e departamentos"
+    },
+    {
+      "id": "fef",
+      "termo": "Faculdade de Educação Física",
+      "sigla": "FEF",
+      "descricao": "Unidade acadêmica voltada ao ensino, pesquisa e extensão relacionados à educação física e às atividades esportivas.",
+      "categoria": "Faculdades, institutos e departamentos"
+    },
+    {
+      "id": "fm",
+      "termo": "Faculdade de Medicina",
+      "sigla": "FM",
+      "descricao": "Unidade acadêmica dedicada ao ensino, pesquisa e extensão na área da medicina.",
+      "categoria": "Faculdades, institutos e departamentos"
+    },
+    {
+      "id": "fs",
+      "termo": "Faculdade de Ciências da Saúde",
+      "sigla": "FS",
+      "descricao": "Unidade acadêmica que reúne atividades de ensino, pesquisa e extensão em saúde.",
+      "categoria": "Faculdades, institutos e departamentos"
+    },
+    {
+      "id": "ft",
+      "termo": "Faculdade de Tecnologia",
+      "sigla": "FT",
+      "descricao": "Unidade acadêmica que reúne cursos e atividades de ensino, pesquisa e extensão nas áreas de engenharia e tecnologia.",
+      "categoria": "Faculdades, institutos e departamentos"
+    },
+    {
+      "id": "fup",
+      "termo": "Faculdade UnB Planaltina",
+      "sigla": "FUP",
+      "descricao": "Campus da UnB localizada em Planaltina, voltada ao ensino, pesquisa e extensão na área de agrárias.",
+      "categoria": "Faculdades, institutos e departamentos"
+    },
+    {
+      "id": "ib",
+      "termo": "Instituto de Biologia",
+      "sigla": "IB",
+      "descricao": "Unidade acadêmica voltada ao ensino, pesquisa e extensão nas áreas das ciências biológicas.",
+      "categoria": "Faculdades, institutos e departamentos"
+    },
+    {
+      "id": "ics",
+      "termo": "Instituto de Ciências Sociais",
+      "sigla": "ICS",
+      "descricao": "Unidade acadêmica voltada ao ensino e à pesquisa nas áreas das ciências sociais.",
+      "categoria": "Faculdades, institutos e departamentos"
+    },
+    {
+      "id": "ida",
+      "termo": "Instituto de Artes",
+      "sigla": "IDA",
+      "descricao": "Unidade acadêmica dedicada ao ensino, pesquisa e extensão nas áreas de artes.",
+      "categoria": "Faculdades, institutos e departamentos"
+    },
+    {
+      "id": "ie",
+      "termo": "Instituto de Ciências Exatas",
+      "sigla": "IE",
+      "descricao": "Unidade acadêmica relacionada às áreas de matemática, estatística e computação.",
+      "categoria": "Faculdades, institutos e departamentos"
+    },
+    {
+      "id": "if",
+      "termo": "Instituto de Física",
+      "sigla": "IF",
+      "descricao": "Unidade acadêmica dedicada ao ensino, pesquisa e extensão na área de física.",
+      "categoria": "Faculdades, institutos e departamentos"
+    },
+    {
+      "id": "ig",
+      "termo": "Instituto de Geociências",
+      "sigla": "IG",
+      "descricao": "Unidade acadêmica dedicada ao estudo e à pesquisa nas áreas relacionadas às geociências.",
+      "categoria": "Faculdades, institutos e departamentos"
+    },
+    {
+      "id": "ih",
+      "termo": "Instituto de Ciências Humanas",
+      "sigla": "IH",
+      "descricao": "Unidade acadêmica de ciências humanas. Também aparece como ICH em alguns documentos.",
+      "categoria": "Faculdades, institutos e departamentos"
+    },
+    {
+      "id": "il",
+      "termo": "Instituto de Letras",
+      "sigla": "IL",
+      "descricao": "Unidade acadêmica dedicada ao ensino, pesquisa e extensão nas áreas de letras e linguística.",
+      "categoria": "Faculdades, institutos e departamentos"
+    },
+    {
+      "id": "ip",
+      "termo": "Instituto de Psicologia",
+      "sigla": "IP",
+      "descricao": "Unidade acadêmica voltada ao ensino, pesquisa e extensão na área de psicologia.",
+      "categoria": "Faculdades, institutos e departamentos"
+    },
+    {
+      "id": "ipol",
+      "termo": "Instituto de Ciência Política",
+      "sigla": "IPOL",
+      "descricao": "Unidade acadêmica dedicada ao ensino e pesquisa em ciência política.",
+      "categoria": "Faculdades, institutos e departamentos"
+    },
+    {
+      "id": "iq",
+      "termo": "Instituto de Química",
+      "sigla": "IQ",
+      "descricao": "Unidade acadêmica dedicada ao ensino, pesquisa e extensão na área de química.",
+      "categoria": "Faculdades, institutos e departamentos"
+    },
+    {
+      "id": "irel",
+      "termo": "Instituto de Relações Internacionais",
+      "sigla": "IREL",
+      "descricao": "Unidade acadêmica dedicada ao ensino e à pesquisa em relações internacionais.",
+      "categoria": "Faculdades, institutos e departamentos"
+    },
+    {
+      "id": "leau",
+      "termo": "Laboratório Experimental de Arquitetura e Urbanismo",
+      "sigla": "LEAU",
+      "descricao": "Laboratório ligado a atividades de arquitetura e urbanismo.",
+      "categoria": "Faculdades, institutos e departamentos"
+    },
+    {
+      "id": "nmt",
+      "termo": "Núcleo de Medicina Tropical",
+      "sigla": "NMT",
+      "descricao": "Núcleo de pesquisa e atendimento em medicina tropical; atividade atual a confirmar.",
+      "categoria": "Faculdades, institutos e departamentos"
+    },
+    {
+      "id": "aamc",
+      "termo": "Assessoria de Acompanhamento e Mediação de Conduta",
+      "sigla": "AAMC",
+      "descricao": "Assessoria de acompanhamento e mediação; público atendido a confirmar.",
+      "categoria": "Representação e apoio estudantil"
+    },
+    {
+      "id": "adunb",
+      "termo": "Associação dos Docentes da Universidade de Brasília",
+      "sigla": "ADUnB",
+      "descricao": "Entidade sindical dos docentes.",
+      "categoria": "Representação e apoio estudantil"
+    },
+    {
+      "id": "af",
+      "termo": "Ações Afirmativas",
+      "sigla": "AF",
+      "descricao": "Políticas e medidas voltadas a ampliar o acesso e a permanência de grupos historicamente excluídos.",
+      "categoria": "Representação e apoio estudantil"
+    },
+    {
+      "id": "asfub",
+      "termo": "Associação dos Servidores da UnB",
+      "sigla": "ASFUB",
+      "descricao": "Entidade representativa dos servidores.",
+      "categoria": "Representação e apoio estudantil"
+    },
+    {
+      "id": "ate",
+      "termo": "Unidade de Atendimento ao Estudante",
+      "sigla": "ATE",
+      "descricao": "Unidade de atendimento estudantil citada em fonte acadêmica; vigência a confirmar.",
+      "categoria": "Representação e apoio estudantil"
+    },
+    {
+      "id": "ca",
+      "termo": "Centro Acadêmico",
+      "sigla": "CA",
+      "descricao": "Entidade de representação dos estudantes de um curso.",
+      "categoria": "Representação e apoio estudantil"
+    },
+    {
+      "id": "ccn",
+      "termo": "Centro de Convivência Negra",
+      "sigla": "CCN",
+      "descricao": "Espaço de encontro e debate citado no blog de 2009; situação atual a confirmar.",
+      "categoria": "Representação e apoio estudantil"
+    },
+    {
+      "id": "ceb",
+      "termo": "Conselho de Entidades de Base",
+      "sigla": "CEB",
+      "descricao": "Fórum em que centros acadêmicos participam da deliberação estudantil; descrição do blog de 2009, a confirmar.",
+      "categoria": "Representação e apoio estudantil"
+    },
+    {
+      "id": "daces",
+      "termo": "Diretoria de Acessibilidade",
+      "sigla": "DACES",
+      "descricao": "Órgão, setor ou colegiado com a função indicada pelo nome; atribuições e vigência a confirmar.",
+      "categoria": "Representação e apoio estudantil"
+    },
+    {
+      "id": "dasu",
+      "termo": "Diretoria de Atenção à Saúde da Comunidade Universitária",
+      "sigla": "DASU",
+      "descricao": "Órgão, setor ou colegiado com a função indicada pelo nome; atribuições e vigência a confirmar.",
+      "categoria": "Representação e apoio estudantil"
+    },
+    {
+      "id": "dce",
+      "termo": "Diretório Central dos Estudantes",
+      "sigla": "DCE",
+      "descricao": "Entidade de representação dos estudantes da UnB.",
+      "categoria": "Representação e apoio estudantil"
+    },
+    {
+      "id": "ddis",
+      "termo": "Diretoria de Desenvolvimento e Integração Social",
+      "sigla": "DDIS",
+      "descricao": "Diretoria ligada a desenvolvimento e integração social; atribuições atuais a confirmar.",
+      "categoria": "Representação e apoio estudantil"
+    },
+    {
+      "id": "dds",
+      "termo": "Diretoria de Desenvolvimento Social",
+      "sigla": "DDS",
+      "descricao": "Órgão, setor ou colegiado com a função indicada pelo nome; atribuições e vigência a confirmar.",
+      "categoria": "Representação e apoio estudantil"
+    },
+    {
+      "id": "padiv",
+      "termo": "Programa de Atenção à Diversidade",
+      "sigla": "PADIV",
+      "descricao": "Programa voltado a ações de diversidade; oferta e regras atuais a confirmar.",
+      "categoria": "Representação e apoio estudantil"
+    },
+    {
+      "id": "pme",
+      "termo": "Programa de Moradia Estudantil",
+      "sigla": "PME",
+      "descricao": "Programa de Moradia Estudantil; função e vigência a confirmar.",
+      "categoria": "Representação e apoio estudantil"
+    },
+    {
+      "id": "pnaes",
+      "termo": "Política Nacional de Assistência Estudantil",
+      "sigla": "PNAES",
+      "descricao": "Política Nacional de Assistência Estudantil; função e vigência a confirmar.",
+      "categoria": "Representação e apoio estudantil"
+    },
+    {
+      "id": "rd",
+      "termo": "Representante Discente",
+      "sigla": "RD",
+      "descricao": "Estudante que representa seus pares em conselhos e colegiados; forma de escolha atual a confirmar.",
+      "categoria": "Representação e apoio estudantil"
+    },
+    {
+      "id": "sintfub",
+      "termo": "Sindicato dos Trabalhadores da Fundação Universidade de Brasília",
+      "sigla": "SINTFUB",
+      "descricao": "Sindicato dos servidores técnicos e administrativos.",
+      "categoria": "Representação e apoio estudantil"
+    },
+    {
+      "id": "une",
+      "termo": "União Nacional dos Estudantes",
+      "sigla": "UNE",
+      "descricao": "Entidade nacional de representação estudantil.",
+      "categoria": "Representação e apoio estudantil"
+    },
+    {
+      "id": "bdtd",
+      "termo": "Biblioteca Digital Brasileira de Teses e Dissertações",
+      "sigla": "BDTD",
+      "descricao": "Portal de busca de teses e dissertações brasileiras.",
+      "categoria": "Sistemas e documentos acadêmicos"
+    },
+    {
+      "id": "ead",
+      "termo": "Educação a Distância",
+      "sigla": "EAD",
+      "descricao": "Educação a Distância; função e vigência a confirmar.",
+      "categoria": "Sistemas e documentos acadêmicos"
+    },
+    {
+      "id": "ira",
+      "termo": "Índice de Rendimento Acadêmico",
+      "sigla": "IRA",
+      "descricao": "Índice de Rendimento Acadêmico, indicador do desempenho no histórico escolar.",
+      "categoria": "Sistemas e documentos acadêmicos"
+    },
+    {
+      "id": "lai",
+      "termo": "Lei de Acesso à Informação",
+      "sigla": "LAI",
+      "descricao": "Lei que regula o acesso a informações públicas.",
+      "categoria": "Sistemas e documentos acadêmicos"
+    },
+    {
+      "id": "lgpd",
+      "termo": "Lei Geral de Proteção de Dados",
+      "sigla": "LGPD",
+      "descricao": "Lei Geral de Proteção de Dados; função e vigência a confirmar.",
+      "categoria": "Sistemas e documentos acadêmicos"
+    },
+    {
+      "id": "pdi",
+      "termo": "Plano de Desenvolvimento Institucional",
+      "sigla": "PDI",
+      "descricao": "Plano de Desenvolvimento Institucional; função e vigência a confirmar.",
+      "categoria": "Sistemas e documentos acadêmicos"
+    },
+    {
+      "id": "ppc",
+      "termo": "Projeto Pedagógico do Curso",
+      "sigla": "PPC",
+      "descricao": "Documento que organiza os objetivos, o currículo e as regras de formação de um curso.",
+      "categoria": "Sistemas e documentos acadêmicos"
+    },
+    {
+      "id": "riunb",
+      "termo": "Repositório Institucional Universidade de Brasília",
+      "sigla": "RIUnB",
+      "descricao": "Sistema ou serviço usado no contexto indicado pelo nome; funcionalidades específicas a confirmar.",
+      "categoria": "Sistemas e documentos acadêmicos"
+    },
+    {
+      "id": "scba",
+      "termo": "Sistema de Controle de Bolsas e Auxílios",
+      "sigla": "SCBA",
+      "descricao": "Sistema ou serviço usado no contexto indicado pelo nome; funcionalidades específicas a confirmar.",
+      "categoria": "Sistemas e documentos acadêmicos"
+    },
+    {
+      "id": "sei",
+      "termo": "Sistema Eletrônico de Informações",
+      "sigla": "SEI",
+      "descricao": "Sistema Eletrônico de Informações, usado para processos e documentos administrativos.",
+      "categoria": "Sistemas e documentos acadêmicos"
+    },
+    {
+      "id": "siafi",
+      "termo": "Sistema Integrado de Administração Financeira",
+      "sigla": "SIAFI",
+      "descricao": "Sistema federal usado na administração financeira pública.",
+      "categoria": "Sistemas e documentos acadêmicos"
+    },
+    {
+      "id": "siape",
+      "termo": "Sistema Integrado de Administração de Recursos Humanos",
+      "sigla": "SIAPE",
+      "descricao": "Sistema federal de informações de pessoal.",
+      "categoria": "Sistemas e documentos acadêmicos"
+    },
+    {
+      "id": "sib-unb",
+      "termo": "Sistema de Bibliotecas da UnB",
+      "sigla": "SiB-UnB",
+      "descricao": "Rede de bibliotecas da universidade.",
+      "categoria": "Sistemas e documentos acadêmicos"
+    },
+    {
+      "id": "sic",
+      "termo": "Serviço de Informação ao Cidadão",
+      "sigla": "SIC",
+      "descricao": "Canal para pedidos de acesso à informação pública.",
+      "categoria": "Sistemas e documentos acadêmicos"
+    },
+    {
+      "id": "sig-unb",
+      "termo": "Sistemas Integrados de Gestão da UnB",
+      "sigla": "SIG-UnB",
+      "descricao": "Conjunto de sistemas institucionais de gestão. Também aparece como SIG.",
+      "categoria": "Sistemas e documentos acadêmicos"
+    },
+    {
+      "id": "sigaa",
+      "termo": "Sistema Integrado de Gestão de Atividades Acadêmicas",
+      "sigla": "SIGAA",
+      "descricao": "Sistema de Gestão de Atividades Acadêmicas, usado para acompanhar turmas, matrícula e histórico.",
+      "categoria": "Sistemas e documentos acadêmicos"
+    },
+    {
+      "id": "sigra",
+      "termo": "Sistema de Graduação",
+      "sigla": "SIGRA",
+      "descricao": "Sistema de Graduação; função e vigência a confirmar.",
+      "categoria": "Sistemas e documentos acadêmicos"
+    },
+    {
+      "id": "sigrh",
+      "termo": "Sistema Integrado de Gestão de Recursos Humanos",
+      "sigla": "SIGRH",
+      "descricao": "Sistema usado em processos de gestão de pessoas.",
+      "categoria": "Sistemas e documentos acadêmicos"
+    },
+    {
+      "id": "sinaes",
+      "termo": "Sistema Nacional de Avaliação da Educação Superior",
+      "sigla": "Sinaes",
+      "descricao": "Sistema nacional de avaliação de instituições e cursos superiores.",
+      "categoria": "Sistemas e documentos acadêmicos"
+    },
+    {
+      "id": "sipac",
+      "termo": "Sistema Integrado de Gestão de Patrimônio, Administração e Contratos",
+      "sigla": "SIPAC",
+      "descricao": "Sistema de gestão de patrimônio, administração e contratos.",
+      "categoria": "Sistemas e documentos acadêmicos"
+    },
+    {
+      "id": "sipic",
+      "termo": "Sistema de Iniciação Científica",
+      "sigla": "SIPIC",
+      "descricao": "Sistema ou serviço usado no contexto indicado pelo nome; funcionalidades específicas a confirmar.",
+      "categoria": "Sistemas e documentos acadêmicos"
+    },
+    {
+      "id": "sippos",
+      "termo": "Sistema de Pós-Graduação",
+      "sigla": "SIPPOS",
+      "descricao": "Sistema ou serviço usado no contexto indicado pelo nome; funcionalidades específicas a confirmar.",
+      "categoria": "Sistemas e documentos acadêmicos"
+    },
+    {
+      "id": "ti",
+      "termo": "Tecnologia da Informação",
+      "sigla": "TI",
+      "descricao": "Área de recursos e serviços digitais.",
+      "categoria": "Sistemas e documentos acadêmicos"
+    },
+    {
+      "id": "tic",
+      "termo": "Tecnologia da Informação e Comunicação",
+      "sigla": "TIC",
+      "descricao": "Área que reúne recursos digitais e de comunicação.",
+      "categoria": "Sistemas e documentos acadêmicos"
+    },
+    {
+      "id": "c-t",
+      "termo": "Ciência e Tecnologia",
+      "sigla": "C&T",
+      "descricao": "Expressão usada em políticas e projetos de pesquisa e inovação.",
+      "categoria": "Ensino, pesquisa, extensão e intercâmbio"
+    },
+    {
+      "id": "cepe",
+      "termo": "Conselho de Ensino, Pesquisa e Extensão",
+      "sigla": "CEPE",
+      "descricao": "Conselho de Ensino, Pesquisa e Extensão; função e vigência a confirmar.",
+      "categoria": "Ensino, pesquisa, extensão e intercâmbio"
+    },
+    {
+      "id": "cex",
+      "termo": "Câmara de Extensão",
+      "sigla": "CEX",
+      "descricao": "Câmara de Extensão; função e vigência a confirmar.",
+      "categoria": "Ensino, pesquisa, extensão e intercâmbio"
+    },
+    {
+      "id": "cpp",
+      "termo": "Câmara de Pesquisa e Pós-Graduação",
+      "sigla": "CPP",
+      "descricao": "Câmara de Pesquisa e Pós-Graduação; função e vigência a confirmar.",
+      "categoria": "Ensino, pesquisa, extensão e intercâmbio"
+    },
+    {
+      "id": "dex",
+      "termo": "Decanato de Extensão",
+      "sigla": "DEX",
+      "descricao": "Unidade responsável pela política de extensão universitária e pelo desenvolvimento de ações de extensão da UnB.",
+      "categoria": "Ensino, pesquisa, extensão e intercâmbio"
+    },
+    {
+      "id": "dpg",
+      "termo": "Decanato de Pós-graduação",
+      "sigla": "DPG",
+      "descricao": "Decanato de Pós-graduação; função e vigência a confirmar.",
+      "categoria": "Ensino, pesquisa, extensão e intercâmbio"
+    },
+    {
+      "id": "enade",
+      "termo": "Exame Nacional de Desempenho de Estudantes",
+      "sigla": "Enade",
+      "descricao": "Exame Nacional de Desempenho de Estudantes; função e vigência a confirmar.",
+      "categoria": "Ensino, pesquisa, extensão e intercâmbio"
+    },
+    {
+      "id": "finca",
+      "termo": "Festival Universitário de Música Candanga da UnB",
+      "sigla": "FINCA",
+      "descricao": "Festival Universitário de Música Candanga da UnB; função e vigência a confirmar.",
+      "categoria": "Ensino, pesquisa, extensão e intercâmbio"
+    },
+    {
+      "id": "marca",
+      "termo": "Programa de Mobilidade Acadêmica Regional para Cursos Acreditados",
+      "sigla": "MARCA",
+      "descricao": "Programa de mobilidade acadêmica internacional; critérios variam por chamada.",
+      "categoria": "Ensino, pesquisa, extensão e intercâmbio"
+    },
+    {
+      "id": "ods",
+      "termo": "Objetivos de Desenvolvimento Sustentável",
+      "sigla": "ODS",
+      "descricao": "Conjunto de objetivos da ONU usado como referência em projetos e políticas.",
+      "categoria": "Ensino, pesquisa, extensão e intercâmbio"
+    },
+    {
+      "id": "pas",
+      "termo": "Programa de Avaliação Seriada",
+      "sigla": "PAS",
+      "descricao": "Programa de Avaliação Seriada, forma de ingresso na UnB.",
+      "categoria": "Ensino, pesquisa, extensão e intercâmbio"
+    },
+    {
+      "id": "pd-i",
+      "termo": "Pesquisa, Desenvolvimento e Inovação",
+      "sigla": "PD&I",
+      "descricao": "Conjunto de atividades de produção e aplicação de conhecimento.",
+      "categoria": "Ensino, pesquisa, extensão e intercâmbio"
+    },
+    {
+      "id": "pdp",
+      "termo": "Plano de Desenvolvimento de Pessoas",
+      "sigla": "PDP",
+      "descricao": "Plano institucional de capacitação e desenvolvimento de servidores.",
+      "categoria": "Ensino, pesquisa, extensão e intercâmbio"
+    },
+    {
+      "id": "pdpg",
+      "termo": "Programa de Desenvolvimento da Pós-Graduação",
+      "sigla": "PDPG",
+      "descricao": "Programa de apoio à pós-graduação; regras variam por edital.",
+      "categoria": "Ensino, pesquisa, extensão e intercâmbio"
+    },
+    {
+      "id": "pdse",
+      "termo": "Programa de Doutorado-sanduíche no Exterior",
+      "sigla": "PDSE",
+      "descricao": "Programa de Doutorado-sanduíche no Exterior; função e vigência a confirmar.",
+      "categoria": "Ensino, pesquisa, extensão e intercâmbio"
+    },
+    {
+      "id": "peac",
+      "termo": "Projeto de Extensão de Ação Contínua",
+      "sigla": "PEAC",
+      "descricao": "Projeto de Extensão de Ação Contínua; função e vigência a confirmar.",
+      "categoria": "Ensino, pesquisa, extensão e intercâmbio"
+    },
+    {
+      "id": "pec-g",
+      "termo": "Programa de Estudantes Convênio-Graduação",
+      "sigla": "PEC-G",
+      "descricao": "Programa de cooperação para estudantes estrangeiros de graduação.",
+      "categoria": "Ensino, pesquisa, extensão e intercâmbio"
+    },
+    {
+      "id": "pec-pg",
+      "termo": "Programa de Estudantes-Convênio de Pós-Graduação",
+      "sigla": "PEC-PG",
+      "descricao": "Programa de cooperação para estudantes estrangeiros de pós-graduação.",
+      "categoria": "Ensino, pesquisa, extensão e intercâmbio"
+    },
+    {
+      "id": "pet",
+      "termo": "Programa de Educação Tutorial",
+      "sigla": "PET",
+      "descricao": "Programa de Educação Tutorial; função e vigência a confirmar.",
+      "categoria": "Ensino, pesquisa, extensão e intercâmbio"
+    },
+    {
+      "id": "pgd",
+      "termo": "Programa de Gestão e Desempenho",
+      "sigla": "PGD",
+      "descricao": "Programa de organização e acompanhamento do trabalho de servidores.",
+      "categoria": "Ensino, pesquisa, extensão e intercâmbio"
+    },
+    {
+      "id": "pibex",
+      "termo": "Programa Institucional de Bolsas de Extensão",
+      "sigla": "PIBEX",
+      "descricao": "Programa Institucional de Bolsas de Extensão; função e vigência a confirmar.",
+      "categoria": "Ensino, pesquisa, extensão e intercâmbio"
+    },
+    {
+      "id": "pibic",
+      "termo": "Programa Institucional de Bolsas de Iniciação Científica",
+      "sigla": "PIBIC",
+      "descricao": "Apoia projetos de pesquisa com participação de estudantes. As modalidades PIBIC-AF e PIBIC-EM aparecem junto deste termo para revisão.",
+      "categoria": "Ensino, pesquisa, extensão e intercâmbio"
+    },
+    {
+      "id": "pibid",
+      "termo": "Programa de Iniciação à Docência",
+      "sigla": "PIBID",
+      "descricao": "Programa de Iniciação à Docência; função e vigência a confirmar.",
+      "categoria": "Ensino, pesquisa, extensão e intercâmbio"
+    },
+    {
+      "id": "pibiti",
+      "termo": "Programa de Iniciação Científica em Desenvolvimento Tecnológico e Inovação",
+      "sigla": "PIBITI",
+      "descricao": "Programa de Iniciação Científica em Desenvolvimento Tecnológico e Inovação; função e vigência a confirmar.",
+      "categoria": "Ensino, pesquisa, extensão e intercâmbio"
+    },
+    {
+      "id": "pics",
+      "termo": "Práticas Integrativas e Complementares em Saúde",
+      "sigla": "PICS",
+      "descricao": "Conjunto de práticas de cuidado em saúde oferecidas conforme o serviço.",
+      "categoria": "Ensino, pesquisa, extensão e intercâmbio"
+    },
+    {
+      "id": "pij",
+      "termo": "Programa de Educação Infanto-Juvenil",
+      "sigla": "PIJ",
+      "descricao": "Programa educacional para crianças e jovens; situação atual a confirmar.",
+      "categoria": "Ensino, pesquisa, extensão e intercâmbio"
+    },
+    {
+      "id": "pls",
+      "termo": "Plano Diretor de Logística Sustentável",
+      "sigla": "PLS",
+      "descricao": "Plano institucional de ações para reduzir impactos ambientais da gestão.",
+      "categoria": "Ensino, pesquisa, extensão e intercâmbio"
+    },
+    {
+      "id": "pne",
+      "termo": "Plano Nacional de Educação",
+      "sigla": "PNE",
+      "descricao": "Plano nacional de metas para a educação.",
+      "categoria": "Ensino, pesquisa, extensão e intercâmbio"
+    },
+    {
+      "id": "pnpd",
+      "termo": "Programa Nacional de Pós-Doutorado",
+      "sigla": "PNPD",
+      "descricao": "Programa de apoio a pesquisadores em pós-doutorado; vigência a confirmar.",
+      "categoria": "Ensino, pesquisa, extensão e intercâmbio"
+    },
+    {
+      "id": "pnpg",
+      "termo": "Plano Nacional de Pós-Graduação",
+      "sigla": "PNPG",
+      "descricao": "Plano nacional de diretrizes para a pós-graduação.",
+      "categoria": "Ensino, pesquisa, extensão e intercâmbio"
+    },
+    {
+      "id": "ppg",
+      "termo": "Programa de Pós-Graduação",
+      "sigla": "PPG",
+      "descricao": "Programa de Pós-Graduação; função e vigência a confirmar.",
+      "categoria": "Ensino, pesquisa, extensão e intercâmbio"
+    },
+    {
+      "id": "pppi",
+      "termo": "Projeto Político Pedagógico Institucional",
+      "sigla": "PPPI",
+      "descricao": "Documento com princípios e diretrizes da formação na universidade.",
+      "categoria": "Ensino, pesquisa, extensão e intercâmbio"
+    },
+    {
+      "id": "print",
+      "termo": "Projeto de Internacionalização",
+      "sigla": "PrInt",
+      "descricao": "Projeto de Internacionalização; função e vigência a confirmar.",
+      "categoria": "Ensino, pesquisa, extensão e intercâmbio"
+    },
+    {
+      "id": "proap",
+      "termo": "Programa de Apoio à Pós-Graduação",
+      "sigla": "PROAP",
+      "descricao": "Programa de Apoio à Pós-Graduação; função e vigência a confirmar.",
+      "categoria": "Ensino, pesquisa, extensão e intercâmbio"
+    },
+    {
+      "id": "proex",
+      "termo": "Programa de Excelência Acadêmica",
+      "sigla": "PROEX",
+      "descricao": "Programa de Excelência Acadêmica; função e vigência a confirmar.",
+      "categoria": "Ensino, pesquisa, extensão e intercâmbio"
+    },
+    {
+      "id": "progest",
+      "termo": "Programa de Gestão de Pessoas",
+      "sigla": "PROGEST",
+      "descricao": "Programa ligado ao desenvolvimento de servidores; regras atuais a confirmar.",
+      "categoria": "Ensino, pesquisa, extensão e intercâmbio"
+    },
+    {
+      "id": "promisaes",
+      "termo": "Projeto Milton Santos de Acesso ao Ensino Superior",
+      "sigla": "PROMISAES",
+      "descricao": "Apoio a estudantes estrangeiros do PEC-G; regras atuais a confirmar.",
+      "categoria": "Ensino, pesquisa, extensão e intercâmbio"
+    },
+    {
+      "id": "reuni",
+      "termo": "Programa de Apoio a Planos de Reestruturação e Expansão das Universidades Federais",
+      "sigla": "Reuni",
+      "descricao": "Programa federal histórico de expansão das universidades.",
+      "categoria": "Ensino, pesquisa, extensão e intercâmbio"
+    },
+    {
+      "id": "semuni",
+      "termo": "Semana Universitária",
+      "sigla": "Semuni",
+      "descricao": "Semana Universitária; função e vigência a confirmar.",
+      "categoria": "Ensino, pesquisa, extensão e intercâmbio"
+    },
+    {
+      "id": "uab",
+      "termo": "Universidade Aberta do Brasil",
+      "sigla": "UAB",
+      "descricao": "Universidade Aberta do Brasil; função e vigência a confirmar.",
+      "categoria": "Ensino, pesquisa, extensão e intercâmbio"
+    },
+    {
+      "id": "ace",
+      "termo": "Arquivo Central",
+      "sigla": "ACE",
+      "descricao": "Unidade responsável pela gestão, preservação e organização dos documentos arquivísticos da UnB.",
+      "categoria": "Administração e serviços da UnB"
+    },
+    {
+      "id": "adm",
+      "termo": "Administração",
+      "sigla": "ADM",
+      "descricao": "Área de administração. O código pode aparecer em diferentes unidades sem formar um novo termo para cada uma.",
+      "categoria": "Administração e serviços da UnB"
+    },
+    {
+      "id": "al",
+      "termo": "Almoxarifado",
+      "sigla": "AL",
+      "descricao": "Setor que recebe, guarda e distribui materiais.",
+      "categoria": "Administração e serviços da UnB"
+    },
+    {
+      "id": "aud",
+      "termo": "Auditoria Interna",
+      "sigla": "AUD",
+      "descricao": "Órgão, setor ou colegiado com a função indicada pelo nome; atribuições e vigência a confirmar.",
+      "categoria": "Administração e serviços da UnB"
+    },
+    {
+      "id": "cac",
+      "termo": "Câmara de Assuntos Comunitários",
+      "sigla": "CAC",
+      "descricao": "Órgão, setor ou colegiado com a função indicada pelo nome; atribuições e vigência a confirmar.",
+      "categoria": "Administração e serviços da UnB"
+    },
+    {
+      "id": "cad",
+      "termo": "Conselho de Administração",
+      "sigla": "CAD",
+      "descricao": "Órgão, setor ou colegiado com a função indicada pelo nome; atribuições e vigência a confirmar.",
+      "categoria": "Administração e serviços da UnB"
+    },
+    {
+      "id": "capes",
+      "termo": "Coordenação de Aperfeiçoamento de Pessoal de Nível Superior",
+      "sigla": "CAPES",
+      "descricao": "Agência federal de apoio à pós-graduação.",
+      "categoria": "Administração e serviços da UnB"
+    },
+    {
+      "id": "cdt",
+      "termo": "Centro de Apoio ao Desenvolvimento Tecnológico",
+      "sigla": "CDT",
+      "descricao": "Centro de Apoio ao Desenvolvimento Tecnológico; função e vigência a confirmar.",
+      "categoria": "Administração e serviços da UnB"
+    },
+    {
+      "id": "cead",
+      "termo": "Centro de Educação a Distância e Tecnologias Educacionais",
+      "sigla": "CEAD",
+      "descricao": "Unidade voltada ao desenvolvimento e apoio de atividades de educação a distância.",
+      "categoria": "Administração e serviços da UnB"
+    },
+    {
+      "id": "ceam",
+      "termo": "Centro de Estudos Avançados Multidisciplinares",
+      "sigla": "CEAM",
+      "descricao": "Centro que reúne estudos e atividades acadêmicas de caráter multidisciplinar.",
+      "categoria": "Administração e serviços da UnB"
+    },
+    {
+      "id": "cebraspe",
+      "termo": "Centro Brasileiro de Pesquisa em Avaliação e Seleção e de Promoção de Eventos",
+      "sigla": "Cebraspe",
+      "descricao": "Instituição de avaliação e seleção criada após o Cespe/UnB; as duas siglas aparecem em documentos de épocas diferentes.",
+      "categoria": "Administração e serviços da UnB"
+    },
+    {
+      "id": "ceg",
+      "termo": "Câmara de Ensino de Graduação",
+      "sigla": "CEG",
+      "descricao": "Órgão, setor ou colegiado com a função indicada pelo nome; atribuições e vigência a confirmar.",
+      "categoria": "Administração e serviços da UnB"
+    },
+    {
+      "id": "ceplan",
+      "termo": "Centro de Planejamento Oscar Niemeyer",
+      "sigla": "CEPLAN",
+      "descricao": "Centro de Planejamento Oscar Niemeyer; função e vigência a confirmar.",
+      "categoria": "Administração e serviços da UnB"
+    },
+    {
+      "id": "ceri",
+      "termo": "Cerimonial da UnB",
+      "sigla": "Ceri",
+      "descricao": "Setor que organiza protocolos e eventos institucionais.",
+      "categoria": "Administração e serviços da UnB"
+    },
+    {
+      "id": "cet",
+      "termo": "Centro de Excelência em Turismo",
+      "sigla": "CET",
+      "descricao": "Centro da UnB dedicado ao ensino, pesquisa e extensão relacionados ao turismo.",
+      "categoria": "Administração e serviços da UnB"
+    },
+    {
+      "id": "cgr",
+      "termo": "Coordenação de Gerenciamento de Resíduos",
+      "sigla": "CGR",
+      "descricao": "Setor ligado à gestão de resíduos da universidade.",
+      "categoria": "Administração e serviços da UnB"
+    },
+    {
+      "id": "cnpq",
+      "termo": "Conselho Nacional de Desenvolvimento Científico e Tecnológico",
+      "sigla": "CNPq",
+      "descricao": "Agência federal de apoio à pesquisa e a bolsas científicas.",
+      "categoria": "Administração e serviços da UnB"
+    },
+    {
+      "id": "consuni",
+      "termo": "Conselho Universitário",
+      "sigla": "CONSUNI",
+      "descricao": "Órgão, setor ou colegiado com a função indicada pelo nome; atribuições e vigência a confirmar.",
+      "categoria": "Administração e serviços da UnB"
+    },
+    {
+      "id": "cpa",
+      "termo": "Comissão Própria de Avaliação",
+      "sigla": "CPA",
+      "descricao": "Órgão, setor ou colegiado com a função indicada pelo nome; atribuições e vigência a confirmar.",
+      "categoria": "Administração e serviços da UnB"
+    },
+    {
+      "id": "cpd",
+      "termo": "Centro de Informática",
+      "sigla": "CPD",
+      "descricao": "Centro de Informática; função e vigência a confirmar.",
+      "categoria": "Administração e serviços da UnB"
+    },
+    {
+      "id": "cplad",
+      "termo": "Câmara de Planejamento e Administração",
+      "sigla": "CPLAD",
+      "descricao": "Colegiado de planejamento e administração da UnB.",
+      "categoria": "Administração e serviços da UnB"
+    },
+    {
+      "id": "dac",
+      "termo": "Decanato de Assuntos Comunitários",
+      "sigla": "DAC",
+      "descricao": "Decanato responsável por políticas e ações relacionadas à assistência, permanência, saúde, esporte, acessibilidade e assuntos comunitários.",
+      "categoria": "Administração e serviços da UnB"
+    },
+    {
+      "id": "daf",
+      "termo": "Decanato de Administração",
+      "sigla": "DAF",
+      "descricao": "Órgão, setor ou colegiado com a função indicada pelo nome; atribuições e vigência a confirmar.",
+      "categoria": "Administração e serviços da UnB"
+    },
+    {
+      "id": "dai",
+      "termo": "Diretoria de Avaliação e Estatísticas Institucionais",
+      "sigla": "DAI",
+      "descricao": "Setor de avaliação e informações institucionais.",
+      "categoria": "Administração e serviços da UnB"
+    },
+    {
+      "id": "daia",
+      "termo": "Diretoria de Acompanhamento e Integração Acadêmica",
+      "sigla": "DAIA",
+      "descricao": "Diretoria ligada ao acompanhamento da vida acadêmica.",
+      "categoria": "Administração e serviços da UnB"
+    },
+    {
+      "id": "dap",
+      "termo": "Diretoria de Administração de Pessoas",
+      "sigla": "DAP",
+      "descricao": "Diretoria de processos de pessoal da UnB.",
+      "categoria": "Administração e serviços da UnB"
+    },
+    {
+      "id": "dcf",
+      "termo": "Diretoria de Contabilidade e Finanças",
+      "sigla": "DCF",
+      "descricao": "Diretoria responsável por contabilidade e finanças.",
+      "categoria": "Administração e serviços da UnB"
+    },
+    {
+      "id": "dco",
+      "termo": "Diretoria de Compras",
+      "sigla": "DCO",
+      "descricao": "Setor de compras institucionais.",
+      "categoria": "Administração e serviços da UnB"
+    },
+    {
+      "id": "deg",
+      "termo": "Decanato de Ensino de Graduação",
+      "sigla": "DEG",
+      "descricao": "Órgão executivo da Reitoria responsável pelo planejamento, supervisão, coordenação e acompanhamento das atividades de ensino de graduação da UnB.",
+      "categoria": "Administração e serviços da UnB"
+    },
+    {
+      "id": "dgm",
+      "termo": "Diretoria de Gestão de Materiais",
+      "sigla": "DGM",
+      "descricao": "Setor de gestão de materiais da universidade.",
+      "categoria": "Administração e serviços da UnB"
+    },
+    {
+      "id": "dgp",
+      "termo": "Decanato de Gestão de Pessoas",
+      "sigla": "DGP",
+      "descricao": "Órgão, setor ou colegiado com a função indicada pelo nome; atribuições e vigência a confirmar.",
+      "categoria": "Administração e serviços da UnB"
+    },
+    {
+      "id": "dirad",
+      "termo": "Diretoria de Administração",
+      "sigla": "DIRAD",
+      "descricao": "Diretoria administrativa; unidade a que pertence a sigla a confirmar.",
+      "categoria": "Administração e serviços da UnB"
+    },
+    {
+      "id": "dor",
+      "termo": "Diretoria de Orçamento",
+      "sigla": "DOR",
+      "descricao": "Setor de planejamento e acompanhamento orçamentário.",
+      "categoria": "Administração e serviços da UnB"
+    },
+    {
+      "id": "dpam",
+      "termo": "Diretoria de Provimento, Acompanhamento e Movimentação",
+      "sigla": "DPAM",
+      "descricao": "Setor de ingresso e movimentação de servidores.",
+      "categoria": "Administração e serviços da UnB"
+    },
+    {
+      "id": "dpi",
+      "termo": "Decanato de Pesquisa e Inovação",
+      "sigla": "DPI",
+      "descricao": "Órgão, setor ou colegiado com a função indicada pelo nome; atribuições e vigência a confirmar.",
+      "categoria": "Administração e serviços da UnB"
+    },
+    {
+      "id": "dpl",
+      "termo": "Diretoria de Planejamento",
+      "sigla": "DPL",
+      "descricao": "Setor de planejamento institucional.",
+      "categoria": "Administração e serviços da UnB"
+    },
+    {
+      "id": "dpo",
+      "termo": "Decanato de Planejamento, Orçamento e Avaliação Institucional",
+      "sigla": "DPO",
+      "descricao": "Decanato responsável pelo planejamento institucional, orçamento e avaliação da UnB.",
+      "categoria": "Administração e serviços da UnB"
+    },
+    {
+      "id": "dpr",
+      "termo": "Diretoria de Processos Organizacionais",
+      "sigla": "DPR",
+      "descricao": "Setor de organização de processos institucionais.",
+      "categoria": "Administração e serviços da UnB"
+    },
+    {
+      "id": "edu",
+      "termo": "Editora UnB",
+      "sigla": "EDU",
+      "descricao": "Editora UnB; função e vigência a confirmar.",
+      "categoria": "Administração e serviços da UnB"
+    },
+    {
+      "id": "finatec",
+      "termo": "Fundação de Empreendimentos Científicos e Tecnológicos",
+      "sigla": "FINATEC",
+      "descricao": "Fundação de Empreendimentos Científicos e Tecnológicos; função e vigência a confirmar.",
+      "categoria": "Administração e serviços da UnB"
+    },
+    {
+      "id": "finep",
+      "termo": "Financiadora de Estudos e Projetos",
+      "sigla": "Finep",
+      "descricao": "Agência federal de apoio financeiro à pesquisa e inovação.",
+      "categoria": "Administração e serviços da UnB"
+    },
+    {
+      "id": "fub",
+      "termo": "Fundação Universidade de Brasília",
+      "sigla": "FUB",
+      "descricao": "Fundação Universidade de Brasília; função e vigência a confirmar.",
+      "categoria": "Administração e serviços da UnB"
+    },
+    {
+      "id": "gre",
+      "termo": "Gabinete da Reitoria",
+      "sigla": "GRE",
+      "descricao": "Órgão, setor ou colegiado com a função indicada pelo nome; atribuições e vigência a confirmar.",
+      "categoria": "Administração e serviços da UnB"
+    },
+    {
+      "id": "inep",
+      "termo": "Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira",
+      "sigla": "Inep",
+      "descricao": "Órgão federal responsável por estudos e avaliações educacionais.",
+      "categoria": "Administração e serviços da UnB"
+    },
+    {
+      "id": "int",
+      "termo": "Secretaria de Assuntos Internacionais",
+      "sigla": "INT",
+      "descricao": "Órgão, setor ou colegiado com a função indicada pelo nome; atribuições e vigência a confirmar.",
+      "categoria": "Administração e serviços da UnB"
+    },
+    {
+      "id": "masc",
+      "termo": "Módulos de Apoio e Serviços Comunitários",
+      "sigla": "MASC",
+      "descricao": "Módulos de Apoio e Serviços Comunitários; função e vigência a confirmar.",
+      "categoria": "Administração e serviços da UnB"
+    },
+    {
+      "id": "mec",
+      "termo": "Ministério da Educação",
+      "sigla": "MEC",
+      "descricao": "Órgão federal responsável pela política nacional de educação.",
+      "categoria": "Administração e serviços da UnB"
+    },
+    {
+      "id": "mre",
+      "termo": "Ministério das Relações Exteriores",
+      "sigla": "MRE",
+      "descricao": "Órgão federal ligado à diplomacia; aparece em processos de mobilidade internacional.",
+      "categoria": "Administração e serviços da UnB"
+    },
+    {
+      "id": "nit",
+      "termo": "Núcleo de Inovação Tecnológica",
+      "sigla": "NIT",
+      "descricao": "Núcleo de Inovação Tecnológica; função e vigência a confirmar.",
+      "categoria": "Administração e serviços da UnB"
+    },
+    {
+      "id": "ouv",
+      "termo": "Ouvidoria da UnB",
+      "sigla": "OUV",
+      "descricao": "Órgão, setor ou colegiado com a função indicada pelo nome; atribuições e vigência a confirmar.",
+      "categoria": "Administração e serviços da UnB"
+    },
+    {
+      "id": "pctec",
+      "termo": "Parque Científico e Tecnológico",
+      "sigla": "PCTec",
+      "descricao": "Estrutura destinada a promover inovação, pesquisa, desenvolvimento tecnológico e interação entre universidade e sociedade.",
+      "categoria": "Administração e serviços da UnB"
+    },
+    {
+      "id": "prc",
+      "termo": "Prefeitura da UnB",
+      "sigla": "PRC",
+      "descricao": "Órgão, setor ou colegiado com a função indicada pelo nome; atribuições e vigência a confirmar.",
+      "categoria": "Administração e serviços da UnB"
+    },
+    {
+      "id": "procap",
+      "termo": "Coordenadoria de Capacitação",
+      "sigla": "PROCAP",
+      "descricao": "Setor de capacitação de servidores.",
+      "categoria": "Administração e serviços da UnB"
+    },
+    {
+      "id": "saa",
+      "termo": "Secretaria de Administração Acadêmica",
+      "sigla": "SAA",
+      "descricao": "Cuida de matrícula, registros e documentos acadêmicos dos estudantes. Em documentos antigos, a área aparece como DAA.",
+      "categoria": "Administração e serviços da UnB"
+    },
+    {
+      "id": "sdh",
+      "termo": "Secretaria de Direitos Humanos",
+      "sigla": "SDH",
+      "descricao": "Órgão, setor ou colegiado com a função indicada pelo nome; atribuições e vigência a confirmar.",
+      "categoria": "Administração e serviços da UnB"
+    },
+    {
+      "id": "sema",
+      "termo": "Secretaria de Meio Ambiente",
+      "sigla": "SeMA",
+      "descricao": "Secretaria responsável por ações relacionadas à gestão ambiental e sustentabilidade na UnB.",
+      "categoria": "Administração e serviços da UnB"
+    },
+    {
+      "id": "soc",
+      "termo": "Secretaria dos Órgãos Colegiados",
+      "sigla": "SOC",
+      "descricao": "Órgão, setor ou colegiado com a função indicada pelo nome; atribuições e vigência a confirmar.",
+      "categoria": "Administração e serviços da UnB"
+    },
+    {
+      "id": "sti",
+      "termo": "Secretaria de Tecnologia da Informação",
+      "sigla": "STI",
+      "descricao": "Sistema ou serviço usado no contexto indicado pelo nome; funcionalidades específicas a confirmar.",
+      "categoria": "Administração e serviços da UnB"
+    },
+    {
+      "id": "unb",
+      "termo": "Universidade de Brasília",
+      "sigla": "UnB",
+      "descricao": "Instituição federal de ensino superior.",
+      "categoria": "Administração e serviços da UnB"
+    },
+    {
+      "id": "unbtv",
+      "termo": "Rádio e Televisão Universitárias da Universidade de Brasília",
+      "sigla": "UnBTV",
+      "descricao": "Canal de comunicação audiovisual da Universidade de Brasília. Também pode aparecer como: UnB-TV.",
+      "categoria": "Administração e serviços da UnB"
+    }
+  ]
 }

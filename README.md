@@ -87,5 +87,5 @@ formato dos dados.
 
 ## Glossário
 
-A página `/glossario/` aguarda os termos. O formato dos dados e os campos de
-localização estão em [docs/glossario.md](docs/glossario.md).
+A página `/glossario/` reúne siglas e termos usados na UnB. O formato dos dados
+e os campos de localização estão em [docs/glossario.md](docs/glossario.md).
