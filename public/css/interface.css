@@ -408,12 +408,12 @@ html {
 }
 .interface-unb {
     --pilot-bg: #111215;
-    --pilot-surface: #182337;
-    --pilot-field: #213049;
-    --pilot-border: #374962;
-    --pilot-text: #f0f4fa;
-    --pilot-muted: #b3c2d5;
-    --pilot-accent: #8cbaff;
+    --pilot-surface: #1b1d21;
+    --pilot-field: #24262c;
+    --pilot-border: #383b43;
+    --pilot-text: #f0f1f4;
+    --pilot-muted: #adb2bd;
+    --pilot-accent: #81b4ff;
     --pilot-success: #87d6a6;
     background: var(--pilot-bg);
     color: var(--pilot-text);
@@ -423,10 +423,10 @@ html {
 [data-tema='claro'] .interface-unb {
     --pilot-bg: #f5f5f7;
     --pilot-surface: #fff;
-    --pilot-field: #f7faff;
-    --pilot-border: #ccd8e8;
-    --pilot-text: #1b2a3d;
-    --pilot-muted: #52647c;
+    --pilot-field: #fff;
+    --pilot-border: #d7d9df;
+    --pilot-text: #202126;
+    --pilot-muted: #606570;
     --pilot-accent: #075bc7;
     --pilot-success: #197047;
 }
