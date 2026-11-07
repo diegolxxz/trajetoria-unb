@@ -180,7 +180,7 @@ All files changed for this implementation:
 - `tests/grade-interface.test.cjs`: comparison participation, inclusion editing and
   independent cancellation of compatibility and generation.
 - `docs/grade.md`: actual controls, bounds and backup fields.
-- `docs/designs/grade/design_draft.md`: approval and implementation record.
+- `docs/historico/grade/design_draft.md`: approval and implementation record.
 
 New logic was tested with observed failing tests before implementation. Browser
 checks use an isolated context and temporary scripts outside the source tree;

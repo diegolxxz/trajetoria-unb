@@ -4,7 +4,7 @@
 **Goal:** Semestres, IRA simplificado, horas aprovadas, comparação de médias e simulação de todos os editais.
 **Architecture:** HTML/JS estático; cálculos puros compartilhados e testes DOM com linkedom.
 **Tech Stack:** Node test, Bun, Python/Bottle.
-**Spec:** docs/superpowers/specs/2026-10-27-semestres-simulacoes-design.md
+**Spec:** docs/historico/superpowers/specs/2026-10-27-semestres-simulacoes-design.md
 
 ## Global Constraints
 - Preserve local/dados.json e chaves/formato de localStorage existentes.
