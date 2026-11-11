@@ -11,6 +11,12 @@ const root = process.argv[2] === 'dist' ? path.join(project, 'dist') : source;
 const origin = 'https://trajetoriaunb.vercel.app';
 const files = new Set();
 const pages = new Map();
+const nonIndexablePages = new Set([
+  '404.html',
+  'gerador-grade/index.html',
+  'privacidade/index.html',
+  'termos/index.html',
+]);
 const errors = [];
 const check = (condition, message) => {
   if (!condition) errors.push(message);
@@ -58,19 +64,17 @@ for (const file of files) {
   check(Boolean(document.querySelector('title')?.textContent.trim()), `${file}: título ausente.`);
   check(document.querySelectorAll('h1').length === 1, `${file}: deve ter um h1.`);
   const canonical = document.querySelector('link[rel="canonical"]')?.getAttribute('href');
+  const noindex = document
+    .querySelector('meta[name="robots"]')
+    ?.getAttribute('content')
+    ?.split(/[\s,]+/)
+    .includes('noindex');
+  check(Boolean(noindex) === nonIndexablePages.has(file), `${file}: diretiva noindex incorreta.`);
   if (file === '404.html') {
     check(!canonical, '404 não deve declarar canonical.');
-    check(
-      document.querySelector('meta[name="robots"]')?.getAttribute('content')?.includes('noindex'),
-      '404 deve ter noindex.',
-    );
     continue;
   }
   check(canonical === urlFor(file).href, `${file}: canonical não corresponde à rota.`);
-  check(
-    !document.querySelector('meta[name="robots"]')?.getAttribute('content')?.includes('noindex'),
-    `${file}: página pública com noindex.`,
-  );
 }
 for (const [file, document] of pages) {
   for (const element of document.querySelectorAll('a[href], link[href], script[src], img[src]')) {
@@ -92,11 +96,14 @@ const locations = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => m
 check(new Set(locations).size === locations.length, 'Sitemap contém URLs duplicadas.');
 for (const location of locations) {
   const url = new URL(location);
-  check(url.origin === origin && pages.has(fileFor(url)), `Sitemap: rota inválida ${location}`);
+  const file = fileFor(url);
+  check(
+    location === urlFor(file).href && pages.has(file) && !nonIndexablePages.has(file),
+    `Sitemap: URL inválida ou não indexável ${location}`,
+  );
 }
 for (const file of pages.keys()) {
-  if (file === '404.html') check(!locations.includes(urlFor(file).href), '404 deve ficar fora do sitemap.');
-  else check(locations.includes(urlFor(file).href), `Sitemap: falta ${urlFor(file)}`);
+  if (!nonIndexablePages.has(file)) check(locations.includes(urlFor(file).href), `Sitemap: falta ${urlFor(file)}`);
 }
 const catalog = await json('data/editais/index.json');
 const slugs = new Set();
