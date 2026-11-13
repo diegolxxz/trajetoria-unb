@@ -476,7 +476,7 @@
             aplicar,
         );
     }
-    function confirmarAcao(tituloTexto, texto, rotulo, aplicar) {
+    function confirmarAcao(tituloTexto, texto, rotulo, aplicar, { focarConfirmar = false } = {}) {
         const dialog = el('dialog', 'grade-confirmacao');
         const titulo = el('h2', '', tituloTexto);
         titulo.id = 'tituloConfirmacaoGrade';
@@ -510,7 +510,8 @@
         });
         document.body.append(dialog);
         dialog.showModal();
-        cancelar.focus();
+        const botaoInicial = focarConfirmar ? confirmar : cancelar;
+        botaoInicial.focus();
     }
     function celulasTurma(t, mostrarVagas) {
         const horario = t.horarios.join(' · ') || 'Horário não informado';
@@ -664,6 +665,7 @@
                             $('buscaGrade').focus();
                             buscar();
                         },
+                        { focarConfirmar: true },
                     );
                 topo.append(nome);
                 if (modo === 'manual') {

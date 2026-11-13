@@ -397,10 +397,18 @@ test('remover disciplina exige confirmação e cancelar preserva escolhas e hist
     for (const modo of ['manual', 'gerador']) {
         const { document, buscar, storage } = await interfaceGrade(undefined, undefined, [disciplina], undefined, modo);
         const criar = document.createElement.bind(document);
+        let botaoFocado;
         document.createElement = (tag) => {
             const node = criar(tag);
             if (tag === 'dialog') {
-                node.showModal = () => node.setAttribute('open', '');
+                node.showModal = () => {
+                    node.setAttribute('open', '');
+                    for (const botao of node.querySelectorAll('button')) {
+                        botao.focus = () => {
+                            botaoFocado = botao;
+                        };
+                    }
+                };
                 node.close = () => {
                     node.removeAttribute('open');
                     node.dispatchEvent(new document.defaultView.Event('close'));
@@ -412,6 +420,10 @@ test('remover disciplina exige confirmação e cancelar preserva escolhas e hist
         const antes = storage.get('trajetoria-unb:grade:v1');
         document.getElementById('removerGrade-MAT0026').onclick();
         assert.ok(document.querySelector('dialog[open]'));
+        assert.ok(
+            botaoFocado === document.querySelector('dialog .grade-principal'),
+            'O botão de remoção deve receber foco',
+        );
         assert.equal(storage.get('trajetoria-unb:grade:v1'), antes);
         document.querySelector('dialog button').onclick();
         assert.equal(document.querySelector('dialog'), null);
